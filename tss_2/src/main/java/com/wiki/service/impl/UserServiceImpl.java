@@ -1,7 +1,7 @@
-package com.wiki.service.Impl;
+package com.wiki.service.impl;
 
 import com.wiki.dao.DAOBase;
-import com.wiki.dao.Impl.UserDAO;
+import com.wiki.dao.impl.UserDAO;
 import com.wiki.domain.ResultLogin;
 import com.wiki.domain.User;
 import com.wiki.service.UserService;

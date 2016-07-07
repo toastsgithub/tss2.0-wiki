@@ -1,4 +1,4 @@
-package com.wiki.dao.Impl;
+package com.wiki.dao.impl;
 
 import com.wiki.dao.DAOBase;
 

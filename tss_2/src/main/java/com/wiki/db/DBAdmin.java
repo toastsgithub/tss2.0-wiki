@@ -4,7 +4,7 @@ package com.wiki.db;
  * Created by 羊驼 on 2016/7/7.
  */
 import com.sun.rowset.CachedRowSetImpl;
-import com.wiki.dao.Impl.UserDAO;
+import com.wiki.dao.impl.UserDAO;
 
 import javax.sql.RowSet;
 import javax.sql.rowset.CachedRowSet;

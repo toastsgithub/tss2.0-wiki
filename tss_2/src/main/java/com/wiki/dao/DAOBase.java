@@ -1,7 +1,7 @@
 package com.wiki.dao;
 
 
-import com.wiki.dao.Impl.UserDAO;
+import com.wiki.dao.impl.UserDAO;
 import com.wiki.db.DBAdmin;
 
 import java.lang.reflect.Field;
