@@ -14,13 +14,14 @@
 
     <mvc:default-servlet-handler />
     <mvc:annotation-driven />
+    <mvc:resources mapping="/static/**" location="/static/"/>
     <context:annotation-config />
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 
-        <property name="prefix" value="/WEB-INF/pages/"/>
+        <property name="prefix" value=""/>
 
-        <property name="suffix" value=".jsp"/>
+        <property name="suffix" value=""/>
 
     </bean>
 </beans>

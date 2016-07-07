@@ -17,7 +17,8 @@ public class UserServiceImpl implements UserService{
         User temp = new User();
         ResultLogin resultLogin = new ResultLogin();
         if(a.length == 0){
-            return null;
+            resultLogin.setIncluded(false);
+            return resultLogin;
         }
         temp.username = (String.valueOf(a[0].get("username")));
         temp.password = (String.valueOf(a[0].get("password")));
