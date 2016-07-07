@@ -1,5 +1,7 @@
 package com.wiki.domain;
 
+import com.wiki.dao.impl.User;
+
 /**
  * Created by Administrator on 2016/7/7.
  */
