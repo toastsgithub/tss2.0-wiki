@@ -1,6 +1,7 @@
 package com.wiki.dao;
 
 
+import com.wiki.dao.Impl.UserDAO;
 import com.wiki.db.DBAdmin;
 
 import java.lang.reflect.Field;
@@ -172,4 +173,7 @@ public abstract class DAOBase {
         return null;
     }
 
+    public static void main(String[] args) {
+        System.out.println(UserDAO.class.getClassLoader().getResource(""));
+    }
 }
