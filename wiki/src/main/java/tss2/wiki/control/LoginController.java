@@ -21,10 +21,4 @@ public class LoginController {
         UserServiceImpl userService = new UserServiceImpl();
         return userService.Login(username, password);
     }
-
-    @RequestMapping(value = "/hello")
-    public String login(Model model) {
-        model.addAttribute("greeting", "Hello Spring MVC");
-        return "helloworld";
-    }
 }
