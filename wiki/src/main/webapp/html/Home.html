@@ -43,24 +43,26 @@
         </div>
         <div id="login_module" style="height: 530px;width: 540px;background-color: #ffffff;box-shadow: 0px 0px 4px 0px #b5b5b5 ">
             <div id="blank" style="color: #ffffff">--</div>
-            <div id="email_block">
-                <div style="font-size: 20px;margin-left: 35px;" class="ayuthaya">email</div>
-                <input class="input_frame" type="text" >
-            </div>
-            <div id="passwd_block">
-                <div style="font-size: 20px;margin-left: 35px;" class="ayuthaya">password</div>
-                <input type="password" class="input_frame" type="text">
-            </div>
-            <div id="login_buttons">
-                <div id="forget">
-
+            <form action="/user/login">
+                <div id="email_block">
+                    <div style="font-size: 20px;margin-left: 35px;" class="ayuthaya">email</div>
+                    <input class="input_frame" type="text" >
                 </div>
-                <div id="forget_btn" class="ayuthaya">forget password?</div>
-                <button id="login_btn" type="button" class="btn btn-primary" style="font-size: 20px">sign in</button>
-                <!--<div id="login_btn" class="btn btn-default">-->
-                    <!--sign in-->
-                <!--</div>-->
-            </div>
+                <div id="passwd_block">
+                    <div style="font-size: 20px;margin-left: 35px;" class="ayuthaya">password</div>
+                    <input type="password" class="input_frame" type="text">
+                </div>
+                <div id="login_buttons">
+                    <div id="forget">
+
+                    </div>
+                    <div id="forget_btn" class="ayuthaya">forget password?</div>
+                    <button id="login_btn" type="submit" class="btn btn-primary" style="font-size: 20px">sign in</button>
+                    <!--<div id="login_btn" class="btn btn-default">-->
+                        <!--sign in-->
+                    <!--</div>-->
+                </div>
+            </form>
             <div id="or_label" style="font-size: 20px;margin-left:20px;margin-top: 10px;" class="ayuthaya">or</div>
 
             <div id="git_login">
