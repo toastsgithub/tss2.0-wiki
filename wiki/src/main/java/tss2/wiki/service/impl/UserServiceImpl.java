@@ -18,7 +18,28 @@ public class UserServiceImpl implements UserService{
         ResultLogin resultLogin = new ResultLogin();
         if(a.length == 0){
             resultLogin.setIncluded(false);
-            return resultLogin;
+            return null;
+        }
+        temp.username = (String.valueOf(a[0].get("username")));
+        temp.password = (String.valueOf(a[0].get("password")));
+        temp.type = (Integer.parseInt(String.valueOf(a[0].get("type"))));
+        if(password.equals(temp.password)){
+            resultLogin.setIncluded(true);
+        }else{
+            resultLogin.setIncluded(false);
+        }
+        resultLogin.setUser(temp);
+        return resultLogin;
+    }
+
+    public ResultLogin Test(String userName, String password) {
+        User userDAO = new User();
+        DAOBase[] a = userDAO.query().where("username like '%"+userName+"%'");
+        User temp = new User();
+        ResultLogin resultLogin = new ResultLogin();
+        if(a.length == 0){
+            resultLogin.setIncluded(false);
+            return null;
         }
         temp.username = (String.valueOf(a[0].get("username")));
         temp.password = (String.valueOf(a[0].get("password")));
@@ -33,8 +54,8 @@ public class UserServiceImpl implements UserService{
     }
 
     public static void main(String[] args){
-        UserService userService = new UserServiceImpl();
-        ResultLogin a = userService.Login("123","123");
+        UserServiceImpl userService = new UserServiceImpl();
+        ResultLogin a = userService.Test("123","123");
         if(a==null){
             System.out.println("该用户不存在");
         }else if(a.isIncluded()) {
