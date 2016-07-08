@@ -9,9 +9,16 @@ public class WikiEntry extends DAOBase {
     public String title;
     public String tags;
     public String content;
-    public String lastUpdateDate;
 
     public WikiEntry query() {
         return new WikiEntry();
+    }
+
+    public static void main(String[] args) {
+        WikiEntry we = new WikiEntry();
+        we.content = "123";
+        we.tags = "123";
+        we.title = "1234";
+        we.save();
     }
 }
