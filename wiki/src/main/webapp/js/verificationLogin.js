@@ -7,6 +7,10 @@ function verif(){
     // xhr.s
     var username = document.getElementById("user").value;
     var password = document.getElementById("psw").value;
+    if(username==""||password==""){
+        alert("please fill the blanks")
+        return;
+    }
     $.ajax({
         url:"/user/login",
         type:"get",
