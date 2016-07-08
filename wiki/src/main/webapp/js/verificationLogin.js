@@ -12,7 +12,8 @@ function verif(){
         type:"get",
         data:{username:username,password:password},
         success:function (data) {
-            if(data==null){
+            alert(data);
+            if(data==""){
                 alert("user not exits");
             } else if (data.included==false){
                alert("username or password is incorrect");
