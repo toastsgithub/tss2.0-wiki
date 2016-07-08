@@ -5,19 +5,22 @@
 function verif(){
     // var xhr = new XMLHttpRequest();
     // xhr.s
-    alert(21345678);
     var username = document.getElementById("user").value;
-    alert("name"+username);
     var password = document.getElementById("psw").value;
-    alert("pass"+password);
     $.ajax({
         url:"/user/login",
         type:"get",
         data:{username:username,password:password},
         success:function (data) {
-            var veri = eval("(" + data + ")");
-            // var info = data[1];
-            alert(veri);
+            if(data==null){
+                alert("user not exits");
+            } else if (data.included==false){
+               alert("username or password is incorrect");
+           } else if (data.user.type==0){
+                alert("welcome, user!");
+            }else if(data.user.type == 1){
+                alert("welcome, admin!");
+            }
         },
         error:function (data) {
             alert("error!");
