@@ -24,7 +24,7 @@ public class DBAdmin {
 
     private static final String localhost = "localhost", ali1 = "121.42.184.4", ali2 = "114.215.88.219", tx = "182.254.146.31";
     private static final String dbName = "tss2";
-    private static final String URL = "jdbc:mysql://" + ali1 + "/" + dbName + "?useSSL=false&serverTimezone=UTC";
+    private static final String URL = "jdbc:mysql://" + ali1 + "/" + dbName + "?useSSL=false&serverTimezone=UTC&characterEncoding=utf8";
     private static final String USER = "root";
     private static final String PASSWD = "root";
     private static Connection conn = null;
@@ -90,7 +90,7 @@ public class DBAdmin {
         }
 
         try {
-            stmt.execute("create table if not EXISTS " + name + " (" + strFields + ", PRIMARY KEY (id));");
+            stmt.execute("create table if not EXISTS " + name + " (" + strFields + ", PRIMARY KEY (id)) DEFAULT CHARSET=utf8;");
             stmt.execute("alter table " + name + " modify id int(11) auto_increment;");
             stmt.execute("alter table " + name + " modify id int(11) default 1;");
             stmt.execute("alter table " + name + " modify id int(11) auto_increment;");
