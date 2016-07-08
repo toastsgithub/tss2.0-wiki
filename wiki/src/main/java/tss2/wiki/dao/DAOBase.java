@@ -11,23 +11,26 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- * 数据表基类
- * 提供访问控制、表和域的管理、执行sql语句的能力。
+ * Base of all DAOs. Every entity subscribe to a
+ * record in the table that the class holding to.
+ *
+ * The name of the table that the class holding to
+ * is decided by the method <code>getTableName</code>.
+ * By default, it is the class's simple name.
+ *
+ * The DAOs provides basic query function which a sql
+ * query like <code>'select * from A where (...)'</code>
+ * can provide. To execute more complicated query function,
+ * use {@Code DBAdmin.query()}
+ *
+ * @see DBAdmin
  * Created by coral on 16-5-2.
  */
 public abstract class DAOBase {
 
     public int id;
 
-    static int lastId = 0;  // 保存主键的最新值。
-
-    public DAOBase() {
-        id = ++lastId;
-    }
-
-    public DAOBase(String tableName) {
-        id = ++lastId;
-    }
+    public DAOBase() { }
 
     public DAOBase[] where(String whereStatment) {
         return where(whereStatment, "");
@@ -52,8 +55,6 @@ public abstract class DAOBase {
         }
         ResultSet rs = DBAdmin.query(query);
         ArrayList<DAOBase> result = new ArrayList<>();
-        ArrayList<Field> fields = new ArrayList<>();
-        Collections.addAll(fields, getClass().getFields());
         if (rs == null){
             return result.toArray(new DAOBase[0]);
         }
@@ -85,15 +86,13 @@ public abstract class DAOBase {
                                 field.set(tmp, rs.getDate(field.getName()));
                         }
                     } catch (SQLException | IllegalAccessException e) {
-                        //e.printStackTrace();
+                        e.printStackTrace();
                     }
                 }
                 result.add(tmp);
             }
             rs.close();
-        } catch (SQLException | IllegalAccessException e) {
-            //e.printStackTrace();
-        } catch (InstantiationException e) {
+        } catch (SQLException | IllegalAccessException | InstantiationException e) {
             e.printStackTrace();
         }
 
@@ -117,11 +116,42 @@ public abstract class DAOBase {
         ResultSet rs = DBAdmin.query("select * from " + getTableName() + " where (id = " + this.get("id") + ");");
         String sql = "";
         try {
-            String values = "";
-            ArrayList<Field> fields = new ArrayList<>();
-            Collections.addAll(fields, this.getClass().getFields());
-            for (Field field : fields) {
-                if (!values.equals("")) values += ", ";
+            String values = getValueString();
+            if (!rs.next()) {
+                sql = "insert into " + getTableName() + " set " + values + ";";
+                DBAdmin.execute(sql);
+            } else {
+                sql = "update " + getTableName() + " set " + values + " where id = " + id + ";";
+                DBAdmin.execute(sql);
+            }
+        } catch (SQLException e) {
+            System.err.println(sql);
+            e.printStackTrace();
+        }
+    }
+
+    public String getTableName() {
+        return this.getClass().getSimpleName();
+    }
+
+
+    public Object get(String key) {
+        try {
+            Field field = this.getClass().getField(key);
+            return field.get(this);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private String getValueString() {
+        String values = "";
+        ArrayList<Field> fields = new ArrayList<>();
+        Collections.addAll(fields, this.getClass().getFields());
+        for (Field field : fields) {
+            if (!values.equals("")) values += ", ";
+            try {
                 switch (field.getType().getSimpleName()) {
                     case "Integer":
                     case "int":
@@ -144,36 +174,10 @@ public abstract class DAOBase {
                     case "Date":
                         values += field.getName() + '=' + "'" + field.get(this).toString() + "'";
                 }
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
             }
-            if (!rs.next()) {
-                sql = "insert into " + getTableName() + " set " + values + ";";
-                DBAdmin.execute(sql);
-            } else {
-                sql = "update " + getTableName() + " set " + values + " where id = " + id + ";";
-                DBAdmin.execute(sql);
-            }
-        } catch (IllegalAccessException | SQLException e) {
-            System.err.println(sql);
-            e.printStackTrace();
         }
-    }
-
-    public String getTableName() {
-        return this.getClass().getSimpleName();
-    }
-
-
-    public Object get(String key) {
-        try {
-            Field field = this.getClass().getField(key);
-            return field.get(this);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public static void main(String[] args) {
-        System.out.println(User.class.getClassLoader().getResource(""));
+        return values;
     }
 }

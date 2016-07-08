@@ -4,7 +4,9 @@ package tss2.wiki.db;
  * Created by 羊驼 on 2016/7/7.
  */
 import com.sun.rowset.CachedRowSetImpl;
+import tss2.wiki.dao.impl.UpdateHistory;
 import tss2.wiki.dao.impl.User;
+import tss2.wiki.dao.impl.WikiEntry;
 
 import javax.sql.RowSet;
 import javax.sql.rowset.CachedRowSet;
@@ -31,6 +33,8 @@ public class DBAdmin {
     // register classes here
     private static Class[] tables = {
             User.class,
+            WikiEntry.class,
+            UpdateHistory.class
     };
 
     static {
@@ -40,7 +44,6 @@ public class DBAdmin {
                 conn = DriverManager.getConnection(URL, USER, PASSWD);
                 stmt = conn.createStatement();
                 System.out.println("Successfully connected to " + URL);
-                migrate();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -55,14 +58,14 @@ public class DBAdmin {
         for (Class clz : tables) {
             boolean contains = false;
             for (String tbl : tbls) {
-                if (tbl.contains(clz.getSimpleName())) contains = true;
+                if (tbl.equals(clz.getSimpleName())) contains = true;
             }
             if (!contains) createTable(clz);
         }
         for (String table : tbls) {
             boolean contains = false;
             for (Class clz : tables) {
-                if (table.contains(clz.getSimpleName())) contains = true;
+                if (table.equals(clz.getSimpleName())) contains = true;
             }
             if (!contains) dropTable(table);
         }
