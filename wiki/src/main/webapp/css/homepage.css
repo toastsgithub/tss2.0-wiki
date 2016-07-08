@@ -2,18 +2,6 @@ body{
     background-color: #f7f7f7;
     /*background-color: rebeccapurple;*/
 }
-
-@font-face {
-    font-family: 'myPingFang';
-    src: url('../resource/font/SanFranciscoDisplayUltralight.eot');
-    src: url('../resource/font/SanFranciscoDisplayUltralight.eot') format('embedded-opentype'),
-    url('../resource/font//SanFranciscoDisplayUltralight.woff2') format('woff2'),
-    url('../resource/font//SanFranciscoDisplayUltralight.woff') format('woff'),
-    url('../resource/font//SanFranciscoDisplayUltralight.ttf') format('truetype'),
-    url('../resource/font//SanFranciscoDisplayUltralight.svg#SanFranciscoDisplayUltralight') format('svg');
-}
-
-
 #se_btn{
     /*background-color: #1b6d85;*/
 }
@@ -88,11 +76,11 @@ body{
     /*margin-left:20px;*/
 }
 .pingfang{
-    font-family: "myPingFang";
+    font-family: "PingFang SC";
     font-weight: 100;
 }
 .ayuthaya{
-    font-family: Arial;
+    font-family: Ayuthaya;
 
 }
 #left_top{
@@ -148,4 +136,3 @@ body{
     border-top-left-radius: 8px;
     float: left;
 }
-
