@@ -4,6 +4,7 @@ package tss2.wiki.dao;
 import tss2.wiki.dao.impl.User;
 import tss2.wiki.db.DBAdmin;
 
+import javax.sql.RowSet;
 import java.lang.reflect.Field;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -53,7 +54,35 @@ public abstract class DAOBase {
         if (options != null && !options.equals("")) {
             query += options + ";";
         }
-        ResultSet rs = DBAdmin.query(query);
+        return query(query);
+    }
+
+    /**
+     * set the value of the field with the assigned value.
+     * This method throws no exceptions nor return anything,
+     * thus even if the setting ends in failure it will
+     * do nothing to notify you, neither it will crash.
+     *
+     * @param key the name of the field
+     * @param value the value you want to set
+     */
+    public void setValue(String key, Object value) {
+        Field field = null;
+        try {
+            field = getClass().getField(key);
+            field.set(this, value);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * executing a sql query string and
+     * @param qs
+     * @return
+     */
+    public DAOBase[] query(String qs) {
+        RowSet rs =  DBAdmin.query(qs);
         ArrayList<DAOBase> result = new ArrayList<>();
         if (rs == null){
             return result.toArray(new DAOBase[0]);
@@ -95,18 +124,7 @@ public abstract class DAOBase {
         } catch (SQLException | IllegalAccessException | InstantiationException e) {
             e.printStackTrace();
         }
-
         return result.toArray(new DAOBase[result.size()]);
-    }
-
-    public void setValue(String key, Object value) {
-        Field field = null;
-        try {
-            field = getClass().getField(key);
-            field.set(this, value);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            e.printStackTrace();
-        }
     }
 
     /**

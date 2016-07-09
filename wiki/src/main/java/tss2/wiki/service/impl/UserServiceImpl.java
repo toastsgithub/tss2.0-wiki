@@ -3,7 +3,7 @@ package tss2.wiki.service.impl;
 import tss2.wiki.dao.DAOBase;
 import tss2.wiki.dao.impl.User;
 import tss2.wiki.dao.impl.WikiEntry;
-import tss2.wiki.domain.ResultLogin;
+import tss2.wiki.domain.LoginResult;
 import tss2.wiki.service.UserService;
 
 /**
@@ -12,11 +12,11 @@ import tss2.wiki.service.UserService;
 public class UserServiceImpl implements UserService{
 
     @Override
-    public ResultLogin Login(String userName, String password) {
+    public LoginResult Login(String userName, String password) {
         User userDAO = new User();
         DAOBase[] a = userDAO.query().where("username = '"+userName+"'");
         User temp = new User();
-        ResultLogin resultLogin = new ResultLogin();
+        LoginResult resultLogin = new LoginResult();
         if(a.length == 0){
             resultLogin.setIncluded(false);
             return null;
@@ -33,11 +33,11 @@ public class UserServiceImpl implements UserService{
         return resultLogin;
     }
 
-    public ResultLogin testFuzzySearch(String userName, String password) {
+    public LoginResult testFuzzySearch(String userName, String password) {
         User userDAO = new User();
         DAOBase[] a = userDAO.query().where("username like '%"+userName+"%'");
         User temp = new User();
-        ResultLogin resultLogin = new ResultLogin();
+        LoginResult resultLogin = new LoginResult();
         if(a.length == 0){
             resultLogin.setIncluded(false);
             return null;

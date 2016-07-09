@@ -1,6 +1,6 @@
 package tss2.wiki.control;
 
-import tss2.wiki.domain.ResultLogin;
+import tss2.wiki.domain.LoginResult;
 import tss2.wiki.service.impl.UserServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/user")
 public class UserController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public @ResponseBody ResultLogin login(@RequestParam(value = "username", required = false) String username,
+    public @ResponseBody LoginResult login(@RequestParam(value = "username", required = false) String username,
                       @RequestParam(value = "password", required = false) String password) {
         UserServiceImpl userService = new UserServiceImpl();
         return userService.Login(username, password);

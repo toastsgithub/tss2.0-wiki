@@ -6,6 +6,9 @@ import org.springframework.web.bind.annotation.*;
 import tss2.wiki.dao.DAOBase;
 import tss2.wiki.dao.impl.Summary;
 import tss2.wiki.db.DBAdmin;
+import tss2.wiki.domain.TagResult;
+import tss2.wiki.service.ContentService;
+import tss2.wiki.service.impl.ContentServiceImpl;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -45,5 +48,13 @@ public class ContentController {
         DAOBase[] content = Summary.query().where("");
         if (content.length == 0) return null;
         return content[0].get("summaryJO").toString();
+    }
+
+    @RequestMapping(value = "/tags", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
+    public @ResponseBody TagResult getTags() {
+        ContentService cs = new ContentServiceImpl();
+        TagResult result = new TagResult();
+        result.data = cs.getTags();
+        return result;
     }
 }
