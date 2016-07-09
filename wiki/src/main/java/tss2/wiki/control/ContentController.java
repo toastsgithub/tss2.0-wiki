@@ -16,6 +16,22 @@ import java.util.Map;
 @Controller
 @RequestMapping(value = "/content")
 public class ContentController {
+
+    /**
+     * request body:
+     * {
+     *   operation: 'add',
+     *   data: {
+     *     time: '2015-01-01 11:11:11',
+     *     username: '123',
+     *     entry_title: 'c++',
+     *     tags: '软件工程/软件开发/需求工程',
+     *     content: 'markdown正文',
+     *   }
+     * }
+     * @param map
+     * @return
+     */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public @ResponseBody String addEntry(@RequestBody Map map) {
         Map mapObject = (Map) map.get("operation");
@@ -24,7 +40,7 @@ public class ContentController {
         return ar.toString();
     }
 
-    @RequestMapping(value = "/summary", method = RequestMethod.GET)
+    @RequestMapping(value = "/summary", method = RequestMethod.GET, produces="text/plain;charset=UTF-8")
     public @ResponseBody String getSummary() {
         DAOBase[] content = Summary.query().where("");
         if (content.length == 0) return null;
