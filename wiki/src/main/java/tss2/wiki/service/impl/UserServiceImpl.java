@@ -2,6 +2,7 @@ package tss2.wiki.service.impl;
 
 import tss2.wiki.dao.DAOBase;
 import tss2.wiki.dao.impl.User;
+import tss2.wiki.dao.impl.WikiEntry;
 import tss2.wiki.domain.ResultLogin;
 import tss2.wiki.service.UserService;
 
@@ -32,7 +33,7 @@ public class UserServiceImpl implements UserService{
         return resultLogin;
     }
 
-    public ResultLogin Test(String userName, String password) {
+    public ResultLogin testFuzzySearch(String userName, String password) {
         User userDAO = new User();
         DAOBase[] a = userDAO.query().where("username like '%"+userName+"%'");
         User temp = new User();
@@ -53,16 +54,26 @@ public class UserServiceImpl implements UserService{
         return resultLogin;
     }
 
+    public void testAdd() {
+        WikiEntry wikiEntryDAO = new WikiEntry();
+        wikiEntryDAO.setValue("title","软件工程与计算1");
+        wikiEntryDAO.setValue("tags","软件工程 java");
+        wikiEntryDAO.setValue("content","刘钦");
+//        wikiEntryDAO.save();
+        DAOBase[] a = wikiEntryDAO.query().where("title like '%软件%'");
+        System.out.println(String.valueOf(a[0].get("title")));
+    }
+
     public static void main(String[] args){
         UserServiceImpl userService = new UserServiceImpl();
-        ResultLogin a = userService.Test("123","123");
-        if(a==null){
-            System.out.println("该用户不存在");
-        }else if(a.isIncluded()) {
-            System.out.println(a.getUser().password);
-        }else {
-            System.out.println("密码错误");
-        }
-
+//        ResultLogin a = userService.testFuzzySearch("123","123");
+//        if(a==null){
+//            System.out.println("该用户不存在");
+//        }else if(a.isIncluded()) {
+//            System.out.println(a.getUser().password);
+//        }else {
+//            System.out.println("密码错误");
+//        }
+        userService.testAdd();
     }
 }
