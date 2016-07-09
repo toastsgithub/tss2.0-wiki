@@ -5,12 +5,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import tss2.wiki.dao.DAOBase;
 import tss2.wiki.dao.impl.Summary;
-import tss2.wiki.db.DBAdmin;
 import tss2.wiki.domain.TagResult;
 import tss2.wiki.service.ContentService;
 import tss2.wiki.service.impl.ContentServiceImpl;
 
-import java.util.ArrayList;
 import java.util.Map;
 
 /**
@@ -35,12 +33,10 @@ public class ContentController {
      * @param map
      * @return
      */
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/add", method = RequestMethod.POST, produces="text/plain;charset=UTF-8")
     public @ResponseBody String addEntry(@RequestBody Map map) {
-        Map mapObject = (Map) map.get("operation");
-        mapObject = (Map) mapObject.get("a");
-        ArrayList ar = (ArrayList) mapObject.get("c");
-        return ar.toString();
+        String operation = map.get("operation").toString();
+        return operation;
     }
 
     @RequestMapping(value = "/summary", method = RequestMethod.GET, produces="text/plain;charset=UTF-8")
@@ -56,5 +52,9 @@ public class ContentController {
         TagResult result = new TagResult();
         result.data = cs.getTags();
         return result;
+    }
+
+    private void process(Map map) {
+        String opr = map.get("operation").toString();
     }
 }
