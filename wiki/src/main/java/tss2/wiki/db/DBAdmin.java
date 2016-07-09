@@ -4,6 +4,7 @@ package tss2.wiki.db;
  * Created by 羊驼 on 2016/7/7.
  */
 import com.sun.rowset.CachedRowSetImpl;
+import tss2.wiki.dao.impl.Summary;
 import tss2.wiki.dao.impl.UpdateHistory;
 import tss2.wiki.dao.impl.User;
 import tss2.wiki.dao.impl.WikiEntry;
@@ -34,7 +35,8 @@ public class DBAdmin {
     private static Class[] tables = {
             User.class,
             WikiEntry.class,
-            UpdateHistory.class
+            UpdateHistory.class,
+            Summary.class,
     };
 
     static {
@@ -162,7 +164,7 @@ public class DBAdmin {
         return arrField.toArray(res);
     }
 
-    public static String getTypeName(String type) {
+    private static String getTypeName(String type) {
         switch (type) {
             case "Integer":
             case "int":
@@ -236,8 +238,5 @@ public class DBAdmin {
     }
 
     public static void main(String[] args) {
-        User user = new User();
-        user.username = "你是笨蛋";
-        user.save();
     }
 }
