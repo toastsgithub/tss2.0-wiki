@@ -13,6 +13,7 @@
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="../css/wiki_navigator.css">
+    <link rel="stylesheet" href="../css/editor.css">
 </head>
 <body>
 <!--<link rel="stylesheet" href="editormd.min.css" />-->
@@ -28,12 +29,33 @@
     </div>
 </nav>
 
+<div id="mainInfo">
+    <div id="name" class="row minf">
+        <label class="namlab">条目名称：</label>
+        <input class="minf_input"/>
+    </div>
+    <!--<hr>-->
+    <div id="type" class="row minf" style="display: block;">
+        <label class="namlab">类别：</label>
+        <input class="minf_input"/>
+    </div>
+    <div id="tag" class="row minf">
+        <label class="namlab">标签：</label>
+        <input class="minf_input" />
+    </div>
+    <div id="summary" class="row minf">
+        <label class="namlab">摘要：</label>
+        <textarea class="minf_input" style="width: 80%; height: 100px;"></textarea>
+    </div>
+</div>
 
 
 <div id="editormd">
     <!--这个textarea可以写也可以不写，因为Editormd会自动追加-->
     <textarea style="display:none;">### Hello Editor.md !<br> ##hello world</textarea>
 </div>
+
+<span class="glyphicon glyphicon-compressed"></span>
 <button class="btn btn-primary" onclick=show_html();>show html interface</button>
 <button class="btn btn-primary" onclick=show_markdown();>show markdown interface</button>
 <!--<script src="jquery.min.js"></script>-->
@@ -47,7 +69,7 @@
             path  : '../editormd_lib/', // Editormd目录里面的lib目录路径
 //            theme : "dark", // 编辑器主题
             previewTheme : "chrome", // 预览区主题
-            editorTheme : "lesser-dark", // 编辑区主题
+            editorTheme : "3024-day", // 编辑区主题
             codeFold : true, // 启用代码折叠
             saveHTMLToTextarea : true,    // 保存 HTML 到 Textarea
             searchReplace : true, // 启用搜索替换
