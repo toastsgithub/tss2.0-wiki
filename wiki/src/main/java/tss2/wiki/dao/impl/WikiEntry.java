@@ -12,18 +12,12 @@ public class WikiEntry extends DAOBase {
     public String title;
     public String tags;
     public String contentPath;
+    public String categories;
     public String summery;
     public int visits;
     public int mainversion, subversion; // latest version number
 
     public WikiEntry query() {
         return new WikiEntry();
-    }
-
-    public static void main(String[] args) {
-        DBAdmin.dropTable("WikiEntry");
-        DBAdmin.createTable(WikiEntry.class);
-        DBAdmin.dropTable("UpdateHistory");
-        DBAdmin.createTable(UpdateHistory.class);
     }
 }

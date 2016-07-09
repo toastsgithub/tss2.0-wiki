@@ -4,7 +4,6 @@ import tss2.wiki.dao.DAOBase;
 import tss2.wiki.db.DBAdmin;
 import tss2.wiki.util.TimeGenerator;
 
-import javax.sql.RowSet;
 
 /**
  * Created by 羊驼 on 2016/7/9.
