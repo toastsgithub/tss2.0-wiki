@@ -12,13 +12,14 @@
     <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="../js/verificationLogin.js"></script>
     <link rel="stylesheet" href="../css/homepage.css">
+    <link rel="stylesheet" href="../css/wiki_navigator.css">
 </head>
 <body>
 
 <nav class="navbar navbar-default" style="background-color: #ffffff">
     <div class="container-fluid">
-        <a class="navbar-header" href="#" style="margin-top: 10px;">
-            <img src="../resource/icon/tss_logo@2x.png" alt="" style="height: 32px">
+        <a class="navbar-header" href="../html/Home.html" style="margin-top: 10px;">
+            <img  src="../resource/icon/tss_logo@2x.png" alt="" style="height: 32px">
         </a>
         <div class="navbar-header navbar-right" style=";margin-top: 10px;">
             <div id="about_btn" class="" style="" onclick="location='../html/about.html'">About</div>
@@ -42,14 +43,14 @@
         <div id="left_top" class="ayuthaya">
             Sign In
         </div>
-        <div id="login_module" style="height: 530px;width: 540px;background-color: #ffffff;box-shadow: 0px 0px 4px 0px #b5b5b5 ">
+        <div id="login_module" style="height: 530px;width: 470px;background-color: #ffffff;box-shadow: 0px 0px 4px 0px #b5b5b5 ">
             <div id="blank" style="color: #ffffff">--</div>
                 <div id="email_block">
-                    <div style="font-size: 20px;margin-left: 35px;" class="ayuthaya">email</div>
+                    <div style="font-size: 20px;margin-left: 20px;" class="ayuthaya">email</div>
                     <input id="user" name="user" class="input_frame" type="text" >
                 </div>
                 <div id="passwd_block">
-                    <div style="font-size: 20px;margin-left: 35px;" class="ayuthaya">password</div>
+                    <div style="font-size: 20px;margin-left: 20px;" class="ayuthaya">password</div>
                     <input id="psw" name="psw" type="password" class="input_frame" type="text">
                 </div>
                 <div id="login_buttons">
@@ -70,6 +71,13 @@
                 </div>
                 <div style="float: left;font-size: 20px;margin-top: 10px;margin-left: 70px;color: white" class="ayuthaya">sign in with github</div>
             </div>
+
+            <div onclick="location='../html/Entry_editor.html'" style="width: 90%;height: 50px; font-size: 20px; margin-left:20px;margin-top: 10px;" class="btn btn-primary">markdown beta1.0</div>
+
+            <div class="login_tooltips" id="tooltips">
+                <!--tooltips-->
+            </div>
+
         </div>
 
     </div>

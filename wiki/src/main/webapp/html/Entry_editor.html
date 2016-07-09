@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>entry</title>
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <!--<script src="../js/editormd.js"></script>-->
+    <link rel="stylesheet" href="../css/editormd.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+    <!--<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">-->
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../css/wiki_navigator.css">
+</head>
+<body>
+<!--<link rel="stylesheet" href="editormd.min.css" />-->
+<nav class="navbar navbar-default" style="background-color: #ffffff">
+    <div class="container-fluid">
+        <a class="navbar-header" href="../html/Home.html" style="margin-top: 10px;">
+            <img src="../resource/icon/tss_logo@2x.png" alt="" style="height: 32px">
+        </a>
+        <div class="navbar-header navbar-right" style=";margin-top: 10px;">
+            <div id="about_btn" class="" style="" onclick="location='../html/about.html'">About</div>
+            <div id="help_btn" class="" style="" onclick="location='../html/help.html'">Help</div>
+        </div>
+    </div>
+</nav>
+
+
+
+<div id="editormd">
+    <!--这个textarea可以写也可以不写，因为Editormd会自动追加-->
+    <textarea style="display:none;">### Hello Editor.md !<br> ##hello world</textarea>
+</div>
+<button class="btn btn-primary" onclick=show_html();>show html interface</button>
+<button class="btn btn-primary" onclick=show_markdown();>show markdown interface</button>
+<!--<script src="jquery.min.js"></script>-->
+<script src="../js/editormd.js"></script>
+<script type="text/javascript">
+    var editor_instance;
+    $(function() {
+        var editor = editormd("editormd", {
+            width  : "90%", // 编辑器宽
+            height  : 540, // 编辑器高
+            path  : '../editormd_lib/', // Editormd目录里面的lib目录路径
+//            theme : "dark", // 编辑器主题
+            previewTheme : "chrome", // 预览区主题
+            editorTheme : "lesser-dark", // 编辑区主题
+            codeFold : true, // 启用代码折叠
+            saveHTMLToTextarea : true,    // 保存 HTML 到 Textarea
+            searchReplace : true, // 启用搜索替换
+            htmlDecode : "style,script,iframe|on*", // 开启 HTML 标签解析，为了安全性，默认不开启
+            emoji : true, // 启用emoji表情
+            taskList : true, // 任务列表
+            tocm      : true,         // Using [TOCM]
+            tex : true,               // 开启科学公式TeX语言支持，默认关闭
+            flowChart : true,         // 开启流程图支持，默认关闭
+            sequenceDiagram : true,   // 开启时序/序列图支持，默认关闭,
+            imageUpload : true, // 启用图片上传
+            imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"], // 允许上传的图片类型
+            imageUploadURL : "index.php?s=uploadArticleImg}", // 处理图片上传功能的地址
+            onload : function() { // 加载完毕的回调函数
+                console.info('EditorMD 加载完毕!');
+                //watch : false,                // 关闭实时预览
+//                toolbar  : false,             //关闭工具栏
+                //previewCodeHighlight : false, // 关闭预览 HTML 的代码块高亮，默认开启
+                //dialogLockScreen : false,   // 设置弹出层对话框不锁屏，全局通用，默认为true
+                //dialogShowMask : false,     // 设置弹出层对话框显示透明遮罩层，全局通用，默认为true
+                //dialogDraggable : false,    // 设置弹出层对话框不可拖动，全局通用，默认为true
+                //dialogMaskOpacity : 0.4,    // 设置透明遮罩层的透明度，全局通用，默认值为0.1
+                // dialogMaskBgColor : "#000", // 设置透明遮罩层的背景颜色，全局通用，默认为#fff
+            }
+        });
+        /*
+         // 也可以使用这样的形式
+         var editor = editormd({
+         id   : "editormd",
+         path : "../lib/" ,
+         ...
+         });
+         */
+        editor_instance =editor;
+    });
+    function show_html() {
+        alert("获取html源内容:\n----------\n"+editor_instance.getHTML());
+    }
+    function show_markdown() {
+        alert(editor_instance.getMarkdown())
+    }
+</script>
+</body>
+
+</html>

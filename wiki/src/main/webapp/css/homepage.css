@@ -26,39 +26,39 @@ body{
     /*height: 30px;*/
     background-color: chocolate;
 }
-#help_btn{
-    height: 30px;
-    width: 80px;
-    text-align: center;
-    font-size: 20px;
-    border-bottom: 0px solid #26448a;
-    cursor: pointer;
-    /*background-color: chocolate;*/
-    -webkit-transition: background-color .5s;
-    float: left;
-    margin-left:10px;
-}
-#help_btn:hover{
-    border-bottom: solid 2px #3B81C7;
-    -webkit-transition: background-color .5s;
-    /*position: fixed;*/
-}
-#about_btn{
-    height: 30px;
-    width: 80px;
-    text-align: center;
-    font-size: 20px;
-    border-bottom: 0px solid #26448a;
-    cursor: pointer;
-    /*background-color: chocolate;*/
-    -webkit-transition: border .1s;
-    float: left;
-    /*margin-left:50px;*/
-}
-#about_btn:hover{
-    border-bottom: solid 2px #3B81C7;
-    -webkit-transition: border .1s;
-}
+/*#help_btn{*/
+    /*height: 30px;*/
+    /*width: 80px;*/
+    /*text-align: center;*/
+    /*font-size: 20px;*/
+    /*border-bottom: 0px solid #26448a;*/
+    /*cursor: pointer;*/
+    /*!*background-color: chocolate;*!*/
+    /*-webkit-transition: background-color .5s;*/
+    /*float: left;*/
+    /*margin-left:10px;*/
+/*}*/
+/*#help_btn:hover{*/
+    /*border-bottom: solid 2px #3B81C7;*/
+    /*-webkit-transition: background-color .5s;*/
+    /*!*position: fixed;*!*/
+/*}*/
+/*#about_btn{*/
+    /*height: 30px;*/
+    /*width: 80px;*/
+    /*text-align: center;*/
+    /*font-size: 20px;*/
+    /*border-bottom: 0px solid #26448a;*/
+    /*cursor: pointer;*/
+    /*!*background-color: chocolate;*!*/
+    /*-webkit-transition: border .1s;*/
+    /*float: left;*/
+    /*!*margin-left:50px;*!*/
+/*}*/
+/*#about_btn:hover{*/
+    /*border-bottom: solid 2px #3B81C7;*/
+    /*-webkit-transition: border .1s;*/
+/*}*/
 #wiki_title{
     /*background-color: red;*/
     margin-left:50px;
@@ -114,10 +114,11 @@ body{
     height: 50px;
     width: 200px;
     float: right;
-    margin-right:32px;
+    margin-right:28px;
     outline: none;
 }
 #forget_btn{
+    color: rgb(51, 122, 183);
     margin-top:10px;
     margin-left:20px;
     font-size: 20px;
@@ -147,4 +148,20 @@ body{
     border-bottom-left-radius: 8px;
     border-top-left-radius: 8px;
     float: left;
+}
+.login_tooltips{
+    width: 98%;
+    font-size: 27px;
+    margin-left:5px;
+    height: 50px;
+    /*background-color: #fbf8e2;*/
+    background-color: transparent;
+    color: transparent;
+    border:solid 1px #f6ebcb;
+    border-color: transparent;
+    border-radius: 5px;
+    float: left;
+    margin-top: 80px;
+    /*visibility: hidden;*/
+    /*-webkit-transition: background-color 1.5s;*/
 }
