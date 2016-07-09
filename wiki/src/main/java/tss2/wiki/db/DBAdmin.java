@@ -44,6 +44,7 @@ public class DBAdmin {
                 conn = DriverManager.getConnection(URL, USER, PASSWD);
                 stmt = conn.createStatement();
                 System.out.println("Successfully connected to " + URL);
+                migrate();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -90,7 +91,7 @@ public class DBAdmin {
         }
 
         try {
-            stmt.execute("create table if not EXISTS " + name + " (" + strFields + ", PRIMARY KEY (id)) DEFAULT CHARSET=utf8;");
+            stmt.execute("create table if not EXISTS " + name + " (" + strFields + ", PRIMARY KEY (id)) DEFAULT CHARSET=gbk;");
             stmt.execute("alter table " + name + " modify id int(11) auto_increment;");
             stmt.execute("alter table " + name + " modify id int(11) default 1;");
             stmt.execute("alter table " + name + " modify id int(11) auto_increment;");
@@ -235,6 +236,8 @@ public class DBAdmin {
     }
 
     public static void main(String[] args) {
-
+        User user = new User();
+        user.username = "你是笨蛋";
+        user.save();
     }
 }

@@ -37,4 +37,9 @@ public class FileLoader {
         }
         return content;
     }
+
+    public String loadStringFromClassPath(String path) {
+        String classpath = FileLoader.class.getClassLoader().getResource(path).toString();
+        return loadString(classpath);
+    }
 }
