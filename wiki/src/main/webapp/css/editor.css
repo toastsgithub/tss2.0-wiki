@@ -1,0 +1,18 @@
+.minf{
+	margin-bottom: 20px;
+	width: 100%;
+	margin-left: 5%
+}
+
+.namlab{
+	width: 70px; 
+	float:left;
+	margin-left: 1%;
+	/*background-color: yellow;*/
+}
+
+.minf_input{
+	margin-left: 30px;
+	width: 20%;
+	/*background-color: red;*/
+}

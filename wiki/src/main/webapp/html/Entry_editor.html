@@ -13,6 +13,7 @@
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="../css/wiki_navigator.css">
+    <link rel="stylesheet" href="../css/editor.css">
 </head>
 <body>
 <!--<link rel="stylesheet" href="editormd.min.css" />-->
@@ -28,6 +29,25 @@
     </div>
 </nav>
 
+<div id="mainInfo">
+    <div id="name" class="row minf">
+        <label class="namlab">条目名称：</label>
+        <input class="minf_input"/>
+    </div>
+    <!--<hr>-->
+    <div id="type" class="row minf" style="display: block;">
+        <label class="namlab">类别：</label>
+        <input class="minf_input"/>
+    </div>
+    <div id="tag" class="row minf">
+        <label class="namlab">标签：</label>
+        <input class="minf_input" />
+    </div>
+    <div id="summary" class="row minf">
+        <label class="namlab">摘要：</label>
+        <textarea class="minf_input" style="width: 80%; height: 100px;"></textarea>
+    </div>
+</div>
 
 
 <div id="editormd">
