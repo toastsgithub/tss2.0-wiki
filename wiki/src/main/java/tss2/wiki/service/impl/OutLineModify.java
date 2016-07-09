@@ -1,47 +1,50 @@
-package tss2.wiki.service;
+package tss2.wiki.service.impl;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import tss2.wiki.service.OutLineModifyService;
+
 /**
  * Created by Administrator on 2016/7/9.
  */
 
-public class OutLineModify {
+public class OutLineModify implements OutLineModifyService{
     //{"ruanjian":[{"a":[{"e":["q"]},"f"]},{"b":["h"]},{"c":["i"]},{"d":["j","k"]},"m"]}
-    public static String JsonString = "{\"ruanjian\":[{\"a\":[{\"e\":[\"q\"]},\"f\"]},{\"b\":[\"h\"]},{\"c\":[\"i\"]},{\"d\":[\"j\",\"k\"]},\"m\"]}";
+    private static String JsonString = "{\"ruanjian\":[{\"a\":[{\"e\":[\"q\"]},\"f\"]},{\"b\":[\"h\"]},{\"c\":[\"i\"]},{\"d\":[\"j\",\"k\"]},\"m\"]}";
 
     public static void main(String[] args){
         OutLineModify tree =new OutLineModify();
-        //tree.test(JsonString);
-        //System.out.println("-----------");
         System.out.println(tree.add(JsonString, "a", "l"));
     }
 
-    public String test(String jsonString){
-        JSONObject jsonObject;
-        jsonObject = JSONObject.fromObject(jsonString);
-        String[] arr = jsonString.split(":");
-        if(arr.length>=2){
-            String temp = arr[0].substring(2, arr[0].length()-1);
-            System.out.println(temp);
-            JSONArray jsonarray = JSONArray.fromObject(jsonObject.get(temp));
-            int l = jsonarray.size();
-            for(int i = 0;i<l;i++){
-                //System.out.println(jsonarray.getString(i));
-                jsonObject = JSONObject.fromObject(jsonarray.getString(i));
-                System.out.println(jsonObject.toString());
-                String[] arr1 = jsonObject.toString().split(":");
-                if(arr1.length>=2){
-                    String temp1 = arr1[0].substring(2, arr1[0].length()-1);
-                    System.out.println(temp1);
-                    JSONArray jsonarra = JSONArray.fromObject(jsonObject.get(temp1));
-                    System.out.println(jsonarra.toString());
-                    for(int j = 0;j<jsonarra.size();j++ ){
-                        System.out.println(jsonarra.get(j).toString());
-                    }
-                }
-            }
-        }
-        return null;
+    /**
+     *
+     * @param father 所需要添加的大纲节点所在地的父节点
+     * @param addString 所需要添加的大纲节点
+     * @return 修改后大纲的json格式String
+     */
+    public String add(String father,String addString){
+        return this.add(JsonString,father,addString);
+    }
+
+    /**
+     *
+     * @param father 所需要删除的大纲节点所在地的父节点
+     * @param deleteString 所需要删除的大纲节点
+     * @return 修改后大纲的json格式String
+     */
+    public String delete(String father,String deleteString){
+        return this.delete(JsonString,father,deleteString);
+    }
+
+    /**
+     *
+     * @param father 所需要修改的大纲节点所在地的父节点
+     * @param beforeChange 修改前的节点
+     * @param afterChange 修改后的节点
+     * @return 修改后大纲的json格式String
+     */
+    public String modify(String father, String beforeChange, String afterChange){
+        return this.modify(JsonString,father,beforeChange,afterChange);
     }
 
     /**
@@ -51,7 +54,7 @@ public class OutLineModify {
      * @param addString 所需要添加的大纲节点
      * @return 修改后大纲的json格式String
      */
-    public String add(String jsonString,String father,String addString){
+    private String add(String jsonString,String father,String addString){
         JSONObject jsonObject;
         jsonObject = JSONObject.fromObject(jsonString);
         String[] arr = jsonString.split(":");
@@ -129,14 +132,11 @@ public class OutLineModify {
         return "";
     }
 
-    /**
-     *
-     * @param jsonString 表示大纲的json格式String
-     * @param changeString 所需要修改的大纲节点
-     * @return 修改后大纲的json格式String
-     */
-    public String modify(String jsonString,String changeString){
+    private String delete(String jsonString,String father,String addString){
+        return null;
+    }
 
+    private String modify(String jsonString,String father,String beforeChange, String afterChange){
         return null;
     }
 }
