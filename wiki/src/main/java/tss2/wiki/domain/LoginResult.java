@@ -5,7 +5,7 @@ import tss2.wiki.dao.impl.User;
 /**
  * Created by Administrator on 2016/7/7.
  */
-public class ResultLogin {
+public class LoginResult {
     private boolean included;
     private User user;
 
