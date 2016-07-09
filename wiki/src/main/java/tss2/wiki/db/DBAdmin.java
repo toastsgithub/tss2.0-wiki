@@ -4,10 +4,8 @@ package tss2.wiki.db;
  * Created by 羊驼 on 2016/7/7.
  */
 import com.sun.rowset.CachedRowSetImpl;
-import tss2.wiki.dao.impl.Summary;
-import tss2.wiki.dao.impl.UpdateHistory;
-import tss2.wiki.dao.impl.User;
-import tss2.wiki.dao.impl.WikiEntry;
+import tss2.wiki.dao.DAOBase;
+import tss2.wiki.dao.impl.*;
 
 import javax.sql.RowSet;
 import javax.sql.rowset.CachedRowSet;
@@ -37,6 +35,7 @@ public class DBAdmin {
             WikiEntry.class,
             UpdateHistory.class,
             Summary.class,
+            Tag.class,
     };
 
     static {
@@ -176,7 +175,7 @@ public class DBAdmin {
                 break;
             case "[C":
             case "String":
-                type = "varchar(255)";
+                type = "text";
                 break;
             case "double":
             case "Double":
