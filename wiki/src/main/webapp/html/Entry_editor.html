@@ -45,19 +45,20 @@
     </div>
     <div id="summary" class="row minf">
         <label class="namlab">摘要：</label>
-        <textarea class="minf_input" style="width: 80%; height: 100px;"></textarea>
+        <textarea class="minf_input" placeholder="若无摘要,则自动提取正文前两百个字作文摘要"  style="width: 80%; height: 100px;resize:none"></textarea>
     </div>
 </div>
 
 
 <div id="editormd">
     <!--这个textarea可以写也可以不写，因为Editormd会自动追加-->
-    <textarea style="display:none;">### Hello Editor.md !<br> ##hello world</textarea>
+    <textarea style="display:none;background-color: #f7f7f7">### Hello Editor.md !<br> ##hello world</textarea>
 </div>
 
 <span class="glyphicon glyphicon-compressed"></span>
 <button class="btn btn-primary" onclick=show_html();>show html interface</button>
 <button class="btn btn-primary" onclick=show_markdown();>show markdown interface</button>
+<button class="btn btn-primary" onclick=getMyName();>get user name</button>
 <!--<script src="jquery.min.js"></script>-->
 <script src="../js/editormd.js"></script>
 <script type="text/javascript">
@@ -110,6 +111,10 @@
     }
     function show_markdown() {
         alert(editor_instance.getMarkdown())
+    }
+    function getMyName(){
+        var myName='<%=session.getAttribute("MYNAME")%>';
+        alert(myName);
     }
 </script>
 </body>

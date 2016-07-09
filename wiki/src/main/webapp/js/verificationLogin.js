@@ -25,7 +25,8 @@ function verif(){
                // alert("username or password is incorrect");
                 show_illegal_tip();
            } else if (data.user.type==0){
-                alert("welcome, user!");
+                // alert("welcome, user!");
+                location.href = "../html/search.html"
             }else if(data.user.type == 1){
                 alert("welcome, admin!");
             }
