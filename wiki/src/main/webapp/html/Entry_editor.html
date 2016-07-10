@@ -41,27 +41,17 @@
     <!--<hr>-->
     <div class="row minf" style="display: block;">
         <label class="namlab">类别：</label>
-        <input id="category_input" class="minf_input" list="category_list"/>
-        <datalist id="category_list">
-            <!--<option>Bavette</option>-->
-            <!--<option>Cannelloni</option>-->
-            <!--<option>Fiorentine</option>-->
-            <!--<option>Gnocchi</option>-->
-            <!--<option>Pappardelle</option>-->
-            <!--<option>Penne lisce</option>-->
-            <!--<option>Pici</option>-->
-            <!--<option>Rigatoni</option>-->
-            <!--<option>Spaghetti</option>-->
-            <!--<option>Tagliatelle</option>-->
-        </datalist>
+        <input id="category_input" class="minf_input"/>
         <span id="typeTip" class="tip"></span>
-
     </div>
     <div class="row minf">
         <label class="namlab">标签：</label>
-        <input id="tags_input" class="minf_input"/>
+        <input id="tags_input" class="minf_input" data-role="tagsinput"/>
         <span id="tagTip" class="tip"></span>
     </div>
+
+    <div id="tags_pool" class="row minf" ></div>
+
     <div class="row minf">
         <label class="namlab">摘要：</label>
         <textarea id="summary" class="minf_input" placeholder="若无摘要,则自动提取正文前两百个字作文摘要"  style="width: 80%; height: 100px;resize:none"></textarea>
@@ -169,6 +159,30 @@
             }
         });
     });
+</script>
+<script>
+    $("#tags_input").keydown(function (e) {
+        if(e.keyCode==13){
+            add_tags(document.getElementById('tags_input').value);
+        }
+    })
+    function add_tags(tag) {
+//        alert("painting:"+tag);
+        if(tag=="")return;
+
+        var tag_pool = document.getElementById('tags_pool');
+        var new_tag = document.createElement("span");
+        var cancel_btn = document.createElement("span");
+        cancel_btn.innerHTML = "×";
+        cancel_btn.style.backgroundColor = "red";
+
+        new_tag.innerHTML = tag;
+        new_tag.appendChild(cancel_btn);
+//        alert("create done");
+        tag_pool.appendChild(new_tag);
+//        alert("append done");
+        document.getElementById('tags_input').value = "";
+    }
 </script>
 </body>
 
