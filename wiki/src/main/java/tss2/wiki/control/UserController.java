@@ -27,7 +27,7 @@ public class UserController {
         String password = request.getParameter("password");
         LoginResult lresult = userService.Login(username, password);
         if (lresult != null && lresult.isIncluded()) {
-            Cookie cookie = new Cookie(username, new SessionServiceimpl().register(username));
+            Cookie cookie = new Cookie(username, new SessionServiceimpl().register(username).getSessionID());
             cookie.setMaxAge(SessionServiceimpl.DEFAULT_SESSION_LIFETIME * 60);
             response.addCookie(cookie);
         }

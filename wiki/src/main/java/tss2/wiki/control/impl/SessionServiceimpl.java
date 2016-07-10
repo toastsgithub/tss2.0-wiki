@@ -3,6 +3,8 @@ package tss2.wiki.control.impl;
 import tss2.wiki.model.WikiSession;
 import tss2.wiki.control.service.SessionService;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -29,8 +31,9 @@ public class SessionServiceimpl implements SessionService {
      * @param username 需要检查会话id的用户名
      * @return null表示会话不存在或失效，sessionID表示该用户的会话。
      */
+    @Override
     public WikiSession checkSession(String username) {
-        if (sessionTable.containsKey(username)) {
+        if (!sessionTable.containsKey(username)) {
             return null;
         }
         WikiSession session = sessionTable.get(username);
@@ -51,12 +54,26 @@ public class SessionServiceimpl implements SessionService {
      * @param minutes 会话的生命周期。
      * @return 创建的会话id。
      */
-    public String register(String username, int minutes) {
+    @Override
+    public WikiSession register(String username, int minutes) {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.MINUTE, minutes);
         String sessionID = generateSessionID(SESSION_ID_LENGTH);
-        sessionTable.put(username, new WikiSession(sessionID, calendar.getTime()));
-        return sessionID;
+        WikiSession session = new WikiSession(sessionID, calendar.getTime());
+        sessionTable.put(username, session);
+        return session;
+    }
+
+    @Override
+    public WikiSession checkSession(HttpServletRequest request) {
+        Cookie[] cookies = request.getCookies();
+        String sessionID = "";
+        for (Cookie cookie: cookies) {
+            if (cookie.getName().equals("sessionID")) {
+                sessionID = cookie.getValue();
+            }
+        }
+        return checkSession(sessionID);
     }
 
     /**
@@ -65,7 +82,8 @@ public class SessionServiceimpl implements SessionService {
      * @param username 需要创建会话的用户名。
      * @return 创建的会话id。
      */
-    public String register(String username) {
+    @Override
+    public WikiSession register(String username) {
         return register(username, DEFAULT_SESSION_LIFETIME);
     }
 
@@ -76,6 +94,16 @@ public class SessionServiceimpl implements SessionService {
      */
     public void disableSession(String username) {
         sessionTable.remove(username);
+    }
+
+    @Override
+    public String getUserBySession(String sessionID) {
+        for (String username: sessionTable.keySet()) {
+            if (sessionTable.get(username).getSessionID().equals(sessionID)) {
+                return username;
+            }
+        }
+        return null;
     }
 
     private HashMap<String, WikiSession> sessionTable;
@@ -89,5 +117,4 @@ public class SessionServiceimpl implements SessionService {
         }
         return sessionid;
     }
-
 }
