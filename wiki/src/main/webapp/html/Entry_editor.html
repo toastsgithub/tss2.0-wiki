@@ -14,7 +14,9 @@
     <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="../css/wiki_navigator.css">
     <link rel="stylesheet" href="../css/editor.css">
+    <link rel="stylesheet" href="../css/auto_complete.css">
     <script src="../js/createClause.js"></script>
+    <script src="../js/jquery.autocomplete.js"></script>
 </head>
 <body>
 <!--<link rel="stylesheet" href="editormd.min.css" />-->
@@ -55,10 +57,10 @@
     </div>
     <div class="row minf">
         <label class="namlab">标签：</label>
-        <input class="minf_input" list="tags_list"/>
-        <datalist id="tags_list">
+        <input id="tags_input" class="minf_input"/>
+        <!--<datalist id="tags_list">-->
 
-        </datalist>
+        <!--</datalist>-->
     </div>
     <div class="row minf">
         <label class="namlab">摘要：</label>
@@ -136,22 +138,31 @@
 
 </script>
 <script>
+    var countries = [
+        { value: 'Andorra', data: 'AD' },
+        {value: 'Boston'},
+        {value:'China'},
+        {value:'Devon'},
+        {value:'England'},
+        { value: 'Zimbabwe', data: 'ZZ' }
+    ];
     $(document).ready(function () {
-//        document.getElementById("tag_list");
+
+
+        $('#tags_input').autocomplete({
+            lookup: countries
+//            serviceUrl: '/content/tags'
+        });
+//        alert("done");
         $.ajax({
             type: 'get',
             url:'/content/tags',
             success:function (data) {
-//                alert(data.data.length);
                 for (var i=0;i<data.data.length;i++){
-//                    alert(data.data[i]);
-                    var new_option = document.createElement("option");
-//                    new_option.innerHTML = "this is a new option";
-                    new_option.value = data.data[i];
-                    document.getElementById("tags_list").appendChild(new_option);
+                    countries.push({value:data.data[i]});
                 }
-
-                alert("append done");
+//                countries.push({value:"hello"});
+//                alert("append done");
             },
             error:function () {
                 alert("网络连接不畅通");
