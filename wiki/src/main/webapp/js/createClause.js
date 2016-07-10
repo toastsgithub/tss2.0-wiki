@@ -10,7 +10,7 @@ function addClause(){
     var catagories = document.getElementById("type").value;
     var content = show_markdown();
 
-    var data0 = {
+    var data = {
                    operation: "add",data:
                    {
                        time: time,
@@ -23,13 +23,14 @@ function addClause(){
                    }
                    };
     // alert("content:"+content);
+    // alert("data:" + JSON.stringify(data));
     // var data = {operations:'add',data:{time:time, username:'123', summary:summary,title: title, tags:tags,
     //     categories:catagories,content:content}};
     $.ajax({
         type:"post",
         url:"/content/add",
         contentType:'application/json;charset=utf-8',
-        data:JSON.stringify(data0),
+        data:JSON.stringify(data),
         success:function(data){
             alert("create successfully!");
         },
