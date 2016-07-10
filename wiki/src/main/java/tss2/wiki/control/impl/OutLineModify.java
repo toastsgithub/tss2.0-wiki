@@ -1,7 +1,7 @@
-package tss2.wiki.service.impl;
+package tss2.wiki.control.impl;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-import tss2.wiki.service.OutLineModifyService;
+import tss2.wiki.control.service.OutLineModifyService;
 
 /**
  * Created by Administrator on 2016/7/9.

@@ -1,6 +1,6 @@
 package tss2.wiki.domain;
 
-import tss2.wiki.dao.impl.User;
+import tss2.wiki.dao.User;
 
 /**
  * Created by Administrator on 2016/7/7.

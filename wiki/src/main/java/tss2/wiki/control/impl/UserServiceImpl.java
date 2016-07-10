@@ -1,10 +1,10 @@
-package tss2.wiki.service.impl;
+package tss2.wiki.control.impl;
 
 import tss2.wiki.dao.DAOBase;
-import tss2.wiki.dao.impl.User;
-import tss2.wiki.dao.impl.WikiEntry;
+import tss2.wiki.dao.User;
+import tss2.wiki.dao.WikiEntry;
 import tss2.wiki.domain.LoginResult;
-import tss2.wiki.service.UserService;
+import tss2.wiki.control.service.UserService;
 
 /**
  * Created by Administrator on 2016/7/7.

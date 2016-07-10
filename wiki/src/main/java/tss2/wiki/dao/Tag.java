@@ -1,6 +1,4 @@
-package tss2.wiki.dao.impl;
-
-import tss2.wiki.dao.DAOBase;
+package tss2.wiki.dao;
 
 /**
  * Created by 羊驼 on 2016/7/9.

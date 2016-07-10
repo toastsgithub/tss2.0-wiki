@@ -1,17 +1,16 @@
 package tss2.wiki.util;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.Scanner;
 
 /**
+ * 文件读写类。
+ *
  * Created by 羊驼 on 2016/7/8.
  */
 public class FileLoader {
 
-    public static String loadString(String path) {
+    public static String loadStringFromAbsolutePath(String path) {
         Scanner scanner = null;
         FileInputStream fin = null;
         String content = "";
@@ -23,6 +22,7 @@ public class FileLoader {
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            return null;
         } finally {
             if (scanner != null) {
                 scanner.close();
@@ -38,8 +38,36 @@ public class FileLoader {
         return content;
     }
 
-    public String loadStringFromClassPath(String path) {
+    public static String loadStringFromFile(String path) {
         String classpath = FileLoader.class.getClassLoader().getResource(path).toString();
-        return loadString(classpath);
+        return loadStringFromAbsolutePath(classpath);
+    }
+
+    public static void writeStringToAbsolutePath(String path, String content) {
+        PrintWriter pw = null;
+        FileOutputStream fout = null;
+        try {
+            fout = new FileOutputStream(path, false);
+            pw = new PrintWriter(fout);
+            pw.write(content);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            if (pw != null) {
+                pw.close();
+            }
+            if (fout != null) {
+                try {
+                    fout.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public static void writeStringToFile(String path, String content) {
+        String classpath = FileLoader.class.getClassLoader().getResource(path).toString();
+        writeStringToAbsolutePath(classpath, content);
     }
 }
