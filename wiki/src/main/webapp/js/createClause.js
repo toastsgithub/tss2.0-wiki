@@ -3,9 +3,9 @@
  */
 
 function addClause(){
-
+    alert("judge");
     var submit=true;
-    if(document.getElementById("name").value == null){
+    if(document.getElementById("name_input").value == ""){
         document.getElementById("nameTip").innerHTML="请输入条目名称";
         submit=false;
     }
@@ -19,16 +19,21 @@ function addClause(){
     }
     if(submit==false){
         return;
+    }else {
+        document.getElementById("nameTip").innerHTML="";
+        document.getElementById("typeTip").innerHTML="";
+        document.getElementById("tagTip").innerHTML="";
     }
-
+    alert("judge done");
+    
 
     var time = getTime();
-    var title = document.getElementById("name").value;
+    var title = document.getElementById("name_input").value;
     var summary = document.getElementById("summary").value;
-    var tags = document.getElementById("tag").value;
-    var catagories = document.getElementById("type").value;
+    var tags = document.getElementById("tags_input").value;
+    var catagories = document.getElementById("category_input").value;
     var content = show_markdown();
-    alert(title);
+    alert("info");
 
 
     var data = {
