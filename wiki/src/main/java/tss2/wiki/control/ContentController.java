@@ -12,6 +12,7 @@ import tss2.wiki.domain.TagResult;
 import tss2.wiki.control.service.ContentService;
 import tss2.wiki.control.impl.ContentServiceImpl;
 import tss2.wiki.model.WikiSession;
+import tss2.wiki.model.WikiSunmary;
 import tss2.wiki.vo.WikiEntryVO;
 
 import javax.servlet.http.Cookie;
@@ -59,9 +60,8 @@ public class ContentController {
      */
     @RequestMapping(value = "/outline", method = RequestMethod.GET, produces="text/plain;charset=UTF-8")
     public @ResponseBody String getSummary() {
-        DAOBase[] content = Summary.query().where("");
-        if (content.length == 0) return null;
-        return content[0].get("summaryJO").toString();
+        WikiSunmary wikiSunmary = new WikiSunmary();
+        return wikiSunmary.getSummary();
     }
 
     /**
