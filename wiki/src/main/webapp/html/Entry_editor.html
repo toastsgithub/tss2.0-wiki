@@ -30,13 +30,13 @@
     </div>
 </nav>
 
-<div id="mainInfo">
+<div>
     <div id="name" class="row minf">
         <label class="namlab">条目名称：</label>
-        <input class="minf_input"/>
+        <input id="mainInfo" class="minf_input"/>
     </div>
     <!--<hr>-->
-    <div id="type" class="row minf" style="display: block;">
+    <div class="row minf" style="display: block;">
         <label class="namlab">类别：</label>
         <input class="minf_input" list="category_list"/>
         <datalist id="category_list">
@@ -51,17 +51,18 @@
             <!--<option>Spaghetti</option>-->
             <!--<option>Tagliatelle</option>-->
         </datalist>
+
     </div>
-    <div id="tag" class="row minf">
+    <div class="row minf">
         <label class="namlab">标签：</label>
         <input class="minf_input" list="tags_list"/>
         <datalist id="tags_list">
 
         </datalist>
     </div>
-    <div id="summary" class="row minf">
+    <div class="row minf">
         <label class="namlab">摘要：</label>
-        <textarea class="minf_input" placeholder="若无摘要,则自动提取正文前两百个字作文摘要"  style="width: 80%; height: 100px;resize:none"></textarea>
+        <textarea id="summary" class="minf_input" placeholder="若无摘要,则自动提取正文前两百个字作文摘要"  style="width: 80%; height: 100px;resize:none"></textarea>
     </div>
 </div>
 
