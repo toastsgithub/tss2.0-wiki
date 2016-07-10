@@ -42,7 +42,7 @@ public class ContentController {
      * @param map
      * @return
      */
-    @RequestMapping(value = "/add", method = RequestMethod.POST, produces="text/plain;charset=UTF-8")
+    @RequestMapping(value = "/add", method = RequestMethod.POST, produces="application/json;charset=UTF-8")
     public @ResponseBody ResultMessage addEntry(HttpServletRequest request, @RequestBody Map map) {
         String operation = map.get("operation").toString();
         // TODO session control
