@@ -23,4 +23,12 @@ public class ResultMessage {
     public void setMessage(String message) {
         this.message = message;
     }
+
+    public int getError() {
+        return error;
+    }
+
+    public String getMessage() {
+        return message;
+    }
 }
