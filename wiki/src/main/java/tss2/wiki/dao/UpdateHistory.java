@@ -1,5 +1,7 @@
 package tss2.wiki.dao;
 
+import tss2.wiki.util.TimeGenerator;
+
 /**
  * Holding update events of wiki entries.
  *
@@ -17,5 +19,11 @@ public class UpdateHistory extends DAOBase {
 
     public static UpdateHistory query() {
         return new UpdateHistory();
+    }
+
+    @Override
+    public void save() {
+        this.timestamp = TimeGenerator.getTimeStampBySecond();
+        super.save();
     }
 }

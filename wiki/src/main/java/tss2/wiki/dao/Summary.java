@@ -23,11 +23,4 @@ public class Summary extends DAOBase {
         timestamp = TimeGenerator.getTimeStampBySecond();
         super.save();
     }
-
-    public static void main(String[] args) {
-        DAOBase[] content = Summary.query().where("");
-        Summary s = (Summary) content[0];
-        s.setValue("summaryJO", "被我改了");
-        s.save();
-    }
 }

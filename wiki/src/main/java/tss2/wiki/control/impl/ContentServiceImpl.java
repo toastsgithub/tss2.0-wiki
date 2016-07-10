@@ -5,6 +5,7 @@ import tss2.wiki.dao.Tag;
 import tss2.wiki.domain.ResultMessage;
 import tss2.wiki.control.service.ContentService;
 import tss2.wiki.model.WikiRecord;
+import tss2.wiki.model.WikiSession;
 import tss2.wiki.vo.WikiEntryVO;
 
 import java.util.ArrayList;
@@ -26,11 +27,12 @@ public class ContentServiceImpl implements ContentService {
     }
 
     @Override
-    public ResultMessage process(String sessionID, Map map) {
+    public ResultMessage process(WikiEntryVO wikiEntry) {
+        Map map = wikiEntry.getData();
         String operation = map.get("operation").toString();
         switch (operation) {
             case "add":
-                return add(new WikiEntryVO(sessionID, (Map) map.get("data")));
+                return add(wikiEntry);
         }
         return null;
     }
@@ -40,11 +42,11 @@ public class ContentServiceImpl implements ContentService {
         String title = map.get("title").toString();
         WikiRecord entry = new WikiRecord(title);
         String summary = map.get("summary").toString();
-        String categories = map.get("categories").toString();
-        String tags = map.get("tags").toString();
+        String[] categories = map.get("categories").toString().split("[/]");
+        String[] tags = map.get("tags").toString().split("[/]");
         String content = map.get("content").toString();
-
-
+        String username = new SessionServiceimpl().getUserBySession(data.getSessionID());
+        entry.setContent(username, categories, tags, summary, content, true);
         return new ResultMessage(0);
     }
 }

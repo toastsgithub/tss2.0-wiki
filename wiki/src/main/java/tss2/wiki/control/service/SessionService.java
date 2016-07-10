@@ -2,6 +2,8 @@ package tss2.wiki.control.service;
 
 import tss2.wiki.model.WikiSession;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * Created by 羊驼 on 2016/7/10.
  */
@@ -26,7 +28,17 @@ public interface SessionService {
      * @param minutes 会话的生命周期。
      * @return 创建的会话id。
      */
-    String register(String username, int minutes);
+    WikiSession register(String username, int minutes);
+
+    /**
+     * 在会话列表中检查当前亲贵的会话。如果该用户的会话不存在
+     * 或者已经过期，则返回null。
+     * 否则，返回这个用户的会话id。
+     *
+     * @param request 需要检查会话id的用户名
+     * @return null表示会话不存在或失效，sessionID表示该用户的会话。
+     */
+    WikiSession checkSession(HttpServletRequest request);
 
     /**
      * 为这个用户创建一个具有默认会话长度的会话。
@@ -34,7 +46,7 @@ public interface SessionService {
      * @param username 需要创建会话的用户名。
      * @return 创建的会话id。
      */
-    String register(String username);
+    WikiSession register(String username);
 
     /**
      * 使用户的会话失效。
@@ -42,4 +54,11 @@ public interface SessionService {
      * @param username 需要关闭会话的用户名。
      */
     void disableSession(String username);
+
+    /**
+     * 根据session id 获取用户id
+     * @param sessionID session id
+     * @return 用户名
+     */
+    String getUserBySession(String sessionID);
 }

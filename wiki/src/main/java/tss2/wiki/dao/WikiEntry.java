@@ -11,7 +11,7 @@ public class WikiEntry extends DAOBase {
     public String contentPath;
     public String categories;
     public String summery;
-    public int visits;
+    public int visits = 0;
     public int mainversion, subversion; // latest version number
 
     public static WikiEntry query() {
