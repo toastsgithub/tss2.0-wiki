@@ -38,11 +38,26 @@
     <!--<hr>-->
     <div id="type" class="row minf" style="display: block;">
         <label class="namlab">类别：</label>
-        <input class="minf_input"/>
+        <input class="minf_input" list="category_list"/>
+        <datalist id="category_list">
+            <!--<option>Bavette</option>-->
+            <!--<option>Cannelloni</option>-->
+            <!--<option>Fiorentine</option>-->
+            <!--<option>Gnocchi</option>-->
+            <!--<option>Pappardelle</option>-->
+            <!--<option>Penne lisce</option>-->
+            <!--<option>Pici</option>-->
+            <!--<option>Rigatoni</option>-->
+            <!--<option>Spaghetti</option>-->
+            <!--<option>Tagliatelle</option>-->
+        </datalist>
     </div>
     <div id="tag" class="row minf">
         <label class="namlab">标签：</label>
-        <input class="minf_input" />
+        <input class="minf_input" list="tags_list"/>
+        <datalist id="tags_list">
+
+        </datalist>
     </div>
     <div id="summary" class="row minf">
         <label class="namlab">摘要：</label>
@@ -117,34 +132,31 @@
         var myName='<%=session.getAttribute("MYNAME")%>';
         alert(myName);
     }
-//    function addClause() {
-//        var data = {
-//                    operation: "add",data:
-//                    {
-//                        time: "2015-01-01 11:11:11",
-//                        username: "123",
-//                        summary: "asdasdas",
-//                        title: "c++",
-//                        tags: "blablabla",
-//                        categories:"c1/c2/c3",
-//                        content: "markdown正文"
-//                    }
-//                    };
-//        $.ajax({
-//            type:'post',
-//            contentType:'application/json;charset=utf-8',
-//            url:'/content/add',
-//            data:JSON.stringify(data),
-//            success:function (data) {
-//                alert("success");
-//                alert(data);
-//            },
-//            error:function (data) {
-//                alert(JSON.stringify(data));
-//                alert("error");
-//            }
-//        });
-//    }
+
+</script>
+<script>
+    $(document).ready(function () {
+//        document.getElementById("tag_list");
+        $.ajax({
+            type: 'get',
+            url:'/content/tags',
+            success:function (data) {
+//                alert(data.data.length);
+                for (var i=0;i<data.data.length;i++){
+//                    alert(data.data[i]);
+                    var new_option = document.createElement("option");
+//                    new_option.innerHTML = "this is a new option";
+                    new_option.value = data.data[i];
+                    document.getElementById("tags_list").appendChild(new_option);
+                }
+
+                alert("append done");
+            },
+            error:function () {
+                alert("网络连接不畅通");
+            }
+        });
+    });
 </script>
 </body>
 

@@ -9,7 +9,7 @@ function addClause(){
     var tags = document.getElementById("tag").value;
     var catagories = document.getElementById("type").value;
     var content = show_markdown();
-
+    alert(summary);
     var data0 = {
                    operation: "add",data:
                    {
@@ -22,7 +22,7 @@ function addClause(){
                        content: content
                    }
                    };
-    // alert("content:"+content);
+    alert("content:"+JSON.stringify(data0));
     // var data = {operations:'add',data:{time:time, username:'123', summary:summary,title: title, tags:tags,
     //     categories:catagories,content:content}};
     $.ajax({
