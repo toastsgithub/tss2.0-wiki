@@ -2,18 +2,20 @@ package tss2.wiki.control.impl;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import tss2.wiki.control.service.OutLineModifyService;
+import tss2.wiki.model.WikiSunmary;
 
 /**
  * Created by Administrator on 2016/7/9.
  */
 
-public class OutLineModify implements OutLineModifyService{
+public class OutLineModifyImpl implements OutLineModifyService{
     //{"ruanjian":[{"a":[{"e":["q"]},"f"]},{"b":["h"]},{"c":["i"]},{"d":["j","k"]},"m"]}
     private static String JsonString = "{\"ruanjian\":[{\"a\":[{\"e\":[\"q\"]},\"f\"]},{\"b\":[\"h\"]},{\"c\":[\"i\"]},{\"d\":[\"j\",\"k\"]},\"m\"]}";
+    private WikiSunmary wikiSunmary = new WikiSunmary();
 
     public static void main(String[] args){
-        OutLineModify tree =new OutLineModify();
-        System.out.println(tree.add(JsonString, "a", "l"));
+        OutLineModifyService tree =new OutLineModifyImpl();
+        System.out.println(tree.add("四班", "孙浩大哥本来就是多"));
     }
 
     /**
@@ -23,7 +25,10 @@ public class OutLineModify implements OutLineModifyService{
      * @return 修改后大纲的json格式String
      */
     public String add(String father,String addString){
-        return this.add(JsonString,father,addString);
+        String jsonString = wikiSunmary.getSummary();
+        String result = this.add(jsonString,father,addString);
+        wikiSunmary.setSummary(result);
+        return result;
     }
 
     /**
@@ -33,7 +38,10 @@ public class OutLineModify implements OutLineModifyService{
      * @return 修改后大纲的json格式String
      */
     public String delete(String father,String deleteString){
-        return this.delete(JsonString,father,deleteString);
+        String jsonString = wikiSunmary.getSummary();
+        String result = this.delete(JsonString,father,deleteString);
+        wikiSunmary.setSummary(result);
+        return result;
     }
 
     /**
@@ -44,7 +52,10 @@ public class OutLineModify implements OutLineModifyService{
      * @return 修改后大纲的json格式String
      */
     public String modify(String father, String beforeChange, String afterChange){
-        return this.modify(JsonString,father,beforeChange,afterChange);
+        String jsonString = wikiSunmary.getSummary();
+        String result = this.modify(JsonString,father,beforeChange,afterChange);
+        wikiSunmary.setSummary(result);
+        return result;
     }
 
     /**
