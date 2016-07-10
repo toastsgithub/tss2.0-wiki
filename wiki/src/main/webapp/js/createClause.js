@@ -3,12 +3,33 @@
  */
 
 function addClause(){
+
+    var submit=true;
+    if(document.getElementById("name").value == null){
+        document.getElementById("nameTip").innerHTML="请输入条目名称";
+        submit=false;
+    }
+    if(document.getElementById("category_input").value == ""){
+        document.getElementById("typeTip").innerHTML="请选择类别";
+        submit=false;
+    }
+    if(document.getElementById("tags_input").value == ""){
+        document.getElementById("tagTip").innerHTML="请选择标签";
+        submit=false;
+    }
+    if(submit==false){
+        return;
+    }
+
+
     var time = getTime();
     var title = document.getElementById("name").value;
     var summary = document.getElementById("summary").value;
     var tags = document.getElementById("tag").value;
     var catagories = document.getElementById("type").value;
     var content = show_markdown();
+    alert(title);
+
 
     var data = {
                    operation: "add",data:
