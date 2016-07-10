@@ -1,7 +1,5 @@
-package tss2.wiki.dao.impl;
+package tss2.wiki.dao;
 
-import tss2.wiki.dao.DAOBase;
-import tss2.wiki.db.DBAdmin;
 import tss2.wiki.util.TimeGenerator;
 
 
@@ -19,10 +17,17 @@ public class Summary extends DAOBase {
 
     @Override
     public void save() {
-        // add version
+        // TODO: add version
 
         // set timestamp
-        timestamp = TimeGenerator.getTimeStampByMillis();
+        timestamp = TimeGenerator.getTimeStampBySecond();
         super.save();
+    }
+
+    public static void main(String[] args) {
+        DAOBase[] content = Summary.query().where("");
+        Summary s = (Summary) content[0];
+        s.setValue("summaryJO", "被我改了");
+        s.save();
     }
 }

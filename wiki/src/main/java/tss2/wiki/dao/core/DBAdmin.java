@@ -1,11 +1,8 @@
-package tss2.wiki.db;
+package tss2.wiki.dao.core;
 
-/**
- * Created by 羊驼 on 2016/7/7.
- */
+
 import com.sun.rowset.CachedRowSetImpl;
-import tss2.wiki.dao.DAOBase;
-import tss2.wiki.dao.impl.*;
+import tss2.wiki.dao.*;
 
 import javax.sql.RowSet;
 import javax.sql.rowset.CachedRowSet;

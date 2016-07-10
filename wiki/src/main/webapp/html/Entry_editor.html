@@ -35,12 +35,13 @@
 <div>
     <div id="name" class="row minf">
         <label class="namlab">条目名称：</label>
-        <input id="mainInfo" class="minf_input"/>
+        <input id="name_input" class="minf_input"/>
+        <span id="nameTip" class="tip"></span>
     </div>
     <!--<hr>-->
     <div class="row minf" style="display: block;">
         <label class="namlab">类别：</label>
-        <input class="minf_input" list="category_list"/>
+        <input id="category_input" class="minf_input" list="category_list"/>
         <datalist id="category_list">
             <!--<option>Bavette</option>-->
             <!--<option>Cannelloni</option>-->
@@ -53,14 +54,13 @@
             <!--<option>Spaghetti</option>-->
             <!--<option>Tagliatelle</option>-->
         </datalist>
+        <span id="typeTip" class="tip"></span>
 
     </div>
     <div class="row minf">
         <label class="namlab">标签：</label>
         <input id="tags_input" class="minf_input"/>
-        <!--<datalist id="tags_list">-->
-
-        <!--</datalist>-->
+        <span id="tagTip" class="tip"></span>
     </div>
     <div class="row minf">
         <label class="namlab">摘要：</label>

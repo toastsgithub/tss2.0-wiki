@@ -1,6 +1,4 @@
-package tss2.wiki.dao.impl;
-
-import tss2.wiki.dao.DAOBase;
+package tss2.wiki.dao;
 
 /**
  * Holding update events of wiki entries.
@@ -11,7 +9,9 @@ public class UpdateHistory extends DAOBase {
     public String title;
     public String username;
     public String timestamp;
-    public String contentPath;  // record **FLODER PATH**
+    public String summary;
+    public String categories;
+    public String contentPath;
     public String tags;
     public int mainversion, subversion;
 

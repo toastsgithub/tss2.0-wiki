@@ -12,7 +12,7 @@ import java.util.Date;
  */
 public class TimeGenerator {
 
-    public static String getTimeStampByMillis() {
+    public static String getTimeStampBySecond() {
         Date curr = Calendar.getInstance().getTime();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return format.format(curr);

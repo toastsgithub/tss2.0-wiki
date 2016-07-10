@@ -1,8 +1,7 @@
 package tss2.wiki.dao;
 
 
-import tss2.wiki.dao.impl.User;
-import tss2.wiki.db.DBAdmin;
+import tss2.wiki.dao.core.DBAdmin;
 
 import javax.sql.RowSet;
 import java.lang.reflect.Field;
@@ -91,7 +90,6 @@ public abstract class DAOBase {
             while (rs.next()) {
                 DAOBase tmp = this.getClass().newInstance();
                 for (Field field: getClass().getFields()) {
-                    if (field.getName().equals("id")) continue;
                     try {
                         switch (field.getType().getSimpleName()) {
                             case "Integer":

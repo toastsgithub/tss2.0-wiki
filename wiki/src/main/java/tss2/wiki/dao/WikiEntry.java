@@ -1,7 +1,4 @@
-package tss2.wiki.dao.impl;
-
-import tss2.wiki.dao.DAOBase;
-import tss2.wiki.db.DBAdmin;
+package tss2.wiki.dao;
 
 /**
  * contains wiki entries.
@@ -17,7 +14,7 @@ public class WikiEntry extends DAOBase {
     public int visits;
     public int mainversion, subversion; // latest version number
 
-    public WikiEntry query() {
+    public static WikiEntry query() {
         return new WikiEntry();
     }
 }

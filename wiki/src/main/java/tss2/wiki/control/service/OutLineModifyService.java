@@ -1,4 +1,4 @@
-package tss2.wiki.service;
+package tss2.wiki.control.service;
 
 /**
  * Created by Administrator on 2016/7/9.
