@@ -14,7 +14,16 @@
 .minf_input{
 	margin-left: 30px;
 	width: 20%;
+    border: solid 0.5px #c8c8d0;
+    -webkit-transition: border .5s;
 	/*background-color: red;*/
+    outline: none;
+
+}
+.minf_input:focus{
+    /*border-color: #84d0c9;*/
+    border-color: #3f82c5;
+    -webkit-transition: border .5s;
 }
 
 .tip{
