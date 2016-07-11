@@ -16,7 +16,7 @@ public interface SessionService {
      * @param username 需要检查会话id的用户名
      * @return null表示会话不存在或失效，sessionID表示该用户的会话。
      */
-    WikiSession checkSession(String username);
+    WikiSession checkUser(String username);
 
     /**
      * 新建一个用户的会话，而不会去检查这个用户的合法性。
@@ -38,7 +38,7 @@ public interface SessionService {
      * @param request 需要检查会话id的用户名
      * @return null表示会话不存在或失效，sessionID表示该用户的会话。
      */
-    WikiSession checkSession(HttpServletRequest request);
+    WikiSession checkUser(HttpServletRequest request);
 
     /**
      * 为这个用户创建一个具有默认会话长度的会话。

@@ -26,6 +26,7 @@ public class UserController {
         if (lresult != null && lresult.isIncluded()) {
             Cookie cookie = new Cookie("sessionID", new SessionServiceimpl().register(username).getSessionID());
             cookie.setMaxAge(SessionServiceimpl.DEFAULT_SESSION_LIFETIME * 60);
+            cookie.setPath("/");
             response.addCookie(cookie);
         }
         return lresult;

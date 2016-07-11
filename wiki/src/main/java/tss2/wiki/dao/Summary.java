@@ -1,9 +1,11 @@
 package tss2.wiki.dao;
 
-import tss2.wiki.util.TimeGenerator;
+import tss2.wiki.util.TimeUtil;
 
 
 /**
+ *
+ *
  * Created by 羊驼 on 2016/7/9.
  */
 public class Summary extends DAOBase {
@@ -20,7 +22,7 @@ public class Summary extends DAOBase {
         // TODO: add version
 
         // set timestamp
-        timestamp = TimeGenerator.getTimeStampBySecond();
+        timestamp = TimeUtil.getTimeStampBySecond();
         super.save();
     }
 }

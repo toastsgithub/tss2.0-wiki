@@ -33,6 +33,7 @@ public class DBAdmin {
             UpdateHistory.class,
             Summary.class,
             Tag.class,
+            Session.class,
     };
 
     static {

@@ -38,7 +38,7 @@ public class ContentServiceImpl implements ContentService {
     }
 
     private ResultMessage add(WikiEntryVO data) {
-        Map map = data.getData();
+        Map map = (Map) data.getData().get("data");
         String title = map.get("title").toString();
         WikiRecord entry = new WikiRecord(title);
         String summary = map.get("summary").toString();

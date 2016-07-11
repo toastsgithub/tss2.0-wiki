@@ -4,7 +4,7 @@ import tss2.wiki.dao.DAOBase;
 import tss2.wiki.dao.UpdateHistory;
 import tss2.wiki.dao.WikiEntry;
 import tss2.wiki.util.FileLoader;
-import tss2.wiki.util.TimeGenerator;
+import tss2.wiki.util.TimeUtil;
 
 /**
  *
@@ -109,7 +109,7 @@ public class WikiRecord {
         history.tags = strTags;
         history.categories = strCateg;
         history.summary = summary;
-        history.timestamp = TimeGenerator.getTimeStampBySecond();
+        history.timestamp = TimeUtil.getTimeStampBySecond();
         history.mainversion = mainversion;
         history.subversion = subversion;
         history.username = username;
