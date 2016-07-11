@@ -1,74 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <title>Prototype</title>
-    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
-    <!--<script src="../js/editormd.js"></script>-->
-    <link rel="stylesheet" href="../css/editormd.css">
-    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="../css/wiki_navigator.css">
-    <link rel="stylesheet" href="../css/entry_content.css">
+    <title>tree</title>
+
+    <script src="https://code.angularjs.org/1.5.5/angular.js" data-semver="1.5.5" data-require="angularjs@1.5.5"></script>
+    <script data-require="d3@*" data-semver="3.5.3" src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.js"></script>
+    <script type="text/javascript" src="https://rawgit.com/komushi/ng-d3tree/master/src/ng-d3tree.js"></script>
+
+    <link rel="stylesheet" href="https://rawgit.com/komushi/ng-d3tree/master/src/css/ng-d3tree.css" />
+
 </head>
-<body>
-<nav class="navbar navbar-default" style="background-color: #ffffff">
-    <div class="container-fluid">
-        <a class="navbar-header" href="../html/Home.html" style="margin-top: 10px;">
-            <img src="../resource/icon/tss_logo@2x.png" alt="" style="height: 32px">
-        </a>
-        <div class="navbar-header navbar-right" style=";margin-top: 10px;">
-            <div id="about_btn" class="" style="" onclick="location='../html/about.html'">About</div>
-            <div id="help_btn" class="" style="" onclick="location='../html/help.html'">Help</div>
-        </div>
-    </div>
-</nav>
 
 
-<ol>
-    <li>1</li>
-</ol>
-<ol>
-    <li>2.1</li>
-    <li>2.2</li>
-    <li>2.3</li>
-</ol>
+<body ng-app="d3treeApp">
+
+<script>
+    var app = angular.module("d3treeApp", ['ngD3tree']);
+    app.controller("treeCtrl", ['$scope', '$http', function($scope, $http) {
+
+        $http.get('/content/outline')
+                .success(function(res){
+                    $scope.d3json = res;
+                });
+
+    }]);
+</script>
+
+<div ng-controller="treeCtrl">
+    <h2>Reingold-Tilford Tree Static</h2>
+    <reingold-tilford-tree
+            data="d3json"
+            width="550"
+            height="500"
+            json-path="">
+    </reingold-tilford-tree>
+</div>
 
 
 </body>
-<script>
-    var data={"软件":[{"一班":[{"二班":["说好的孙浩大哥呢"]},"考拉","浣熊"]},{"三班":["喵"]},{"四班":["歪歪"]},{"怎么这么多":["好烦啊","我编不下去了"]},"还有？？"]};
-    $(document).ready(function () {
-        alert("ready");
-//        display(data);
-        document.cookie="userid=110";
-        alert(document.cookie);
-//        alert(typeof ["1","2"]);
-//        getAll(data);
-    });
-
-</script>
-<script>
-
-</script>
-<!--<script>-->
-    <!--function display(items){-->
-        <!--alert("in display");-->
-        <!--for(var item in items){-->
-            <!--alert("!");-->
-            <!--alert(item);-->
-            <!--$("#outline").append("<li>"+item+"</li>");-->
-            <!--if(item!=null){-->
-                <!--alert("items="+items);-->
-                <!--alert("item="+item);-->
-<!--//			da = JSON.parse(item);-->
-<!--//			alert(da);-->
-                <!--alert("&ndash;&gt;"+items[item]);-->
-                <!--display(items[item]);-->
-            <!--}-->
-        <!--}-->
-    <!--}-->
-<!--</script>-->
 </html>
