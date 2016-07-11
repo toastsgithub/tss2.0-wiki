@@ -15,7 +15,7 @@ public class OutLineModifyImpl implements OutLineModifyService{
 
     public static void main(String[] args){
         OutLineModifyService tree =new OutLineModifyImpl();
-        System.out.println(tree.add("四班", "孙浩大哥本来就是多"));
+        System.out.println(tree.add("考拉", "考拉爸爸"));
     }
 
     /**
@@ -27,7 +27,7 @@ public class OutLineModifyImpl implements OutLineModifyService{
     public String add(String father,String addString){
         String jsonString = wikiSunmary.getSummary();
         String result = this.add(jsonString,father,addString);
-        wikiSunmary.setSummary(result);
+        //wikiSunmary.setSummary(result);
         return result;
     }
 
@@ -75,7 +75,7 @@ public class OutLineModifyImpl implements OutLineModifyService{
             if(temp.equals(father)){
                 JSONArray jsonarray = JSONArray.fromObject(jsonObject.get(temp));
                 jsonarray.add(addString);
-                //System.out.println(jsonarray);
+                String nothing;
                 int l = jsonarray.size();
                 for(int i = 0;i<l;i++){
                     System.out.println(jsonarray.get(i).toString());
@@ -89,6 +89,7 @@ public class OutLineModifyImpl implements OutLineModifyService{
                 String two = "";
                 String result = "";
                 for(int i = 0;i<l;i++){
+                    //System.out.println(jsonarray.getString(i));
                     try{
                         jsonObject = JSONObject.fromObject(jsonarray.getString(i));
                         //System.out.println(jsonarray.getString(i));
@@ -104,12 +105,56 @@ public class OutLineModifyImpl implements OutLineModifyService{
                         //System.out.println(result);
                     }catch(Exception e){
                         System.out.println(jsonarray.getString(i));
-                        //System.out.println(jsonarray);
-                        if(result == ""){
-                            result= result+jsonarray.getString(i);
+                        System.out.println(i);
+                        if(jsonarray.getString(i).equals(father)){
+                            JSONObject a = new JSONObject();
+                            String[] t = new String[1];
+                            t[0] = addString;
+                            a.accumulate(father,t);
+                            //jsonarray.add(i-1,a);
+                            jsonarray.add(a);
+                            jsonarray.remove(i);
+                            System.out.println(jsonarray);
+                            System.out.println(i);
+                            System.out.println(result);
+                            //jsonObject.replace(temp,jsonarray);
+
+                            for(int j = i; j < l; j++){
+                                if(result == ""){
+                                    try{
+                                        JSONObject Object = JSONObject.fromObject(jsonarray.getString(j));
+                                        result= result+jsonarray.getString(j);
+                                    }catch(Exception el){
+                                        result = result+"\""+jsonarray.getString(j)+"\"";
+                                    }
+                                }else{
+                                    try{
+                                        JSONObject Object = JSONObject.fromObject(jsonarray.getString(j));
+                                        result= result+","+jsonarray.getString(j);
+                                    }catch(Exception el){
+                                        result = result+","+"\""+jsonarray.getString(j)+"\"";
+                                    }
+                                    //result = result+","+"\""+jsonarray.getString(i)+"\"";
+                                    //result = result+","+jsonarray.getString(j);
+                                }
+
+                            }
+                            break;
                         }else{
-                            result = result+","+"\""+jsonarray.getString(i)+"\"";
+                            if(result == ""){
+                                try{
+                                    JSONObject Object = JSONObject.fromObject(jsonarray.getString(i));
+                                    result= result+jsonarray.getString(i);
+                                }catch(Exception e1){
+                                    result= result+"\""+jsonarray.getString(i)+"\"";
+                                }
+
+                            }else{
+                                result = result+","+"\""+jsonarray.getString(i)+"\"";
+                            }
                         }
+                        //System.out.println(jsonarray);
+
                         //System.out.println(result);
                     }
                 }
@@ -135,10 +180,20 @@ public class OutLineModifyImpl implements OutLineModifyService{
                 int l = jsonarray.size();
                 for(int i = 0;i<l;i++){
                     System.out.println(jsonarray.get(i).toString());
+                    if(jsonarray.get(i).toString().equals(father)){
+                        JSONObject a = new JSONObject();
+                        String[] t = new String[1];
+                        t[0] = addString;
+                        a.accumulate(father,t);
+                        jsonarray.add(a);
+                        jsonarray.remove(i);
+                        jsonObject.replace(temp,jsonarray);
+                    }
                 }
             }
-            //System.out.println(jsonString);
-            return jsonString;
+
+            //System.out.println(jsonObject);
+            return jsonObject.toString();
         }
         return "";
     }
