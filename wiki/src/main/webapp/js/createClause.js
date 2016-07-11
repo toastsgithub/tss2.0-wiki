@@ -33,6 +33,7 @@ function addClause(){
     var tags = document.getElementById("tags_input").value;
     var catagories = document.getElementById("category_input").value;
     var content = show_markdown();
+    content = "###this is content";
     alert("info");
 
 
@@ -49,7 +50,7 @@ function addClause(){
                    }
                    };
     // alert("content:"+content);
-    // alert("data:" + JSON.stringify(data));
+    alert("data:" + JSON.stringify(data));
     // var data = {operations:'add',data:{time:time, username:'123', summary:summary,title: title, tags:tags,
     //     categories:catagories,content:content}};
     $.ajax({
