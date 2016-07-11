@@ -3,7 +3,7 @@ package tss2.wiki.model;
 import tss2.wiki.dao.DAOBase;
 import tss2.wiki.dao.UpdateHistory;
 import tss2.wiki.dao.WikiEntry;
-import tss2.wiki.util.FileLoader;
+import tss2.wiki.util.FileUtil;
 import tss2.wiki.util.TimeUtil;
 
 import java.io.File;
@@ -36,6 +36,10 @@ public class WikiRecord {
         }
     }
 
+    public WikiRecord(String title, int mainversion, int subversion) {
+
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }
@@ -47,7 +51,7 @@ public class WikiRecord {
     public String getContent() {
         String path = dao.contentPath;
         if (dao.contentPath == null) return null;
-        return FileLoader.loadStringFromAbsolutePath(path);
+        return FileUtil.loadStringFromAbsolutePath(path);
     }
 
     public String[] getCategories() {
@@ -73,7 +77,7 @@ public class WikiRecord {
             return null;
         } else {
             String path = ((UpdateHistory) updatehistory[0]).contentPath;
-            return FileLoader.loadStringFromFile(path);
+            return FileUtil.loadStringFromFile(path);
         }
     }
 
@@ -140,12 +144,16 @@ public class WikiRecord {
         dao.save();
 
         // write content to file system
-        FileLoader.writeStringToAbsolutePath(path, content);
+        FileUtil.writeStringToAbsolutePath(path, content);
     }
 
     public void addVisit() {
         ++dao.visits;
         dao.save();
+    }
+
+    public void delete() {
+        dao.delete();
     }
 
     private WikiEntry dao;
