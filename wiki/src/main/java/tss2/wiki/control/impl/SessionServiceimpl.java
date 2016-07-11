@@ -66,7 +66,7 @@ public class SessionServiceimpl implements SessionService {
     public String getUserBySession(String sessionID) {
         WikiSession session = WikiSession.checkSession(sessionID);
         if (session == null) return null;
-        return session.getSessionID();
+        return session.getUserID();
     }
 
     private String generateSessionID(int length) {

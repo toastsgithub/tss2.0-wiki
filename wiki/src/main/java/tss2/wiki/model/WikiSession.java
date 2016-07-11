@@ -62,6 +62,10 @@ public class WikiSession {
         return new WikiSession((Session) sessions[0]);
     }
 
+
+    public String getUserID() {
+        return dao.username;
+    }
     /**
      * This will renew or create a session.
      *

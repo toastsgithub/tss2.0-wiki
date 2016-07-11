@@ -8,6 +8,8 @@ import tss2.wiki.domain.ResultMessage;
 import tss2.wiki.domain.TagResult;
 import tss2.wiki.control.service.ContentService;
 import tss2.wiki.control.impl.ContentServiceImpl;
+import tss2.wiki.domain.WikiResult;
+import tss2.wiki.model.WikiRecord;
 import tss2.wiki.model.WikiSession;
 import tss2.wiki.model.WikiSunmary;
 import tss2.wiki.vo.WikiEntryVO;
@@ -72,5 +74,15 @@ public class ContentController {
         TagResult result = new TagResult();
         result.data = cs.getTags();
         return result;
+    }
+
+    @RequestMapping(value = "", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
+    public @ResponseBody WikiResult doGet(@RequestParam(value = "title") String title) {
+        ContentService cs = new ContentServiceImpl();
+        WikiRecord wikiRecord = new WikiRecord(title);
+        if (wikiRecord.getContent() == null) {
+            return new WikiResult(0);
+        }
+        return new WikiResult(1, wikiRecord);
     }
 }

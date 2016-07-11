@@ -6,6 +6,8 @@ import tss2.wiki.dao.WikiEntry;
 import tss2.wiki.util.FileLoader;
 import tss2.wiki.util.TimeUtil;
 
+import java.io.File;
+
 /**
  *
  * Created by 羊驼 on 2016/7/10.
@@ -15,12 +17,20 @@ public class WikiRecord {
     public static final String FILE_PATH_PREFIX = "/wikimd/";
     public static final String FILE_PATH_SUFFIX = ".md";
 
+    private WikiRecord() {
+        File fp = new File(FILE_PATH_PREFIX);
+        if (!fp.exists())
+            fp.mkdirs();
+    }
+
     public WikiRecord(String title) {
+        this();
         setTitle(title);
-        DAOBase[] contents = WikiEntry.query().where("title = '" + title + "");
+        DAOBase[] contents = WikiEntry.query().where("title = '" + title + "'");
         if (contents.length == 0) {
             dao = new WikiEntry();
             dao.title = title;
+            dao.contentPath = null;
         } else {
             dao = (WikiEntry) contents[0];
         }
@@ -34,8 +44,9 @@ public class WikiRecord {
         return dao.title;
     }
 
-    public String getMdContent() {
+    public String getContent() {
         String path = dao.contentPath;
+        if (dao.contentPath == null) return null;
         return FileLoader.loadStringFromAbsolutePath(path);
     }
 
@@ -87,6 +98,10 @@ public class WikiRecord {
             mainversion += 1;
         }
         String path = FILE_PATH_PREFIX + getTitle() + "/" + mainversion + "." + subversion + FILE_PATH_SUFFIX;
+        File fp = new File(FILE_PATH_PREFIX + getTitle() + "/");
+        if (!fp.exists()) {
+            fp.mkdirs();
+        }
         String strCateg = "";
         for (String cat: categories) {
             if (!strCateg.equals("")) {
@@ -125,7 +140,7 @@ public class WikiRecord {
         dao.save();
 
         // write content to file system
-        FileLoader.writeStringToFile(path, content);
+        FileLoader.writeStringToAbsolutePath(path, content);
     }
 
     public void addVisit() {
