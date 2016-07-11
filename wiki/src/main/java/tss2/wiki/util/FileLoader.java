@@ -47,7 +47,7 @@ public class FileLoader {
         PrintWriter pw = null;
         FileOutputStream fout = null;
         try {
-            fout = new FileOutputStream(path, false);
+            fout = new FileOutputStream(path);
             pw = new PrintWriter(fout);
             pw.write(content);
         } catch (FileNotFoundException e) {
