@@ -76,9 +76,11 @@ public abstract class DAOBase {
     }
 
     /**
-     * executing a sql query string and
-     * @param qs
-     * @return
+     * executing a sql query string and return wrapped
+     * objects.
+     *
+     * @param qs sql expression
+     * @return wrapped objects
      */
     public DAOBase[] query(String qs) {
         RowSet rs =  DBAdmin.query(qs);
@@ -146,10 +148,31 @@ public abstract class DAOBase {
         }
     }
 
+    public void save(String key) {
+        ResultSet rs = DBAdmin.query("select * from " + getTableName() + " where (" + key + " = '" + this.get(key) + "');");
+        String sql = "";
+        try {
+            String values = getValueString();
+            if (!rs.next()) {
+                sql = "insert into " + getTableName() + " set " + values + ";";
+                DBAdmin.execute(sql);
+            } else {
+                sql = "update " + getTableName() + " set " + values + " where " + key + " = '" + this.get(key) + "';";
+                DBAdmin.execute(sql);
+            }
+        } catch (SQLException e) {
+            System.err.println(sql);
+            e.printStackTrace();
+        }
+    }
+
     public String getTableName() {
         return this.getClass().getSimpleName();
     }
 
+    public void delete() {
+        DBAdmin.execute("delete from " + getTableName() + " where (id = " + this.id + ");");
+    }
 
     public Object get(String key) {
         try {

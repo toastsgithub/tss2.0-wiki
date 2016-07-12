@@ -15,6 +15,7 @@ import tss2.wiki.model.WikiSunmary;
 import tss2.wiki.vo.WikiEntryVO;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -84,5 +85,12 @@ public class ContentController {
             return new WikiResult(0);
         }
         return new WikiResult(1, wikiRecord);
+    }
+
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    public @ResponseBody ResultMessage deleteEntry(@RequestParam(value = "title") String title) {
+        WikiRecord wikiRecord = new WikiRecord(title);
+        wikiRecord.delete();
+        return new ResultMessage(0);
     }
 }

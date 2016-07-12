@@ -4,8 +4,8 @@ package tss2.wiki.domain;
  * Created by 羊驼 on 2016/7/9.
  */
 public class ResultMessage {
-    int error = 0;
-    String message = "";
+    private int error = 0;
+    private String message = "";
 
     public ResultMessage(int error) {
         setError(error);
