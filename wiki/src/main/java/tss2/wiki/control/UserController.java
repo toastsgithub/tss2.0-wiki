@@ -31,9 +31,4 @@ public class UserController {
         }
         return lresult;
     }
-
-    @RequestMapping(value = "/login.do", method = RequestMethod.GET)
-    public String login() {
-        return "/html/Home.html";
-    }
 }
