@@ -63,6 +63,12 @@ public class ContentController {
         return wikiSunmary.getSummary();
     }
 
+    @RequestMapping(value = "/Outline", method = RequestMethod.GET, produces="text/plain;charset=UTF-8")
+    public @ResponseBody Map getOutline() {
+        WikiSunmary wikiSunmary = new WikiSunmary();
+        return wikiSunmary.create();
+    }
+
     /**
      * 获取所有标签信息。
      * @return {
