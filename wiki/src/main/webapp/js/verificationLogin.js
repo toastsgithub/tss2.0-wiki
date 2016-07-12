@@ -5,6 +5,7 @@
 function verif(){
     // var xhr = new XMLHttpRequest();
     // xhr.s
+
     var username = document.getElementById("user").value;
     var password = document.getElementById("psw").value;
     if(username==""||password==""){
@@ -12,6 +13,8 @@ function verif(){
         show_unfinished_tip();
         return;
     }
+    // document.getElementById('login_btn').setAttribute('disabled',"disabled");
+    make_disable('login_btn');
     $.ajax({
         url:"/user/login",
         type:"get",
@@ -30,11 +33,17 @@ function verif(){
             }else if(data.user.type == 1){
                 alert("welcome, admin!");
             }
+            // document.getElementById('login_btn').removeAttribute('disabled');
+            remove_disable('login_btn');
         },
         error:function (data) {
             alert("error!");
+            // document.getElementById('login_btn').removeAttribute('disabled');
+            remove_disable('login_btn');
         }
     });
+    
+    // alert("end");
 }
 
 function show_unfinished_tip() {

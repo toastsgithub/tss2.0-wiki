@@ -3,7 +3,7 @@
  */
 
 function addClause() {
-    alert("judge");
+    // alert("judge");
     var submit = true;
     if (document.getElementById("name_input").value == "") {
         document.getElementById("nameTip").innerHTML = "请输入条目名称";
@@ -24,8 +24,8 @@ function addClause() {
         document.getElementById("typeTip").innerHTML = "";
         document.getElementById("tagTip").innerHTML = "";
     }
-    alert("judge done");
-
+    // alert("judge done");
+    make_disable('submit_btn');
 
     var time = getTime();
     var title = document.getElementById("name_input").value;
@@ -34,7 +34,7 @@ function addClause() {
     var catagories = document.getElementById("category_input").value;
     var content = show_markdown();
     content = "###this is content";
-    alert("info");
+    // alert("info");
 
 
     var data = {
@@ -49,7 +49,7 @@ function addClause() {
         }
     };
     // alert("content:"+content);
-    alert("data:" + JSON.stringify(data));
+    // alert("data:" + JSON.stringify(data));
     // var data = {operations:'add',data:{time:time, username:'123', summary:summary,title: title, tags:tags,
     //     categories:catagories,content:content}};
     $.ajax({
@@ -58,9 +58,11 @@ function addClause() {
         contentType: 'application/json;charset=utf-8',
         data: JSON.stringify(data),
         success: function (data) {
+            remove_disable('submit_btn');
             alert("create successfully!");
         },
         error: function (data) {
+            remove_disable('submit_btn');
             alert("error");
         },
     })
