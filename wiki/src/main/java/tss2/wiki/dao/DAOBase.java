@@ -148,6 +148,27 @@ public abstract class DAOBase {
         }
     }
 
+<<<<<<< HEAD
+=======
+    public void save(String key) {
+        ResultSet rs = DBAdmin.query("select * from " + getTableName() + " where (" + key + " = '" + this.get(key) + "');");
+        String sql = "";
+        try {
+            String values = getValueString();
+            if (!rs.next()) {
+                sql = "insert into " + getTableName() + " set " + values + ";";
+                DBAdmin.execute(sql);
+            } else {
+                sql = "update " + getTableName() + " set " + values + " where " + key + " = '" + this.get(key) + "';";
+                DBAdmin.execute(sql);
+            }
+        } catch (SQLException e) {
+            System.err.println(sql);
+            e.printStackTrace();
+        }
+    }
+
+>>>>>>> master
     public String getTableName() {
         return this.getClass().getSimpleName();
     }

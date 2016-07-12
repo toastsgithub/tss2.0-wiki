@@ -2,6 +2,10 @@ package tss2.wiki.control.impl;
 
 import tss2.wiki.model.WikiSession;
 import tss2.wiki.control.service.SessionService;
+<<<<<<< HEAD
+=======
+import tss2.wiki.util.StringUtil;
+>>>>>>> master
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -70,6 +74,7 @@ public class SessionServiceimpl implements SessionService {
     }
 
     private String generateSessionID(int length) {
+<<<<<<< HEAD
         String template = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         String sessionid = "";
         Random rand = new Random();
@@ -77,5 +82,8 @@ public class SessionServiceimpl implements SessionService {
             sessionid += template.charAt(rand.nextInt(template.length()));
         }
         return sessionid;
+=======
+        return StringUtil.generateTokener(length);
+>>>>>>> master
     }
 }
