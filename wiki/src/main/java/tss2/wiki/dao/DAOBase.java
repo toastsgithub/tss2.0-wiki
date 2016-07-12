@@ -148,8 +148,6 @@ public abstract class DAOBase {
         }
     }
 
-<<<<<<< HEAD
-=======
     public void save(String key) {
         ResultSet rs = DBAdmin.query("select * from " + getTableName() + " where (" + key + " = '" + this.get(key) + "');");
         String sql = "";
@@ -168,7 +166,6 @@ public abstract class DAOBase {
         }
     }
 
->>>>>>> master
     public String getTableName() {
         return this.getClass().getSimpleName();
     }

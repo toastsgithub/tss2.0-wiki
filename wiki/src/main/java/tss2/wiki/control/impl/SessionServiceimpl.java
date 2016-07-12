@@ -4,7 +4,6 @@ import tss2.wiki.model.WikiSession;
 import tss2.wiki.control.service.SessionService;
 import tss2.wiki.util.StringUtil;
 
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Calendar;

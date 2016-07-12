@@ -31,12 +31,9 @@ public class UserController {
         }
         return lresult;
     }
-<<<<<<< HEAD
 
     @RequestMapping(value = "/login.do", method = RequestMethod.GET)
     public String login() {
         return "/html/Home.html";
     }
-=======
->>>>>>> master
 }
