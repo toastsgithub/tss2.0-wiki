@@ -15,6 +15,8 @@ public class FileUtil {
         FileInputStream fin = null;
         String content = "";
         try {
+            File file = new File(path);
+            file.getParentFile().mkdirs();
             fin = new FileInputStream(path);
             scanner = new Scanner(fin);
             while (scanner.hasNext()) {
@@ -47,6 +49,8 @@ public class FileUtil {
         PrintWriter pw = null;
         FileOutputStream fout = null;
         try {
+            File file = new File(path);
+            file.getParentFile().mkdirs();
             fout = new FileOutputStream(path);
             pw = new PrintWriter(fout);
             pw.write(content);
