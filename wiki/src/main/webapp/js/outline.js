@@ -7,11 +7,24 @@ $.get(
     "/content/outline",
     null,
     function (data) {
-        rawData=eval("("+data+")");
+        alert("data below----\n"+data);
+        // rawData=eval("("+data+")");
+        // show(rawData);
+        var json_data = {"软件":[{"一班":[{"二班":["说好的孙浩大哥呢"]},{"考拉":["考拉爸爸"]},{"浣熊":[]}]},{"三班":["瞄","好多"]},{"四班":["歪歪","就是多"]},{"怎么这么多":["好烦","编不下去了"]},"还有??"]};
+        // alert("--->"+JSON.parse(data));
+        var root_node = new Object();
+        root_node.text = "知识体系";
+        root_node.children = [];
 
-        show(rawData);
+        read_json(root_node,JSON.parse(data));//读取到的数据为string 类型的,要转成obj (返回数据类型 可能跟请求方式和参数有关)
+        // alert(JSON.stringify(root_node));
+        $('#moutline').jstree({
+            'core' : {
+                'data' : root_node
+            }
+        });
     }
-)
+);
 
 
 // var rowData={"软件":[{"一班":[{"二班":["说好的孙浩大哥呢"]},"考拉","浣熊"]},{"三班":["喵"]},{"四班":["歪歪"]},{"怎么这么多":["好烦啊","我编不下去了"]},"还有？？"]};
@@ -76,6 +89,47 @@ function getNum(data){
         count++;
     }
     return count;
+}
+
+function read_json(father,data) {
+    // alert("data-->"+data);
+    //    alert("current father:--?>"+JSON.stringify(data));
+
+    if(!is_array(data)) {
+        var current_node = new Object();
+//            alert(" is a json obj");
+        for (key in data){
+            current_node.text = key;
+            father.children[father.children.length] = current_node;
+            current_node.children=[];
+            read_json(current_node,data[key]);
+//                alert("datakey: "+is_array(data[key]));
+        }
+
+    }else{
+//            alert(" is a Array");
+//            alert(data+" is an array and length is "+data.length);
+//              alert(JSON.stringify(data));
+        for (x in data){
+//                alert("data type is json obj? ->"+(typeof data[x] == "object"));
+            if(typeof data[x] == 'object'){
+                //该数组元素是json对象
+//                    alert("!!!这是一个json对象->"+JSON.stringify(data[x]));
+                read_json(father,data[x]);
+            }else{
+                //该数组元素是单个数组值
+//                    alert("!!!这是单个数值->"+data[x]);
+                var current_node = new Object();
+                current_node.text = data[x];
+                father.children[father.children.length] = current_node;
+            }
+        }
+    }
+}
+function is_array(data) {
+//        alert ("type test-->"+Object.prototype.toString.call(data));
+    return Object.prototype.toString.call(data)=='[object Array]';//!!!!!!!<<-----此处有精华
+
 }
 
 
