@@ -14,7 +14,7 @@ import java.io.File;
  */
 public class WikiRecord {
 
-    public static final String FILE_PATH_PREFIX = "/wikimd/";
+    public static final String FILE_PATH_PREFIX = "wikimd/";
     public static final String FILE_PATH_SUFFIX = ".md";
 
     private WikiRecord() {
@@ -104,7 +104,7 @@ public class WikiRecord {
         String path = FILE_PATH_PREFIX + getTitle() + "/" + mainversion + "." + subversion + FILE_PATH_SUFFIX;
         File fp = new File(FILE_PATH_PREFIX + getTitle() + "/");
         if (!fp.exists()) {
-            fp.mkdirs();
+            boolean result = fp.mkdirs();
         }
         String strCateg = "";
         for (String cat: categories) {

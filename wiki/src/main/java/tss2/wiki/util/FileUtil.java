@@ -71,7 +71,7 @@ public class FileUtil {
     }
 
     public static void writeStringToFile(String path, String content) {
-        String classpath = FileUtil.class.getClassLoader().getResource(path).toString();
+        String classpath = FileUtil.class.getResource(path).toString();
         writeStringToAbsolutePath(classpath, content);
     }
 }
