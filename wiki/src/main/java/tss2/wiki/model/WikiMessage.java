@@ -65,9 +65,17 @@ public class WikiMessage {
         dao.toUser = StringUtil.concatArray("/", toUser);
         dao.title = title;
         dao.detail = detail;
-        dao.read = 0;
+        dao.read = false;
         dao.save();
         return new ResultMessage(0);
+    }
+
+    public boolean isRead() {
+        return dao.read;
+    }
+
+    public void setRead(boolean read) {
+        dao.read = read;
     }
 
     public void set(String messageID) {

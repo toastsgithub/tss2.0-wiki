@@ -39,16 +39,23 @@ public abstract class DAOBase {
 
 
     /**
-     * 执行查询，并将结果包装为对象。
+     * Execute a query and wrap the result as an
+     * {@code DAOBase} object, decided by which
+     * class is being called.
      *
-     * @param whereStatment where条件语句
-     * @param options 附加的条件语句，将会被直接拼接到where后面
-     * @return 查询的结果。
+     * The method will try to fill every field of
+     * the class. If there is no such field in the
+     * DB table, or the type is not capable, this
+     * field will be left {@code null};
+     *
+     * @param whereStatement where statement
+     * @param options options, which will be concat after the main expression
+     * @return the wrapped result.
      */
-    public DAOBase[] where(String whereStatment, String options) {
+    public DAOBase[] where(String whereStatement, String options) {
         String query = "select * from " + getTableName();
-        if (whereStatment != null && !whereStatment.equals("")) {
-            query += " where(" + whereStatment + ")";
+        if (whereStatement != null && !whereStatement.equals("")) {
+            query += " where(" + whereStatement + ")";
         }
         if (options != null && !options.equals("")) {
             query += options + ";";
@@ -128,7 +135,16 @@ public abstract class DAOBase {
     }
 
     /**
-     * 保存当前数据项。如果已经存在于表中，则把原数据覆盖为最新值。
+     * save the current DAO.
+     * As the DAO is corresponding to an entry in
+     * the database by the field {@code id}.
+     *
+     * If there is no such entry, it will create a
+     * new entry in the database.
+     *
+     * Wlse this will overwrite the entry.
+     *
+     * This method can ben override.
      */
     public void save() {
         ResultSet rs = DBAdmin.query("select * from " + getTableName() + " where (id = " + this.get("id") + ");");
@@ -148,6 +164,13 @@ public abstract class DAOBase {
         }
     }
 
+    /**
+     * Almost the same as {@code save()}, however this
+     * method can specify the key that is used to find
+     * equivalence.
+     *
+     * @param key the key used to find equivalence.
+     */
     public void save(String key) {
         ResultSet rs = DBAdmin.query("select * from " + getTableName() + " where (" + key + " = '" + this.get(key) + "');");
         String sql = "";
@@ -166,6 +189,11 @@ public abstract class DAOBase {
         }
     }
 
+    /**
+     * Get table name. By default it is the current
+     * class's simple name.
+     * @return
+     */
     public String getTableName() {
         return this.getClass().getSimpleName();
     }
@@ -212,6 +240,10 @@ public abstract class DAOBase {
                         break;
                     case "Date":
                         values += field.getName() + '=' + "'" + field.get(this).toString() + "'";
+                        break;
+                    case "boolean":
+                    case "Boolean":
+                        values += field.getName() + "='" + field.getBoolean(this) + "'";
                 }
             } catch (IllegalAccessException e) {
                 e.printStackTrace();

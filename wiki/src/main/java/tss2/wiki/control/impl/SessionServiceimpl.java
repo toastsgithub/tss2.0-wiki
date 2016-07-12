@@ -2,15 +2,11 @@ package tss2.wiki.control.impl;
 
 import tss2.wiki.model.WikiSession;
 import tss2.wiki.control.service.SessionService;
+import tss2.wiki.model.WikiUser;
 import tss2.wiki.util.StringUtil;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Random;
-
 /**
  *
  * Created by 羊驼 on 2016/7/10.
@@ -64,10 +60,10 @@ public class SessionServiceimpl implements SessionService {
     }
 
     @Override
-    public String getUserBySession(String sessionID) {
+    public WikiUser getUserBySession(String sessionID) {
         WikiSession session = WikiSession.checkSession(sessionID);
         if (session == null) return null;
-        return session.getUserID();
+        return new WikiUser(session.getUserID());
     }
 
     private String generateSessionID(int length) {

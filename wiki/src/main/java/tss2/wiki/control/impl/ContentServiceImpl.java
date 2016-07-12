@@ -6,6 +6,7 @@ import tss2.wiki.domain.ResultMessage;
 import tss2.wiki.control.service.ContentService;
 import tss2.wiki.model.WikiRecord;
 import tss2.wiki.model.WikiSession;
+import tss2.wiki.model.WikiUser;
 import tss2.wiki.vo.WikiEntryVO;
 
 import java.util.ArrayList;
@@ -45,8 +46,8 @@ public class ContentServiceImpl implements ContentService {
         String[] categories = map.get("categories").toString().split("[/]");
         String[] tags = map.get("tags").toString().split("[/]");
         String content = map.get("content").toString();
-        String username = new SessionServiceimpl().getUserBySession(data.getSessionID());
-        entry.setContent(username, categories, tags, summary, content, true);
+        WikiUser user = new SessionServiceimpl().getUserBySession(data.getSessionID());
+        entry.setContent(user.getUsername(), categories, tags, summary, content, true);
         return new ResultMessage(0);
     }
 }
