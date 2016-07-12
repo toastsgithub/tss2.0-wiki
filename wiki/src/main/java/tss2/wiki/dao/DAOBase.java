@@ -251,4 +251,11 @@ public abstract class DAOBase {
         }
         return values;
     }
+
+    public static void main(String[] args) {
+        User user = new User();
+        user.password = "woyaochihuoguo";
+        user.username = "cuijiji";
+        user.save();
+    }
 }

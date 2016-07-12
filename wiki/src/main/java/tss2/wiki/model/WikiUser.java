@@ -11,8 +11,6 @@ import java.util.ArrayList;
 /**
  * Created by 羊驼 on 2016/7/10.
  */
-
-
 public class WikiUser {
 
     private WikiUser() {
@@ -32,6 +30,11 @@ public class WikiUser {
         return ss.checkUser(getUsername());
     }
 
+    public int loadMessages() {
+        unreadMessage = 0;
+        return unreadMessage;
+    }
+
     public String getUsername() {
         return dao.username;
     }
@@ -45,5 +48,6 @@ public class WikiUser {
     }
 
     private User dao;
-    private ArrayList<Message> messageList;
+    private ArrayList<WikiMessage> messageList;
+    private int unreadMessage = 0;
 }
