@@ -76,9 +76,11 @@ public abstract class DAOBase {
     }
 
     /**
-     * executing a sql query string and
-     * @param qs
-     * @return
+     * executing a sql query string and return wrapped
+     * objects.
+     *
+     * @param qs sql expression
+     * @return wrapped objects
      */
     public DAOBase[] query(String qs) {
         RowSet rs =  DBAdmin.query(qs);
@@ -150,6 +152,9 @@ public abstract class DAOBase {
         return this.getClass().getSimpleName();
     }
 
+    public void delete() {
+        DBAdmin.execute("delete from " + getTableName() + " where (id = " + this.id + ");");
+    }
 
     public Object get(String key) {
         try {
