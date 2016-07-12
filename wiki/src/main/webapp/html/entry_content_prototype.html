@@ -1,42 +1,50 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <title>tree</title>
+    <meta charset="UTF-8">
+    <title>Prototype</title>
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <!--<script src="../js/editormd.js"></script>-->
+    <link rel="stylesheet" href="../css/editormd.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../css/wiki_navigator.css">
+    <link rel="stylesheet" href="../css/entry_content.css">
 
-    <script src="https://code.angularjs.org/1.5.5/angular.js" data-semver="1.5.5" data-require="angularjs@1.5.5"></script>
-    <script data-require="d3@*" data-semver="3.5.3" src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.js"></script>
-    <script type="text/javascript" src="https://rawgit.com/komushi/ng-d3tree/master/src/ng-d3tree.js"></script>
 
-    <link rel="stylesheet" href="https://rawgit.com/komushi/ng-d3tree/master/src/css/ng-d3tree.css" />
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
 </head>
+<body>
+<nav class="navbar navbar-default" style="background-color: #ffffff; margin: 0;">
+    <div class="container-fluid">
+        <a class="navbar-header" href="../html/Home.html" style="margin-top: 10px;">
+            <img src="../resource/icon/tss_logo@2x.png" alt="" style="height: 32px">
+        </a>
+        <div class="navbar-header navbar-right" style=";margin-top: 10px;">
+            <div id="about_btn" class="" style="" onclick="location='../html/about.html'">About</div>
+            <div id="help_btn" class="" style="" onclick="location='../html/help.html'">Help</div>
+        </div>
+    </div>
+</nav>
+<div class="row" style="">
+    <div id="left_part" class="col-sm-2">
 
+    </div>
 
-<body ng-app="d3treeApp">
-
-<script>
-    var app = angular.module("d3treeApp", ['ngD3tree']);
-    app.controller("treeCtrl", ['$scope', '$http', function($scope, $http) {
-
-        $http.get('/content/outline')
-                .success(function(res){
-                    $scope.d3json = res;
-                });
-
-    }]);
-</script>
-
-<div ng-controller="treeCtrl">
-    <h2>Reingold-Tilford Tree Static</h2>
-    <reingold-tilford-tree
-            data="d3json"
-            width="550"
-            height="500"
-            json-path="">
-    </reingold-tilford-tree>
+    <div id="right_part" class="col-xs-10">
+        <div id="jstree_demo_div"></div>
+    </div>
 </div>
 
-
 </body>
+<script>
+    $(document).ready(function () {
+        alert("ready");
+        $('#jstree_demo_div').jstree();
+        alert("init done");
+    })
+</script>
 </html>

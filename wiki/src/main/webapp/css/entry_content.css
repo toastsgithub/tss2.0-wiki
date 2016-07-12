@@ -1,4 +1,18 @@
+body{
+    background-color: #ffffff;
+}
 div{
-    background-color: #2aabd2;
-    border: solid 1px red;
+    /*background-color: #2aabd2;*/
+    /*border: solid 1px red;*/
+}
+
+#left_part{
+    background-color: #f6f6f6;
+    height: 1000px;
+}
+
+#right_part{
+    /*background-color: #2aabd2;*/
+    /*border: solid 1px #c5a6a8;*/
+    height:1000px;
 }
