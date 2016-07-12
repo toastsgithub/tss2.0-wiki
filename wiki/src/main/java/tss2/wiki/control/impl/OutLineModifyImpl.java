@@ -4,6 +4,8 @@ import net.sf.json.JSONObject;
 import tss2.wiki.control.service.OutLineModifyService;
 import tss2.wiki.model.WikiSunmary;
 
+import java.util.*;
+
 /**
  * Created by Administrator on 2016/7/9.
  */
@@ -13,10 +15,6 @@ public class OutLineModifyImpl implements OutLineModifyService{
     private static String JsonString = "{\"ruanjian\":[{\"a\":[{\"e\":[\"q\"]},\"f\"]},{\"b\":[\"h\"]},{\"c\":[\"i\"]},{\"d\":[\"j\",\"k\"]},\"m\"]}";
     private WikiSunmary wikiSunmary = new WikiSunmary();
 
-    public static void main(String[] args){
-        OutLineModifyService tree =new OutLineModifyImpl();
-        System.out.println(tree.add("考拉", "考拉爸爸"));
-    }
 
     /**
      *
@@ -203,6 +201,7 @@ public class OutLineModifyImpl implements OutLineModifyService{
     }
 
     private String modify(String jsonString,String father,String beforeChange, String afterChange){
+
         return null;
     }
 }
