@@ -144,7 +144,8 @@ public class WikiRecord {
         dao.save();
 
         // write content to file system
-        FileUtil.writeStringToAbsolutePath(path, content);
+        WikiFile file = new WikiFile(path);
+        file.setContent(content);
     }
 
     public void addVisit() {

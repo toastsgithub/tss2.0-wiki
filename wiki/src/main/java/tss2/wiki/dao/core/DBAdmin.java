@@ -34,6 +34,7 @@ public class DBAdmin {
             Summary.class,
             Tag.class,
             Session.class,
+            Message.class,
     };
 
     static {

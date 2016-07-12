@@ -1,6 +1,7 @@
 package tss2.wiki.control.service;
 
 import tss2.wiki.model.WikiSession;
+import tss2.wiki.model.WikiUser;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -60,5 +61,5 @@ public interface SessionService {
      * @param sessionID session id
      * @return 用户名
      */
-    String getUserBySession(String sessionID);
+    WikiUser getUserBySession(String sessionID);
 }
