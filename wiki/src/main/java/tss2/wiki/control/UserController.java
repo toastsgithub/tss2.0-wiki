@@ -1,10 +1,14 @@
 package tss2.wiki.control;
 
+import tss2.wiki.control.service.SessionService;
 import tss2.wiki.domain.LoginResult;
 import tss2.wiki.control.impl.SessionServiceimpl;
 import tss2.wiki.control.impl.UserServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import tss2.wiki.domain.UserResult;
+import tss2.wiki.model.WikiSession;
+import tss2.wiki.model.WikiUser;
 
 import javax.servlet.http.*;
 
@@ -35,5 +39,17 @@ public class UserController {
     @RequestMapping(value = "/login.do", method = RequestMethod.GET)
     public String login() {
         return "/html/Home.html";
+    }
+
+    @RequestMapping(value = "/info", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
+    public @ResponseBody
+    UserResult getUserInfo(HttpServletRequest request) {
+        SessionService ss = new SessionServiceimpl();
+        WikiSession session = ss.checkUser(request);
+        if (session == null) {
+            return new UserResult(0);
+        }
+        WikiUser user = new WikiUser(session.getUserID());
+        return new UserResult(1, user.getUsername(), user.getType());
     }
 }
