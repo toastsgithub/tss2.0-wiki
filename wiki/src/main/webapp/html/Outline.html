@@ -5,13 +5,45 @@
     <title>Outline</title>
     <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
     <!--<script src="../js/outline.js"></script>-->
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+    <!--<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">-->
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
 </head>
 <body>
-??this is test page
+    <div id="test_tree" style="width: 100%;height: 200px;background-color: #eff6f4">
+        <div class="btn btn-primary" >增加</div>
+        <div class="btn btn-danger">删除</div>
+        <!--<div class="btn btn-primary">增加</div>-->
+    </div>
+
+    <form id="s">
+        <input type="search" id="q" />
+        <button type="submit">Search</button>
+    </form>
     <div id="moutline" >
     </div>
+
+
+    <!--<script>-->
+        <!--$("#moutline").jstree({-->
+            <!--"plugins" : ["search"]-->
+        <!--});-->
+       <!---->
+    <!--</script>-->
+
 </body>
 <script src="../js/outline.js"></script>
 </html>
+<script>
+    $(document).ready(function () {
+//        $('#moutline').on("changed.jstree",function (e,data) {
+////            alert("what's e?"+JSON.stringify(e));
+//            alert("here are data:"+data.instance.get_node(data.selected[0]).text);
+//        })
+    });
+    
+</script>

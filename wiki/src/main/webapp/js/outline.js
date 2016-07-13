@@ -7,7 +7,7 @@ $.get(
     "/content/outline",
     null,
     function (data) {
-        alert("data below----\n"+data);
+        // alert("data below----\n"+data);
         // rawData=eval("("+data+")");
         // show(rawData);
         var json_data = {"软件":[{"一班":[{"二班":["说好的孙浩大哥呢"]},{"考拉":["考拉爸爸"]},{"浣熊":[]}]},{"三班":["瞄","好多"]},{"四班":["歪歪","就是多"]},{"怎么这么多":["好烦","编不下去了"]},"还有??"]};
@@ -20,8 +20,26 @@ $.get(
         // alert(JSON.stringify(root_node));
         $('#moutline').jstree({
             'core' : {
+                // "themes" : {
+                //     "dots" : true // no connecting dots between dots
+                // },
+                "check_callback":true,
+                
                 'data' : root_node
-            }
+            },
+            "types" : {
+                "default" : {
+                    "icon" : "glyphicon glyphicon-book"
+                },
+                // "demo" : {
+                //     "icon" : "glyphicon glyphicon-ok"
+                // }
+            },
+            "plugins" : ["dnd","contextmenu","wholerow","types",'search'] // activate the state plugin on this instance
+        });
+        $("#s").submit(function(e) {
+            e.preventDefault();
+            $("#moutline").jstree(true).search($("#q").val());
         });
     }
 );
