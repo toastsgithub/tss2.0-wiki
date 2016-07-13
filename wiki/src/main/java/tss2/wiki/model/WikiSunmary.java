@@ -11,6 +11,9 @@ import java.util.Map;
  * Created by Administrator on 2016/7/10.
  */
 public class WikiSunmary {
+    public static WikiSunmary c = new WikiSunmary();
+    public static Map temp = c.create();
+
     public String getSummary(){
         DAOBase[] content = Summary.query().where("");
         String jsonString = content[0].get("summaryJO").toString();
@@ -224,8 +227,7 @@ public class WikiSunmary {
         return result;
     }
     public static void main(String[] args){
-        WikiSunmary c = new WikiSunmary();
-        Map temp = c.create();
+
         System.out.println(temp);
         c.modify(temp, "一班", "段段","段段段段");
         System.out.println("-----");
