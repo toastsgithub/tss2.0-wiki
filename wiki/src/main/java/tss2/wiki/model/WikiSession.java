@@ -4,6 +4,7 @@ package tss2.wiki.model;
 import tss2.wiki.dao.DAOBase;
 import tss2.wiki.dao.Session;
 
+import javax.servlet.http.Cookie;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -15,9 +16,6 @@ import java.util.Date;
  * Created by 羊驼 on 2016/7/10.
  */
 public class WikiSession {
-
-    Session dao;
-    boolean valid = false;
 
     private WikiSession() { }
 
@@ -66,6 +64,11 @@ public class WikiSession {
     public String getUserID() {
         return dao.username;
     }
+
+    public WikiUser getUser() {
+        return new WikiUser(dao.username);
+    }
+
     /**
      * This will renew or create a session.
      *
@@ -90,10 +93,21 @@ public class WikiSession {
         valid = true;
     }
 
+    /**
+     * return the session id of the current session.
+     *
+     * @return the session id
+     */
     public String getSessionID() {
         return dao.sessionID;
     }
 
+
+    /**
+     * Get the date of expiry.
+     *
+     * @return the date after when the session is invalid.
+     */
     public Date getDeadline() {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
@@ -104,6 +118,12 @@ public class WikiSession {
         }
     }
 
+    /**
+     * Jugde whether the session is valid. According to
+     * the system time of the server.
+     *
+     * @return {@code true} if valid. {@code false} if not
+     */
     public boolean isValid() {
         if (!valid) return false;
         // check lifetime
@@ -118,16 +138,27 @@ public class WikiSession {
         return deadline != null && deadline.after(now);
     }
 
+    /**
+     * make the session invalid
+     */
     public void disable() {
         dao.deadline = "0000-00-00 00:00:00";
         dao.save();
         valid = false;
     }
 
+    /**
+     * renew the current session and make it valid in
+     * time of specified minutes.
+     *
+     * @param minutes lifetime of the renewed session.
+     */
     public void renew(int minutes) {
         Calendar now = Calendar.getInstance();
         now.add(Calendar.MINUTE, minutes);
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
     }
+
+    private Session dao;
+    private boolean valid = false;
 }

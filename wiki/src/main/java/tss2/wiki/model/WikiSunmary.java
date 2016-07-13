@@ -2,6 +2,7 @@ package tss2.wiki.model;
 
 import tss2.wiki.dao.DAOBase;
 import tss2.wiki.dao.Summary;
+import tss2.wiki.util.FileUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,28 +12,31 @@ import java.util.Map;
  * Created by Administrator on 2016/7/10.
  */
 public class WikiSunmary {
-    public String getSummary(){
-        DAOBase[] content = Summary.query().where("");
-        String jsonString = content[0].get("summaryJO").toString();
-        return jsonString;
+
+    public WikiSunmary() {
+        Object result = FileUtil.loadObjectFromAbsolutePath("summary.dat");
+        if (result instanceof Map) {
+            map = (Map<String, ArrayList<Map>>) result;
+        }
+        if (map == null) {
+            map = new HashMap<>();
+        }
     }
 
-    public void setSummary(String jsonString){
-        DAOBase[] content = Summary.query().where("");
-        content[0].setValue("summaryJO",jsonString);
-        content[0].save();
+    public Map getSummary() {
+        return map;
     }
 
-    public void search(Map m){
-        String k = m.keySet().toString().substring(1, m.keySet().toString().length()-1);
+    public void search(Map m) {
+        String k = m.keySet().toString().substring(1, m.keySet().toString().length() - 1);
         System.out.println(k);
         ArrayList<Map> a = (ArrayList<Map>) m.get(k);
         //System.out.println(a.length);
-        for(int i = 0; i<a.size(); i++){
-            k = a.get(i).keySet().toString().substring(1, a.get(i).keySet().toString().length()-1);
-            if(a.get(i).get(k)!=null){
+        for (int i = 0; i < a.size(); i++) {
+            k = a.get(i).keySet().toString().substring(1, a.get(i).keySet().toString().length() - 1);
+            if (a.get(i).get(k) != null) {
                 this.search(a.get(i));
-            }else{
+            } else {
                 System.out.println(k);
                 System.out.println(a.get(i).get(k));
             }
@@ -40,93 +44,90 @@ public class WikiSunmary {
     }
 
     /**
-     *
-     * @param father 要增加节点的父节点
+     * @param father    要增加节点的父节点
      * @param addString 要增加的节点
      */
-    public void add(String father,String addString){
-        this.add(null,father,addString);
+    public void add(String father, String addString) {
+        this.add(null, father, addString);
     }
 
     /**
-     *
      * @param father 要删除节点的父节点
      * @param delete 要删除的节点
      */
-    public void delete(String father,String delete){
-        this.delete(null,father,delete);
+    public void delete(String father, String delete) {
+        this.delete(null, father, delete);
     }
 
     /**
-     *
      * @param father 要修改节点的父节点
      * @param before 修改前节点
-     * @param after 修改后节点
+     * @param after  修改后节点
      */
-    public void modify(String father,String before,String after){
-        this.modify(null,father,before,after);
+    public void modify(String father, String before, String after) {
+        this.modify(null, father, before, after);
     }
 
-    private void add(Map map,String father,String addString){
-        String k = map.keySet().toString().substring(1, map.keySet().toString().length()-1);
+    private void add(Map map, String father, String addString) {
+        String k = map.keySet().toString().substring(1, map.keySet().toString().length() - 1);
         System.out.println(k);
         ArrayList<Map> a = (ArrayList<Map>) map.get(k);
-        if(k.equals(father)){
-            Map<String,ArrayList<Map>> add = new HashMap();
+        if (k.equals(father)) {
+            Map<String, ArrayList<Map>> add = new HashMap();
             ArrayList<Map> tempArr = new ArrayList<Map>();
             add.put(addString, tempArr);
             a.add(add);
         }
-        for(int i = 0; i<a.size(); i++){
-            k = a.get(i).keySet().toString().substring(1, a.get(i).keySet().toString().length()-1);
-            if(a.get(i).get(k)!=null){
-                if(k.equals(father)){
+        for (int i = 0; i < a.size(); i++) {
+            k = a.get(i).keySet().toString().substring(1, a.get(i).keySet().toString().length() - 1);
+            if (a.get(i).get(k) != null) {
+                if (k.equals(father)) {
                     System.out.println(k);
-                    Map<String,ArrayList<Map>> add = (Map<String, ArrayList<Map>>) a.get(i);
+                    Map<String, ArrayList<Map>> add = (Map<String, ArrayList<Map>>) a.get(i);
                     ArrayList<Map> tempArr = add.get(k);
-                    Map<String,ArrayList<Map>> e = new HashMap();
+                    Map<String, ArrayList<Map>> e = new HashMap();
                     ArrayList<Map> valueArr = new ArrayList<Map>();
                     e.put(addString, valueArr);
                     tempArr.add(e);
                     break;
                 }
-                this.add(a.get(i),father,addString);
-            }else{
+                this.add(a.get(i), father, addString);
+            } else {
                 System.out.println(k);
                 System.out.println(a.get(i).get(k));
             }
         }
     }
 
-    private void delete(Map map,String father,String delete){
-        String k = map.keySet().toString().substring(1, map.keySet().toString().length()-1);
+    private void delete(Map map, String father, String delete) {
+        String k = map.keySet().toString().substring(1, map.keySet().toString().length() - 1);
         System.out.println(k);
         ArrayList<Map> a = (ArrayList<Map>) map.get(k);
-        if(k.equals(father)){
-            for(int l =0; l<a.size();l++){
-                String every = a.get(l).keySet().toString().substring(1,a.get(l).keySet().toString().length()-1);
-                if(every.equals(delete)){
+        if (k.equals(father)) {
+            for (int l = 0; l < a.size(); l++) {
+                String every = a.get(l).keySet().toString().substring(1, a.get(l).keySet().toString().length() - 1);
+                if (every.equals(delete)) {
                     a.remove(l);
                 }
             }
         }
-        for(int i = 0; i<a.size(); i++){
-            k = a.get(i).keySet().toString().substring(1, a.get(i).keySet().toString().length()-1);
-            if(a.get(i).get(k)!=null){
-                if(k.equals(father)){
+        for (int i = 0; i < a.size(); i++) {
+            k = a.get(i).keySet().toString().substring(1, a.get(i).keySet().toString().length() - 1);
+            if (a.get(i).get(k) != null) {
+                if (k.equals(father)) {
                     System.out.println(k);
-                    Map<String,ArrayList<Map>> add = (Map<String, ArrayList<Map>>) a.get(i);
+                    Map<String, ArrayList<Map>> add = (Map<String, ArrayList<Map>>) a.get(i);
                     ArrayList<Map> tempArr = add.get(k);
-                    for(int l =0; l<tempArr.size();l++){
-                        String every = tempArr.get(l).keySet().toString().substring(1,tempArr.get(l).keySet().toString().length()-1);
-                        if(every.equals(delete)){
+                    for (int l = 0; l < tempArr.size(); l++) {
+                        String every = tempArr.get(l).keySet().toString().substring(1, tempArr.get(l).keySet().toString().length() - 1);
+                        if (every.equals(delete)) {
                             tempArr.remove(l);
                         }
                     }
                     break;
                 }
-                this.delete(a.get(i),father,delete);
-            }else{
+                this.delete(a.get(i), father, delete);
+            } else {
                 System.out.println(k);
                 System.out.println(a.get(i).get(k));
 
@@ -134,65 +135,65 @@ public class WikiSunmary {
         }
     }
 
-    private void modify(Map map,String father,String before,String after){
-        String k = map.keySet().toString().substring(1, map.keySet().toString().length()-1);
+    private void modify(Map map, String father, String before, String after) {
+        String k = map.keySet().toString().substring(1, map.keySet().toString().length() - 1);
         System.out.println(k);
         ArrayList<Map> a = (ArrayList<Map>) map.get(k);
-        if(k.equals(father)){
+        if (k.equals(father)) {
 
-            for(int l =0; l<a.size();l++){
-                String every = a.get(l).keySet().toString().substring(1,a.get(l).keySet().toString().length()-1);
-                if(every.equals(before)){
-                    Map<String,ArrayList<Map>> add = new HashMap();
+            for (int l = 0; l < a.size(); l++) {
+                String every = a.get(l).keySet().toString().substring(1, a.get(l).keySet().toString().length() - 1);
+                if (every.equals(before)) {
+                    Map<String, ArrayList<Map>> add = new HashMap();
                     ArrayList<Map> tempArr = new ArrayList<Map>();
                     add = a.get(l);
                     tempArr = add.get(every);
                     add.remove(before);
                     add.put(after, tempArr);
                     a.remove(l);
-                    a.add(l,add);
+                    a.add(l, add);
                     break;
                 }
             }
         }
-        for(int i = 0; i<a.size(); i++){
-            k = a.get(i).keySet().toString().substring(1, a.get(i).keySet().toString().length()-1);
-            if(a.get(i).get(k)!=null){
-                if(k.equals(father)){
+        for (int i = 0; i < a.size(); i++) {
+            k = a.get(i).keySet().toString().substring(1, a.get(i).keySet().toString().length() - 1);
+            if (a.get(i).get(k) != null) {
+                if (k.equals(father)) {
                     System.out.println(k);
-                    Map<String,ArrayList<Map>> add = (Map<String, ArrayList<Map>>) a.get(i);
+                    Map<String, ArrayList<Map>> add = (Map<String, ArrayList<Map>>) a.get(i);
                     ArrayList<Map> tempArr = add.get(k);
-                    for(int l =0; l<tempArr.size();l++){
-                        String every = tempArr.get(l).keySet().toString().substring(1,tempArr.get(l).keySet().toString().length()-1);
-                        if(every.equals(before)){
+                    for (int l = 0; l < tempArr.size(); l++) {
+                        String every = tempArr.get(l).keySet().toString().substring(1, tempArr.get(l).keySet().toString().length() - 1);
+                        if (every.equals(before)) {
                             int aaa;
-                            Map<String,ArrayList<Map>> addM = new HashMap();
+                            Map<String, ArrayList<Map>> addM = new HashMap();
                             ArrayList<Map> Arr = new ArrayList<Map>();
                             addM = tempArr.get(l);
                             Arr = addM.get(every);
                             addM.remove(before);
                             addM.put(after, Arr);
                             tempArr.remove(l);
-                            tempArr.add(l,addM);
+                            tempArr.add(l, addM);
                             break;
                         }
                     }
                     break;
                 }
-                this.modify(a.get(i),father,before,after);
-            }else{
+                this.modify(a.get(i), father, before, after);
+            } else {
                 System.out.println(k);
                 System.out.println(a.get(i).get(k));
             }
         }
     }
 
-    public Map create(){
-        Map<String,ArrayList<Map>> result = new HashMap();
-        Map<String,ArrayList<Map>> a = new HashMap();
-        Map<String,ArrayList<Map>> b = new HashMap();
+    public Map create() {
+        Map<String, ArrayList<Map>> result = new HashMap();
+        Map<String, ArrayList<Map>> a = new HashMap();
+        Map<String, ArrayList<Map>> b = new HashMap();
 
-        Map<String,ArrayList<Map>> e = new HashMap();
+        Map<String, ArrayList<Map>> e = new HashMap();
         ArrayList<Map> eArr = new ArrayList<Map>();
         e.put("段段", eArr);
         ArrayList<Map> aArr = new ArrayList<Map>();
@@ -200,10 +201,10 @@ public class WikiSunmary {
         a.put("一班", aArr);
 
         ArrayList<Map> bArr = new ArrayList<Map>();
-        Map<String,ArrayList<Map>> c = new HashMap();
-        Map<String,ArrayList<Map>> d = new HashMap();
-        Map<String,ArrayList<Map>> f = new HashMap();
-        Map<String,ArrayList<Map>> g = new HashMap();
+        Map<String, ArrayList<Map>> c = new HashMap();
+        Map<String, ArrayList<Map>> d = new HashMap();
+        Map<String, ArrayList<Map>> f = new HashMap();
+        Map<String, ArrayList<Map>> g = new HashMap();
         ArrayList<Map> cArr = new ArrayList<Map>();
         ArrayList<Map> dArr = new ArrayList<Map>();
         ArrayList<Map> fArr = new ArrayList<Map>();
@@ -223,14 +224,17 @@ public class WikiSunmary {
         result.put("软件", ruanjian);
         return result;
     }
-    public static void main(String[] args){
+
+    public static void main(String[] args) {
         WikiSunmary c = new WikiSunmary();
         Map temp = c.create();
         System.out.println(temp);
-        c.modify(temp, "一班", "段段","段段段段");
+        c.modify(temp, "一班", "段段", "段段段段");
         System.out.println("-----");
         //c.search(temp);
         System.out.println(temp);
         //c.search(c.add(temp, "ruanjian", "h"));
     }
+
+    private static Map<String, ArrayList<Map>> map = null;
 }
