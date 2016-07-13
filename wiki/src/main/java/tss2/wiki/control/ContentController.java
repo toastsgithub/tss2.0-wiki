@@ -58,7 +58,7 @@ public class ContentController {
      * @return 大纲树的json表示。
      */
     @RequestMapping(value = "/outline", method = RequestMethod.GET, produces="text/plain;charset=UTF-8")
-    public @ResponseBody String getSummary() {
+    public @ResponseBody Map getSummary() {
         WikiSunmary wikiSunmary = new WikiSunmary();
         return wikiSunmary.getSummary();
     }
