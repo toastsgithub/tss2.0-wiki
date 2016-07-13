@@ -49,6 +49,7 @@ public class WikiSunmary {
      */
     public void add(String father, String addString) {
         this.add(map, father, addString);
+        FileUtil.writeObjectToAbsolutePath("summary.dat", map);
     }
 
     /**
@@ -57,6 +58,7 @@ public class WikiSunmary {
      */
     public void delete(String father, String delete) {
         this.delete(map, father, delete);
+        FileUtil.writeObjectToAbsolutePath("summary.dat", map);
     }
 
     /**
@@ -66,6 +68,7 @@ public class WikiSunmary {
      */
     public void modify(String father, String before, String after) {
         this.modify(map, father, before, after);
+        FileUtil.writeObjectToAbsolutePath("summary.dat", map);
     }
 
     private void add(Map map, String father, String addString) {
