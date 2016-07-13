@@ -234,7 +234,4 @@ public class DBAdmin {
             e.printStackTrace();
         }
     }
-
-    public static void main(String[] args) {
-    }
 }

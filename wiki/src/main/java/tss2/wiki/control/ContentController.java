@@ -52,22 +52,7 @@ public class ContentController {
         return cs.process(new WikiEntryVO(session, map));
     }
 
-    /**
-     * 获取大纲信息。
-     *
-     * @return 大纲树的json表示。
-     */
-    @RequestMapping(value = "/outline", method = RequestMethod.GET, produces="text/plain;charset=UTF-8")
-    public @ResponseBody String getSummary() {
-        WikiSunmary wikiSunmary = new WikiSunmary();
-        return wikiSunmary.getSummary();
-    }
 
-    @RequestMapping(value = "/Outline", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
-    public @ResponseBody Map getOutline() {
-        WikiSunmary wikiSunmary = new WikiSunmary();
-        return wikiSunmary.create();
-    }
 
     /**
      * 获取所有标签信息。
@@ -81,6 +66,14 @@ public class ContentController {
         TagResult result = new TagResult();
         result.data = cs.getTags();
         return result;
+    }
+
+
+
+    @RequestMapping(value = "/search", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
+    public @ResponseBody TagResult FuzzySearch() {
+
+        return null;
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET, produces="application/json;charset=UTF-8")

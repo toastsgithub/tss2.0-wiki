@@ -30,9 +30,23 @@ public class WikiUser {
         return ss.checkUser(getUsername());
     }
 
-    public int loadMessages() {
-        unreadMessage = 0;
-        return unreadMessage;
+    public ArrayList<WikiMessage> loadMessages() {
+        int unreadMessage = 0;
+        DAOBase[] messages = Message.query().where("");
+        for (DAOBase message: messages) {
+            WikiMessage wikiMessage = new WikiMessage((Message) message);
+            for (String toUser: wikiMessage.getToUserList()) {
+                if (toUser.equals(getUsername()) &&
+                        getType() == 1 && toUser.equals("#1") &&
+                        getType() == 0 && toUser.equals("#0")) {
+                    messageList.add(wikiMessage);
+                    if (!wikiMessage.isRead()) {
+                        ++unreadMessage;
+                    }
+                }
+            }
+        }
+        return messageList;
     }
 
     public String getUsername() {
@@ -49,5 +63,4 @@ public class WikiUser {
 
     private User dao;
     private ArrayList<WikiMessage> messageList;
-    private int unreadMessage = 0;
 }
