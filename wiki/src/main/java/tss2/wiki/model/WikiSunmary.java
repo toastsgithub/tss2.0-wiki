@@ -15,11 +15,13 @@ public class WikiSunmary {
 
     public WikiSunmary() {
         Object result = FileUtil.loadObjectFromAbsolutePath("summary.dat");
-        if (result instanceof Map) {
-            map = (Map<String, ArrayList<Map>>) result;
-        }
         if (map == null) {
             map = new HashMap<>();
+            FileUtil.writeObjectToAbsolutePath("summary.dat", map);
+            return;
+        }
+        if (result instanceof Map) {
+            map = (Map<String, ArrayList<Map>>) result;
         }
     }
 
