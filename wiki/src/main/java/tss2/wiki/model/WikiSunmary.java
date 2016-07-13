@@ -13,11 +13,12 @@ import java.util.Map;
  */
 public class WikiSunmary {
 
+    static String path = "c:\\summary.dat";
     public WikiSunmary() {
-        Object result = FileUtil.loadObjectFromAbsolutePath("summary.dat");
+        Object result = FileUtil.loadObjectFromAbsolutePath(path);
         if (map == null) {
             map = create();
-            FileUtil.writeObjectToAbsolutePath("summary.dat", map);
+            FileUtil.writeObjectToAbsolutePath(path, map);
             return;
         }
         if (result instanceof Map) {
@@ -51,7 +52,7 @@ public class WikiSunmary {
      */
     public void add(String father, String addString) {
         this.add(map, father, addString);
-        FileUtil.writeObjectToAbsolutePath("summary.dat", map);
+        FileUtil.writeObjectToAbsolutePath(path, map);
     }
 
     /**
@@ -60,7 +61,7 @@ public class WikiSunmary {
      */
     public void delete(String father, String delete) {
         this.delete(map, father, delete);
-        FileUtil.writeObjectToAbsolutePath("summary.dat", map);
+        FileUtil.writeObjectToAbsolutePath(path, map);
     }
 
     /**
@@ -70,7 +71,7 @@ public class WikiSunmary {
      */
     public void modify(String father, String before, String after) {
         this.modify(map, father, before, after);
-        FileUtil.writeObjectToAbsolutePath("summary.dat", map);
+        FileUtil.writeObjectToAbsolutePath(path,map);
     }
 
     private void add(Map map, String father, String addString) {
@@ -85,7 +86,6 @@ public class WikiSunmary {
         }
         for (int i = 0; i < a.size(); i++) {
             k = a.get(i).keySet().toString().substring(1, a.get(i).keySet().toString().length() - 1);
-            if (a.get(i).get(k) != null) {
                 if (k.equals(father)) {
                     System.out.println(k);
                     Map<String, ArrayList<Map>> add = (Map<String, ArrayList<Map>>) a.get(i);
@@ -97,10 +97,6 @@ public class WikiSunmary {
                     break;
                 }
                 this.add(a.get(i), father, addString);
-            } else {
-                System.out.println(k);
-                System.out.println(a.get(i).get(k));
-            }
         }
     }
 
@@ -118,7 +114,6 @@ public class WikiSunmary {
         }
         for (int i = 0; i < a.size(); i++) {
             k = a.get(i).keySet().toString().substring(1, a.get(i).keySet().toString().length() - 1);
-            if (a.get(i).get(k) != null) {
                 if (k.equals(father)) {
                     System.out.println(k);
                     Map<String, ArrayList<Map>> add = (Map<String, ArrayList<Map>>) a.get(i);
@@ -132,11 +127,6 @@ public class WikiSunmary {
                     break;
                 }
                 this.delete(a.get(i), father, delete);
-            } else {
-                System.out.println(k);
-                System.out.println(a.get(i).get(k));
-
-            }
         }
     }
 
@@ -163,7 +153,6 @@ public class WikiSunmary {
         }
         for (int i = 0; i < a.size(); i++) {
             k = a.get(i).keySet().toString().substring(1, a.get(i).keySet().toString().length() - 1);
-            if (a.get(i).get(k) != null) {
                 if (k.equals(father)) {
                     System.out.println(k);
                     Map<String, ArrayList<Map>> add = (Map<String, ArrayList<Map>>) a.get(i);
@@ -171,7 +160,7 @@ public class WikiSunmary {
                     for (int l = 0; l < tempArr.size(); l++) {
                         String every = tempArr.get(l).keySet().toString().substring(1, tempArr.get(l).keySet().toString().length() - 1);
                         if (every.equals(before)) {
-                            int aaa;
+                            int aaa; //防止代码重复的声明，忽略这句话
                             Map<String, ArrayList<Map>> addM = new HashMap();
                             ArrayList<Map> Arr = new ArrayList<Map>();
                             addM = tempArr.get(l);
@@ -186,10 +175,6 @@ public class WikiSunmary {
                     break;
                 }
                 this.modify(a.get(i), father, before, after);
-            } else {
-                System.out.println(k);
-                System.out.println(a.get(i).get(k));
-            }
         }
     }
 
@@ -232,13 +217,10 @@ public class WikiSunmary {
 
     public static void main(String[] args) {
         WikiSunmary c = new WikiSunmary();
-        Map temp = c.create();
-        System.out.println(temp);
-        c.modify(temp, "一班", "段段", "段段段段");
+        System.out.println(map);
+        c.delete("一班", "段段");
         System.out.println("-----");
-        //c.search(temp);
-        System.out.println(temp);
-        //c.search(c.add(temp, "ruanjian", "h"));
+        System.out.println(map);
     }
 
     private static Map<String, ArrayList<Map>> map = null;
