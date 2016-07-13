@@ -104,7 +104,10 @@ public class FileUtil {
         String content = "";
         try {
             File file = new File(path);
-            file.getParentFile().mkdirs();
+            File parent = file.getParentFile();
+            if (parent != null) {
+                parent.mkdirs();
+            }
             fin = new FileInputStream(path);
             ois = new ObjectInputStream(fin);
             return ois.readObject();

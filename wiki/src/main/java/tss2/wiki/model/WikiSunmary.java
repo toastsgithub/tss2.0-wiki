@@ -16,7 +16,7 @@ public class WikiSunmary {
     public WikiSunmary() {
         Object result = FileUtil.loadObjectFromAbsolutePath("summary.dat");
         if (map == null) {
-            map = new HashMap<>();
+            map = create();
             FileUtil.writeObjectToAbsolutePath("summary.dat", map);
             return;
         }
