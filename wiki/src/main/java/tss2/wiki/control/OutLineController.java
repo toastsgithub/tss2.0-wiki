@@ -2,6 +2,8 @@ package tss2.wiki.control;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import tss2.wiki.dao.DAOBase;
+import tss2.wiki.dao.Summary;
 import tss2.wiki.model.WikiSunmary;
 
 import java.util.Map;
@@ -21,6 +23,20 @@ public class OutLineController {
         WikiSunmary wikiSunmary = new WikiSunmary();
         System.out.println(wikiSunmary.getSummary());
         return wikiSunmary.getSummary();
+    }
+
+    @RequestMapping(value = "/getSummary", method = RequestMethod.GET, produces="text/plain;charset=UTF-8")
+    public @ResponseBody String getSummary() {
+        DAOBase[] content = Summary.query().where("");
+        String jsonString = content[0].get("summaryJO").toString();
+        return jsonString;
+    }
+
+    @RequestMapping(value = "/setSummary", method = RequestMethod.GET, produces="text/plain;charset=UTF-8")
+    public @ResponseBody void setSummary(@RequestParam(value = "tree") String tree) {
+        DAOBase[] content = Summary.query().where("");
+        content[0].setValue("summaryJO",tree);
+        content[0].save();
     }
 
     /**
