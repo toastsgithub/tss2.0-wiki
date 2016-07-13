@@ -3,20 +3,166 @@
  */
 
 var rawData;
+var all_data = new Object();
 $.get(
-    "/content/outline",
+    "/outline/show",
     null,
     function (data) {
-        // alert("data below----\n"+data);
+        // alert("data below----\n"+JSON.stringify(data));
         // rawData=eval("("+data+")");
         // show(rawData);
-        var json_data = {"软件":[{"一班":[{"二班":["说好的孙浩大哥呢"]},{"考拉":["考拉爸爸"]},{"浣熊":[]}]},{"三班":["瞄","好多"]},{"四班":["歪歪","就是多"]},{"怎么这么多":["好烦","编不下去了"]},"还有??"]};
+        // var json_data = {"软件":[{"一班":[{"二班":["说好的孙浩大哥呢"]},{"考拉":["考拉爸爸"]},{"浣熊":[]}]},{"三班":["瞄","好多"]},{"四班":["歪歪","就是多"]},{"怎么这么多":["好烦","编不下去了"]},"还有??"]};
+        var json_data_2 = {
+            "id": "j1_1",
+            "text": "知识体系",
+            "icon": "glyphicon glyphicon-book",
+            "li_attr": {
+                "id": "j1_1"
+            },
+            "a_attr": {
+                "href": "#",
+                "id": "j1_1_anchor"
+            },
+            "state": {
+                "loaded": true,
+                "opened": false,
+                "selected": false,
+                "disabled": false
+            },
+            "data": { },
+            "children": [
+                {
+                    "id": "j1_2",
+                    "text": "软件",
+                    "icon": "glyphicon glyphicon-book",
+                    "li_attr": {
+                        "id": "j1_2"
+                    },
+                    "a_attr": {
+                        "href": "#"
+                    },
+                    "state": {
+                        "loaded": true,
+                        "opened": false,
+                        "selected": false,
+                        "disabled": false
+                    },
+                    "data": { },
+                    "children": [
+                        {
+                            "id": "j1_3",
+                            "text": "一班",
+                            "icon": "glyphicon glyphicon-book",
+                            "li_attr": {
+                                "id": "j1_3"
+                            },
+                            "a_attr": {
+                                "href": "#"
+                            },
+                            "state": {
+                                "loaded": true,
+                                "opened": false,
+                                "selected": false,
+                                "disabled": false
+                            },
+                            "data": { },
+                            "children": [
+                                {
+                                    "id": "j1_4",
+                                    "text": "段段",
+                                    "icon": "glyphicon glyphicon-book",
+                                    "li_attr": {
+                                        "id": "j1_4"
+                                    },
+                                    "a_attr": {
+                                        "href": "#"
+                                    },
+                                    "state": {
+                                        "loaded": true,
+                                        "opened": false,
+                                        "selected": false,
+                                        "disabled": false
+                                    },
+                                    "data": { },
+                                    "children": [ ],
+                                    "type": "default"
+                                }
+                            ],
+                            "type": "default"
+                        },
+                        {
+                            "id": "j1_5",
+                            "text": "二班",
+                            "icon": "glyphicon glyphicon-book",
+                            "li_attr": {
+                                "id": "j1_5"
+                            },
+                            "a_attr": {
+                                "href": "#"
+                            },
+                            "state": {
+                                "loaded": true,
+                                "opened": false,
+                                "selected": false,
+                                "disabled": false
+                            },
+                            "data": { },
+                            "children": [
+                                {
+                                    "id": "j1_6",
+                                    "text": "考拉",
+                                    "icon": "glyphicon glyphicon-book",
+                                    "li_attr": {
+                                        "id": "j1_6"
+                                    },
+                                    "a_attr": {
+                                        "href": "#"
+                                    },
+                                    "state": {
+                                        "loaded": true,
+                                        "opened": false,
+                                        "selected": false,
+                                        "disabled": false
+                                    },
+                                    "data": { },
+                                    "children": [ ],
+                                    "type": "default"
+                                },
+                                {
+                                    "id": "j1_8",
+                                    "text": "浩浩",
+                                    "icon": "glyphicon glyphicon-book",
+                                    "li_attr": {
+                                        "id": "j1_8"
+                                    },
+                                    "a_attr": {
+                                        "href": "#"
+                                    },
+                                    "state": {
+                                        "loaded": true,
+                                        "opened": false,
+                                        "selected": false,
+                                        "disabled": false
+                                    },
+                                    "data": { },
+                                    "children": [ ],
+                                    "type": "default"
+                                }
+                            ],
+                            "type": "default"
+                        }
+                    ],
+                    "type": "default"
+                }
+            ],
+            "type": "default"
+        };
         // alert("--->"+JSON.parse(data));
         var root_node = new Object();
         root_node.text = "知识体系";
         root_node.children = [];
-
-        read_json(root_node,JSON.parse(data));//读取到的数据为string 类型的,要转成obj (返回数据类型 可能跟请求方式和参数有关)
+        all_data = root_node;
+        read_json(root_node,data);//读取到的数据为string 类型的,要转成obj (返回数据类型 可能跟请求方式和参数有关)
         // alert(JSON.stringify(root_node));
         $('#moutline').jstree({
             'core' : {
@@ -25,7 +171,7 @@ $.get(
                 // },
                 "check_callback":true,
                 
-                'data' : root_node
+                'data' : json_data_2
             },
             "types" : {
                 "default" : {
@@ -46,6 +192,15 @@ $.get(
 
 
 // var rowData={"软件":[{"一班":[{"二班":["说好的孙浩大哥呢"]},"考拉","浣熊"]},{"三班":["喵"]},{"四班":["歪歪"]},{"怎么这么多":["好烦啊","我编不下去了"]},"还有？？"]};
+/**
+ * to save current outline
+ * no matter modified or not
+ * params:none
+ */
+function save_outline() {
+    var data_obj = $('#moutline').jstree(true).get_json();
+    alert(JSON.stringify(data_obj));
+}
 
 function show(rowData) {
     var outline = document.getElementById("moutline");

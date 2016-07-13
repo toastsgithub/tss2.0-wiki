@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 body{
     background-color: #ffffff;
 }
@@ -12,13 +11,8 @@ div{
     height: 1000px;
 }
 
-#right_part{
+#right_part {
     /*background-color: #2aabd2;*/
     /*border: solid 1px #c5a6a8;*/
-    height:1000px;
-=======
-div{
-    background-color: #2aabd2;
-    border: solid 1px red;
->>>>>>> a4424b7bef7d30e49ff19adcc4a8e23014640d00
+    height: 1000px;
 }
