@@ -32,11 +32,14 @@ public class OutLineController {
         return jsonString;
     }
 
-    @RequestMapping(value = "/setSummary", method = RequestMethod.GET, produces="text/plain;charset=UTF-8")
-    public @ResponseBody void setSummary(@RequestParam(value = "tree") String tree) {
-        DAOBase[] content = Summary.query().where("");
-        content[0].setValue("summaryJO",tree);
-        content[0].save();
+    @RequestMapping(value = "/setSummary", method = RequestMethod.POST, produces="application/json;charset=UTF-8")
+    public @ResponseBody void setSummary(@RequestBody Map map) {
+        System.out.println(map);
+        //DAOBase[] content = Summary.query().where("");
+        //content[0].setValue("summaryJO",map.toString());
+        //content[0].save();
+        WikiSunmary wikiSunmary = new WikiSunmary();
+        wikiSunmary.setMap(map);
     }
 
     /**

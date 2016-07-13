@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public class WikiSunmary {
 
-    static String path = "c:\\summary.dat";
+    static String path = "/Users/duanzhengmou/Desktop/temp_data/summary.dat";
 
     public WikiSunmary() {
         Object result = FileUtil.loadObjectFromAbsolutePath(path);
@@ -184,6 +184,11 @@ public class WikiSunmary {
         }
     }
 
+    public static void setMap(Map<String, ArrayList<Map>> map) {
+        WikiSunmary.map = map;
+        FileUtil.writeObjectToAbsolutePath(path, map);
+    }
+
     /**
      * 创建初始测试用大纲，存储格式为Map<String, ArrayList<Map>>
      * （叶节点也为Map<String, ArrayList<Map>>格式，其value为空）
@@ -234,5 +239,5 @@ public class WikiSunmary {
         System.out.println(map);
     }
 
-    private static Map<String, ArrayList<Map>> map = null;
+    private static Map map = null;
 }
