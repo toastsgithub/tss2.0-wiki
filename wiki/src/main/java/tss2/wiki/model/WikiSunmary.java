@@ -10,13 +10,15 @@ import java.util.Map;
 
 /**
  * Created by Administrator on 2016/7/10.
+ * add(),delete(),modify()的实现均基于search（）方法的基本思路
  */
 public class WikiSunmary {
 
     static String path = "c:\\summary.dat";
+
     public WikiSunmary() {
         Object result = FileUtil.loadObjectFromAbsolutePath(path);
-        if (map == null) {
+        if (result == null) {
             map = create();
             FileUtil.writeObjectToAbsolutePath(path, map);
             return;
@@ -30,19 +32,19 @@ public class WikiSunmary {
         return map;
     }
 
+    /**
+     * add(),delete(),modify()的基本遍历算法
+     * @param m
+     */
     public void search(Map m) {
-        String k = m.keySet().toString().substring(1, m.keySet().toString().length() - 1);
+        String k = m.keySet().toString().substring(1, m.keySet().toString().length() - 1); //k = key
         System.out.println(k);
         ArrayList<Map> a = (ArrayList<Map>) m.get(k);
         //System.out.println(a.length);
-        for (int i = 0; i < a.size(); i++) {
-            k = a.get(i).keySet().toString().substring(1, a.get(i).keySet().toString().length() - 1);
-            if (a.get(i).get(k) != null) {
-                this.search(a.get(i));
-            } else {
-                System.out.println(k);
-                System.out.println(a.get(i).get(k));
-            }
+        for (int i = 0; i < a.size(); i++) {    //遍历m.value
+            k = a.get(i).keySet().toString().substring(1, a.get(i).keySet().toString().length() - 1); //k = key
+            this.search(a.get(i));  //m.value内的每一项均为Map<String, ArrayList<Map>>结构，递归遍历
+
         }
     }
 
@@ -74,23 +76,24 @@ public class WikiSunmary {
         FileUtil.writeObjectToAbsolutePath(path,map);
     }
 
+    //递归思路参考this.search()
     private void add(Map map, String father, String addString) {
-        String k = map.keySet().toString().substring(1, map.keySet().toString().length() - 1);
-        System.out.println(k);
+        String k = map.keySet().toString().substring(1, map.keySet().toString().length() - 1); //k = key
+        //System.out.println(k);
         ArrayList<Map> a = (ArrayList<Map>) map.get(k);
         if (k.equals(father)) {
-            Map<String, ArrayList<Map>> add = new HashMap();
+            Map<String, ArrayList<Map>> add = new HashMap(); //在a中添加结构为Map<String, ArrayList<Map>> 的叶节点add，add的value为空的ArrayList<Map>
             ArrayList<Map> tempArr = new ArrayList<Map>();
             add.put(addString, tempArr);
             a.add(add);
         }
         for (int i = 0; i < a.size(); i++) {
-            k = a.get(i).keySet().toString().substring(1, a.get(i).keySet().toString().length() - 1);
+            k = a.get(i).keySet().toString().substring(1, a.get(i).keySet().toString().length() - 1); //k = key
                 if (k.equals(father)) {
-                    System.out.println(k);
+                    //System.out.println(k);
                     Map<String, ArrayList<Map>> add = (Map<String, ArrayList<Map>>) a.get(i);
                     ArrayList<Map> tempArr = add.get(k);
-                    Map<String, ArrayList<Map>> e = new HashMap();
+                    Map<String, ArrayList<Map>> e = new HashMap(); //在tempArr中添加结构为Map<String, ArrayList<Map>> e，e的value为空的ArrayList<Map>
                     ArrayList<Map> valueArr = new ArrayList<Map>();
                     e.put(addString, valueArr);
                     tempArr.add(e);
@@ -101,10 +104,11 @@ public class WikiSunmary {
     }
 
     private void delete(Map map, String father, String delete) {
-        String k = map.keySet().toString().substring(1, map.keySet().toString().length() - 1);
+        String k = map.keySet().toString().substring(1, map.keySet().toString().length() - 1); //k = key
         System.out.println(k);
         ArrayList<Map> a = (ArrayList<Map>) map.get(k);
         if (k.equals(father)) {
+            //遍历a，删除a中的delete元素
             for (int l = 0; l < a.size(); l++) {
                 String every = a.get(l).keySet().toString().substring(1, a.get(l).keySet().toString().length() - 1);
                 if (every.equals(delete)) {
@@ -113,11 +117,12 @@ public class WikiSunmary {
             }
         }
         for (int i = 0; i < a.size(); i++) {
-            k = a.get(i).keySet().toString().substring(1, a.get(i).keySet().toString().length() - 1);
+            k = a.get(i).keySet().toString().substring(1, a.get(i).keySet().toString().length() - 1); //k = key
                 if (k.equals(father)) {
                     System.out.println(k);
                     Map<String, ArrayList<Map>> add = (Map<String, ArrayList<Map>>) a.get(i);
                     ArrayList<Map> tempArr = add.get(k);
+                    //遍历tempArr，删除tempArr中的delete元素
                     for (int l = 0; l < tempArr.size(); l++) {
                         String every = tempArr.get(l).keySet().toString().substring(1, tempArr.get(l).keySet().toString().length() - 1);
                         if (every.equals(delete)) {
@@ -131,22 +136,22 @@ public class WikiSunmary {
     }
 
     private void modify(Map map, String father, String before, String after) {
-        String k = map.keySet().toString().substring(1, map.keySet().toString().length() - 1);
+        String k = map.keySet().toString().substring(1, map.keySet().toString().length() - 1); //k = key
         System.out.println(k);
         ArrayList<Map> a = (ArrayList<Map>) map.get(k);
         if (k.equals(father)) {
-
+            //遍历a，将a中的before改为after
             for (int l = 0; l < a.size(); l++) {
-                String every = a.get(l).keySet().toString().substring(1, a.get(l).keySet().toString().length() - 1);
+                String every = a.get(l).keySet().toString().substring(1, a.get(l).keySet().toString().length() - 1); //k = key
                 if (every.equals(before)) {
-                    Map<String, ArrayList<Map>> add = new HashMap();
+                    Map<String, ArrayList<Map>> add = new HashMap(); //创建after的map
                     ArrayList<Map> tempArr = new ArrayList<Map>();
-                    add = a.get(l);
-                    tempArr = add.get(every);
+                    add = a.get(l); //将after对应到before
+                    tempArr = add.get(every); //取出before的value
                     add.remove(before);
-                    add.put(after, tempArr);
-                    a.remove(l);
-                    a.add(l, add);
+                    add.put(after, tempArr); //将before的value的after绑定
+                    a.remove(l); //删除a中的before map
+                    a.add(l, add); //再a中添加添加after map
                     break;
                 }
             }
@@ -157,6 +162,7 @@ public class WikiSunmary {
                     System.out.println(k);
                     Map<String, ArrayList<Map>> add = (Map<String, ArrayList<Map>>) a.get(i);
                     ArrayList<Map> tempArr = add.get(k);
+                    //遍历tempArr，将tempArr中的before改为after
                     for (int l = 0; l < tempArr.size(); l++) {
                         String every = tempArr.get(l).keySet().toString().substring(1, tempArr.get(l).keySet().toString().length() - 1);
                         if (every.equals(before)) {
@@ -178,6 +184,11 @@ public class WikiSunmary {
         }
     }
 
+    /**
+     * 创建初始测试用大纲，存储格式为Map<String, ArrayList<Map>>
+     * （叶节点也为Map<String, ArrayList<Map>>格式，其value为空）
+     * @return
+     */
     public Map create() {
         Map<String, ArrayList<Map>> result = new HashMap();
         Map<String, ArrayList<Map>> a = new HashMap();
@@ -218,7 +229,7 @@ public class WikiSunmary {
     public static void main(String[] args) {
         WikiSunmary c = new WikiSunmary();
         System.out.println(map);
-        c.delete("一班", "段段");
+        c.add("一班", "段段");
         System.out.println("-----");
         System.out.println(map);
     }
