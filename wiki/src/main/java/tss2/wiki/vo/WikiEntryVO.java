@@ -1,6 +1,5 @@
 package tss2.wiki.vo;
 
-import tss2.wiki.dao.WikiEntry;
 import tss2.wiki.model.WikiSession;
 
 import java.util.Map;

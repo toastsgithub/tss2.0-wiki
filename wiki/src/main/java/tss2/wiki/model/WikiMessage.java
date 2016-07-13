@@ -9,14 +9,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Wiki信息。
+ * WikiMessage.
  *
  * Created by coral on 16-7-12.
  */
 public class WikiMessage {
 
     /**
-     * search a message accoring to a messageID
+     * search a message according to a messageID.
+     * if not exists, create a new one, but will not
+     * write an empty entry to the database.
      *
      * @param messageID
      */
@@ -34,6 +36,10 @@ public class WikiMessage {
         }
     }
 
+    public WikiMessage(Message message) {
+        this.dao = message;
+    }
+
     public String getMessageID() {
         return dao.messageID;
     }
@@ -42,6 +48,11 @@ public class WikiMessage {
         return dao.fromUser;
     }
 
+    /**
+     * Get the list of the target users.
+     *
+     * @return the list holding the users.
+     */
     public List<String> getToUserList() {
         ArrayList<String> userList = new ArrayList<>();
         String[] users = dao.toUser.split("/");
@@ -60,6 +71,16 @@ public class WikiMessage {
         return dao.detail;
     }
 
+    /**
+     * set the content of the message. and save the changes
+     * back to the database.
+     *
+     * @param fromUser which user the message come from
+     * @param toUser to which user the message is sent to
+     * @param title the title of the message
+     * @param detail the content of the message.
+     * @return a result message that always saying no error.
+     */
     public ResultMessage setContent(String fromUser, String[] toUser, String title, String detail) {
         dao.fromUser = fromUser;
         dao.toUser = StringUtil.concatArray("/", toUser);

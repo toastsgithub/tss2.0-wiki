@@ -37,7 +37,6 @@ public abstract class DAOBase {
     }
 
 
-
     /**
      * Execute a query and wrap the result as an
      * {@code DAOBase} object, decided by which

@@ -7,6 +7,7 @@ import java.util.Random;
  * Created by 羊驼 on 2016/7/10.
  */
 public class StringUtil {
+
     public static String concatArray(String connector, String[] array) {
         if (array == null) return null;
         String result = "";
