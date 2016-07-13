@@ -48,7 +48,7 @@ public class WikiSunmary {
      * @param addString 要增加的节点
      */
     public void add(String father, String addString) {
-        this.add(null, father, addString);
+        this.add(map, father, addString);
     }
 
     /**
@@ -56,7 +56,7 @@ public class WikiSunmary {
      * @param delete 要删除的节点
      */
     public void delete(String father, String delete) {
-        this.delete(null, father, delete);
+        this.delete(map, father, delete);
     }
 
     /**
@@ -65,7 +65,7 @@ public class WikiSunmary {
      * @param after  修改后节点
      */
     public void modify(String father, String before, String after) {
-        this.modify(null, father, before, after);
+        this.modify(map, father, before, after);
     }
 
     private void add(Map map, String father, String addString) {

@@ -19,7 +19,8 @@ public class OutLineController {
     @RequestMapping(value = "/show", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
     public @ResponseBody Map getOutline() {
         WikiSunmary wikiSunmary = new WikiSunmary();
-        return wikiSunmary.create();
+        System.out.println(wikiSunmary.getSummary());
+        return wikiSunmary.getSummary();
     }
 
     /**
@@ -36,7 +37,8 @@ public class OutLineController {
         String addString = map.get("addString").toString();
         WikiSunmary wikiSunmary = new WikiSunmary();
         wikiSunmary.add(father,addString);
-        return wikiSunmary.temp;
+        System.out.println(wikiSunmary.getSummary());
+        return wikiSunmary.getSummary();
     }
 
     /**
@@ -52,9 +54,9 @@ public class OutLineController {
         String father = map.get("father").toString();
         String delete = map.get("delete").toString();
         WikiSunmary wikiSunmary = new WikiSunmary();
-        wikiSunmary.add(father,delete);
-        System.out.println(wikiSunmary.temp);
-        return wikiSunmary.temp;
+        wikiSunmary.delete(father,delete);
+        System.out.println(wikiSunmary.getSummary());
+        return wikiSunmary.getSummary();
     }
 
     /**
@@ -73,8 +75,8 @@ public class OutLineController {
         String after = map.get("after").toString();
         WikiSunmary wikiSunmary = new WikiSunmary();
         wikiSunmary.modify(father,before,after);
-        System.out.println(wikiSunmary.temp);
-        return wikiSunmary.temp;
+        System.out.println(wikiSunmary.getSummary());
+        return wikiSunmary.getSummary();
     }
 
 
