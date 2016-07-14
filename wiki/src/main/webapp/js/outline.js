@@ -195,4 +195,35 @@ function search_entry(entry_key) {
     window.location.href="../html/entry_content_prototype.html";
 }
 
+/**
+ * 根据大纲节点的名称获取该节点下的所有条目
+ * @param outline_key 大纲的名称
+ * @returns {array}
+ */
+function get_entry_of_outline(outline_key) {
+    var result = [];
+    $.ajax({
+        url:'/content/searchByCategories',
+        async:false,
+        type:'get',
+        data:{categories:outline_key},
+        success:function (data){
+            // alert("done and data:"+data.titlelist);
+            if(data.exist==0){
+                // result = null;
+            }else{
+                for (x in data.titlelist){
+                    // alert("append:"+data.titlelist[x]);
+                    result.push(data.titlelist[x]);
+                }
+            }
+
+        },
+        error:function(data){
+            // alert("error-->"+JSON.stringify(data));
+            // result = null;   
+        }
+    });
+    return result;
+}
 

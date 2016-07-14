@@ -58,6 +58,7 @@
         <div class="col-sm-6">
             <input type="text" id="entry_search" placeholder="条目查询" >
             <button class="btn btn-primary" onclick=search_entry(document.getElementById('entry_search').value);>Search</button>
+            <button onclick=temp();>test</button>
         </div>
     </div>
 
@@ -80,5 +81,7 @@
 //            alert("here are data:"+data.instance.get_node(data.selected[0]).text);
 //        })
 //    });
-
+function temp() {
+    alert(get_entry_of_outline(document.getElementById('entry_search').value));
+}
 </script>
