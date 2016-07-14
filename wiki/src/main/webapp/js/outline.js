@@ -183,7 +183,7 @@ $.get(
                 //     "icon" : "glyphicon glyphicon-ok"
                 // }
             },
-            "plugins" : ["dnd","contextmenu","wholerow","types",'search'] // activate the state plugin on this instance
+            "plugins" : ["dnd","contextmenu","wholerow","types",'search','unique'] // activate the state plugin on this instance
         });
         $("#s").submit(function(e) {
             e.preventDefault();
