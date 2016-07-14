@@ -37,13 +37,13 @@ public class WikiRecord {
         }
     }
 
-    public static ArrayList<WikiEntry> getContentByCategories(String categories){
+    public static ArrayList<String> getContentByCategories(String categories){
         DAOBase[] contents = WikiEntry.query().where("categories like '%"+categories+"%'");
-        ArrayList<WikiEntry> entries = new ArrayList<WikiEntry>();
+        ArrayList<String> result = new ArrayList<>();
         for(int i = 0;i<contents.length;i++){
-            entries.add( (WikiEntry) contents[i]);
+            result.add( ((WikiEntry)contents[i]).title);
         }
-        return entries;
+        return result;
     }
 
     public WikiRecord(String title, int mainversion, int subversion) {

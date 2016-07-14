@@ -67,10 +67,12 @@ public class ContentController {
     }
 
     @RequestMapping(value = "/searchByCategories", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
-    public @ResponseBody RecordsResult searchByCategories(@RequestParam(value = "categories") String categories) {
-        //getContentByCatagries(catagries);
-        //RecordsResult recordsResult = new RecordsResult();
-        return new RecordsResult(1,getContentByCategories(categories));
+    public @ResponseBody OutLineTitleResult searchByCategories(@RequestParam(value = "categories") String categories) {
+        ArrayList<String> stringArrayList = getContentByCategories(categories);
+        if(stringArrayList.size()==0){
+            return new OutLineTitleResult(0);
+        }
+        return new OutLineTitleResult(1,stringArrayList);
     }
 
 
