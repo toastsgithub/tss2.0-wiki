@@ -4,12 +4,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import tss2.wiki.control.impl.SessionServiceimpl;
 import tss2.wiki.control.service.SessionService;
-import tss2.wiki.domain.OutLineResult;
-import tss2.wiki.domain.ResultMessage;
-import tss2.wiki.domain.TagResult;
+import tss2.wiki.domain.*;
 import tss2.wiki.control.service.ContentService;
 import tss2.wiki.control.impl.ContentServiceImpl;
-import tss2.wiki.domain.WikiResult;
 import tss2.wiki.model.WikiOutline;
 import tss2.wiki.model.WikiRecord;
 import tss2.wiki.model.WikiSession;
@@ -18,6 +15,8 @@ import tss2.wiki.vo.WikiEntryVO;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Map;
+
+import static tss2.wiki.model.WikiRecord.getContentByCategories;
 
 /**
  * Created by 羊驼 on 2016/7/8.
@@ -67,17 +66,23 @@ public class ContentController {
         return result;
     }
 
+    @RequestMapping(value = "/searchByCategories", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
+    public @ResponseBody RecordsResult searchByCategories(@RequestParam(value = "categories") String categories) {
+        //getContentByCatagries(catagries);
+        //RecordsResult recordsResult = new RecordsResult();
+        return new RecordsResult(1,getContentByCategories(categories));
+    }
 
 
-    @RequestMapping(value = "/search", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
-    public @ResponseBody TagResult FuzzySearch() {
+    @RequestMapping(value = "/fuzzySsearch", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
+    public @ResponseBody
+    RecordsResult fuzzySearch() {
 
         return null;
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
     public @ResponseBody WikiResult doGet(@RequestParam(value = "title") String title) {
-        ContentService cs = new ContentServiceImpl();
         WikiRecord wikiRecord = new WikiRecord(title);
         if (wikiRecord.getContent() == null) {
             return new WikiResult(0);
