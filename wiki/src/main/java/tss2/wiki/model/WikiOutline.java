@@ -12,10 +12,10 @@ import java.util.Map;
  */
 public class WikiOutline {
 
-    static String path = "/Users/duanzhengmou/Desktop/temp_data/summary.dat";
+    static String path = "/home/coral/文档/Tencent Files/2419335621/FileRecv/summary.dat";
 
     private static void loadPath() {
-        path = WikiOutline.class.getClass().getResource("").getPath() + "summary.dat";
+        path = WikiOutline.class.getClassLoader().getResource("").getPath().replaceAll("[%][2][0]", " ") + "summary.dat";
     }
 
     public WikiOutline() {
