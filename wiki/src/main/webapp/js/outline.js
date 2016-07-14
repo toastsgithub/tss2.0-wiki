@@ -194,7 +194,7 @@ function is_array(data) {
 function search_entry(entry_key) {
     if(entry_key == "")return ;
     alert("you enter the:"+entry_key);
-    window.location.href="../html/entry_content_prototype.html";
+    window.location.href="../html/entry_content.html";
 }
 
 /**
@@ -273,7 +273,7 @@ function display_outline_content(outline_key) {
                 var right_part = document.getElementById('article_board');
                 var new_node = document.createElement('div');
                 var the_link = document.createElement('a');
-                var url = '../html/entry_content_prototype.html?entry='+content_title;
+                var url = '../html/entry_content.html?entry='+content_title;
                 the_link.href = url;
                 the_link.innerHTML = content_title;
                 new_node.appendChild(the_link);

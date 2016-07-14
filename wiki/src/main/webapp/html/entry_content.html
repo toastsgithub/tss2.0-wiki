@@ -12,10 +12,12 @@
     <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="../css/wiki_navigator.css">
     <link rel="stylesheet" href="../css/entry_content.css">
+    <script src="../js/entry_content.js"></script>
+    <script src="../js/showdown.min.js"></script>
 
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>-->
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />-->
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
 </head>
 <body>
 <nav class="navbar navbar-default" style="background-color: #ffffff; margin: 0;">
@@ -35,16 +37,21 @@
     </div>
 
     <div id="right_part" class="col-xs-10">
-        <div id="jstree_demo_div"></div>
+
     </div>
 </div>
 
 </body>
 <script>
     $(document).ready(function () {
-        alert("ready");
-        $('#jstree_demo_div').jstree();
-        alert("init done");
+        var param = location.href.split("?")[1].split("=")[1];
+        var entry_name = decodeURI(param);
+//        alert(entry_name);
+        load_content(entry_name);
+
+//        alert("ready");
+//        $('#jstree_demo_div').jstree();
+//        alert("init done");
     })
 </script>
 
