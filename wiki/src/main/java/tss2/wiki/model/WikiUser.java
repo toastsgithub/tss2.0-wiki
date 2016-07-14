@@ -31,6 +31,7 @@ public class WikiUser {
     }
 
     public ArrayList<WikiMessage> loadMessages() {
+        messageList = new ArrayList<>();
         int unreadMessage = 0;
         DAOBase[] messages = Message.query().where("");
         for (DAOBase message: messages) {
@@ -40,7 +41,7 @@ public class WikiUser {
                         getType() == 1 && toUser.equals("#1") &&
                         getType() == 0 && toUser.equals("#0")) {
                     messageList.add(wikiMessage);
-                    if (!wikiMessage.isRead()) {
+                    if (wikiMessage.getRead() == 0) {
                         ++unreadMessage;
                     }
                 }

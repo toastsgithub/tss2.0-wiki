@@ -1,7 +1,5 @@
 package tss2.wiki.model;
 
-import tss2.wiki.dao.DAOBase;
-import tss2.wiki.dao.Summary;
 import tss2.wiki.util.FileUtil;
 
 import java.util.ArrayList;
@@ -12,11 +10,11 @@ import java.util.Map;
  * Created by Administrator on 2016/7/10.
  * add(),delete(),modify()的实现均基于search（）方法的基本思路
  */
-public class WikiSunmary {
+public class WikiOutline {
 
     static String path = "/Users/duanzhengmou/Desktop/temp_data/summary.dat";
 
-    public WikiSunmary() {
+    public WikiOutline() {
         Object result = FileUtil.loadObjectFromAbsolutePath(path);
         if (result == null) {
             map = create();
@@ -185,7 +183,7 @@ public class WikiSunmary {
     }
 
     public static void setMap(Map<String, ArrayList<Map>> map) {
-        WikiSunmary.map = map;
+        WikiOutline.map = map;
         FileUtil.writeObjectToAbsolutePath(path, map);
     }
 
@@ -232,7 +230,7 @@ public class WikiSunmary {
     }
 
     public static void main(String[] args) {
-        WikiSunmary c = new WikiSunmary();
+        WikiOutline c = new WikiOutline();
         System.out.println(map);
         c.add("一班", "段段");
         System.out.println("-----");

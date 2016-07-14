@@ -232,6 +232,7 @@ public class DBAdmin {
             stmt.executeUpdate(sqlExecute);
         } catch (SQLException e) {
             e.printStackTrace();
+            System.err.println(sqlExecute);
         }
     }
 }

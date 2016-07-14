@@ -197,6 +197,9 @@ public abstract class DAOBase {
         return this.getClass().getSimpleName();
     }
 
+    /**
+     * delete the current data entry.
+     */
     public void delete() {
         DBAdmin.execute("delete from " + getTableName() + " where (id = " + this.id + ");");
     }
@@ -242,19 +245,12 @@ public abstract class DAOBase {
                         break;
                     case "boolean":
                     case "Boolean":
-                        values += field.getName() + "='" + field.getBoolean(this) + "'";
+                        values += field.getName() + "=" + field.getBoolean(this) + "";
                 }
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
         }
         return values;
-    }
-
-    public static void main(String[] args) {
-        User user = new User();
-        user.password = "woyaochihuoguo";
-        user.username = "cuijiji";
-        user.save();
     }
 }

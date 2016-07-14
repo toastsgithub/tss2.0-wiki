@@ -6,6 +6,7 @@ import tss2.wiki.control.impl.SessionServiceimpl;
 import tss2.wiki.control.impl.UserServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import tss2.wiki.domain.MessageResult;
 import tss2.wiki.domain.UserResult;
 import tss2.wiki.model.WikiSession;
 import tss2.wiki.model.WikiUser;
@@ -41,9 +42,8 @@ public class UserController {
         return "/html/Home.html";
     }
 
-    @RequestMapping(value = "/info", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
-    public @ResponseBody
-    UserResult getUserInfo(HttpServletRequest request) {
+    @RequestMapping(value = "/info", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+    public @ResponseBody UserResult getUserInfo(HttpServletRequest request) {
         SessionService ss = new SessionServiceimpl();
         WikiSession session = ss.checkUser(request);
         if (session == null) {
@@ -51,5 +51,18 @@ public class UserController {
         }
         WikiUser user = new WikiUser(session.getUserID());
         return new UserResult(1, user.getUsername(), user.getType());
+    }
+
+    @RequestMapping(value = "/message", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+    public @ResponseBody MessageResult getUserMessage(HttpServletRequest request) {
+        SessionService ss = new SessionServiceimpl();
+        WikiSession session = ss.checkUser(request);
+        if (session == null) {
+            return new MessageResult(1, "Authentication Failed");
+        }
+        WikiUser user = new WikiUser(session.getUserID());
+        MessageResult result = new MessageResult();
+        result.getData().addAllMessage(user.loadMessages());
+        return result;
     }
 }
