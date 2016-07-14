@@ -37,9 +37,6 @@
                     <li><a href="../html/Entry_editor.html">增加条目(管理员)</a></li>
                     <li role="separator" class="divider"></li>
                     <li><a href="#">请求增加条目(敬请期待)</a></li>
-                    <!--<li><a href="#">Separated link</a></li>-->
-                    <!--<li role="separator" class="divider"></li>-->
-                    <!--<li><a href="#">One more separated link</a></li>-->
                 </ul>
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">选项<span class="caret"></span></a>
             </li>
@@ -65,8 +62,9 @@
         <div id="outline_article" class="row">
             <div id="moutline" class="col-sm-6">
             </div>
+            <button onclick=display_outline_content("崔火锅");>???</button>
             <div id="article_board" class="col-sm-6">
-                <button>???</button>
+
             </div>
         </div>
 
@@ -75,12 +73,16 @@
 <script src="../js/outline.js"></script>
 </html>
 <script>
-//    $(document).ready(function () {
-//        $('#moutline').on("changed.jstree",function (e,data) {
+    $(document).ready(function () {
+        $('#moutline').on("changed.jstree",function (e,data) {
 //            alert("the object:"+JSON.stringify(data.instance));
-//            alert("here are data:"+data.instance.get_node(data.selected[0]).text);
-//        })
-//    });
+            var selected_name = data.instance.get_node(data.selected[0]).text;
+//            alert("here are data:"+ selected_name);
+            display_outline_content(selected_name);
+        })
+        load_all_outline_content();
+
+    });
 function temp() {
     alert(get_entry_of_outline(document.getElementById('entry_search').value));
 }

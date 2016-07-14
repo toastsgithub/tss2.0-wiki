@@ -3,7 +3,7 @@
  */
 
 // var rawData;
-// var all_data = new Object();
+var all_outline_content=[];
 $.get(
     "/outline/show",
     null,
@@ -178,6 +178,7 @@ function read_json(father,data) {
 /**
  * 判断参数是否为array
  * @param data 任意对象类型
+ * @status work well
  * @returns {boolean}
  */
 function is_array(data) {
@@ -187,6 +188,7 @@ function is_array(data) {
 }
 /**
  * 根据搜索的条目执行相关跳转,如果传入字符串不合法(如为空)则do nothing,若有其他判断条件则在此方法中扩展
+ * @status work well
  * @param entry_key 条目关键字,字符串类型
  */
 function search_entry(entry_key) {
@@ -196,34 +198,107 @@ function search_entry(entry_key) {
 }
 
 /**
- * 根据大纲节点的名称获取该节点下的所有条目
+ * 根据大纲节点的名称获取该节点下的所有条目,并构造对象,存储到全局数组中
  * @param outline_key 大纲的名称
+ * @status work well
  * @returns {array}
  */
 function get_entry_of_outline(outline_key) {
     var result = [];
     $.ajax({
         url:'/content/searchByCategories',
-        async:false,
+        // async:false,
         type:'get',
         data:{categories:outline_key},
         success:function (data){
-            // alert("done and data:"+data.titlelist);
             if(data.exist==0){
-                // result = null;
+            //    do nothing
             }else{
                 for (x in data.titlelist){
-                    // alert("append:"+data.titlelist[x]);
                     result.push(data.titlelist[x]);
                 }
+                var temp_obj = new Object();
+                temp_obj.name = outline_key;
+                temp_obj.content = result;
+                all_outline_content.push(temp_obj);
             }
 
         },
         error:function(data){
-            // alert("error-->"+JSON.stringify(data));
-            // result = null;   
+        //    do nothing
         }
     });
-    return result;
+    // return result;
 }
 
+/**
+ * 在页面一加载的时候同时启动该方法,请求所有大纲的内容,并保存到全局数组中
+ * @status work well
+ * @params none
+ */
+function load_all_outline_content(){
+    $.ajax({
+        url:'/outline/list',
+        // async:false,
+        type:'get',
+        success:function (data) {
+            for (x in data.data){
+                var list = get_entry_of_outline(data.data[x]);
+                // var temp_obj = new Object();
+                // temp_obj.name = data.data[x];
+                // temp_obj.content = list;
+                // all_outline_content.push(temp_obj);
+            }
+
+        },
+        error:function(data){
+            //    do nothing
+        }
+    });
+}
+/**
+ * 根据大纲的名称从全局数组中查询该大纲节点下存在的条目,并加到右侧div中,该方法通常
+ * 在大纲树的点击事件中触发
+ * @param outline_key 大纲节点名称
+ */
+function display_outline_content(outline_key) {
+    remove_all_child('article_board');
+    for (x in all_outline_content){
+        
+        if(all_outline_content[x].name == outline_key){
+            // alert(JSON.stringify(all_outline_content[x]));
+            for (y in all_outline_content[x].content){
+                var content_title = all_outline_content[x].content[y];
+                // alert(content_title+"]]]");
+                var right_part = document.getElementById('article_board');
+                var new_node = document.createElement('div');
+                var the_link = document.createElement('a');
+                var url = '../html/entry_content_prototype.html?entry='+content_title;
+                the_link.href = url;
+                the_link.innerHTML = content_title;
+                new_node.appendChild(the_link);
+                right_part.appendChild(new_node);
+            }
+        }
+    }
+
+    // var right_part = document.getElementById('article_board');
+    // var new_node = document.createElement('div');
+    // var the_link = document.createElement('a');
+    // the_link.href = 'http://www.baidu.com';
+    // the_link.innerHTML = outline_key;
+    // new_node.appendChild(the_link);
+    // right_part.appendChild(new_node);
+
+}
+/**
+ * 移除该元素下的所有子元素
+ * @param element_id
+ */
+function remove_all_child(element_id) {
+    var div = document.getElementById(element_id);
+    while(div.hasChildNodes()) //当div下还存在子节点时 循环继续
+    {
+        div.removeChild(div.firstChild);
+    }
+}
