@@ -29,9 +29,10 @@ function verif(){
                 show_illegal_tip();
            } else if (data.user.type==0){
                 // alert("welcome, user!");
-                location.href = "../html/search.html"
+                location.href = "../html/Outline.html";
             }else if(data.user.type == 1){
-                alert("welcome, admin!");
+                location.href = "../html/Outline.html";
+                // alert("welcome, admin!");
             }
             // document.getElementById('login_btn').removeAttribute('disabled');
             remove_disable('login_btn');

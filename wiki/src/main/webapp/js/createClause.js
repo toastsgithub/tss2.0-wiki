@@ -52,20 +52,20 @@ function addClause() {
         }
     };
     
-    // $.ajax({
-    //     type: "post",
-    //     url: "/content/add",
-    //     contentType: 'application/json;charset=utf-8',
-    //     data: JSON.stringify(data),
-    //     success: function (data) {
-    //         remove_disable('submit_btn');
-    //         alert("create successfully!");
-    //     },
-    //     error: function (data) {
-    //         remove_disable('submit_btn');
-    //         alert("error");
-    //     }
-    // })
+    $.ajax({
+        type: "post",
+        url: "/content/add",
+        contentType: 'application/json;charset=utf-8',
+        data: JSON.stringify(data),
+        success: function (data) {
+            remove_disable('submit_btn');
+            alert("create successfully!");
+        },
+        error: function (data) {
+            remove_disable('submit_btn');
+            alert("error");
+        }
+    })
 }
 
 function getTime() {

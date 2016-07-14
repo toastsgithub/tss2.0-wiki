@@ -1,3 +1,22 @@
+#outline_article{
+    margin-top: 20px;
+}
 #article_board{
     background-color: #f6ebcb;
 }
+#q,#entry_search{
+    outline: none;
+    height: 32px;
+    margin-left:20px;
+    width: 80%;
+    border: solid 1px #d3dad8;
+    -webkit-transition: border .5s;
+}
+#q:hover,#q:focus,#entry_search:hover,#entry_search:focus{
+    border: solid 1px #3f82c5!important;
+    -webkit-transition: border .5s;
+}
+/*#q:focus{*/
+    /*border: solid 1px #3f82c5!important;*/
+    /*-webkit-transition: border .5s;*/
+/*}*/
