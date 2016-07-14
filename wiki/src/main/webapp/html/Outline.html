@@ -12,8 +12,41 @@
     <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+    <link rel="stylesheet" href="../css/outline.css">
+    <link rel="stylesheet" href="../css/wiki_navigator.css">
+    <script src="../js/wiki_utils.js"></script>
+
 </head>
 <body>
+<nav class="navbar navbar-default" style="background-color: #ffffff">
+    <div class="container-fluid">
+        <a class="navbar-header" href="../html/Home.html" style="margin-top: 10px;">
+            <img  src="../resource/icon/tss_logo@2x.png" alt="" style="height: 32px">
+        </a>
+        <!--<div class="navbar-header navbar-right" style=";margin-top: 10px;">-->
+            <!--<div id="about_btn" class="" style="" onclick="location='../html/about.html'">About</div>-->
+            <!--<div id="help_btn" class="" style="" onclick="location='../html/help.html'">Help</div>-->
+        <!--</div>-->
+        <ul class="nav navbar-nav">
+            <!--<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>-->
+            <li><a href="#">Link</a></li>
+            <li><a onclick=get_user();>get user test</a></li>
+            <!--<li class="dropdown">-->
+                <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>-->
+                <!--<ul class="dropdown-menu">-->
+                    <!--<li><a href="#">Action</a></li>-->
+                    <!--<li><a href="#">Another action</a></li>-->
+                    <!--<li><a href="#">Something else here</a></li>-->
+                    <!--<li role="separator" class="divider"></li>-->
+                    <!--<li><a href="#">Separated link</a></li>-->
+                    <!--<li role="separator" class="divider"></li>-->
+                    <!--<li><a href="#">One more separated link</a></li>-->
+                <!--</ul>-->
+            <!--</li>-->
+        </ul>
+    </div>
+</nav>
+
     <div id="test_tree" style="width: 100%;height: 200px;background-color: #eff6f4">
         <div class="btn btn-primary" >增加</div>
         <div class="btn btn-danger">删除</div>
@@ -22,18 +55,21 @@
         <!--<div class="btn btn-primary">增加</div>-->
     </div>
 
-
+<!--正经内容的分割线-->
     <form id="s">
         <input type="search" id="q" style="border: solid 1px #d3dad8;outline: none"/>
         <button type="submit" class="btn btn-primary">Search</button>
     </form>
 
-
-    <div id="outline_article">
-        <div id="moutline" >
+    <!--<div class="contai">-->
+        <div id="outline_article" class="row">
+            <div id="moutline" class="col-sm-6">
+            </div>
+            <div id="article_board" class="col-sm-6">
+                <button>???</button>
+            </div>
         </div>
-    </div>
-
+    <!--</div>-->
 
     <!--<script>-->
         <!--$("#moutline").jstree({-->

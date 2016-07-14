@@ -121,7 +121,9 @@
         alert("获取html源内容:\n----------\n"+editor_instance.getHTML());
     }
     function show_markdown() {
-        alert(editor_instance.getMarkdown())
+//        alert("you got me ");
+//        alert(editor_instance.getMarkdown());
+        return editor_instance.getMarkdown();
     }
     function getMyName(){
         var myName='<%=session.getAttribute("MYNAME")%>';

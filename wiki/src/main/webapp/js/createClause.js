@@ -32,8 +32,11 @@ function addClause() {
     var summary = document.getElementById("summary").value;
     var tags = document.getElementById("tags_input").value;
     var catagories = document.getElementById("category_input").value;
+    var username = get_user();
+    alert("current user-->"+username);
     var content = show_markdown();
-    content = "###this is content";
+    // alert("----->content--->"+content);
+    // content = "###this is content";
     // alert("info");
 
 
@@ -45,27 +48,24 @@ function addClause() {
             title: title,
             tags: tags,
             categories: catagories,
-            content: "21332432"
+            content: content
         }
     };
-    // alert("content:"+content);
-    // alert("data:" + JSON.stringify(data));
-    // var data = {operations:'add',data:{time:time, username:'123', summary:summary,title: title, tags:tags,
-    //     categories:catagories,content:content}};
-    $.ajax({
-        type: "post",
-        url: "/content/add",
-        contentType: 'application/json;charset=utf-8',
-        data: JSON.stringify(data),
-        success: function (data) {
-            remove_disable('submit_btn');
-            alert("create successfully!");
-        },
-        error: function (data) {
-            remove_disable('submit_btn');
-            alert("error");
-        },
-    })
+    
+    // $.ajax({
+    //     type: "post",
+    //     url: "/content/add",
+    //     contentType: 'application/json;charset=utf-8',
+    //     data: JSON.stringify(data),
+    //     success: function (data) {
+    //         remove_disable('submit_btn');
+    //         alert("create successfully!");
+    //     },
+    //     error: function (data) {
+    //         remove_disable('submit_btn');
+    //         alert("error");
+    //     }
+    // })
 }
 
 function getTime() {
