@@ -14,14 +14,22 @@ public class WikiOutline {
 
     static String path = "/Users/duanzhengmou/Desktop/temp_data/summary.dat";
 
+    private static void loadPath() {
+        path = WikiOutline.class.getClass().getResource("").getPath() + "summary.dat";
+    }
+
     public WikiOutline() {
+        loadPath();
         Object result = FileUtil.loadObjectFromAbsolutePath(path);
         if (result == null) {
+            System.err.println("fail in loading outline");
             map = create();
             FileUtil.writeObjectToAbsolutePath(path, map);
             return;
         }
         if (result instanceof Map) {
+            System.out.println("load successfully");
+            System.out.println();
             map = (Map<String, ArrayList<Map>>) result;
         }
     }
@@ -227,14 +235,6 @@ public class WikiOutline {
         ruanjian.add(b);
         result.put("软件", ruanjian);
         return result;
-    }
-
-    public static void main(String[] args) {
-        WikiOutline c = new WikiOutline();
-        System.out.println(map);
-        c.add("一班", "段段");
-        System.out.println("-----");
-        System.out.println(map);
     }
 
     private static Map map = null;
