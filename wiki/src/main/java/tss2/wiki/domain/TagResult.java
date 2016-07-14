@@ -7,4 +7,8 @@ import java.util.ArrayList;
  */
 public class TagResult {
     public ArrayList<String> data;
+
+    public ArrayList<String> getData() {
+        return data;
+    }
 }

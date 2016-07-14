@@ -7,6 +7,7 @@ import tss2.wiki.util.FileUtil;
 import tss2.wiki.util.TimeUtil;
 
 import java.io.File;
+import java.util.ArrayList;
 
 /**
  *
@@ -34,6 +35,15 @@ public class WikiRecord {
         } else {
             dao = (WikiEntry) contents[0];
         }
+    }
+
+    public static ArrayList<WikiEntry> getContentByCategories(String categories){
+        DAOBase[] contents = WikiEntry.query().where("categories like '%"+categories+"%'");
+        ArrayList<WikiEntry> entries = new ArrayList<WikiEntry>();
+        for(int i = 0;i<contents.length;i++){
+            entries.add( (WikiEntry) contents[i]);
+        }
+        return entries;
     }
 
     public WikiRecord(String title, int mainversion, int subversion) {
