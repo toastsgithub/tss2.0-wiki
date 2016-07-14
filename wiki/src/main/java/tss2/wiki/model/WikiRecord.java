@@ -38,7 +38,7 @@ public class WikiRecord {
     }
 
     public static ArrayList<String> getContentByCategories(String categories){
-        DAOBase[] contents = WikiEntry.query().where("categories like '%"+categories+"%'");
+        DAOBase[] contents = WikiEntry.query().where("categories = '"+categories+"'");
         ArrayList<String> result = new ArrayList<>();
         for(int i = 0;i<contents.length;i++){
             result.add( ((WikiEntry)contents[i]).title);
