@@ -4,18 +4,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import tss2.wiki.control.impl.SessionServiceimpl;
 import tss2.wiki.control.service.SessionService;
+import tss2.wiki.domain.OutLineResult;
 import tss2.wiki.domain.ResultMessage;
 import tss2.wiki.domain.TagResult;
 import tss2.wiki.control.service.ContentService;
 import tss2.wiki.control.impl.ContentServiceImpl;
 import tss2.wiki.domain.WikiResult;
+import tss2.wiki.model.WikiOutline;
 import tss2.wiki.model.WikiRecord;
 import tss2.wiki.model.WikiSession;
-import tss2.wiki.model.WikiSunmary;
 import tss2.wiki.vo.WikiEntryVO;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.Map;
 
 /**
@@ -51,8 +52,6 @@ public class ContentController {
         if (session == null) return new ResultMessage(1, "Authentication Failed");
         return cs.process(new WikiEntryVO(session, map));
     }
-
-
 
     /**
      * 获取所有标签信息。
