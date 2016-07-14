@@ -8,7 +8,7 @@ $.get(
     "/outline/show",
     null,
     function (data) {
-        // alert("data below----\n"+JSON.stringify(data));
+        alert("data below----\n"+JSON.stringify(data));
         // rawData=eval("("+data+")");
         // show(rawData);
         // var json_data = {"软件":[{"一班":[{"二班":["说好的孙浩大哥呢"]},{"考拉":["考拉爸爸"]},{"浣熊":[]}]},{"三班":["瞄","好多"]},{"四班":["歪歪","就是多"]},{"怎么这么多":["好烦","编不下去了"]},"还有??"]};
@@ -157,12 +157,14 @@ $.get(
             ],
             "type": "default"
         };
-        // alert("--->"+JSON.parse(data));
-        var root_node = new Object();
-        root_node.text = "知识体系";
-        root_node.children = [];
-        all_data = root_node;
-        read_json(root_node,data);//读取到的数据为string 类型的,要转成obj (返回数据类型 可能跟请求方式和参数有关)
+        // alert("--->"+json_data_2);
+        
+        // var root_node = new Object();
+        // root_node.text = "知识体系";
+        // root_node.children = [];
+        // all_data = root_node;
+        // read_json(root_node,data);//读取到的数据为string 类型的,要转成obj (返回数据类型 可能跟请求方式和参数有关)
+        
         // alert(JSON.stringify(root_node));
         $('#moutline').jstree({
             'core' : {
@@ -171,7 +173,7 @@ $.get(
                 // },
                 "check_callback":true,
                 
-                'data' : json_data_2
+                'data' : data
             },
             "types" : {
                 "default" : {
@@ -199,7 +201,20 @@ $.get(
  */
 function save_outline() {
     var data_obj = $('#moutline').jstree(true).get_json();
-    alert(JSON.stringify(data_obj));
+    $.ajax({
+        url:'/outline/setSummary',
+        type:'post',
+        contentType:'application/json',
+        data:JSON.stringify(data_obj[0]),
+        success:function () {
+
+            alert("success");
+        },
+        error:function (data) {
+            alert('error'+JSON.stringify(data));
+        }
+    });
+    
 }
 
 function show(rowData) {
