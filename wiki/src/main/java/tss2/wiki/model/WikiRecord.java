@@ -3,6 +3,7 @@ package tss2.wiki.model;
 import tss2.wiki.dao.DAOBase;
 import tss2.wiki.dao.UpdateHistory;
 import tss2.wiki.dao.WikiEntry;
+import tss2.wiki.domain.RecordsResult;
 import tss2.wiki.util.FileUtil;
 import tss2.wiki.util.TimeUtil;
 
@@ -44,6 +45,36 @@ public class WikiRecord {
             result.add( ((WikiEntry)contents[i]).title);
         }
         return result;
+    }
+
+    public static RecordsResult recordFuzzySearch(String search){
+        DAOBase[] title = WikiEntry.query().where("title like '%"+search+"%'");
+        DAOBase[] tags = WikiEntry.query().where("tags like '%"+search+"%'");
+        DAOBase[] categories = WikiEntry.query().where("categories like '%"+search+"%'");
+        DAOBase[] summery = WikiEntry.query().where("summery like '%"+search+"%'");
+        ArrayList<WikiEntry> result = new ArrayList<>();
+        for(int i = 0;i<title.length;i++){
+            result.add((WikiEntry)title[i]);
+        }
+        for(int i = 0;i<tags.length;i++){
+            if(result.contains((WikiEntry)tags[i])){
+            }else{
+                result.add((WikiEntry)tags[i]);
+            }
+        }
+        for(int i = 0;i<categories.length;i++){
+            if(result.contains((WikiEntry)categories[i])){
+            }else{
+                result.add((WikiEntry)categories[i]);
+            }
+        }
+        for(int i = 0;i<summery.length;i++){
+            if(result.contains((WikiEntry)summery[i])){
+            }else{
+                result.add((WikiEntry)summery[i]);
+            }
+        }
+        return new RecordsResult(1,result);
     }
 
     public WikiRecord(String title, int mainversion, int subversion) {
