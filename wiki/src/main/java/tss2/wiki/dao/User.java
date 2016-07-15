@@ -1,5 +1,7 @@
 package tss2.wiki.dao;
 
+import tss2.wiki.dao.core.DAOBase;
+
 /**
  * Created by 羊驼 on 2016/7/7.
  */

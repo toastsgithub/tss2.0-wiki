@@ -1,6 +1,6 @@
 package tss2.wiki.model;
 
-import tss2.wiki.dao.DAOBase;
+import tss2.wiki.dao.core.DAOBase;
 import tss2.wiki.dao.UpdateHistory;
 import tss2.wiki.dao.WikiEntry;
 import tss2.wiki.domain.RecordsResult;
@@ -106,6 +106,9 @@ public class WikiRecord {
     private static boolean search(WikiEntry wikiEntry,String search){
         WikiRecord wikiRecord = new WikiRecord(wikiEntry.title);
         String content = wikiRecord.getContent();
+        if(content==null){
+            return false;
+        }
         return content.contains(search);
     }
 

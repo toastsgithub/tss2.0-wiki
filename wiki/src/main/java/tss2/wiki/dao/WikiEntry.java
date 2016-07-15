@@ -1,5 +1,7 @@
 package tss2.wiki.dao;
 
+import tss2.wiki.dao.core.DAOBase;
+
 /**
  * contains wiki entries.
  *

@@ -13,10 +13,10 @@ function addClause() {
         document.getElementById("typeTip").innerHTML = "请选择类别";
         submit = false;
     }
-    if (document.getElementById("tags_input").value == "") {
-        document.getElementById("tagTip").innerHTML = "请选择标签";
-        submit = false;
-    }
+    // if (document.getElementById("tags_input").value == "") {
+    //     document.getElementById("tagTip").innerHTML = "请选择标签";
+    //     submit = false;
+    // }
     if (judge_type == false){
         submit = false;
     }
@@ -33,7 +33,9 @@ function addClause() {
     var time = getTime();
     var title = document.getElementById("name_input").value;
     var summary = document.getElementById("summary").value;
-    var tags = document.getElementById("tags_input").value;
+    var tags = getTags();
+    alert(tags);
+    return ;
     var catagories = document.getElementById("category_input").value;
     var username = get_user();
     alert("current user-->"+username);
@@ -87,4 +89,15 @@ function getTime() {
     var second = date.getSeconds();
     var time = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
     return time;
+}
+
+function getTags() {
+    var tags_pool = document.getElementById('tags_pool');
+    var tags = [];
+    var num = tags_pool.childElementCount;
+    if(num==0) return null;
+    for(var i =0; i<num;i++){
+        tags.push(tags_pool.childNodes[i].firstChild.textContent);
+    }
+    return  tags;
 }

@@ -1,10 +1,9 @@
 package tss2.wiki.model;
 
 
-import tss2.wiki.dao.DAOBase;
+import tss2.wiki.dao.core.DAOBase;
 import tss2.wiki.dao.Session;
 
-import javax.servlet.http.Cookie;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
