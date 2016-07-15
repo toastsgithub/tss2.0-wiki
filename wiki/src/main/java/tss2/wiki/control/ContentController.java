@@ -93,8 +93,8 @@ public class ContentController {
         return recordsResult;
     }
 
-    @RequestMapping(value = "", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
-    public @ResponseBody WikiResult doGet(@RequestParam(value = "title") String title) {
+    @RequestMapping(value = "/wiki/{title}", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
+    public @ResponseBody WikiResult doGet(@PathVariable String title) {
         WikiRecord wikiRecord = new WikiRecord(title);
         if (wikiRecord.getContent() == null) {
             return new WikiResult(0);
