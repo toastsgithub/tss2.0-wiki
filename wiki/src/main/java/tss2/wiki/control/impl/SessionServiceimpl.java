@@ -42,6 +42,9 @@ public class SessionServiceimpl implements SessionService {
     public WikiSession checkUser(HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
         String sessionID = "";
+        if (cookies == null) {
+            return null;
+        }
         for (Cookie cookie: cookies) {
             if (cookie.getName().equals("sessionID")) {
                 sessionID = cookie.getValue();
