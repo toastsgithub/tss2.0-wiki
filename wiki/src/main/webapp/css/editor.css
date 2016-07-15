@@ -1,3 +1,7 @@
+body{
+	/*background-color: #01a252;*/
+	min-width: 600px;
+}
 .minf{
 	margin-bottom: 20px;
 	width: 100%;
