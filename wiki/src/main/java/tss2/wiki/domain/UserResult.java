@@ -10,7 +10,7 @@ public class UserResult {
     }
 
     public UserResult(int login, String username, int type) {
-        login = login;
+        this.login = login;
         data = new UserInfo(username, type);
     }
 
