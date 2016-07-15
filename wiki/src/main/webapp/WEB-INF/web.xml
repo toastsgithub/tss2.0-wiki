@@ -23,7 +23,7 @@
   </servlet-mapping>
 
   <welcome-file-list>
-    <welcome-file>html/Home.html</welcome-file>
+    <welcome-file>html/Outline.html</welcome-file>
   </welcome-file-list>
 
 </web-app>

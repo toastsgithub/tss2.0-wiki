@@ -5,7 +5,7 @@
 // var rawData;
 var all_outline_content=[];
 $.get(
-    "/outline/show",
+    "/outline",
     null,
     function (data) {
         // alert("data below----\n"+JSON.stringify(data));
@@ -39,7 +39,7 @@ $.get(
                 //     "icon" : "glyphicon glyphicon-ok"
                 // }
             },
-            "plugins" : ["wholerow","types",'search','unique']
+            "plugins" : ["wholerow","types",'search','unique','contextmenu']
             // "plugins" : ["dnd","contextmenu","wholerow","types",'search','unique']
         });
         $("#s").submit(function(e) {
@@ -58,8 +58,8 @@ $.get(
 function save_outline() {
     var data_obj = $('#moutline').jstree(true).get_json();
     $.ajax({
-        url:'/outline/setSummary',
-        type:'post',
+        url:'/outline',
+        type:'put',
         contentType:'application/json',
         data:JSON.stringify(data_obj[0]),
         success:function () {

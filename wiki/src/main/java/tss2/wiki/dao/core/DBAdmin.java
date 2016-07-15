@@ -196,6 +196,7 @@ public class DBAdmin {
         ArrayList<String> tbls = new ArrayList<>();
         ResultSet rs;
         try {
+
             rs = stmt.executeQuery("SHOW TABLES;");
             while (rs.next()) {
                 tbls.add(rs.getString("Tables_in_" + dbName));
@@ -208,14 +209,15 @@ public class DBAdmin {
 
     public static RowSet query(String sqlQuery) {
         try {
-            Connection conn = DriverManager.getConnection(URL, USER, PASSWD);
+            if (conn.isClosed()) {
+                conn = DriverManager.getConnection(URL, USER, PASSWD);
+            }
             Statement stmt = conn.createStatement();
             CachedRowSet rs = new CachedRowSetImpl();
             ResultSet s = stmt.executeQuery(sqlQuery);
             rs.populate(s);
             s.close();
             stmt.close();
-            conn.close();
             return rs;
 
         } catch (SQLException e) {
@@ -226,10 +228,12 @@ public class DBAdmin {
 
     public static void execute(String sqlExecute) {
         try {
-            if (stmt.isClosed()) {
-                stmt = DBAdmin.conn.createStatement();
+            if (conn.isClosed()) {
+                conn = DriverManager.getConnection(URL, USER, PASSWD);
             }
+            Statement stmt = conn.createStatement();
             stmt.executeUpdate(sqlExecute);
+            stmt.close();
         } catch (SQLException e) {
             e.printStackTrace();
             System.err.println(sqlExecute);

@@ -11,8 +11,8 @@ import java.util.ArrayList;
 public class RecordsResult {
     private int exist = 0;
     private ArrayList<WikiEntry>  list;
-    public RecordsResult(){
-
+    public RecordsResult(int exist){
+        this.exist = exist;
     }
 
     public RecordsResult(int exist,ArrayList<WikiEntry>  list){

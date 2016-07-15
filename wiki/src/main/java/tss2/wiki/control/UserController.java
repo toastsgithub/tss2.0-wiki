@@ -37,11 +37,6 @@ public class UserController {
         return lresult;
     }
 
-    @RequestMapping(value = "/login.do", method = RequestMethod.GET)
-    public String login() {
-        return "/html/Home.html";
-    }
-
     @RequestMapping(value = "/info", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
     public @ResponseBody UserResult getUserInfo(HttpServletRequest request) {
         SessionService ss = new SessionServiceimpl();
