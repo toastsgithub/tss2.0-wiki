@@ -2,8 +2,7 @@ package tss2.wiki.model;
 
 import tss2.wiki.control.impl.SessionServiceimpl;
 import tss2.wiki.control.service.SessionService;
-import tss2.wiki.dao.DAOBase;
-import tss2.wiki.dao.Message;
+import tss2.wiki.dao.core.DAOBase;
 import tss2.wiki.dao.User;
 
 import java.util.ArrayList;
@@ -34,23 +33,8 @@ public class WikiUser {
     }
 
     public ArrayList<WikiMessage> loadMessages() {
-        messageList = new ArrayList<>();
-        int unreadMessage = 0;
-        DAOBase[] messages = Message.query().where("");
-        for (DAOBase message: messages) {
-            WikiMessage wikiMessage = new WikiMessage((Message) message);
-            for (String toUser: wikiMessage.getToUserList()) {
-                if (toUser.equals(getUsername()) &&
-                        getType() == 1 && toUser.equals("#1") &&
-                        getType() == 0 && toUser.equals("#0")) {
-                    messageList.add(wikiMessage);
-                    if (wikiMessage.getRead() == 0) {
-                        ++unreadMessage;
-                    }
-                }
-            }
-        }
-        return messageList;
+        // TODO
+        return null;
     }
 
     public String getUsername() {

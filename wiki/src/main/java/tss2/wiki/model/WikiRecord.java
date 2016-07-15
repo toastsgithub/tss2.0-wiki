@@ -1,6 +1,6 @@
 package tss2.wiki.model;
 
-import tss2.wiki.dao.DAOBase;
+import tss2.wiki.dao.core.DAOBase;
 import tss2.wiki.dao.UpdateHistory;
 import tss2.wiki.dao.WikiEntry;
 import tss2.wiki.domain.RecordsResult;

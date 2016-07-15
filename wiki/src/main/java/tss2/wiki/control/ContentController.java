@@ -7,7 +7,6 @@ import tss2.wiki.control.service.SessionService;
 import tss2.wiki.domain.*;
 import tss2.wiki.control.service.ContentService;
 import tss2.wiki.control.impl.ContentServiceImpl;
-import tss2.wiki.model.WikiOutline;
 import tss2.wiki.model.WikiRecord;
 import tss2.wiki.model.WikiSession;
 import tss2.wiki.model.WikiUser;
@@ -44,13 +43,16 @@ public class ContentController {
      * @return
      */
     @RequestMapping(value = "", method = RequestMethod.POST, produces="application/json;charset=UTF-8")
-    public @ResponseBody ResultMessage addEntry(HttpServletRequest request, @RequestBody Map map) {
+    public @ResponseBody
+    CommonResult addEntry(HttpServletRequest request, @RequestBody Map map) {
         String operation = map.get("operation").toString();
         // TODO session control
         ContentService cs = new ContentServiceImpl();
         SessionService ss = new SessionServiceimpl();
         WikiSession session = ss.checkUser(request);
-        if (session == null) return new ResultMessage(1, "Authentication Failed");
+        if (session == null) return new CommonResult(1, "Authentication Failed");
+        WikiUser user = session.getUser();
+        if (user.getType() < WikiUser.USER_ADMIN) return new CommonResult(1, "Poor Privilege");
         return cs.process(new WikiEntryVO(session, map));
     }
 
@@ -61,7 +63,8 @@ public class ContentController {
      * @return
      */
     @RequestMapping(value = "", method = RequestMethod.PUT, produces="application/json;charset=UTF-8")
-    public @ResponseBody ResultMessage putEntry(HttpServletRequest request, @RequestBody Map map) {
+    public @ResponseBody
+    CommonResult putEntry(HttpServletRequest request, @RequestBody Map map) {
         return addEntry(request, map);
     }
 
@@ -130,18 +133,19 @@ public class ContentController {
      * @return
      */
     @RequestMapping(value = "", method = RequestMethod.DELETE)
-    public @ResponseBody ResultMessage deleteEntry(HttpServletRequest request, @RequestParam(value = "title") String title) {
+    public @ResponseBody
+    CommonResult deleteEntry(HttpServletRequest request, @RequestParam(value = "title") String title) {
         SessionService ss = new SessionServiceimpl();
         WikiSession session = ss.checkUser(request);
         if (session == null) {
-            return new ResultMessage(1, "Authentication Failed");
+            return new CommonResult(1, "Authentication Failed");
         }
         WikiUser user = session.getUser();
         if (user.getType() != WikiUser.USER_ADMIN) {
-            return new ResultMessage(1, "Authentication Failed");
+            return new CommonResult(1, "Authentication Failed");
         }
         WikiRecord wikiRecord = new WikiRecord(title);
         wikiRecord.delete();
-        return new ResultMessage(0);
+        return new CommonResult(0);
     }
 }

@@ -35,6 +35,7 @@ public class DBAdmin {
             Tag.class,
             Session.class,
             Message.class,
+            User2Message.class
     };
 
     static {
@@ -91,13 +92,13 @@ public class DBAdmin {
         }
 
         try {
-            stmt.execute("create table if not EXISTS " + name + " (" + strFields + ", PRIMARY KEY (id)) DEFAULT CHARSET=gbk;");
+            stmt.execute("create table if not EXISTS " + name + " (" + strFields + ", PRIMARY KEY (id));");
             stmt.execute("alter table " + name + " modify id int(11) auto_increment;");
             stmt.execute("alter table " + name + " modify id int(11) default 1;");
             stmt.execute("alter table " + name + " modify id int(11) auto_increment;");
         } catch (SQLException e) {
             e.printStackTrace();
-            System.err.println("Failed");
+            System.err.println("create table if not EXISTS " + name + " (" + strFields + ", PRIMARY KEY (id));");
             return;
         }
         System.out.println("+ " + name);

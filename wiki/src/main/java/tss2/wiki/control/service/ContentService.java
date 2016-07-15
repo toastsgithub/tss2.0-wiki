@@ -1,6 +1,6 @@
 package tss2.wiki.control.service;
 
-import tss2.wiki.domain.ResultMessage;
+import tss2.wiki.domain.CommonResult;
 import tss2.wiki.vo.WikiEntryVO;
 
 import java.util.ArrayList;
@@ -11,5 +11,5 @@ import java.util.ArrayList;
 public interface ContentService {
     ArrayList<String> getTags();
 
-    ResultMessage process(WikiEntryVO wikiEntry);
+    CommonResult process(WikiEntryVO wikiEntry);
 }
