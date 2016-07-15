@@ -58,6 +58,7 @@ function addClause() {
         contentType: 'application/json;charset=utf-8',
         data: JSON.stringify(data),
         success: function (data) {
+            alert(JSON.stringify(data));
             remove_disable('submit_btn');
             alert("create successfully!");
         },

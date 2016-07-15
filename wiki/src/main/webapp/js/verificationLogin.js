@@ -20,7 +20,6 @@ function verif(){
         type:"get",
         data:{username:username,password:password},
         success:function (data) {
-            // alert(JSON.stringify(data));
             if(data==""){
                 // alert("user not exits");
                 show_not_exist_tip();
