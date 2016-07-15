@@ -24,7 +24,7 @@ public class FileUtil {
             }
         } catch (FileNotFoundException e) {
             //e.printStackTrace();
-            System.err.println("系统找不到指定的文件");
+            System.err.println("系统找不到指定的文件："+path);
             return null;
         } finally {
             if (scanner != null) {
