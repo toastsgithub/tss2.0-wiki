@@ -18,6 +18,9 @@
     <script src="../js/createClause.js"></script>
     <script src="../js/jquery.autocomplete.js"></script>
     <script src="../js/wiki_utils.js"></script>
+    <script>
+        var type = false;
+    </script>
 </head>
 <body>
 <!--<link rel="stylesheet" href="editormd.min.css" />-->
@@ -229,7 +232,9 @@
 
         var tag_pool = document.getElementById('tags_pool');
         var new_tag = document.createElement("span");
-        var cancel_btn = document.createElement("span");
+        var cancel_btn = document.createElement("label");
+
+        cancel_btn
         cancel_btn.innerHTML = "×";
         cancel_btn.style.backgroundColor = "red";
 
@@ -249,10 +254,13 @@
         if(this.value!=""){
             if($.inArray(this.value, type)==-1){
                 document.getElementById('typeTip').innerHTML = "该类别不存在!";
+                type = false;
             }else{
+                type = true;
                 document.getElementById('typeTip').innerHTML = "";
             }
         }else{
+            type = false;
             document.getElementById('typeTip').innerHTML = "";
         }
     }
