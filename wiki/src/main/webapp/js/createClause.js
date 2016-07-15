@@ -34,8 +34,6 @@ function addClause() {
     var title = document.getElementById("name_input").value;
     var summary = document.getElementById("summary").value;
     var tags = getTags();
-    alert(tags);
-    return ;
     var catagories = document.getElementById("category_input").value;
     var username = get_user();
     alert("current user-->"+username);
@@ -56,14 +54,13 @@ function addClause() {
             content: content
         }
     };
-    
     $.ajax({
         type: "post",
         url: "/content",
         contentType: 'application/json;charset=utf-8',
         data: JSON.stringify(data),
         success: function (data) {
-            alert(JSON.stringify(data));
+            // alert(JSON.stringify(data));
             remove_disable('submit_btn');
             if(data.error==0){
                 alert("create successfully!");

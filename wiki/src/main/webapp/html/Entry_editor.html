@@ -225,13 +225,18 @@
         var new_tag = document.createElement("span");
         var cancel_btn = document.createElement("label");
 
-        cancel_btn
+//        cancel_btn
         cancel_btn.innerHTML = "×";
-        cancel_btn.style.color = "red";
+        cancel_btn.style.marginLeft = '3px';
+        cancel_btn.style.color = "white";
+        cancel_btn.style.cursor = 'pointer';
 
         new_tag.innerHTML = tag;
+        new_tag.style.borderRadius = '3px';
         new_tag.appendChild(cancel_btn);
         new_tag.id = tag;
+        new_tag.style.backgroundColor = "#3B81C7";
+        new_tag.style.padding = '5px';
         new_tag.style.marginRight = "20px";
 
 
