@@ -240,8 +240,12 @@
     //验证类别是否存在alert("werty");
 
     document.getElementById('category_input').onblur=function () {
-        if(this.value!=null&&($.inArray(this.value, type)==-1)){
-            document.getElementById('typeTip').innerHTML = "该类别不存在!";
+        if(this.value!=null){
+            if($.inArray(this.value, type)==-1){
+                document.getElementById('typeTip').innerHTML = "该类别不存在!";
+            }else{
+                document.getElementById('typeTip').innerHTML = "";
+            }
         }
     }
 </script>
