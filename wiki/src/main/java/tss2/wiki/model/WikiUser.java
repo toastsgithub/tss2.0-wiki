@@ -13,6 +13,9 @@ import java.util.ArrayList;
  */
 public class WikiUser {
 
+    public static final int USER_ADMIN = 1;
+    public static final int USER_STANDARD = 0;
+
     private WikiUser() {
         messageList = new ArrayList<>();
     }

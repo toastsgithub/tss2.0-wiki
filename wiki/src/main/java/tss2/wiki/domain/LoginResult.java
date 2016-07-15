@@ -13,10 +13,6 @@ public class LoginResult {
         return included;
     }
 
-    public User getUser() {
-        return user;
-    }
-
     public void setIncluded(boolean included) {
         this.included = included;
     }

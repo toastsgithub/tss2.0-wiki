@@ -41,7 +41,7 @@ public class FileUtil {
     }
 
     public static String loadStringFromFile(String path) {
-        String classpath = FileUtil.class.getClassLoader().getResource(path).toString();
+        String classpath = FileUtil.class.getClassLoader().getResource("").toString().replace("[%][2][0]", " ") + path;
         return loadStringFromAbsolutePath(classpath);
     }
 
@@ -71,7 +71,7 @@ public class FileUtil {
     }
 
     public static void writeStringToFile(String path, String content) {
-        String classpath = FileUtil.class.getResource(path).toString();
+        String classpath = FileUtil.class.getClassLoader().getResource("").toString().replace("[%][2][0]", " ") + path;
         writeStringToAbsolutePath(classpath, content);
     }
 
