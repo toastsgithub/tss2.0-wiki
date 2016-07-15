@@ -52,30 +52,61 @@ public class WikiRecord {
         DAOBase[] tags = WikiEntry.query().where("tags like '%"+search+"%'");
         DAOBase[] categories = WikiEntry.query().where("categories like '%"+search+"%'");
         DAOBase[] summery = WikiEntry.query().where("summery like '%"+search+"%'");
+        DAOBase[] all = WikiEntry.query().where("");
+
+        ArrayList<WikiEntry> alllist = new ArrayList<>();
+        for(int i = 0; i < all.length;i++){
+            alllist.add((WikiEntry)all[i]);
+        }
+
         ArrayList<WikiEntry> result = new ArrayList<>();
         for(int i = 0;i<title.length;i++){
             result.add((WikiEntry)title[i]);
         }
         for(int i = 0;i<tags.length;i++){
-            if(result.contains((WikiEntry)tags[i])){
+            if(contain(result,(WikiEntry)tags[i])){
             }else{
                 result.add((WikiEntry)tags[i]);
             }
         }
         for(int i = 0;i<categories.length;i++){
-            if(result.contains((WikiEntry)categories[i])){
+            if(contain(result,(WikiEntry)categories[i])){
             }else{
                 result.add((WikiEntry)categories[i]);
             }
         }
         for(int i = 0;i<summery.length;i++){
-            if(result.contains((WikiEntry)summery[i])){
+            if(contain(result,(WikiEntry)summery[i])){
             }else{
                 result.add((WikiEntry)summery[i]);
             }
         }
+
+        for(int i = 0; i < alllist.size();i++){
+            if(search(alllist.get(i),search)){
+                if(contain(result,alllist.get(i))){
+                    System.out.println("----");
+                }else{
+                    result.add(alllist.get(i));
+                }
+            }
+        }
         result = qsort(result);
         return new RecordsResult(1,result);
+    }
+
+    private  static boolean contain(ArrayList<WikiEntry> wikiEntryArrayList,WikiEntry wikiEntry){
+        for(int i = 0;i<wikiEntryArrayList.size();i++){
+            if(wikiEntryArrayList.get(i).title.equals(wikiEntry.title)){
+                return true;
+            }
+        }
+        return false;
+    }
+    private static boolean search(WikiEntry wikiEntry,String search){
+        WikiRecord wikiRecord = new WikiRecord(wikiEntry.title);
+        String content = wikiRecord.getContent();
+        return content.contains(search);
     }
 
     private static ArrayList<WikiEntry>  qsort(ArrayList<WikiEntry> wikiEntryArrayList){
@@ -217,4 +248,21 @@ public class WikiRecord {
 
     private WikiEntry dao;
     private String title;
+
+    public static void main(String args[]){
+        ArrayList<String> str = new ArrayList<>();
+        str.add("111");
+        str.add("222");
+        str.add("333");
+        str.add("444");
+        str.add("555");
+        String t = "666";
+        str.add(t);
+        String s = "666";
+        if(str.contains(s)){
+            System.out.println("true");
+        }else{
+            System.out.println("false");
+        }
+    }
 }
