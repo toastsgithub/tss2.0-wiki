@@ -7,11 +7,12 @@
  * @params title
  */
 function load_content(title){
-    // alert("we are going  to load:"+title);
+    var url = '/content/wiki/'+title;
+    // alert('url'+url);
     $.ajax({
-        url:'/content',
+        url:url,
         type:'get',
-        data:{title:title},
+        // data:{title:title},
         success:function (data) {
             // alert(JSON.stringify(data));
             var markdown_data = data.data.content;
@@ -43,7 +44,7 @@ function load_content(title){
             
         },
         error:function (data) {
-            alert("error");
+            alert("error"+JSON.stringify(data));
         }
     });
 }

@@ -63,7 +63,12 @@ function addClause() {
         success: function (data) {
             alert(JSON.stringify(data));
             remove_disable('submit_btn');
-            alert("create successfully!");
+            if(data.error==0){
+                alert("create successfully!");
+                window.location = '../html/Outline.html';
+            }else{
+                alert("尚未登录或网络不畅通");
+            }
         },
         error: function (data) {
             remove_disable('submit_btn');
