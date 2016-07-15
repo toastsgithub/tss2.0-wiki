@@ -19,7 +19,7 @@
     <script src="../js/jquery.autocomplete.js"></script>
     <script src="../js/wiki_utils.js"></script>
     <script>
-        var type = false;
+        var judge_type = false;
     </script>
 </head>
 <body>
@@ -154,28 +154,6 @@
     ];
 
     var type = [
-        "ActionScript",
-        "AppleScript",
-        "Asp",
-        "BASIC",
-        "C",
-        "C++",
-        "Clojure",
-        "COBOL",
-        "ColdFusion",
-        "Erlang",
-        "Fortran",
-        "Groovy",
-        "Haskell",
-        "Java",
-        "JavaScript",
-        "Lisp",
-        "Perl",
-        "PHP",
-        "Python",
-        "Ruby",
-        "Scala",
-        "Scheme"
     ];
     $(document).ready(function () {
 
@@ -253,14 +231,14 @@
     document.getElementById('category_input').onblur=function () {
         if(this.value!=""){
             if($.inArray(this.value, type)==-1){
-                document.getElementById('typeTip').innerHTML = "该类别不存在!";
-                type = false;
+                document.getElementById('typeTip').innerHTML = "该类别不存在!"+this.value;
+                judge_type = false;
             }else{
-                type = true;
+                judge_type = true;
                 document.getElementById('typeTip').innerHTML = "";
             }
         }else{
-            type = false;
+            judge_type = false;
             document.getElementById('typeTip').innerHTML = "";
         }
     }

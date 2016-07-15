@@ -17,7 +17,7 @@ function addClause() {
         document.getElementById("tagTip").innerHTML = "请选择标签";
         submit = false;
     }
-    if (type == false){
+    if (judge_type == false){
         submit = false;
     }
     if (submit == false) {
