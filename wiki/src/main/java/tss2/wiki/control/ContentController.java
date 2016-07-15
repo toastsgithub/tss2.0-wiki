@@ -54,6 +54,12 @@ public class ContentController {
         return cs.process(new WikiEntryVO(session, map));
     }
 
+    /**
+     *增加条目
+     * @param request
+     * @param map
+     * @return
+     */
     @RequestMapping(value = "", method = RequestMethod.PUT, produces="application/json;charset=UTF-8")
     public @ResponseBody ResultMessage putEntry(HttpServletRequest request, @RequestBody Map map) {
         return addEntry(request, map);
@@ -73,6 +79,11 @@ public class ContentController {
         return result;
     }
 
+    /**
+     * 根据标签categories获取该标签下所有条目的title
+     * @param categories
+     * @return  title的ArrayList
+     */
     @RequestMapping(value = "/searchByCategories", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
     public @ResponseBody OutLineTitleResult searchByCategories(@RequestParam(value = "categories") String categories) {
         ArrayList<String> stringArrayList = getContentByCategories(categories);
@@ -83,6 +94,11 @@ public class ContentController {
     }
 
 
+    /**
+     * 关键字搜索
+     * @param search
+     * @return 获取不带条目具体内容的条目列表
+     */
     @RequestMapping(value = "/fuzzysearch", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
     public @ResponseBody
     RecordsResult fuzzySearch(@RequestParam(value = "search") String search) {
@@ -93,6 +109,11 @@ public class ContentController {
         return recordsResult;
     }
 
+    /**
+     * 根据title获取带条目具体内容的单个条目
+     * @param title
+     * @return
+     */
     @RequestMapping(value = "/wiki/{title}", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
     public @ResponseBody WikiResult doGet(@PathVariable String title) {
         WikiRecord wikiRecord = new WikiRecord(title);
@@ -102,6 +123,12 @@ public class ContentController {
         return new WikiResult(1, wikiRecord);
     }
 
+    /**
+     * 根据title删除条目
+     * @param request
+     * @param title
+     * @return
+     */
     @RequestMapping(value = "", method = RequestMethod.DELETE)
     public @ResponseBody ResultMessage deleteEntry(HttpServletRequest request, @RequestParam(value = "title") String title) {
         SessionService ss = new SessionServiceimpl();
