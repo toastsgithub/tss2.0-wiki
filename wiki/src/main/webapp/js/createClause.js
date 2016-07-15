@@ -54,7 +54,7 @@ function addClause() {
     
     $.ajax({
         type: "post",
-        url: "/content/add",
+        url: "/content",
         contentType: 'application/json;charset=utf-8',
         data: JSON.stringify(data),
         success: function (data) {
