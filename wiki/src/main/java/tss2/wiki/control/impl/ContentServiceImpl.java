@@ -1,11 +1,10 @@
 package tss2.wiki.control.impl;
 
-import tss2.wiki.dao.DAOBase;
+import tss2.wiki.dao.core.DAOBase;
 import tss2.wiki.dao.Tag;
-import tss2.wiki.domain.ResultMessage;
+import tss2.wiki.domain.CommonResult;
 import tss2.wiki.control.service.ContentService;
 import tss2.wiki.model.WikiRecord;
-import tss2.wiki.model.WikiSession;
 import tss2.wiki.model.WikiUser;
 import tss2.wiki.vo.WikiEntryVO;
 
@@ -28,7 +27,7 @@ public class ContentServiceImpl implements ContentService {
     }
 
     @Override
-    public ResultMessage process(WikiEntryVO wikiEntry) {
+    public CommonResult process(WikiEntryVO wikiEntry) {
         Map map = wikiEntry.getData();
         String operation = map.get("operation").toString();
         switch (operation) {
@@ -38,16 +37,20 @@ public class ContentServiceImpl implements ContentService {
         return null;
     }
 
-    private ResultMessage add(WikiEntryVO data) {
+    private CommonResult add(WikiEntryVO data) {
         Map map = (Map) data.getData().get("data");
         String title = map.get("title").toString();
         WikiRecord entry = new WikiRecord(title);
         String summary = map.get("summary").toString();
         String[] categories = map.get("categories").toString().split("[/]");
-        String[] tags = map.get("tags").toString().split("[/]");
+        ArrayList arrTags = (ArrayList) map.get("tags");
+        String[] tags = new String[arrTags.size()];
+        for (int i = 0; i < tags.length; i++) {
+            tags[i] = arrTags.get(i).toString();
+        }
         String content = map.get("content").toString();
         WikiUser user = new SessionServiceimpl().getUserBySession(data.getSessionID());
         entry.setContent(user.getUsername(), categories, tags, summary, content, true);
-        return new ResultMessage(0);
+        return new CommonResult(0);
     }
 }

@@ -50,14 +50,7 @@ public class UserController {
 
     @RequestMapping(value = "/message", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
     public @ResponseBody MessageResult getUserMessage(HttpServletRequest request) {
-        SessionService ss = new SessionServiceimpl();
-        WikiSession session = ss.checkUser(request);
-        if (session == null) {
-            return new MessageResult(1, "Authentication Failed");
-        }
-        WikiUser user = new WikiUser(session.getUserID());
-        MessageResult result = new MessageResult();
-        result.getData().addAllMessage(user.loadMessages());
-        return result;
+        // TODO
+        return null;
     }
 }

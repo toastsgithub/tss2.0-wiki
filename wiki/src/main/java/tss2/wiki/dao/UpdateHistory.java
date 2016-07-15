@@ -1,5 +1,6 @@
 package tss2.wiki.dao;
 
+import tss2.wiki.dao.core.DAOBase;
 import tss2.wiki.util.TimeUtil;
 
 /**
