@@ -20,19 +20,15 @@ function verif(){
         type:"get",
         data:{username:username,password:password},
         success:function (data) {
-            // alert(data);
+            // alert(JSON.stringify(data));
             if(data==""){
                 // alert("user not exits");
                 show_not_exist_tip();
             } else if (data.included==false){
                // alert("username or password is incorrect");
                 show_illegal_tip();
-           } else if (data.user.type==0){
-                // alert("welcome, user!");
+           } else {
                 location.href = "../html/Outline.html";
-            }else if(data.user.type == 1){
-                location.href = "../html/Outline.html";
-                // alert("welcome, admin!");
             }
             // document.getElementById('login_btn').removeAttribute('disabled');
             remove_disable('login_btn');
