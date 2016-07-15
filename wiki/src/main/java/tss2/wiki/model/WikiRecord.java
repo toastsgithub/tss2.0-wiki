@@ -106,6 +106,9 @@ public class WikiRecord {
     private static boolean search(WikiEntry wikiEntry,String search){
         WikiRecord wikiRecord = new WikiRecord(wikiEntry.title);
         String content = wikiRecord.getContent();
+        if(content==null){
+            return false;
+        }
         return content.contains(search);
     }
 
