@@ -28,7 +28,7 @@ public class OutLineController {
     }
 
     @RequestMapping(value = "", method = RequestMethod.PUT, produces="application/json;charset=UTF-8")
-    public @ResponseBody void setSummary(@RequestBody Map map) {
+    public @ResponseBody void updateSummary(@RequestBody Map map) {
         System.out.println(map);
         //DAOBase[] content = Summary.query().where("");
         //content[0].setValue("summaryJO",map.toString());
@@ -36,6 +36,12 @@ public class OutLineController {
         WikiOutline wikiOutline = new WikiOutline();
         wikiOutline.setMap(map);
     }
+
+    @RequestMapping(value = "", method = RequestMethod.POST, produces="application/json;charset=UTF-8")
+    public @ResponseBody void setSummary(@RequestBody Map map) {
+        updateSummary(map);
+    }
+
 
 
     @RequestMapping(value = "/list", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
