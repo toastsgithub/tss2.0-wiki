@@ -20,9 +20,10 @@ import java.util.Map;
 @Controller
 @RequestMapping(value = "/outline")
 public class OutLineController {
+
     /**
-     *
-     * @return 表示大纲的map
+     *获取大纲列表
+     * @return
      */
     @RequestMapping(value = "", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
     public @ResponseBody Map getOutline() {
@@ -31,6 +32,10 @@ public class OutLineController {
         return wikiOutline.getSummary();
     }
 
+    /**
+     * 更改条目
+     * @param map
+     */
     @RequestMapping(value = "", method = RequestMethod.PUT, produces="application/json;charset=UTF-8")
     public @ResponseBody
     CommonResult updateSummary(HttpServletRequest request, @RequestBody Map map) {
@@ -48,6 +53,10 @@ public class OutLineController {
         return new CommonResult(0);
     }
 
+    /**
+     * 更改条目
+     * @param map
+     */
     @RequestMapping(value = "", method = RequestMethod.POST, produces="application/json;charset=UTF-8")
     public @ResponseBody
     CommonResult setSummary(HttpServletRequest request, @RequestBody Map map) {
@@ -55,7 +64,10 @@ public class OutLineController {
     }
 
 
-
+    /**
+     * 获取大纲中的所有节点
+     * @return
+     */
     @RequestMapping(value = "/list", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
     public @ResponseBody
     OutLineResult getOutlineList() {
