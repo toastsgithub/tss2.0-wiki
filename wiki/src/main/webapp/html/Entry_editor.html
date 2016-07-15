@@ -45,6 +45,9 @@
         <input id="category_input" class="minf_input"/>
         <span id="typeTip" class="tip"></span>
     </div>
+
+    <div id="type_pool" class="row minf"></div>
+
     <div class="row minf">
         <label class="namlab">标签：</label>
         <input id="tags_input" class="minf_input" data-role="tagsinput"/>
@@ -140,6 +143,31 @@
         {value:'England'},
         { value: 'Zimbabwe', data: 'ZZ' }
     ];
+
+    var type = [
+        "ActionScript",
+        "AppleScript",
+        "Asp",
+        "BASIC",
+        "C",
+        "C++",
+        "Clojure",
+        "COBOL",
+        "ColdFusion",
+        "Erlang",
+        "Fortran",
+        "Groovy",
+        "Haskell",
+        "Java",
+        "JavaScript",
+        "Lisp",
+        "Perl",
+        "PHP",
+        "Python",
+        "Ruby",
+        "Scala",
+        "Scheme"
+    ];
     $(document).ready(function () {
 
         document.getElementById('wiki_editor').innerHTML ='#Title\n\nContent';
@@ -147,7 +175,22 @@
             lookup: countries
 //            serviceUrl: '/content/tags'
         });
-//        alert("done");
+
+
+
+
+          //TODO get all the type
+        $.get('/outline/list',null,function(data){
+            sourceData = data.data;
+            for(var i=0;i<sourceData.length;i++){
+                type.push(sourceData[i]);
+            }
+            $('#category_input').autocomplete({
+                lookup: type
+            });
+
+        });
+
         $.ajax({
             type: 'get',
             url:'/content/tags',
@@ -162,8 +205,12 @@
                 alert("网络连接不畅通");
             }
         });
+
+
     });
 </script>
+
+
 <script>
     $("#tags_input").keydown(function (e) {
         if(e.keyCode==13){
@@ -186,6 +233,16 @@
         tag_pool.appendChild(new_tag);
 //        alert("append done");
         document.getElementById('tags_input').value = "";
+    }
+</script>
+
+<script>
+    //验证类别是否存在alert("werty");
+
+    document.getElementById('category_input').onblur=function () {
+        if(this.value!=null&&($.inArray(this.value, type)==-1)){
+            document.getElementById('typeTip').innerHTML = "该类别不存在!";
+        }
     }
 </script>
 </body>
