@@ -74,7 +74,24 @@ public class WikiRecord {
                 result.add((WikiEntry)summery[i]);
             }
         }
+        result = qsort(result);
         return new RecordsResult(1,result);
+    }
+
+    private static ArrayList<WikiEntry>  qsort(ArrayList<WikiEntry> wikiEntryArrayList){
+        int l = wikiEntryArrayList.size();
+        for(int i = 0; i<l; i++){
+            for(int j = 0; j<l-i-1; j++){
+                if(Integer.parseInt(wikiEntryArrayList.get(j).get("visits").toString())<(Integer.parseInt(wikiEntryArrayList.get(j+1).get("visits").toString()))){
+                    WikiEntry wikiEntry= wikiEntryArrayList.get(j+1);
+                    wikiEntryArrayList.remove(j+1);
+                    wikiEntryArrayList.add(j+1,wikiEntryArrayList.get(j));
+                    wikiEntryArrayList.remove(j);
+                    wikiEntryArrayList.add(j,wikiEntry);
+                }
+            }
+        }
+        return wikiEntryArrayList;
     }
 
     public WikiRecord(String title, int mainversion, int subversion) {
