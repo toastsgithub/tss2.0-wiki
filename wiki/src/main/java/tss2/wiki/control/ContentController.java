@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import static tss2.wiki.model.WikiRecord.getContentByCategories;
+import static tss2.wiki.model.WikiRecord.recordFuzzySearch;
 
 /**
  * Created by 羊驼 on 2016/7/8.
@@ -82,11 +83,14 @@ public class ContentController {
     }
 
 
-    @RequestMapping(value = "/fuzzySsearch", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
+    @RequestMapping(value = "/fuzzysearch", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
     public @ResponseBody
-    RecordsResult fuzzySearch() {
-
-        return null;
+    RecordsResult fuzzySearch(@RequestParam(value = "search") String search) {
+        RecordsResult recordsResult = recordFuzzySearch(search);
+        if(recordsResult.getList().size()==0){
+            return new RecordsResult(0);
+        }
+        return recordsResult;
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
