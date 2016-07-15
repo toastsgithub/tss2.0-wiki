@@ -20,15 +20,23 @@
 
 </head>
 <body>
-<nav class="navbar navbar-default" style="background-color: #ffffff; margin: 0;">
+<nav class="navbar navbar-default" style="background-color: #ffffff">
     <div class="container-fluid">
-        <a class="navbar-header" href="" style="margin-top: 10px;">
-            <img src="../resource/icon/tss_logo@2x.png" alt="" style="height: 32px">
+        <a class="navbar-header" href="http://localhost:8080" style="margin-top: 10px;">
+            <img  src="../resource/icon/tss_logo@2x.png" alt="" style="height: 32px">
         </a>
-        <div class="navbar-header navbar-right" style=";margin-top: 10px;">
-            <div id="about_btn" class="" style="" onclick="location='../html/about.html'">About</div>
-            <div id="help_btn" class="" style="" onclick="location='../html/help.html'">Help</div>
-        </div>
+        <ul class="nav navbar-nav">
+            <li><a href="/html/login.html">登录</a></li>
+            <li class="dropdown">
+                <ul class="dropdown-menu">
+                    <li><a href="../html/Outline.html" onclick="">管理大纲(管理员)</a></li>
+                    <li><a href="../html/Entry_editor.html">增加条目(管理员)</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">请求增加条目(敬请期待)</a></li>
+                </ul>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">选项<span class="caret"></span></a>
+            </li>
+        </ul>
     </div>
 </nav>
 <div class="row" style="">
