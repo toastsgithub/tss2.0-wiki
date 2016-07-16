@@ -12,7 +12,7 @@ public class Message extends DAOBase {
     public String toUser;           // 多用户，用户名之间用/隔开。其中#1或#0表示广播到管理员(1)或普通用户(0)
     public String title;            // 消息标题
     public String detail;           // 消息正文
-    public int sent = 0;                // 是否已经被发送
+    public int sent = 0;            // 是否已经被发送
 
     public static Message query() {
         return new Message();

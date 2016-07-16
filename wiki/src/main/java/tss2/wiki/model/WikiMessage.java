@@ -47,6 +47,7 @@ public class WikiMessage {
             um.save();
         }
         dao.sent = 1;
+        dao.save();
     }
 
     public String[] getToUsers() {
