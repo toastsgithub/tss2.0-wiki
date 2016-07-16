@@ -212,7 +212,7 @@ public abstract class DAOBase {
         return null;
     }
 
-    private String getValueString() {
+    protected String getValueString() {
         String values = "";
         ArrayList<Field> fields = new ArrayList<>();
         Collections.addAll(fields, this.getClass().getFields());

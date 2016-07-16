@@ -3,6 +3,9 @@ package tss2.wiki.model;
 import tss2.wiki.dao.core.DAOBase;
 import tss2.wiki.dao.Message;
 import tss2.wiki.dao.User2Message;
+import tss2.wiki.util.StringUtil;
+
+import java.util.ArrayList;
 
 /**
  * WikiMessage.
@@ -11,10 +14,75 @@ import tss2.wiki.dao.User2Message;
  */
 public class WikiMessage {
 
-    public WikiMessage(String username) {
-        DAOBase[] ms = Message.query().where("toUser like '%" + username + "%'");
+    private WikiMessage() { }
+
+    public static WikiMessage getMessage(String messageID) {
+        DAOBase[] ms = Message.query().where("messageID = '" + messageID + "'");
+        if (ms.length == 0) return null;
+        else {
+            WikiMessage result = new WikiMessage();
+            result.dao = (Message) ms[0];
+            return result;
+        }
     }
 
-    private User2Message[] usermessages;
-    private Message[] messages;
+    public WikiMessage(String fromUser, String toUser, String title, String detail) {
+        dao = new Message();
+        dao.messageID = StringUtil.generateTokener(16);
+        dao.fromUser = fromUser;
+        dao.toUser = toUser;
+        dao.title = title;
+        dao.detail = detail;
+        dao.save();
+    }
+
+    public void send() {
+        if (dao.sent == 1) return;
+        for (String to : dao.toUser.split("[/]")) {
+            User2Message um = new User2Message();
+            um.fromUser = dao.fromUser;
+            um.messageID = dao.messageID;
+            um.toUser = to;
+            um.isread = 0;
+            um.save();
+        }
+        dao.sent = 1;
+    }
+
+    public String[] getToUsers() {
+        return dao.toUser.split("[/]");
+    }
+
+    public String getTitle() {
+        return dao.title;
+    }
+
+    public String getMessageID() {
+        return dao.messageID;
+    }
+
+    public String getFromUser() {
+        return dao.fromUser;
+    }
+
+    public void setTitle(String title) {
+        dao.title = title;
+        dao.save();
+    }
+
+    public void setFromUser(String fromUser) {
+        dao.fromUser = fromUser;
+        dao.save();
+    }
+
+    public void setDetail(String detail) {
+        dao.detail = detail;
+        dao.save();
+    }
+
+    public String getDetail() {
+        return dao.detail;
+    }
+
+    private Message dao;
 }

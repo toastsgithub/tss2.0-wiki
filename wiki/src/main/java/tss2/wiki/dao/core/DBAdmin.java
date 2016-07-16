@@ -240,4 +240,8 @@ public class DBAdmin {
             System.err.println(sqlExecute);
         }
     }
+
+    public static void main(String[] args) {
+
+    }
 }

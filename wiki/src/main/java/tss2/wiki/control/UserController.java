@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import tss2.wiki.domain.MessageResult;
 import tss2.wiki.domain.UserResult;
+import tss2.wiki.model.WikiMessage;
 import tss2.wiki.model.WikiSession;
 import tss2.wiki.model.WikiUser;
 
@@ -52,5 +53,38 @@ public class UserController {
     public @ResponseBody MessageResult getUserMessage(HttpServletRequest request) {
         // TODO
         return null;
+    }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public void logout(HttpServletRequest request) {
+        SessionService ss = new SessionServiceimpl();
+        WikiSession session = ss.checkUser(request);
+        if (session == null) {
+            return;
+        }
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie: cookies) {
+                if (cookie.getName().equals("sessionID")) {
+                    cookie.setMaxAge(0);
+                }
+            }
+        }
+        session.disable();
+    }
+
+    @RequestMapping(value = "/message/{messageID}", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+    public @ResponseBody MessageResult readMessage(HttpServletRequest request, @PathVariable String messageID) {
+        SessionService ss = new SessionServiceimpl();
+        WikiSession session = ss.checkUser(request);
+        if (session == null) {
+            return new MessageResult(1);
+        }
+        WikiUser user = session.getUser();
+        WikiMessage message = user.getMessageDetail(messageID);
+        if (message == null) {
+            return new MessageResult(1);
+        }
+        return new MessageResult(0, message.getFromUser(), message.getTitle(), message.getDetail());
     }
 }
