@@ -43,7 +43,7 @@ public class SessionServiceimpl implements SessionService {
         Cookie[] cookies = request.getCookies();
         String sessionID = "";
         if (cookies == null) {
-            return null;
+            return new WikiSession();
         }
         for (Cookie cookie: cookies) {
             if (cookie.getName().equals("sessionID")) {

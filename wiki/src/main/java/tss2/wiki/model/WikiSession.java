@@ -16,7 +16,9 @@ import java.util.Date;
  */
 public class WikiSession {
 
-    private WikiSession() { }
+    public WikiSession() {
+        valid = false;
+    }
 
     /**
      * Try to get exist session from session table.

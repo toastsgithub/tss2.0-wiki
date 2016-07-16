@@ -1,2 +1,0 @@
-<!-- inclusion of a template that includes another template containing parser functions -->
-{{switchInclude}}

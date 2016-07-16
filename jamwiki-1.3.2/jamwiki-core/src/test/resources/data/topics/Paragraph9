@@ -1,5 +1,0 @@
-<!-- test paragraph parsing with unnecessary paragraph tags -->
-: text
-<p>
-: text
-text
