@@ -128,6 +128,8 @@ public class WikiRecord {
         return wikiEntryArrayList;
     }
 
+
+
     public WikiRecord(String title, int mainversion, int subversion) {
 
     }
@@ -245,6 +247,10 @@ public class WikiRecord {
         dao.save();
     }
 
+    public int getVisits(){
+        return dao.visits;
+    }
+
     public void delete() {
         dao.delete();
     }
@@ -253,19 +259,6 @@ public class WikiRecord {
     private String title;
 
     public static void main(String args[]){
-        ArrayList<String> str = new ArrayList<>();
-        str.add("111");
-        str.add("222");
-        str.add("333");
-        str.add("444");
-        str.add("555");
-        String t = "666";
-        str.add(t);
-        String s = "666";
-        if(str.contains(s)){
-            System.out.println("true");
-        }else{
-            System.out.println("false");
-        }
+
     }
 }
