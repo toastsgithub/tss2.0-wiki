@@ -52,7 +52,7 @@ public class WikiSession {
      */
     public static WikiSession checkSession(String sessionID) {
         DAOBase[] sessions = Session.Query().where("sessionID = '" + sessionID + "'");
-        if (sessions.length == 0) return null;
+        if (sessions.length == 0) return new WikiSession();
         if (sessions.length > 1) {
             for (int i = 0; i < sessions.length - 1; i++) {
                 Session toBeDisabled = (Session) sessions[i + 1];
