@@ -57,7 +57,13 @@
     </div>
 
     <div id="right_part" class="col-xs-10">
+        <div id="article_info">
+            <div id="article_title">title</div>
+            <div id="last_update_time">最后更新日期:2016-07-17</div>
+            <div id="access_times">访问次数:65535</div>
+        </div>
         <div id="test-editormd-view"></div>
+
     </div>
 </div>
 
@@ -66,6 +72,7 @@
     $(document).ready(function () {
         var param = location.href.split("?")[1].split("=")[1];
         var entry_name = decodeURI(param);
+        document.getElementById('article_title').innerHTML = entry_name;
 //        alert(entry_name);
         load_content(entry_name);
 

@@ -16,3 +16,18 @@ div{
     /*border: solid 1px #c5a6a8;*/
     height: 1000px;
 }
+#article_info{
+    min-height: 100px;
+    background-color: #f6f6f6;
+}
+#article_title{
+    font-size: 30px;
+    margin-left: 20px;
+    /*background-color: #01a252;*/
+}
+#last_update_time{
+    margin-left: 20px;
+}
+#access_times{
+    margin-left: 20px;
+}
