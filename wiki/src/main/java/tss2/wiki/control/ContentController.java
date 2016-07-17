@@ -49,7 +49,7 @@ public class ContentController {
     public @ResponseBody
     CommonResult addEntry(HttpServletRequest request, @RequestBody Map map) {
         WikiSession session = sessionService.checkUser(request);
-        if (session == null) return new CommonResult(1, "Authentication Failed");
+        if (!session.isValid()) return new CommonResult(1, "Authentication Failed");
         WikiUser user = session.getUser();
         if (user.getType() < WikiUser.USER_ADMIN) return new CommonResult(1, "Poor Privilege");
         return contentService.process(new WikiEntryVO(session, map));
@@ -130,11 +130,10 @@ public class ContentController {
      * @param title
      * @return
      */
-    @RequestMapping(value = "/wiki/{title}", method = RequestMethod.DELETE)
-    public @ResponseBody
-    CommonResult deleteEntry(HttpServletRequest request, @PathVariable String title) {
+    @RequestMapping(value = "/wiki/{title}", method = RequestMethod.DELETE, produces="application/json;charset=UTF-8")
+    public @ResponseBody CommonResult deleteEntry(HttpServletRequest request, @PathVariable String title) {
         WikiSession session = sessionService.checkUser(request);
-        if (session == null) {
+        if (!session.isValid()) {
             return new CommonResult(1, "Authentication Failed");
         }
         WikiUser user = session.getUser();
@@ -143,6 +142,7 @@ public class ContentController {
         }
         WikiRecord wikiRecord = new WikiRecord(title);
         if (wikiRecord.getContent() == null) {
+            wikiRecord.delete();
             return new CommonResult(2, "Entry Not Exist");
         }
         wikiRecord.delete();
