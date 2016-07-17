@@ -17,6 +17,7 @@ import java.util.Date;
 public class WikiSession {
 
     public WikiSession() {
+        dao = new Session();
         valid = false;
     }
 

@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService{
         }else{
             resultLogin.setIncluded(false);
         }
-        resultLogin.setUser(temp);
+        resultLogin.setUser(temp.username, temp.type);
         return resultLogin;
     }
 
@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService{
         }else{
             resultLogin.setIncluded(false);
         }
-        resultLogin.setUser(temp);
+        resultLogin.setUser(temp.username, temp.type);
         return resultLogin;
     }
 

@@ -27,8 +27,8 @@ import java.util.Map;
 @RequestMapping("/user")
 public class UserController {
 
-    private UserServiceImpl     userService = new UserServiceImpl();
-    private SessionService      sessionService = new SessionServiceimpl();
+    private UserServiceImpl userService = new UserServiceImpl();
+    private SessionService sessionService = new SessionServiceimpl();
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public @ResponseBody LoginResult login(HttpServletRequest request, HttpServletResponse response) {

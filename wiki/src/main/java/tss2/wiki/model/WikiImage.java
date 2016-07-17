@@ -1,6 +1,8 @@
 package tss2.wiki.model;
 
 /**
+ * TODO: 增加对插入图片的支持.
+ *
  * Created by 羊驼 on 2016/7/11.
  */
 public class WikiImage {

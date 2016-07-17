@@ -26,6 +26,9 @@ import static tss2.wiki.model.WikiRecord.recordFuzzySearch;
 @RequestMapping(value = "/content")
 public class ContentController {
 
+
+    private ContentService contentService = new ContentServiceImpl();
+    private SessionService sessionService = new SessionServiceimpl();
     /**
      * request body:
      * {
@@ -45,15 +48,11 @@ public class ContentController {
     @RequestMapping(value = "", method = RequestMethod.POST, produces="application/json;charset=UTF-8")
     public @ResponseBody
     CommonResult addEntry(HttpServletRequest request, @RequestBody Map map) {
-        String operation = map.get("operation").toString();
-        // TODO session control
-        ContentService cs = new ContentServiceImpl();
-        SessionService ss = new SessionServiceimpl();
-        WikiSession session = ss.checkUser(request);
-        if (session == null) return new CommonResult(1, "Authentication Failed");
+        WikiSession session = sessionService.checkUser(request);
+        if (!session.isValid()) return new CommonResult(1, "Authentication Failed");
         WikiUser user = session.getUser();
         if (user.getType() < WikiUser.USER_ADMIN) return new CommonResult(1, "Poor Privilege");
-        return cs.process(new WikiEntryVO(session, map));
+        return contentService.process(new WikiEntryVO(session, map));
     }
 
     /**
@@ -76,9 +75,8 @@ public class ContentController {
      */
     @RequestMapping(value = "/tags", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
     public @ResponseBody TagResult getTags() {
-        ContentService cs = new ContentServiceImpl();
         TagResult result = new TagResult();
-        result.data = cs.getTags();
+        result.data = contentService.getTags();
         return result;
     }
 
@@ -132,12 +130,10 @@ public class ContentController {
      * @param title
      * @return
      */
-    @RequestMapping(value = "", method = RequestMethod.DELETE)
-    public @ResponseBody
-    CommonResult deleteEntry(HttpServletRequest request, @RequestParam(value = "title") String title) {
-        SessionService ss = new SessionServiceimpl();
-        WikiSession session = ss.checkUser(request);
-        if (session == null) {
+    @RequestMapping(value = "/wiki/{title}", method = RequestMethod.DELETE, produces="application/json;charset=UTF-8")
+    public @ResponseBody CommonResult deleteEntry(HttpServletRequest request, @PathVariable String title) {
+        WikiSession session = sessionService.checkUser(request);
+        if (!session.isValid()) {
             return new CommonResult(1, "Authentication Failed");
         }
         WikiUser user = session.getUser();
@@ -145,6 +141,10 @@ public class ContentController {
             return new CommonResult(1, "Authentication Failed");
         }
         WikiRecord wikiRecord = new WikiRecord(title);
+        if (wikiRecord.getContent() == null) {
+            wikiRecord.delete();
+            return new CommonResult(2, "Entry Not Exist");
+        }
         wikiRecord.delete();
         return new CommonResult(0);
     }
