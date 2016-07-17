@@ -35,3 +35,8 @@ body{
     border-bottom: solid 2px #3B81C7;
     -webkit-transition: border .1s;
 }
+
+.welcome{
+    margin-top: 15px;
+    float: right;
+}

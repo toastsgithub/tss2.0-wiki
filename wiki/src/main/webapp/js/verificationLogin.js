@@ -2,6 +2,8 @@
  * Created by zhengyunzhi on 16/7/8.
  */
 
+
+
 function verif(){
     // var xhr = new XMLHttpRequest();
     // xhr.s
@@ -20,22 +22,19 @@ function verif(){
         type:"get",
         data:{username:username,password:password},
         success:function (data) {
-            // alert(JSON.stringify(data));
             if(data==""){
-                // alert("user not exits");
                 show_not_exist_tip();
             } else if (data.included==false){
-               // alert("username or password is incorrect");
                 show_illegal_tip();
            } else {
+                document.cookie="login="+1;
+                document.cookie="username="+username;
                 location.href = "../html/Outline.html";
             }
-            // document.getElementById('login_btn').removeAttribute('disabled');
             remove_disable('login_btn');
         },
         error:function (data) {
             alert("error!");
-            // document.getElementById('login_btn').removeAttribute('disabled');
             remove_disable('login_btn');
         }
     });
@@ -50,6 +49,7 @@ function show_unfinished_tip() {
     document.getElementById("tooltips").innerHTML = "请输入完整的账户名和密码";
     show_tooltips();
 }
+
 function show_illegal_tip() {
     document.getElementById("tooltips").style.borderColor = "rgb(226,203,207)";
     document.getElementById("tooltips").style.color = "rgb(149,69,66)";
@@ -57,6 +57,7 @@ function show_illegal_tip() {
     document.getElementById("tooltips").innerHTML = "账户名或密码错误";
     show_tooltips();
 }
+
 function show_not_exist_tip() {
     document.getElementById("tooltips").style.borderColor = "rgb(226,203,207)";
     document.getElementById("tooltips").style.color = "rgb(149,69,66)";
@@ -64,9 +65,54 @@ function show_not_exist_tip() {
     document.getElementById("tooltips").innerHTML = "账户不存在";
     show_tooltips();
 }
+
 function show_tooltips() {
     document.getElementById("tooltips").style.visibility = "visible";
     setTimeout(function () {
         document.getElementById("tooltips").style.visibility = "hidden";
     },2000);
+}
+
+
+function get_welcome() {
+
+    var login = false;
+    var user_name;
+    if(getCookie("login")==1){
+        login = true;
+        user_name = getCookie("username");
+    }
+    
+    if(login == false){
+        document.getElementById("login_button").innerHTML="<a href='http://localhost:8080/html/login.html'>登录</a>";
+        document.getElementById("welcome_tip").innerHTML="";
+        return null;
+    }
+    else{
+        var date = new Date();
+        var hours = date.getHours();
+        var welcome;
+        if(4<=hours&&hours<11){
+            welcome = "早上好, " + user_name;
+        }else if(11<=hours&&hours<14){
+            welcome =  "中午好, " + user_name;
+        }else if(14<=hours&&hours<19){
+            welcome =  "下午好, " + user_name;
+        }else if(19<=hours && hours<24){
+            welcome =  "晚上好, " + user_name;
+        }else{
+            welcome =  "已经是深夜了,早点休息, " + user_name;
+        }
+        document.getElementById("login_button").innerHTML="";
+        document.getElementById("welcome_tip").innerHTML=welcome;
+    }
+}
+
+function getCookie(name){
+    var arr = document.cookie.match(new RegExp("(^| )"+name+"=([^;]*)(;|$)"));
+    if(arr != null){
+        return unescape(arr[2]);
+    }else{
+        return null;
+    }
 }
