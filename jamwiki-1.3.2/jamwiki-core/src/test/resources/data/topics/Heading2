@@ -1,6 +1,0 @@
-<!-- test heading tags containing wiki markup -->
-=='''heading'''==
-
-==#if==
-
-== #if ==

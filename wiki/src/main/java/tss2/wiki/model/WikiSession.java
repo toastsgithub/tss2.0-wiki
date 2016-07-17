@@ -1,10 +1,9 @@
 package tss2.wiki.model;
 
 
-import tss2.wiki.dao.DAOBase;
+import tss2.wiki.dao.core.DAOBase;
 import tss2.wiki.dao.Session;
 
-import javax.servlet.http.Cookie;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -17,7 +16,9 @@ import java.util.Date;
  */
 public class WikiSession {
 
-    private WikiSession() { }
+    public WikiSession() {
+        valid = false;
+    }
 
     /**
      * Try to get exist session from session table.

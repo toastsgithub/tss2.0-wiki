@@ -1,7 +1,0 @@
-<!-- make sure table following list parses correctly -->
-* list
-
-{|
-|-
-| Test
-|}

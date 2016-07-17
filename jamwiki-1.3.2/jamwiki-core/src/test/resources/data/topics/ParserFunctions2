@@ -1,6 +1,0 @@
-<!-- test usage and rendering of parser functions -->
-{{filepath: Test Image.jpg}}
-
-{{localurl: {{PAGENAME}}}}
-
-{{fullurl:Sandbox}}

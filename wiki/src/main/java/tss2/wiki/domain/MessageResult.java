@@ -1,75 +1,55 @@
 package tss2.wiki.domain;
 
-import tss2.wiki.model.WikiMessage;
-
-import java.util.ArrayList;
-
 /**
  * Created by coral on 16-7-13.
  */
 public class MessageResult {
-    int error = 0;
 
-    public MessageResult() {}
-
-    public MessageResult(int error, String message)
-    {
+    public MessageResult(int error) {
         setError(error);
-        setMessage(message);
     }
 
-    public void setError(int error) {
-        this.error = error;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public class UserMessage {
-        int unread = 0;
-        ArrayList<WikiMessage> messageList = new ArrayList<>();
-
-        public ArrayList<WikiMessage> getMessageList() {
-            return messageList;
-        }
-
-        public void addMessage(WikiMessage messageList) {
-            this.messageList.add(messageList);
-            if (messageList.getRead() == 0) {
-                addUnread();
-            }
-        }
-
-        public void addUnread() {
-            ++this.unread;
-        }
-
-        public int getUnread() {
-            return unread;
-        }
-
-        public void addAllMessage(ArrayList<WikiMessage> messageList) {
-            messageList.forEach(this::addMessage);
-        }
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setData(UserMessage data) {
-        this.data = data;
+    public MessageResult(int error, String fromUser, String title, String detail) {
+        setError(error);
+        setDetail(detail);
+        setFromUser(fromUser);
+        setTitle(title);
     }
 
     public int getError() {
         return error;
     }
 
-    public UserMessage getData() {
-        return data;
+    public String getDetail() {
+        return detail;
     }
 
-    private UserMessage data = new UserMessage();
-    private String message = "";
+    public void setError(int error) {
+        this.error = error;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
+    }
+
+    public String getFromUser() {
+        return fromUser;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setFromUser(String fromUser) {
+        this.fromUser = fromUser;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    private int error = 0;
+    private String detail = "";
+    private String title = "";
+    private String fromUser = "";
 }

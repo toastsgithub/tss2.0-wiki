@@ -79,11 +79,7 @@
     <textarea id="wiki_editor" style="display:none;background-color: #f7f7f7">### Hello Editor.md !</textarea>
 </div>
 
-<span class="glyphicon glyphicon-compressed"></span>
-<button class="btn btn-primary" onclick=show_html();>show html interface</button>
-<button class="btn btn-primary" onclick=show_markdown();>show markdown interface</button>
 <button id="submit_btn" class="btn btn-primary" onclick="addClause();">submit</button>
-<button class="btn btn-info" onclick="location='entry_content.html'">prototype</button>
 <!--<script src="jquery.min.js"></script>-->
 <script src="../js/editormd.js"></script>
 <script type="text/javascript">
@@ -227,13 +223,18 @@
         var new_tag = document.createElement("span");
         var cancel_btn = document.createElement("label");
 
-        cancel_btn
+//        cancel_btn
         cancel_btn.innerHTML = "×";
-        cancel_btn.style.color = "red";
+        cancel_btn.style.marginLeft = '3px';
+        cancel_btn.style.color = "white";
+        cancel_btn.style.cursor = 'pointer';
 
         new_tag.innerHTML = tag;
+        new_tag.style.borderRadius = '3px';
         new_tag.appendChild(cancel_btn);
         new_tag.id = tag;
+        new_tag.style.backgroundColor = "#3B81C7";
+        new_tag.style.padding = '5px';
         new_tag.style.marginRight = "20px";
 
 

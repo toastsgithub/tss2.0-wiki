@@ -1,8 +1,0 @@
-<!-- verify that basic HTML with no attribute tags will be processed correctly -->
-<u>text</u>
-
-< u >text< / u >
-
-<strike>text</strike>
-
-<hr />

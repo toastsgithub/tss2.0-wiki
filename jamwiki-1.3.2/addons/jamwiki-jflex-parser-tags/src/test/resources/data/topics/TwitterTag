@@ -1,3 +1,0 @@
-<twitter />
-<twitter data-href="http://www.example.com" data-count="vertical" />
-<twitter data-href="{{fullurl:Example}}" data-count="bogus_value" />

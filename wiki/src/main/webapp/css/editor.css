@@ -1,3 +1,7 @@
+body{
+	/*background-color: #01a252;*/
+	min-width: 600px;
+}
 .minf{
 	margin-bottom: 20px;
 	width: 100%;
@@ -33,6 +37,6 @@
 #tags_pool{
     /*height: 100px;*/
     width: 80%;
-    margin-left:30px;
+    margin-left:70px;
     /*background-color: rgb(151,151,151);*/
 }

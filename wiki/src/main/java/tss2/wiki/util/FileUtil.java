@@ -23,7 +23,8 @@ public class FileUtil {
                 content += scanner.nextLine() + "\n";
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
+            System.err.println("系统找不到指定的文件："+path);
             return null;
         } finally {
             if (scanner != null) {

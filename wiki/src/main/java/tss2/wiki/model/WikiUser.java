@@ -2,9 +2,11 @@ package tss2.wiki.model;
 
 import tss2.wiki.control.impl.SessionServiceimpl;
 import tss2.wiki.control.service.SessionService;
-import tss2.wiki.dao.DAOBase;
 import tss2.wiki.dao.Message;
+import tss2.wiki.dao.User2Message;
+import tss2.wiki.dao.core.DAOBase;
 import tss2.wiki.dao.User;
+import tss2.wiki.util.StringUtil;
 
 import java.util.ArrayList;
 
@@ -16,9 +18,7 @@ public class WikiUser {
     public static final int USER_ADMIN = 1;
     public static final int USER_STANDARD = 0;
 
-    private WikiUser() {
-        messageList = new ArrayList<>();
-    }
+    private WikiUser() { }
 
     public WikiUser(String username) {
         DAOBase[] users = User.query().where("username = '" + username + "'");
@@ -34,23 +34,13 @@ public class WikiUser {
     }
 
     public ArrayList<WikiMessage> loadMessages() {
-        messageList = new ArrayList<>();
-        int unreadMessage = 0;
-        DAOBase[] messages = Message.query().where("");
-        for (DAOBase message: messages) {
-            WikiMessage wikiMessage = new WikiMessage((Message) message);
-            for (String toUser: wikiMessage.getToUserList()) {
-                if (toUser.equals(getUsername()) &&
-                        getType() == 1 && toUser.equals("#1") &&
-                        getType() == 0 && toUser.equals("#0")) {
-                    messageList.add(wikiMessage);
-                    if (wikiMessage.getRead() == 0) {
-                        ++unreadMessage;
-                    }
-                }
-            }
+        DAOBase[] ums = User2Message.query().where("toUser = '" + getUsername() + "'");
+        ArrayList<WikiMessage> result = new ArrayList<>();
+        for (DAOBase um: ums) {
+            WikiMessage message = WikiMessage.getMessage(um.get("messageID").toString());
+            if (message != null) result.add(message);
         }
-        return messageList;
+        return result;
     }
 
     public String getUsername() {
@@ -65,6 +55,39 @@ public class WikiUser {
         return dao.type;
     }
 
+    public void sendMessage(String user, String title, String detail) {
+        String[] users = new String[1];
+        users[0] = user;
+        sendMessage(users, title, detail);
+    }
+
+    public void sendMessage(String[] users, String title, String detail) {
+        String toUser = StringUtil.concatArray("/", users);
+        WikiMessage message = new WikiMessage(getUsername(), toUser, title, detail);
+        message.send();
+    }
+
+    public ArrayList<WikiMessage> getMessageList() {
+        DAOBase[] ums = User2Message.query().where("toUser = '" + getUsername() + "'");
+        ArrayList<WikiMessage> result = new ArrayList<>();
+        for (DAOBase um: ums) {
+            WikiMessage message = WikiMessage.getMessage(um.get("messageID").toString());
+            if (message != null) {
+                result.add(message);
+            }
+        }
+        return result;
+    }
+
+    public WikiMessage getMessageDetail(String messageID) {
+        WikiMessage message = WikiMessage.getMessage(messageID);
+        return message;
+    }
+
     private User dao;
-    private ArrayList<WikiMessage> messageList;
+
+    public static void main(String[] args) {
+        WikiUser user = new WikiUser("dzm14");
+        user.sendMessage("123", "测试消息", "恭喜您看到了这个测试消息");
+    }
 }

@@ -7,7 +7,6 @@ import tss2.wiki.control.service.SessionService;
 import tss2.wiki.domain.*;
 import tss2.wiki.control.service.ContentService;
 import tss2.wiki.control.impl.ContentServiceImpl;
-import tss2.wiki.model.WikiOutline;
 import tss2.wiki.model.WikiRecord;
 import tss2.wiki.model.WikiSession;
 import tss2.wiki.model.WikiUser;
@@ -44,18 +43,28 @@ public class ContentController {
      * @return
      */
     @RequestMapping(value = "", method = RequestMethod.POST, produces="application/json;charset=UTF-8")
-    public @ResponseBody ResultMessage addEntry(HttpServletRequest request, @RequestBody Map map) {
+    public @ResponseBody
+    CommonResult addEntry(HttpServletRequest request, @RequestBody Map map) {
         String operation = map.get("operation").toString();
         // TODO session control
         ContentService cs = new ContentServiceImpl();
         SessionService ss = new SessionServiceimpl();
         WikiSession session = ss.checkUser(request);
-        if (session == null) return new ResultMessage(1, "Authentication Failed");
+        if (session == null) return new CommonResult(1, "Authentication Failed");
+        WikiUser user = session.getUser();
+        if (user.getType() < WikiUser.USER_ADMIN) return new CommonResult(1, "Poor Privilege");
         return cs.process(new WikiEntryVO(session, map));
     }
 
+    /**
+     *增加条目
+     * @param request
+     * @param map
+     * @return
+     */
     @RequestMapping(value = "", method = RequestMethod.PUT, produces="application/json;charset=UTF-8")
-    public @ResponseBody ResultMessage putEntry(HttpServletRequest request, @RequestBody Map map) {
+    public @ResponseBody
+    CommonResult putEntry(HttpServletRequest request, @RequestBody Map map) {
         return addEntry(request, map);
     }
 
@@ -73,6 +82,11 @@ public class ContentController {
         return result;
     }
 
+    /**
+     * 根据标签categories获取该标签下所有条目的title
+     * @param categories
+     * @return  title的ArrayList
+     */
     @RequestMapping(value = "/searchByCategories", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
     public @ResponseBody OutLineTitleResult searchByCategories(@RequestParam(value = "categories") String categories) {
         ArrayList<String> stringArrayList = getContentByCategories(categories);
@@ -83,6 +97,11 @@ public class ContentController {
     }
 
 
+    /**
+     * 关键字搜索
+     * @param search
+     * @return 获取不带条目具体内容的条目列表
+     */
     @RequestMapping(value = "/fuzzysearch", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
     public @ResponseBody
     RecordsResult fuzzySearch(@RequestParam(value = "search") String search) {
@@ -93,6 +112,11 @@ public class ContentController {
         return recordsResult;
     }
 
+    /**
+     * 根据title获取带条目具体内容的单个条目
+     * @param title
+     * @return
+     */
     @RequestMapping(value = "/wiki/{title}", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
     public @ResponseBody WikiResult doGet(@PathVariable String title) {
         WikiRecord wikiRecord = new WikiRecord(title);
@@ -102,19 +126,26 @@ public class ContentController {
         return new WikiResult(1, wikiRecord);
     }
 
+    /**
+     * 根据title删除条目
+     * @param request
+     * @param title
+     * @return
+     */
     @RequestMapping(value = "", method = RequestMethod.DELETE)
-    public @ResponseBody ResultMessage deleteEntry(HttpServletRequest request, @RequestParam(value = "title") String title) {
+    public @ResponseBody
+    CommonResult deleteEntry(HttpServletRequest request, @RequestParam(value = "title") String title) {
         SessionService ss = new SessionServiceimpl();
         WikiSession session = ss.checkUser(request);
         if (session == null) {
-            return new ResultMessage(1, "Authentication Failed");
+            return new CommonResult(1, "Authentication Failed");
         }
         WikiUser user = session.getUser();
         if (user.getType() != WikiUser.USER_ADMIN) {
-            return new ResultMessage(1, "Authentication Failed");
+            return new CommonResult(1, "Authentication Failed");
         }
         WikiRecord wikiRecord = new WikiRecord(title);
         wikiRecord.delete();
-        return new ResultMessage(0);
+        return new CommonResult(0);
     }
 }

@@ -1,6 +1,0 @@
-<!-- verify that preformatted text is formatted correctly with attributes -->
-<pre style="test">
-first
-second
- third
-</pre>
