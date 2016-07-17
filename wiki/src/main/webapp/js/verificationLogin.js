@@ -116,3 +116,17 @@ function getCookie(name){
         return null;
     }
 }
+
+function deleteCookie(name){
+    var date=new Date();
+    date.setTime(date.getTime()-10000); //设定一个过去的时间即可
+    document.cookie=name+"=v; expires="+date.toGMTString();
+}
+
+function clearLogin(){
+    deleteCookie("login");
+    deleteCookie("username");
+}
+
+
+
