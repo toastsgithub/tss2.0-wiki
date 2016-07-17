@@ -44,7 +44,7 @@ public class OutLineController {
     CommonResult updateSummary(HttpServletRequest request, @RequestBody Map map) {
         System.out.println(map);
         WikiSession session = sessionService.checkUser(request);
-        if (session == null) return new CommonResult(1, "Authentication Failed");
+        if (!session.isValid()) return new CommonResult(1, "Authentication Failed");
         WikiUser user = session.getUser();
         if (user.getType() < WikiUser.USER_ADMIN) return new CommonResult(1, "Authentication Failed");
         WikiOutline wikiOutline = new WikiOutline();
