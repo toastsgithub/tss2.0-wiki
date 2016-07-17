@@ -126,6 +126,10 @@ function deleteCookie(name){
 function clearLogin(){
     deleteCookie("login");
     deleteCookie("username");
+    $.get('/user/logout', null, function (data){
+        
+    }
+    );
 }
 
 
