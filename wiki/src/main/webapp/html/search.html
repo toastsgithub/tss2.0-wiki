@@ -22,7 +22,6 @@
 				<img  src="../resource/icon/tss_logo@2x.png" alt="" style="height: 32px">
 			</a>
 			<ul class="nav navbar-nav">
-				<li><a href="/html/login.html">登录</a></li>
 				<li class="dropdown">
 					<ul class="dropdown-menu">
 						<li><a href="../html/Outline.html" onclick="">管理大纲(管理员)</a></li>
@@ -32,6 +31,8 @@
 					</ul>
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">选项<span class="caret"></span></a>
 				</li>
+				<li id="login_button"></li>
+				<div class="welcome" id="welcome_tip"></div>
 			</ul>
 		</div>
 	</nav>
@@ -44,4 +45,8 @@
 			<span class="glyphicon glyphicon-search" style="margin-left: 20px;" onclick="location='http://www.baidu.com'"></span>
 		</div>
 	</body>
+
+<script>
+	get_welcome();
+</script>
 </html>
