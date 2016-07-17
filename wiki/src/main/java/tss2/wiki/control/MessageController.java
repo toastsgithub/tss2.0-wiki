@@ -37,7 +37,11 @@ public class MessageController {
         }
         WikiUser user = session.getUser();
         ArrayList<WikiMessage> messages = user.getMessageList();
-        return null;
+        MessageListResult result = new MessageListResult(0);
+        for (WikiMessage message: messages) {
+            result.addMessage(message.getMessageID(), message.getFromUser(), message.getTitle());
+        }
+        return result;
     }
 
     @RequestMapping(value = "/{messageID}", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
@@ -69,12 +73,10 @@ public class MessageController {
             return new CommonResult(1, "Authentication Failed");
         }
         WikiUser user = session.getUser();
-        String fromUser = user.getUsername();
         String title = map.get("title").toString();
         String detail = map.get("detail").toString();
         String toUser = StringUtil.concatArray("/", (ArrayList) map.get("toUser"));
-        WikiMessage message = new WikiMessage(fromUser, toUser, title, detail);
-        message.send();
+        user.sendMessage(toUser.split("/"), title, detail);
         return new CommonResult(0);
     }
 
