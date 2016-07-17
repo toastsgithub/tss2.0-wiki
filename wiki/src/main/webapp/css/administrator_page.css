@@ -7,3 +7,12 @@
 #right_part{
     background-color: burlywood;
 }
+#tool_box{
+    margin-top:30px;
+}
+.tool_btn{
+    height: 40px;
+    width: 200px;
+    background-color: #f7f7f7;
+    border: solid 1px #b5b5b5;
+}
