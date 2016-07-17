@@ -5,18 +5,18 @@ body{
 .minf{
 	margin-bottom: 20px;
 	width: 100%;
-	margin-left: 5%
+	/*margin-left: 5%*/
 }
 
 .namlab{
 	width: 70px; 
 	float:left;
-	margin-left: 1%;
+	/*margin-left: 1%;*/
 	/*background-color: yellow;*/
 }
 
 .minf_input{
-	margin-left: 30px;
+	/*margin-left: 30px;*/
 	width: 20%;
     border: solid 0.5px #c8c8d0;
     -webkit-transition: border .5s;

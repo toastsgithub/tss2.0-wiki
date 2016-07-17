@@ -15,12 +15,13 @@
     <link rel="stylesheet" href="../css/outline.css">
     <link rel="stylesheet" href="../css/wiki_navigator.css">
     <script src="../js/wiki_utils.js"></script>
+    <script src="../js/verificationLogin.js"></script>
 
 </head>
 <body>
 <nav class="navbar navbar-default" style="background-color: #ffffff">
     <div class="container-fluid">
-        <a class="navbar-header" href="http://localhost:8080" style="margin-top: 10px;">
+        <a class="navbar-header" href="../html/Outline.html" style="margin-top: 10px;">
             <img  src="../resource/icon/tss_logo@2x.png" alt="" style="height: 32px">
         </a>
         <!--<div class="navbar-header navbar-right" style=";margin-top: 10px;">-->
@@ -29,7 +30,6 @@
         <!--</div>-->
         <ul class="nav navbar-nav">
             <!--<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>-->
-            <li><a href="/html/login.html">登录</a></li>
             <li class="dropdown">
                 <ul class="dropdown-menu">
                     <li><a href="../html/Outline.html" onclick="">管理大纲(管理员)</a></li>
@@ -39,6 +39,8 @@
                 </ul>
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">选项<span class="caret"></span></a>
             </li>
+            <li id="login_button"></li>
+            <div class="welcome" id="welcome_tip"></div>
         </ul>
     </div>
 </nav>
@@ -83,4 +85,8 @@
 function temp() {
     alert(get_entry_of_outline(document.getElementById('entry_search').value));
 }
+</script>
+
+<script>
+    get_welcome();
 </script>
