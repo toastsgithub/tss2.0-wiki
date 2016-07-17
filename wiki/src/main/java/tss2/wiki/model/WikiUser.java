@@ -9,6 +9,8 @@ import tss2.wiki.dao.User;
 import tss2.wiki.util.StringUtil;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 /**
  * Created by 羊驼 on 2016/7/10.
@@ -79,9 +81,14 @@ public class WikiUser {
         return result;
     }
 
-    public WikiMessage getMessageDetail(String messageID) {
+    public WikiMessage getMessageDetail(String reader, String messageID) {
         WikiMessage message = WikiMessage.getMessage(messageID);
-        return message;
+        if (message == null) return null;
+        ArrayList<String> arrTo = new ArrayList<>();
+        Collections.addAll(arrTo, message.getToUsers());
+        if (arrTo.contains(reader))
+            return message;
+        else return null;
     }
 
     private User dao;
