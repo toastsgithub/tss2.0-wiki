@@ -34,7 +34,7 @@ public class UserController {
         LoginResult lresult = userService.Login(username, password);
         if (lresult != null && lresult.isIncluded()) {
             Cookie cookie = new Cookie("sessionID", new SessionServiceimpl().register(username).getSessionID());
-            cookie.setMaxAge(5 * 60);
+            cookie.setMaxAge(SessionServiceimpl.DEFAULT_SESSION_LIFETIME * 60);
             cookie.setPath("/");
             response.addCookie(cookie);
         }
