@@ -21,7 +21,8 @@ function load_content(title){
                 text      = markdown_data,
                 html      = converter.makeHtml(text);
             // alert(data.visits);
-            var pre_content = document.getElementById('access_times').innerHTML+=data.data.visits;
+            document.getElementById('access_times').innerHTML+=data.data.visits;
+            document.getElementById('last_update_time').innerHTML+=data.data.date;
             // alert(html);
                 //----------以下是内容的渲染-----------------
                 var testEditormdView;
