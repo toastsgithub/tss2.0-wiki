@@ -48,18 +48,20 @@
 </nav>
 
 <!--正经内容的分割线-->
-    <div class="row">
-        <div class="col-sm-6">
-        <form id="s">
-            <input type="search" id="q" style="border: solid 1px #d3dad8;outline: none" placeholder="大纲查询"/>
-            <button type="submit" class="btn btn-primary">Search</button>
-        </form>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+            <form id="s">
+                <input type="search" id="q" style="border: solid 1px #d3dad8;outline: none" placeholder="大纲查询"/>
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+            </div>
+            <div class="col-sm-6">
+                <input type="text" id="entry_search" placeholder="条目查询" >
+                <button class="btn btn-primary" onclick=search_entry(document.getElementById('entry_search').value);>Search</button>
+            </div>
         </div>
-        <div class="col-sm-6">
-            <input type="text" id="entry_search" placeholder="条目查询" >
-            <button class="btn btn-primary" onclick=search_entry(document.getElementById('entry_search').value);>Search</button>
-        </div>
-    </div>
+
 
         <div id="outline_article" class="row">
             <div id="moutline" class="col-sm-6">
@@ -68,6 +70,7 @@
 
             </div>
         </div>
+    </div>
 
 <button onclick=save_outline()>save</button>
 </body>
