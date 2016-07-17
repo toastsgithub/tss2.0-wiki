@@ -142,6 +142,9 @@ public class ContentController {
             return new CommonResult(1, "Authentication Failed");
         }
         WikiRecord wikiRecord = new WikiRecord(title);
+        if (wikiRecord.getContent() == null) {
+            return new CommonResult(2, "Entry Not Exist");
+        }
         wikiRecord.delete();
         return new CommonResult(0);
     }
