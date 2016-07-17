@@ -253,7 +253,7 @@ public class WikiRecord {
     }
 
     public String getDate(){
-        ResultSet rs = DBAdmin.query("select max(timestamp) from UpdateHistory where (title = '" + getTitle() + "';");
+        ResultSet rs = DBAdmin.query("select max(timestamp) from UpdateHistory where (title = '" + getTitle() + "');");
         String date = null;
         try {
             if (rs.next()) {
