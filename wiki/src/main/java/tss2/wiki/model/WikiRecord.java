@@ -128,7 +128,9 @@ public class WikiRecord {
         return wikiEntryArrayList;
     }
 
+    public static void modifyCategories(String before,String after){
 
+    }
 
     public WikiRecord(String title, int mainversion, int subversion) {
 
@@ -245,6 +247,11 @@ public class WikiRecord {
     public void addVisit() {
         ++dao.visits;
         dao.save();
+    }
+
+    public String getDate(){
+        DAOBase[] contents = UpdateHistory.query().where("title = "+dao.title);
+        return ((UpdateHistory)contents[0]).timestamp;
     }
 
     public int getVisits(){
