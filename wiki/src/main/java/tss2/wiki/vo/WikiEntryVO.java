@@ -8,8 +8,8 @@ import java.util.Map;
  * Created by 羊驼 on 2016/7/10.
  */
 public class WikiEntryVO {
-    WikiSession session;
-    Map data;
+    private WikiSession session;
+    private Map data;
 
     public WikiEntryVO(WikiSession sessionID, Map data) {
         setData(data);

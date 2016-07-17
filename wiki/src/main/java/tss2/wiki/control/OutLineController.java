@@ -21,6 +21,9 @@ import java.util.Map;
 @RequestMapping(value = "/outline")
 public class OutLineController {
 
+
+    private SessionService sessionService = new SessionServiceimpl();
+
     /**
      *获取大纲列表
      * @return
@@ -40,11 +43,7 @@ public class OutLineController {
     public @ResponseBody
     CommonResult updateSummary(HttpServletRequest request, @RequestBody Map map) {
         System.out.println(map);
-        //DAOBase[] content = Summary.query().where("");
-        //content[0].setValue("summaryJO",map.toString());
-        //content[0].save();
-        SessionService ss = new SessionServiceimpl();
-        WikiSession session = ss.checkUser(request);
+        WikiSession session = sessionService.checkUser(request);
         if (session == null) return new CommonResult(1, "Authentication Failed");
         WikiUser user = session.getUser();
         if (user.getType() < WikiUser.USER_ADMIN) return new CommonResult(1, "Authentication Failed");
