@@ -1,5 +1,6 @@
 body{
-    background-color: #ffffff;
+    /*background-color: #ffffff;*/
+    /*background-image: url("../resource/image/lightpaperfibers_@2X.png");*/
 }
 div{
     /*background-color: #2aabd2;*/
@@ -14,6 +15,7 @@ div{
 #right_part {
     /*background-color: #2aabd2;*/
     /*border: solid 1px #c5a6a8;*/
+    /*background-image: url("../resource/image/lightpaperfibers_@2X.png");*/
     height: 1000px;
 }
 #article_info{
