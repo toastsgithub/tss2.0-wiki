@@ -1,5 +1,6 @@
 package tss2.wiki.model;
 
+import tss2.wiki.dao.Alias;
 import tss2.wiki.dao.core.DAOBase;
 import tss2.wiki.dao.UpdateHistory;
 import tss2.wiki.dao.WikiEntry;
@@ -30,12 +31,14 @@ public class WikiRecord {
 
     public WikiRecord(String title) {
         this();
+        title = getTitleFromAlias(title);
         setTitle(title);
         DAOBase[] contents = WikiEntry.query().where("title = '" + title + "'");
         if (contents.length == 0) {
             dao = new WikiEntry();
             dao.title = title;
             dao.contentPath = null;
+            //addTitle(title);
         } else {
             dao = (WikiEntry) contents[0];
         }
@@ -51,38 +54,60 @@ public class WikiRecord {
     }
 
     public static RecordsResult recordFuzzySearch(String search){
+        search = getTitleFromAlias(search);
+
         DAOBase[] title = WikiEntry.query().where("title like '%"+search+"%'");
         DAOBase[] tags = WikiEntry.query().where("tags like '%"+search+"%'");
         DAOBase[] categories = WikiEntry.query().where("categories like '%"+search+"%'");
         DAOBase[] summery = WikiEntry.query().where("summery like '%"+search+"%'");
-        DAOBase[] all = WikiEntry.query().where("");
 
+        DAOBase[] all = WikiEntry.query().where("");
         ArrayList<WikiEntry> alllist = new ArrayList<>();
         for(int i = 0; i < all.length;i++){
             alllist.add((WikiEntry)all[i]);
         }
+        alllist = qsort(alllist);
+
 
         ArrayList<WikiEntry> result = new ArrayList<>();
+        ArrayList<WikiEntry> R1 = new ArrayList<>();
+        ArrayList<WikiEntry> R2 = new ArrayList<>();
+        ArrayList<WikiEntry> R3 = new ArrayList<>();
         for(int i = 0;i<title.length;i++){
             result.add((WikiEntry)title[i]);
         }
+        result = qsort(result);
+
         for(int i = 0;i<tags.length;i++){
             if(contain(result,(WikiEntry)tags[i])){
             }else{
-                result.add((WikiEntry)tags[i]);
+                R1.add((WikiEntry)tags[i]);
             }
         }
         for(int i = 0;i<categories.length;i++){
-            if(contain(result,(WikiEntry)categories[i])){
+            if(contain(result,(WikiEntry)categories[i])&&contain(R1,(WikiEntry)categories[i])){
             }else{
-                result.add((WikiEntry)categories[i]);
+                R2.add((WikiEntry)categories[i]);
             }
         }
+        for(int i = 0;i<R2.size();i++){
+            R1.add(R2.get(i));
+        }
+        R1 = qsort(R1);
+        for(int i = 0;i<R1.size();i++){
+            result.add(R1.get(i));
+        }
+
+
         for(int i = 0;i<summery.length;i++){
             if(contain(result,(WikiEntry)summery[i])){
             }else{
-                result.add((WikiEntry)summery[i]);
+                R3.add((WikiEntry)summery[i]);
             }
+        }
+        R3 = qsort(R3);
+        for(int i = 0; i<R3.size();i++){
+            result.add(R3.get(i));
         }
 
         for(int i = 0; i < alllist.size();i++){
@@ -94,7 +119,7 @@ public class WikiRecord {
                 }
             }
         }
-        result = qsort(result);
+        //result = qsort(result);
         return new RecordsResult(1,result);
     }
 
@@ -134,6 +159,56 @@ public class WikiRecord {
     public static void modifyCategories(String before,String after){
 
     }
+
+    public static String getTitleFromAlias(String alias){
+        DAOBase[] contents = Alias.query().where("alias like '%"+alias+"%'");
+        ArrayList<Alias> aliasArrayList = new ArrayList<>();
+        for(int i = 0;i<contents.length;i++){
+            aliasArrayList.add((Alias) contents[i]);
+        }
+        if(aliasArrayList.size()==0){
+
+            return alias;
+        }
+        for(int i = 0; i < aliasArrayList.size();i++){
+            String[] str = aliasArrayList.get(i).alias.split("/");
+            for(int j = 0; j<str.length;j++){
+                if(str[j].equals(alias)){
+                    return aliasArrayList.get(i).title;
+                }
+            }
+        }
+        return alias;
+    }
+
+    public static void addTitieAlias(String title,String alias){
+        DAOBase[] contents = Alias.query().where("title = '"+ title +"'");
+        if(contents.length==0){
+            Alias alias1 = new Alias();
+            alias1.title = title;
+            alias1.alias = alias;
+            alias1.save();
+        }else{
+            Alias alias1 = (Alias)contents[0];
+            if(alias1.alias.contains(alias)){
+                return;
+            }
+            alias1.alias = alias1.alias+"/"+alias;
+            alias1.save();
+        }
+
+    }
+    public static void addTitle(String title){
+        DAOBase[] contents = Alias.query().where("title = '"+ title +"'");
+        if(contents.length==0){
+            Alias alias1 = new Alias();
+            alias1.title = title;
+            alias1.alias = title;
+            alias1.save();
+        }
+    }
+
+
 
     public WikiRecord(String title, int mainversion, int subversion) {
 
@@ -192,6 +267,7 @@ public class WikiRecord {
      */
     public void setContent(String username, String[] categories, String[] tags, String summary, String content, boolean isSubVersion) {
         String versionStr = getCurrVersionString();
+        addTitle(title);
         int mainversion = dao.mainversion;
         int subversion = dao.subversion;
         if (isSubVersion) {
@@ -266,18 +342,27 @@ public class WikiRecord {
         return date;
     }
 
+
+
+
     public int getVisits(){
         return dao.visits;
     }
 
     public void delete() {
         dao.delete();
+        DAOBase[] contents = Alias.query().where("title = '"+ title +"'");
+        Alias aliasDao = (Alias)contents[0];
+        aliasDao.delete();
     }
 
     private WikiEntry dao;
     private String title;
 
     public static void main(String args[]){
-
+        //addTitieAlias("测试条目","abc");
+        System.out.println(getTitleFromAlias("abc"));
+        //WikiRecord wikiRecord = new WikiRecord("测试条目");
+        //wikiRecord.delete();
     }
 }

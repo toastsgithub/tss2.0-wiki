@@ -96,6 +96,18 @@ public class ContentController {
 
 
     /**
+     *  对某项条目增加别名
+     * @param title 标题（添加条目时设置的标题）
+     * @param alias 别名
+     */
+    @RequestMapping(value = "/addAlias", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
+    public @ResponseBody void addAlias(@RequestParam(value = "title") String title,@RequestParam(value = "alias") String alias) {
+        WikiRecord wikiRecord = new WikiRecord(title);
+        wikiRecord.addTitieAlias(title,alias);
+        return ;
+    }
+
+    /**
      * 关键字搜索
      * @param search
      * @return 获取不带条目具体内容的条目列表
