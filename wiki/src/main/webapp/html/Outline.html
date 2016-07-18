@@ -85,7 +85,8 @@
         </div>
     </div>
 
-<button onclick=save_outline()>save</button>
+<!--<button onclick=save_outline()>save</button>-->
+<button onclick=get_selected_node();>select</button>
 </body>
 <script src="../js/outline.js"></script>
 </html>
@@ -96,7 +97,7 @@
             var selected_name = data.instance.get_node(data.selected[0]).text;
 //            alert("here are data:"+ selected_name);
             display_outline_content(selected_name);
-        })
+        });
         load_all_outline_content();
 
     });

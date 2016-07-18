@@ -245,6 +245,7 @@ function load_all_outline_content(){
         success:function (data) {
             for (x in data.data){
                 var list = get_entry_of_outline(data.data[x]);
+                
                 // var temp_obj = new Object();
                 // temp_obj.name = data.data[x];
                 // temp_obj.content = list;
@@ -355,4 +356,13 @@ function remove_all_child(element_id) {
     {
         div.removeChild(div.firstChild);
     }
+}
+/**
+ * 返回jstree选中的节点的名称
+ * @returns selected_node 选中的节点的名称
+ */
+function get_selected_node() {
+    var selected_node = $('#moutline').jstree(true).get_selected(true)[0].text;
+    alert('selected:'+selected_node);
+    return selected_node;
 }

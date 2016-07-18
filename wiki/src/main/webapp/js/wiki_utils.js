@@ -44,3 +44,21 @@ function get_user() {
         }
     });
 }
+/**
+ * 右下角显示消息提示的方法
+ * @param type 消息提示的基本类型 0为警告类消息提示  1为成功类消息提示
+ * @param message 消息提示内容
+ */
+function show_tips(type,message) {
+    if(type) {
+        Messenger().post({
+            message:message,
+            type:'success'
+        });
+    }else{
+        Messenger().post({
+            message:message,
+            type:'error'
+        });
+    }
+}
