@@ -47,8 +47,17 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">选项<span class="caret"></span></a>
             </li>
             <li id="login_button"></li>
-            <div class="welcome" id="welcome_tip"></div>
         </ul>
+
+        <ul class="nav navbar-nav" style="float: right">
+            <li class="dropdown">
+                <ul class="dropdown-menu">
+                    <li><a href="" onclick="clearLogin();">退出登录</a></li>
+                </ul>
+                <a href="#" id="welcome_tip" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
+            </li>
+        </ul>
+
     </div>
 </nav>
 <div class="row" style="">
@@ -59,8 +68,8 @@
     <div id="right_part" class="col-xs-10">
         <div id="article_info">
             <div id="article_title">title</div>
-            <div id="last_update_time">最后更新日期:2016-07-17</div>
-            <div id="access_times">访问次数:65535</div>
+            <div id="last_update_time">最后更新日期:</div>
+            <div id="access_times">访问次数:</div>
         </div>
         <div id="test-editormd-view"></div>
 

@@ -3,11 +3,14 @@ package tss2.wiki.model;
 import tss2.wiki.dao.core.DAOBase;
 import tss2.wiki.dao.UpdateHistory;
 import tss2.wiki.dao.WikiEntry;
+import tss2.wiki.dao.core.DBAdmin;
 import tss2.wiki.domain.RecordsResult;
 import tss2.wiki.util.FileUtil;
 import tss2.wiki.util.TimeUtil;
 
 import java.io.File;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -128,6 +131,10 @@ public class WikiRecord {
         return wikiEntryArrayList;
     }
 
+    public static void modifyCategories(String before,String after){
+
+    }
+
     public WikiRecord(String title, int mainversion, int subversion) {
 
     }
@@ -245,6 +252,24 @@ public class WikiRecord {
         dao.save();
     }
 
+    public String getDate(){
+        ResultSet rs = DBAdmin.query("select max(timestamp) from UpdateHistory where (title = '" + getTitle() + "');");
+        String date = null;
+        try {
+            if (rs.next()) {
+                date = rs.getString("max(timestamp)");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        System.out.println(date);
+        return date;
+    }
+
+    public int getVisits(){
+        return dao.visits;
+    }
+
     public void delete() {
         dao.delete();
     }
@@ -253,19 +278,6 @@ public class WikiRecord {
     private String title;
 
     public static void main(String args[]){
-        ArrayList<String> str = new ArrayList<>();
-        str.add("111");
-        str.add("222");
-        str.add("333");
-        str.add("444");
-        str.add("555");
-        String t = "666";
-        str.add(t);
-        String s = "666";
-        if(str.contains(s)){
-            System.out.println("true");
-        }else{
-            System.out.println("false");
-        }
+
     }
 }

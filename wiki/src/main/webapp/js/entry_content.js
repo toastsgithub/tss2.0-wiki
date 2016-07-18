@@ -20,6 +20,9 @@ function load_content(title){
                 // text      = '#hello, markdown!\n\n|name|age|\n|--|--|\n|Toast|20|',
                 text      = markdown_data,
                 html      = converter.makeHtml(text);
+            // alert(data.visits);
+            document.getElementById('access_times').innerHTML+=data.data.visits;
+            document.getElementById('last_update_time').innerHTML+=data.data.date;
             // alert(html);
                 //----------以下是内容的渲染-----------------
                 var testEditormdView;
@@ -39,7 +42,7 @@ function load_content(title){
                     taskList        : true,
                     tex             : true,  // 默认不解析
                     flowChart       : true,  // 默认不解析
-                    sequenceDiagram : true,  // 默认不解析
+                    sequenceDiagram : true  // 默认不解析
                 });
             
         },

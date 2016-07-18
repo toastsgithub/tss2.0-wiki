@@ -104,7 +104,7 @@ function get_welcome() {
             welcome =  "已经是深夜了,早点休息, " + user_name;
         }
         document.getElementById("login_button").innerHTML="";
-        document.getElementById("welcome_tip").innerHTML=welcome;
+        document.getElementById("welcome_tip").innerHTML=welcome+document.getElementById("welcome_tip").innerHTML;
     }
 }
 
@@ -126,6 +126,10 @@ function deleteCookie(name){
 function clearLogin(){
     deleteCookie("login");
     deleteCookie("username");
+    $.get('/user/logout', null, function (data){
+        
+    }
+    );
 }
 
 
