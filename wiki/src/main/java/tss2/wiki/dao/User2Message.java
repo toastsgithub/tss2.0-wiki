@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
+ * 消息和消息目标用户的关系表
+ *
  * Created by coral on 16-7-15.
  */
 public class User2Message extends DAOBase {

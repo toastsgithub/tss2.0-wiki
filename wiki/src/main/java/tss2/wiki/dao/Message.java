@@ -3,6 +3,8 @@ package tss2.wiki.dao;
 import tss2.wiki.dao.core.DAOBase;
 
 /**
+ * 消息表
+ *
  * Created by coral on 16-7-12.
  */
 public class Message extends DAOBase {

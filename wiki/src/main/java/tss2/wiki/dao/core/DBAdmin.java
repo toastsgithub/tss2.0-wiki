@@ -28,6 +28,7 @@ public class DBAdmin {
 
     // register classes here
     private static Class[] tables = {
+            Alias.class,
             User.class,
             WikiEntry.class,
             UpdateHistory.class,
@@ -35,7 +36,8 @@ public class DBAdmin {
             Tag.class,
             Session.class,
             Message.class,
-            User2Message.class
+            User2Message.class,
+            Reference.class
     };
 
     static {

@@ -3,6 +3,8 @@ package tss2.wiki.dao;
 import tss2.wiki.dao.core.DAOBase;
 
 /**
+ * 用户
+ *
  * Created by 羊驼 on 2016/7/7.
  */
 public class User extends DAOBase {
