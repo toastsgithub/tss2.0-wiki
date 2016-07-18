@@ -38,7 +38,7 @@ public class WikiRecord {
             dao = new WikiEntry();
             dao.title = title;
             dao.contentPath = null;
-            addTitle(title);
+            //addTitle(title);
         } else {
             dao = (WikiEntry) contents[0];
         }
@@ -267,6 +267,7 @@ public class WikiRecord {
      */
     public void setContent(String username, String[] categories, String[] tags, String summary, String content, boolean isSubVersion) {
         String versionStr = getCurrVersionString();
+        addTitle(title);
         int mainversion = dao.mainversion;
         int subversion = dao.subversion;
         if (isSubVersion) {
