@@ -24,7 +24,9 @@ function search_and_load(keyword) {
                     var title = data.list[x].title;
                     var summary = data.list[x].summery;
                     load_on_search_page(title,summary);
+                    
                 }
+                show_tips(1,"load finished at "+get_current_time());
             }
         },
         error:function () {

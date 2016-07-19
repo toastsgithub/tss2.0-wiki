@@ -71,6 +71,8 @@
 </body>
 <script>
     $(document).ready(function () {
+        var keyword = location.href;
+        show_tips(1,'key: '+keyword);
         show_tips(1,"load at "+get_current_time());
         get_welcome();
         search_and_load('test');

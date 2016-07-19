@@ -221,6 +221,7 @@ function get_entry_of_outline(outline_key) {
                 var temp_obj = new Object();
                 temp_obj.name = outline_key;
                 temp_obj.content = result;
+                // alert(JSON.stringify(temp_obj));
                 all_outline_content.push(temp_obj);
             }
 
@@ -309,7 +310,7 @@ function display_outline_content(outline_key) {
         if(all_outline_content[x].name == outline_key){
             // alert(JSON.stringify(all_outline_content[x]));
             for (y in all_outline_content[x].content){
-                var content_title = all_outline_content[x].content[y];
+                var content_title = all_outline_content[x].content[y].title;
 
                 //这里是内容摘要
 //                var content_abstract = all_outline_content[x].content[y].abstract;
