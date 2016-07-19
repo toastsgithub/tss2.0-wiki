@@ -88,7 +88,7 @@ public class ContentController {
      */
     @RequestMapping(value = "/searchByCategories", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
     public @ResponseBody OutLineTitleResult searchByCategories(@RequestParam(value = "categories") String categories) {
-        ArrayList<String> stringArrayList = getContentByCategories(categories);
+        ArrayList<TitleAndSummary> stringArrayList = getContentByCategories(categories);
         if(stringArrayList.size()==0){
             return new OutLineTitleResult(0);
         }
