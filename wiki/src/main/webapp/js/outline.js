@@ -297,12 +297,11 @@ function load_all_outline_content(){
 // }
 
 /**
- * 根据大纲的名称从全局数组中查询该大纲节点下存在的条目,并加到右侧div中,该方法通常
+ * 根据大纲的名称从全局数组中查询该大纲节点下存在的条目及其内容摘要,并加到右侧div中,该方法通常
  * 在大纲树的点击事件中触发
  * @param outline_key 大纲节点名称
- * @param outline_abstract 大纲节点内容摘要
  */
-var zhaiyao=["\n  摘要：123321，上山打老虎怎么样SDHCUSIC会发生丢还没看到妇女金额共和国viwegrjhvoigerhvoiejrpvjrepojvifdjvjleq 呢抗日女哦ieqrjfqpoewojgnfkdvfre分部日哈佛"];
+//var zhaiyao=["\n  摘要：123321，上山打老虎怎么样SDHCUSIC会发生丢还没看到妇女金额共和国viwegrjhvoigerhvoiejrpvjrepojvifdjvjleq 呢抗日女哦ieqrjfqpoewojgnfkdvfre分部日哈佛"];
 function display_outline_content(outline_key) {
     remove_all_child('article_board');
     for (x in all_outline_content){
@@ -313,7 +312,7 @@ function display_outline_content(outline_key) {
                 var content_title = all_outline_content[x].content[y].title;
 
                 //这里是内容摘要
-//                var content_abstract = all_outline_content[x].content[y].abstract;
+                var content_abstract = all_outline_content[x].content[y].summary;
 
                 // alert(content_title+"]]]");
                 var right_part = document.getElementById('article_board');
@@ -325,7 +324,7 @@ function display_outline_content(outline_key) {
                 var url = '../html/entry_content.html?entry='+content_title;
                 the_link.href = url;
                 the_link.innerHTML = content_title;
-                the_abstract.innerHTML = zhaiyao;
+                the_abstract.innerHTML = content_abstract;
                 the_node.appendChild(the_link);
                 the_node.appendChild(the_abstract);
                 the_node.style.marginTop='10px';
