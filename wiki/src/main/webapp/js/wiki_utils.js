@@ -62,3 +62,13 @@ function show_tips(type,message) {
         });
     }
 }
+/**
+ * 获取当前日期和时间的方法 待扩充
+ */
+function get_current_time() {
+    var date = new Date();
+    // alert(date.getDate());
+    var time = date.getHours() +":"+ date.getMinutes()+":"+date.getSeconds();
+    // alert(time);
+    return time;
+}
