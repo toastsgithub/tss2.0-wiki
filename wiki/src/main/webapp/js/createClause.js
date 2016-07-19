@@ -59,7 +59,11 @@ function addClause() {
     // content = "###this is content";
     // alert("info");
 
-
+    //mock data
+    var mock_obj = new Object();
+    mock_obj.name = '百度一下';
+    mock_obj.url = 'www.baidu.com';
+    mock_obj.websiteName = '凤凰网';
     var data = {
         operation: "add", data: {
             time: time,
@@ -68,7 +72,8 @@ function addClause() {
             title: title,
             tags: tags,
             categories: catagories,
-            content: content
+            content: content,
+            reference:[mock_obj]
         }
     };
     $.ajax({
