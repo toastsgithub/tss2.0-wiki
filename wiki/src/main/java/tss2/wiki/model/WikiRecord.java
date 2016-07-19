@@ -370,7 +370,11 @@ public class WikiRecord {
         return date;
     }
 
-
+    public String getEditor(){
+        DAOBase[] contents = UpdateHistory.query().where("timestamp = '"+ getDate() +"'");
+        UpdateHistory updateHistory = (UpdateHistory)contents[0];
+        return updateHistory.username;
+    }
 
 
     public int getVisits(){
