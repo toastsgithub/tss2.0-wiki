@@ -50,6 +50,7 @@ $.get(
 );
 
 
+
 // var rowData={"软件":[{"一班":[{"二班":["说好的孙浩大哥呢"]},"考拉","浣熊"]},{"三班":["喵"]},{"四班":["歪歪"]},{"怎么这么多":["好烦啊","我编不下去了"]},"还有？？"]};
 /**
  * 无条件读取当前的树的结构并发送到后端保存
@@ -244,6 +245,7 @@ function load_all_outline_content(){
         success:function (data) {
             for (x in data.data){
                 var list = get_entry_of_outline(data.data[x]);
+                
                 // var temp_obj = new Object();
                 // temp_obj.name = data.data[x];
                 // temp_obj.content = list;
@@ -256,27 +258,79 @@ function load_all_outline_content(){
         }
     });
 }
+// /**
+//  * 根据大纲的名称从全局数组中查询该大纲节点下存在的条目,并加到右侧div中,该方法通常
+//  * 在大纲树的点击事件中触发
+//  * @param outline_key 大纲节点名称
+//  */
+// function display_outline_content(outline_key) {
+//     remove_all_child('article_board');
+//     for (x in all_outline_content){
+//       
+//         if(all_outline_content[x].name == outline_key){
+//             // alert(JSON.stringify(all_outline_content[x]));
+//             for (y in all_outline_content[x].content){
+//                 var content_title = all_outline_content[x].content[y];
+//                 // alert(content_title+"]]]");
+//                 var right_part = document.getElementById('article_board');
+//                 var new_node = document.createElement('div');
+//                 document.getElementById('article_board').style.backgroundColor='red';
+//                 var the_link = document.createElement('a');
+//                 var url = '../html/entry_content.html?entry='+content_title;
+//                 the_link.href = url;
+//                 the_link.innerHTML = content_title;
+//                 new_node.appendChild(the_link);
+//                 right_part.appendChild(new_node);
+//             }
+//         }
+//     }
+//
+//     // var right_part = document.getElementById('article_board');
+//     // var new_node = document.createElement('div');
+//     // var the_link = document.createElement('a');
+//     // the_link.href = 'http://www.baidu.com';
+//     // the_link.innerHTML = outline_key;
+//     // new_node.appendChild(the_link);
+//     // right_part.appendChild(new_node);
+//
+// }
+
 /**
  * 根据大纲的名称从全局数组中查询该大纲节点下存在的条目,并加到右侧div中,该方法通常
  * 在大纲树的点击事件中触发
  * @param outline_key 大纲节点名称
+ * @param outline_abstract 大纲节点内容摘要
  */
+var zhaiyao=["\n  摘要：123321，上山打老虎怎么样SDHCUSIC会发生丢还没看到妇女金额共和国viwegrjhvoigerhvoiejrpvjrepojvifdjvjleq 呢抗日女哦ieqrjfqpoewojgnfkdvfre分部日哈佛"];
 function display_outline_content(outline_key) {
     remove_all_child('article_board');
     for (x in all_outline_content){
-        
+
         if(all_outline_content[x].name == outline_key){
             // alert(JSON.stringify(all_outline_content[x]));
             for (y in all_outline_content[x].content){
                 var content_title = all_outline_content[x].content[y];
+
+                //这里是内容摘要
+//                var content_abstract = all_outline_content[x].content[y].abstract;
+
                 // alert(content_title+"]]]");
                 var right_part = document.getElementById('article_board');
                 var new_node = document.createElement('div');
+                // document.getElementById('article_board').style.backgroundColor='red';
+                var the_node = document.createElement('div');
                 var the_link = document.createElement('a');
+                var the_abstract = document.createElement('div');
                 var url = '../html/entry_content.html?entry='+content_title;
                 the_link.href = url;
                 the_link.innerHTML = content_title;
-                new_node.appendChild(the_link);
+                the_abstract.innerHTML = zhaiyao;
+                the_node.appendChild(the_link);
+                the_node.appendChild(the_abstract);
+                the_node.style.marginTop='10px';
+                the_node.style.backgroundColor='#f5f5f5';
+                new_node.appendChild(the_node);
+                new_node.style.marginBottom='10px';
                 right_part.appendChild(new_node);
             }
         }
@@ -291,6 +345,7 @@ function display_outline_content(outline_key) {
     // right_part.appendChild(new_node);
 
 }
+
 /**
  * 移除该元素下的所有子元素
  * @param element_id
@@ -301,4 +356,13 @@ function remove_all_child(element_id) {
     {
         div.removeChild(div.firstChild);
     }
+}
+/**
+ * 返回jstree选中的节点的名称
+ * @returns selected_node 选中的节点的名称
+ */
+function get_selected_node() {
+    var selected_node = $('#moutline').jstree(true).get_selected(true)[0].text;
+    alert('selected:'+selected_node);
+    return selected_node;
 }
