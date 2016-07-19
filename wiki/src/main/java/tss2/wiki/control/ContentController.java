@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Map;
 
+import static tss2.wiki.model.WikiRecord.getAlias;
 import static tss2.wiki.model.WikiRecord.getContentByCategories;
 import static tss2.wiki.model.WikiRecord.recordFuzzySearch;
 
@@ -108,9 +109,18 @@ public class ContentController {
     }
 
     /**
+     * 返回所有条目title和alias
+     * @return
+     */
+    @RequestMapping(value = "/getTitleAndAlias", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
+    public @ResponseBody ArrayList<String> getTitleAndAlias() {
+        return getAlias();
+    }
+
+    /**
      * 关键字搜索
      * @param search
-     * @return 获取不带条目具体内容的条目列表
+     * @return 获取不带条目具体内容的条目列表（排好序）
      */
     @RequestMapping(value = "/fuzzysearch", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
     public @ResponseBody

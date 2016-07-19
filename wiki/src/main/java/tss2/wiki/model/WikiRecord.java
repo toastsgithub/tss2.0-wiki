@@ -31,7 +31,7 @@ public class WikiRecord {
 
     public WikiRecord(String title) {
         this();
-        title = getTitleFromAlias(title);
+        title = getTitleFromAlias(title);//重定向title
         setTitle(title);
         DAOBase[] contents = WikiEntry.query().where("title = '" + title + "'");
         if (contents.length == 0) {
@@ -44,6 +44,11 @@ public class WikiRecord {
         }
     }
 
+    /**
+     * 根据category获取条目title
+     * @param categories
+     * @return
+     */
     public static ArrayList<String> getContentByCategories(String categories){
         DAOBase[] contents = WikiEntry.query().where("categories = '"+categories+"'");
         ArrayList<String> result = new ArrayList<>();
@@ -53,6 +58,11 @@ public class WikiRecord {
         return result;
     }
 
+    /**
+     * 关键字搜索
+     * @param search
+     * @return
+     */
     public static RecordsResult recordFuzzySearch(String search){
         search = getTitleFromAlias(search);
 
@@ -160,6 +170,12 @@ public class WikiRecord {
 
     }
 
+
+    /**
+     * 在传入title时调用，将title/alias转化为title
+     * @param alias
+     * @return
+     */
     public static String getTitleFromAlias(String alias){
         DAOBase[] contents = Alias.query().where("alias like '%"+alias+"%'");
         ArrayList<Alias> aliasArrayList = new ArrayList<>();
@@ -181,6 +197,12 @@ public class WikiRecord {
         return alias;
     }
 
+
+    /**
+     * 在某个title后新增别名
+     * @param title
+     * @param alias
+     */
     public static void addTitieAlias(String title,String alias){
         DAOBase[] contents = Alias.query().where("title = '"+ title +"'");
         if(contents.length==0){
@@ -198,6 +220,11 @@ public class WikiRecord {
         }
 
     }
+
+    /**
+     * 在别名列表里添加新的一项
+     * @param title
+     */
     public static void addTitle(String title){
         DAOBase[] contents = Alias.query().where("title = '"+ title +"'");
         if(contents.length==0){
@@ -208,7 +235,18 @@ public class WikiRecord {
         }
     }
 
-
+    public  static ArrayList<String> getAlias(){
+        DAOBase[] contents = Alias.query().where("");
+        ArrayList<String> aliaslists = new ArrayList<>();
+        for(int i = 0;i<contents.length;i++){
+            Alias temp = (Alias)contents[i];
+            String[] str = temp.alias.split("/");
+            for(int j = 0;j < str.length; j++){
+                aliaslists.add(str[j]);
+            }
+        }
+        return aliaslists;
+    }
 
     public WikiRecord(String title, int mainversion, int subversion) {
 
@@ -334,6 +372,7 @@ public class WikiRecord {
         try {
             if (rs.next()) {
                 date = rs.getString("max(timestamp)");
+                //System.out.println(rs.getString("title"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -342,13 +381,20 @@ public class WikiRecord {
         return date;
     }
 
-
+    public String getEditor(){
+        DAOBase[] contents = UpdateHistory.query().where("timestamp = '"+ getDate() +"'");
+        UpdateHistory updateHistory = (UpdateHistory)contents[0];
+        return updateHistory.username;
+    }
 
 
     public int getVisits(){
         return dao.visits;
     }
 
+    /**
+     * 删除条目，同时删除别名列表里的相应项
+     */
     public void delete() {
         dao.delete();
         DAOBase[] contents = Alias.query().where("title = '"+ title +"'");
@@ -361,8 +407,9 @@ public class WikiRecord {
 
     public static void main(String args[]){
         //addTitieAlias("测试条目","abc");
-        System.out.println(getTitleFromAlias("abc"));
-        //WikiRecord wikiRecord = new WikiRecord("测试条目");
+        //System.out.println(getTitleFromAlias("abc"));
+        WikiRecord wikiRecord = new WikiRecord("测试条目");
+        System.out.println(wikiRecord.getDate());
         //wikiRecord.delete();
     }
 }
