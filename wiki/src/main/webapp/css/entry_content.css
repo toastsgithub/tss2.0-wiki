@@ -1,5 +1,5 @@
 body{
-    /*background-color: #ffffff;*/
+    background-color: #ffffff;
     /*background-image: url("../resource/image/lightpaperfibers_@2X.png");*/
 }
 div{
@@ -32,4 +32,23 @@ div{
 }
 #access_times{
     margin-left: 20px;
+}
+#search_and_btn{
+    float: right;
+}
+#search_module{
+    height: 50px;
+    /*background-color: chocolate;*/
+}
+#search_input{
+    height: 25px;
+    width: 300px;
+    border: solid 1px #c0c0c0;
+    outline:none;
+}
+#search_btn{
+    color: #ffffff;
+    background-color: #3d95dd;
+    border:solid 0;
+
 }

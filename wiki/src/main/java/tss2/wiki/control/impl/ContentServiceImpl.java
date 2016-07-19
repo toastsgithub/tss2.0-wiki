@@ -49,6 +49,8 @@ public class ContentServiceImpl implements ContentService {
             tags[i] = arrTags.get(i).toString();
         }
         String content = map.get("content").toString();
+        String ref = map.get("reference").toString();
+        System.out.println("--->ref:"+ref);
         WikiUser user = new SessionServiceimpl().getUserBySession(data.getSessionID());
         entry.setContent(user.getUsername(), categories, tags, summary, content, true);
         return new CommonResult(0);
