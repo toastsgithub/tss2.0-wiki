@@ -7,9 +7,9 @@ import java.util.ArrayList;
  */
 public class OutLineTitleResult {
     private int exist = 0;
-    private ArrayList<String> titlelist;
+    private ArrayList<TitleAndSummary> titlelist;
 
-    public OutLineTitleResult(int exist, ArrayList<String> titlelist){
+    public OutLineTitleResult(int exist, ArrayList<TitleAndSummary> titlelist){
         this.exist = exist;
         this.titlelist = titlelist;
     }
@@ -22,7 +22,7 @@ public class OutLineTitleResult {
         this.exist = exist;
     }
 
-    public void setTitlelist(ArrayList<String> titlelist) {
+    public void setTitlelist(ArrayList<TitleAndSummary> titlelist) {
         this.titlelist = titlelist;
     }
 
@@ -30,7 +30,7 @@ public class OutLineTitleResult {
         return exist;
     }
 
-    public ArrayList<String> getTitlelist() {
+    public ArrayList<TitleAndSummary> getTitlelist() {
         return titlelist;
     }
 }

@@ -6,6 +6,7 @@ import tss2.wiki.dao.UpdateHistory;
 import tss2.wiki.dao.WikiEntry;
 import tss2.wiki.dao.core.DBAdmin;
 import tss2.wiki.domain.RecordsResult;
+import tss2.wiki.domain.TitleAndSummary;
 import tss2.wiki.util.FileUtil;
 import tss2.wiki.util.TimeUtil;
 
@@ -45,15 +46,15 @@ public class WikiRecord {
     }
 
     /**
-     * 根据category获取条目title
+     * 根据category获取条目title和summary
      * @param categories
      * @return
      */
-    public static ArrayList<String> getContentByCategories(String categories){
+    public static ArrayList<TitleAndSummary> getContentByCategories(String categories){
         DAOBase[] contents = WikiEntry.query().where("categories = '"+categories+"'");
-        ArrayList<String> result = new ArrayList<>();
+        ArrayList<TitleAndSummary> result = new ArrayList<>();
         for(int i = 0;i<contents.length;i++){
-            result.add( ((WikiEntry)contents[i]).title);
+            result.add(new TitleAndSummary(((WikiEntry)contents[i]).title,((WikiEntry)contents[i]).summery));
         }
         return result;
     }
@@ -121,7 +122,7 @@ public class WikiRecord {
         }
 
         for(int i = 0; i < alllist.size();i++){
-            if(search(alllist.get(i),search)){
+            if(search(alllist.get(i).contentPath,search)){
                 if(contain(result,alllist.get(i))){
                     System.out.println("----");
                 }else{
@@ -141,9 +142,9 @@ public class WikiRecord {
         }
         return false;
     }
-    private static boolean search(WikiEntry wikiEntry,String search){
-        WikiRecord wikiRecord = new WikiRecord(wikiEntry.title);
-        String content = wikiRecord.getContent();
+    private static boolean search(String path,String search){
+        //WikiRecord wikiRecord = new WikiRecord(wikiEntry.title);
+        String content = FileUtil.loadStringFromAbsolutePath(path);
         if(content==null){
             return false;
         }

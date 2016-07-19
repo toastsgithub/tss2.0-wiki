@@ -62,6 +62,8 @@
         <span id="nameTip" class="tip"></span>
     </div>
     <!--<hr>-->
+
+
     <div class="row minf" style="display: block;">
         <label class="namlab">类别：</label>
         <input id="category_input" class="minf_input"/>
@@ -151,135 +153,13 @@
 
 </script>
 <script>
-    var countries = [
-        { value: 'Andorra', data: 'AD' },
-        {value: 'Boston'},
-        {value:'China'},
-        {value:'Devon'},
-        {value:'England'},
-        { value: 'Zimbabwe', data: 'ZZ' }
-    ];
-
-    var type = [
-    ];
-    $(document).ready(function () {
-
-        document.getElementById('wiki_editor').innerHTML ='#Title\n\nContent';
-        $('#tags_input').autocomplete({
-            lookup: countries
-//            serviceUrl: '/content/tags'
-        });
-
-
-
-
-        $.get('/outline/list',null,function(data){
-            sourceData = data.data;
-            for(var i=0;i<sourceData.length;i++){
-                type.push(sourceData[i]);
-            }
-            $('#category_input').autocomplete({
-                lookup: type
-            });
-
-        });
-
-        $.ajax({
-            type: 'get',
-            url:'/content/tags',
-            success:function (data) {
-                for (var i=0;i<data.data.length;i++){
-                    countries.push({value:data.data[i]});
-                }
-//                countries.push({value:"hello"});
-//                alert("append done");
-            },
-            error:function () {
-                alert("网络连接不畅通");
-            }
-        });
-
-
-    });
-</script>
-
-
-<script>
-    $("#tags_input").keydown(function (e) {
-        if(e.keyCode==13){
-           var new_tag_to_add = document.getElementById('tags_input').value;
-            if(document.getElementById("tags_pool").childElementCount>0){
-                if(getTags()!=null && $.inArray(new_tag_to_add, getTags())>=0){
-                    document.getElementById("tagTip").innerHTML = "请勿选择重复标签!";
-                    return;
-                }
-            }
-            if(document.getElementById("tags_pool").childElementCount>=5){
-                document.getElementById("tagTip").innerHTML = "最多添加5个标签";
-                return;
-            }
-            document.getElementById("tagTip").innerHTML = "";
-            add_tags(new_tag_to_add);
-        }
-    })
-
-
-    function add_tags(tag) {
-//        alert("painting:"+tag);
-        if(tag=="")return;
-
-        var tag_pool = document.getElementById('tags_pool');
-        var new_tag = document.createElement("span");
-        var cancel_btn = document.createElement("label");
-
-//        cancel_btn
-        cancel_btn.innerHTML = "×";
-        cancel_btn.style.marginLeft = '3px';
-        cancel_btn.style.color = "white";
-        cancel_btn.style.cursor = 'pointer';
-
-        new_tag.innerHTML = tag;
-        new_tag.style.borderRadius = '3px';
-        new_tag.appendChild(cancel_btn);
-        new_tag.id = tag;
-        new_tag.style.backgroundColor = "#3B81C7";
-        new_tag.style.padding = '5px';
-        new_tag.style.marginRight = "20px";
-
-
-//        alert("create done");
-        tag_pool.appendChild(new_tag);
-//        alert("append done");
-        document.getElementById('tags_input').value = "";
-        cancel_btn.onclick = function(){tag_pool.removeChild(document.getElementById(tag));}
-
-    }
-</script>
-
-
-
-<script>
-    //验证类别是否存在alert("werty");
-
-    document.getElementById('category_input').onblur=function () {
-        if(this.value!=""){
-            if($.inArray(this.value, type)==-1){
-                document.getElementById('typeTip').innerHTML = "该类别不存在!"+this.value;
-                judge_type = false;
-            }else{
-                judge_type = true;
-                document.getElementById('typeTip').innerHTML = "";
-            }
-        }else{
-            judge_type = false;
-            document.getElementById('typeTip').innerHTML = "";
-        }
-    }
-</script>
-
-<script>
+    initialData();
+    testAll();
     get_welcome();
 </script>
+
+
+
 </body>
 
 
