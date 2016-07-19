@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
+ * Wiki条目的model
  *
  * Created by 羊驼 on 2016/7/10.
  */
@@ -151,7 +152,7 @@ public class WikiRecord {
         return content.contains(search);
     }
 
-    private static ArrayList<WikiEntry>  qsort(ArrayList<WikiEntry> wikiEntryArrayList){
+    private static ArrayList<WikiEntry> qsort(ArrayList<WikiEntry> wikiEntryArrayList){
         int l = wikiEntryArrayList.size();
         for(int i = 0; i<l; i++){
             for(int j = 0; j<l-i-1; j++){
@@ -166,12 +167,6 @@ public class WikiRecord {
         }
         return wikiEntryArrayList;
     }
-
-    public static void modifyCategories(String before,String after){
-
-    }
-
-
     /**
      * 在传入title时调用，将title/alias转化为title
      * @param alias
