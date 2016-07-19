@@ -2,12 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>createEntry</title>
+    <title>addAlias</title>
     <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
     <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/create_entry.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="../js/createClause.js"></script>
     <script src="../js/jquery.autocomplete.js"></script>
     <script src="../js/verificationLogin.js"></script>
 </head>
@@ -21,7 +20,7 @@
             <li class="dropdown">
                 <ul class="dropdown-menu">
                     <li><a href="../html/Outline.html" onclick="">管理大纲(管理员)</a></li>
-                    <li><a href="../html/Entry_editor.html">增加条目(管理员)</a></li>
+                    <li><a href="../html/create_Entry.html">增加条目(管理员)</a></li>
                     <li role="separator" class="divider"></li>
                     <li><a href="#">请求增加条目(敬请期待)</a></li>
                 </ul>
@@ -41,45 +40,8 @@
 
     </div>
 </nav>
-
-<div>
-    <div class="choice" style="margin-top: 10%" onmouseover=create_big() onmouseleave=create_small()>
-        <img src="../resource/icon/new.png" class="icon" id="new_entry">
-        <span class="icon_text" onclick="window.location='../html/Entry_editor.html'">创建一个新的条目</span>
-    </div>
-
-    <div class="choice" onmouseenter="exit_big()" onmouseleave="exit_small()">
-        <img src="../resource/icon/exit.png" class="icon" id="exit_entry">
-        <span class="icon_text" onclick="window.location='../html/addAlias.html'">为已存在条目添加别名</span>
-    </div>
-
-</div>
-
-
 </body>
-
 <script>
     get_welcome();
-    function create_big(){
-        var img = document.getElementById('new_entry');
-        img.style.height = '85px';
-        img.style.width = '85px';
-    }
-    function create_small() {
-        var img = document.getElementById('new_entry');
-        img.style.height = '80px';
-        img.style.width = '80px';
-    }
-    function exit_big(){
-        var img = document.getElementById('exit_entry');
-        img.style.height = '85px';
-        img.style.width = '85px';
-    }
-    function exit_small() {
-        var img = document.getElementById('exit_entry');
-        img.style.height = '80px';
-        img.style.width = '80px';
-    }
-
 </script>
 </html>
