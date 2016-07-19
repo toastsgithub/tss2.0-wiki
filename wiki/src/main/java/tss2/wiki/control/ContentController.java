@@ -108,6 +108,10 @@ public class ContentController {
         return ;
     }
 
+    /**
+     * 返回所有条目title和alias
+     * @return
+     */
     @RequestMapping(value = "/getTitleAndAlias", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
     public @ResponseBody ArrayList<String> getTitleAndAlias() {
         return getAlias();
