@@ -110,7 +110,7 @@ public class ContentController {
     /**
      * 关键字搜索
      * @param search
-     * @return 获取不带条目具体内容的条目列表
+     * @return 获取不带条目具体内容的条目列表（排好序）
      */
     @RequestMapping(value = "/fuzzysearch", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
     public @ResponseBody
