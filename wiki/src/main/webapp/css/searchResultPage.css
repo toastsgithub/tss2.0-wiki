@@ -1,5 +1,5 @@
 #search_input{
-    width: 300px;
+    width: 545px;
     height: 30px;
     border: solid 1px #c0c0c0;
     margin-left:10px;
@@ -23,4 +23,10 @@
 }
 #search_btn:active{
     background-color: #244e83;
+}
+#main_content{
+    /*background-color: #01a252;*/
+    width: 600px;
+    /*height: 1000px;*/
+    margin-left:115px;
 }

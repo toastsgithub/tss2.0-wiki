@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="../css/wiki_navigator.css">
     <link rel="stylesheet" href="../css/searchResultPage.css">
     <script src="../js/verificationLogin.js"></script>
+    <script src="../js/search_result.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-default" style="background-color: #ffffff">
@@ -61,7 +62,9 @@
     </div>
 </nav>
 
+<div id="main_content">
 
+</div>
 
 
 
@@ -70,6 +73,7 @@
     $(document).ready(function () {
         show_tips(1,"load at "+get_current_time());
         get_welcome();
+        search_and_load('test');
     });
 </script>
 </html>
