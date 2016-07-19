@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Map;
 
+import static tss2.wiki.model.WikiRecord.getAlias;
 import static tss2.wiki.model.WikiRecord.getContentByCategories;
 import static tss2.wiki.model.WikiRecord.recordFuzzySearch;
 
@@ -105,6 +106,11 @@ public class ContentController {
         WikiRecord wikiRecord = new WikiRecord(title);
         wikiRecord.addTitieAlias(title,alias);
         return ;
+    }
+
+    @RequestMapping(value = "/getTitleAndAlias", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
+    public @ResponseBody ArrayList<String> getTitleAndAlias() {
+        return getAlias();
     }
 
     /**

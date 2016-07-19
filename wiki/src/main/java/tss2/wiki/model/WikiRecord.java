@@ -235,7 +235,18 @@ public class WikiRecord {
         }
     }
 
-
+    public  static ArrayList<String> getAlias(){
+        DAOBase[] contents = Alias.query().where("");
+        ArrayList<String> aliaslists = new ArrayList<>();
+        for(int i = 0;i<contents.length;i++){
+            Alias temp = (Alias)contents[i];
+            String[] str = temp.alias.split("/");
+            for(int j = 0;j < str.length; j++){
+                aliaslists.add(str[j]);
+            }
+        }
+        return aliaslists;
+    }
 
     public WikiRecord(String title, int mainversion, int subversion) {
 
