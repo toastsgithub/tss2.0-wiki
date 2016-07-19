@@ -2,7 +2,10 @@
     margin-top: 20px;
 }
 #article_board{
-    background-color: #f6ebcb;
+    /*background-color: #f6ebcb;*/
+    background-color: #f6f6f6;
+    /*background-color: #f6ebcb;*/
+
 }
 #q,#entry_search{
     outline: none;

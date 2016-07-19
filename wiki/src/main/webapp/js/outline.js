@@ -328,7 +328,7 @@ function display_outline_content(outline_key) {
                 the_node.appendChild(the_link);
                 the_node.appendChild(the_abstract);
                 the_node.style.marginTop='10px';
-                the_node.style.backgroundColor='#f5f5f5';
+                the_node.style.backgroundColor='#f6ebcb';
                 new_node.appendChild(the_node);
                 new_node.style.marginBottom='10px';
                 right_part.appendChild(new_node);
