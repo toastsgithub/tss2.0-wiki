@@ -61,9 +61,14 @@ function addClause() {
 
     //mock data
     var mock_obj = new Object();
-    mock_obj.name = '百度一下';
+    mock_obj.name = '这是一条新闻';
     mock_obj.url = 'www.baidu.com';
     mock_obj.websiteName = '凤凰网';
+    
+    var mock_obj2 = new Object();
+    mock_obj2.name = '这是一条谷歌记录';
+    mock_obj2.url = 'www.google.com';
+    mock_obj2.websiteName = '谷歌';
     var data = {
         operation: "add", data: {
             time: time,
@@ -73,7 +78,7 @@ function addClause() {
             tags: tags,
             categories: catagories,
             content: content,
-            reference:[mock_obj]
+            reference:[mock_obj,mock_obj2]
         }
     };
     $.ajax({
