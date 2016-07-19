@@ -32,7 +32,7 @@
 
         <ul class="nav navbar-nav" style="margin-top: 10px;">
             <input type="text" id="search_input">
-            <button id="search_btn">search</button>
+            <button id="search_btn" onclick=search_on_input();>search</button>
         </ul>
 
         <ul class="nav navbar-nav">
@@ -71,11 +71,13 @@
 </body>
 <script>
     $(document).ready(function () {
-        var keyword = location.href;
+        var keyword = location.href.split('?')[1].split('=')[1];
+        keyword = decodeURI(keyword);
+        document.getElementById('search_input').value = keyword;
         show_tips(1,'key: '+keyword);
         show_tips(1,"load at "+get_current_time());
         get_welcome();
-        search_and_load('test');
+        search_and_load(keyword);
     });
 </script>
 </html>

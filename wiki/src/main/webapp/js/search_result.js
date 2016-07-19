@@ -55,3 +55,14 @@ function load_on_search_page(title,summary) {
     
     document.getElementById('main_content').appendChild(single_entry);
 }
+/**
+ * 从编辑框读取内容并跳入相关搜索页面
+ */
+function search_on_input() {
+    var keyword_input = document.getElementById('search_input').value;
+    // alert(keyword);
+    if(keyword_input=='')return;
+    var url = '../html/search_result_page.html?entry='+keyword_input;
+    // alert(url);
+    location.href = url;
+}
