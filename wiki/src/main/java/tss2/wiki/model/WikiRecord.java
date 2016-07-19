@@ -6,6 +6,7 @@ import tss2.wiki.dao.UpdateHistory;
 import tss2.wiki.dao.WikiEntry;
 import tss2.wiki.dao.core.DBAdmin;
 import tss2.wiki.domain.RecordsResult;
+import tss2.wiki.domain.TitleAndSummary;
 import tss2.wiki.util.FileUtil;
 import tss2.wiki.util.TimeUtil;
 
@@ -15,6 +16,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
+ * Wiki条目的model
  *
  * Created by 羊驼 on 2016/7/10.
  */
@@ -45,15 +47,15 @@ public class WikiRecord {
     }
 
     /**
-     * 根据category获取条目title
+     * 根据category获取条目title和summary
      * @param categories
      * @return
      */
-    public static ArrayList<String> getContentByCategories(String categories){
+    public static ArrayList<TitleAndSummary> getContentByCategories(String categories){
         DAOBase[] contents = WikiEntry.query().where("categories = '"+categories+"'");
-        ArrayList<String> result = new ArrayList<>();
+        ArrayList<TitleAndSummary> result = new ArrayList<>();
         for(int i = 0;i<contents.length;i++){
-            result.add( ((WikiEntry)contents[i]).title);
+            result.add(new TitleAndSummary(((WikiEntry)contents[i]).title,((WikiEntry)contents[i]).summery));
         }
         return result;
     }
@@ -121,7 +123,7 @@ public class WikiRecord {
         }
 
         for(int i = 0; i < alllist.size();i++){
-            if(search(alllist.get(i),search)){
+            if(search(alllist.get(i).contentPath,search)){
                 if(contain(result,alllist.get(i))){
                     System.out.println("----");
                 }else{
@@ -141,16 +143,16 @@ public class WikiRecord {
         }
         return false;
     }
-    private static boolean search(WikiEntry wikiEntry,String search){
-        WikiRecord wikiRecord = new WikiRecord(wikiEntry.title);
-        String content = wikiRecord.getContent();
+    private static boolean search(String path,String search){
+        //WikiRecord wikiRecord = new WikiRecord(wikiEntry.title);
+        String content = FileUtil.loadStringFromAbsolutePath(path);
         if(content==null){
             return false;
         }
         return content.contains(search);
     }
 
-    private static ArrayList<WikiEntry>  qsort(ArrayList<WikiEntry> wikiEntryArrayList){
+    private static ArrayList<WikiEntry> qsort(ArrayList<WikiEntry> wikiEntryArrayList){
         int l = wikiEntryArrayList.size();
         for(int i = 0; i<l; i++){
             for(int j = 0; j<l-i-1; j++){
@@ -165,12 +167,6 @@ public class WikiRecord {
         }
         return wikiEntryArrayList;
     }
-
-    public static void modifyCategories(String before,String after){
-
-    }
-
-
     /**
      * 在传入title时调用，将title/alias转化为title
      * @param alias

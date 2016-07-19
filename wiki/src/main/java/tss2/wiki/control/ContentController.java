@@ -88,13 +88,12 @@ public class ContentController {
      */
     @RequestMapping(value = "/searchByCategories", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
     public @ResponseBody OutLineTitleResult searchByCategories(@RequestParam(value = "categories") String categories) {
-        ArrayList<String> stringArrayList = getContentByCategories(categories);
+        ArrayList<TitleAndSummary> stringArrayList = getContentByCategories(categories);
         if(stringArrayList.size()==0){
             return new OutLineTitleResult(0);
         }
         return new OutLineTitleResult(1,stringArrayList);
     }
-
 
     /**
      *  对某项条目增加别名
@@ -123,8 +122,7 @@ public class ContentController {
      * @return 获取不带条目具体内容的条目列表（排好序）
      */
     @RequestMapping(value = "/fuzzysearch", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
-    public @ResponseBody
-    RecordsResult fuzzySearch(@RequestParam(value = "search") String search) {
+    public @ResponseBody RecordsResult fuzzySearch(@RequestParam(value = "search") String search) {
         RecordsResult recordsResult = recordFuzzySearch(search);
         if(recordsResult.getList().size()==0){
             return new RecordsResult(0);
@@ -143,6 +141,7 @@ public class ContentController {
         if (wikiRecord.getContent() == null) {
             return new WikiResult(0);
         }
+        wikiRecord.addVisit();
         return new WikiResult(1, wikiRecord);
     }
 

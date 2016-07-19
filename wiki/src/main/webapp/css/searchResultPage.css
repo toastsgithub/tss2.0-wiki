@@ -1,0 +1,32 @@
+#search_input{
+    width: 545px;
+    height: 30px;
+    border: solid 1px #c0c0c0;
+    margin-left:10px;
+    outline: none;
+    transition: border .5s;
+}
+#search_input:hover,#search_input:focus{
+    border-color: #3B81C7;
+    transition: border .5s;
+}
+#search_btn{
+    height: 30px;
+    margin-left:0;
+    background-color: #3B81C7;
+    color: #ffffff;
+    border:  solid 0;
+
+}
+#search_btn:hover{
+    background-color: #3d95dd;
+}
+#search_btn:active{
+    background-color: #244e83;
+}
+#main_content{
+    /*background-color: #01a252;*/
+    width: 600px;
+    /*height: 1000px;*/
+    margin-left:115px;
+}

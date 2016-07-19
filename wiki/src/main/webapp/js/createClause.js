@@ -43,6 +43,13 @@ function addClause() {
     var username = get_user();
     alert("current user-->"+username);
     var content = show_markdown();
+    if(summary==''){
+        if(content.length>100) {
+            summary = content.substring(0, 100);
+        }else{
+            summary = content;
+        }
+    }
     // alert("----->content--->"+content);
     // content = "###this is content";
     // alert("info");

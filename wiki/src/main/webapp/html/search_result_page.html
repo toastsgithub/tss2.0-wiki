@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>搜索结果</title>
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <!--<script src="../js/outline.js"></script>-->
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+    <!--<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">-->
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <!--以下是tooltips的依赖-->
+    <script src="../js/messenger.min.js"></script>
+    <script src="../js/messenger-theme-future.js"></script>
+    <script src="../js/wiki_utils.js"></script>
+    <link rel="stylesheet" href="../css/messenger-theme-future.css">
+    <link rel="stylesheet" href="../css/messenger.css">
+    <!--END tooltips-->
+    <link rel="stylesheet" href="../css/wiki_navigator.css">
+    <link rel="stylesheet" href="../css/searchResultPage.css">
+    <script src="../js/verificationLogin.js"></script>
+    <script src="../js/search_result.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-default" style="background-color: #ffffff">
+    <div class="container-fluid">
+        <a class="navbar-header" href="../html/Outline.html" style="margin-top: 10px;">
+            <img  src="../resource/icon/tss_logo@2x.png" alt="" style="height: 32px">
+        </a>
+
+        <ul class="nav navbar-nav" style="margin-top: 10px;">
+            <input type="text" id="search_input">
+            <button id="search_btn">search</button>
+        </ul>
+
+        <ul class="nav navbar-nav">
+            <li class="dropdown">
+                <ul class="dropdown-menu">
+                    <li><a href="../html/Outline.html" onclick="">管理大纲(管理员)</a></li>
+                    <li><a href="../html/Entry_editor.html">增加条目(管理员)</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">请求增加条目(敬请期待)</a></li>
+                </ul>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">选项<span class="caret"></span></a>
+            </li>
+            <li id="login_button"></li>
+        </ul>
+
+
+
+        <ul class="nav navbar-nav" style="float: right">
+            <li class="dropdown">
+                <ul class="dropdown-menu">
+                    <li><a href="" onclick="clearLogin();">退出登录</a></li>
+                </ul>
+                <a href="#" id="welcome_tip" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
+            </li>
+        </ul>
+
+    </div>
+</nav>
+
+<div id="main_content">
+
+</div>
+
+
+
+</body>
+<script>
+    $(document).ready(function () {
+        var keyword = location.href;
+        show_tips(1,'key: '+keyword);
+        show_tips(1,"load at "+get_current_time());
+        get_welcome();
+        search_and_load('test');
+    });
+</script>
+</html>
