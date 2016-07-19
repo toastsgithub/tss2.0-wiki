@@ -1,0 +1,39 @@
+
+@font-face {
+    font-family: 'myPingFang';
+    src: url('../resource/font/SanFranciscoDisplayUltralight.eot');
+    src: url('../resource/font/SanFranciscoDisplayUltralight.eot') format('embedded-opentype'),
+    url('../resource/font/SanFranciscoDisplayUltralight.woff2') format('woff2'),
+    url('../resource/font/SanFranciscoDisplayUltralight.woff') format('woff'),
+    url('../resource/font/SanFranciscoDisplayUltralight.ttf') format('truetype'),
+    url('../resource/font/SanFranciscoDisplayUltralight.svg#SanFranciscoDisplayUltralight') format('svg');
+}
+
+.icon{
+    height: 80px;
+    width: 80px;
+}
+
+.choice{
+    margin-left: 35%;
+    margin-top: 40px;
+    width: 35%;
+}
+
+.icon_text{
+    margin-left: 30px;
+    font-size: 30px;
+    font-family: myPingFang;
+    /*font-weight: lighter;*/
+    font-weight: 100;
+    cursor: pointer;
+    color: gray;
+
+}
+
+.setbackimg{
+    background-image: url(../resource/icon/background.png);
+    background-position: center;
+    background-repeat: repeat-y;
+
+}
