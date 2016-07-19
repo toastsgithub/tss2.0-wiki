@@ -66,6 +66,13 @@
     </div>
 
     <div id="right_part" class="col-xs-10">
+
+        <div id="search_module">
+            <div id="search_and_btn">
+                <input type="text" id="search_input">
+                <button id="search_btn" onclick=search_entry();>search</button>
+            </div>
+        </div>
         <div id="article_info">
             <div id="article_title">title</div>
             <div id="last_update_time">最后更新日期:</div>
@@ -112,7 +119,13 @@
 //        });
 //        alert("complete");
 
-    })
+    });
+    $("#search_input").keydown(function (e){
+        if (e.keyCode==13){
+//            var keyword = document.getElementById('search_input').value;
+            search_entry();
+        }
+    });
 </script>
 
 <script>get_welcome();</script>

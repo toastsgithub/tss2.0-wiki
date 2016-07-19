@@ -79,5 +79,10 @@
         get_welcome();
         search_and_load(keyword);
     });
+    $('#search_input').keydown(function (e) {
+        if(e.keyCode==13){
+            search_on_input();
+        }
+    });
 </script>
 </html>

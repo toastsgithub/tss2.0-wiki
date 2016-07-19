@@ -38,8 +38,9 @@ function search_and_load(keyword) {
 function load_on_search_page(title,summary) {
     // show_tips(1,title+" "+summary);
     var single_entry = document.createElement('div');
-    single_entry.style.height = '80px';
+    single_entry.style.maxHeight = '80px';
     single_entry.style.width = '100%';
+    // single_entry.style.backgroundColor = 'blue';
     // single_entry.style.backgroundColor = 'chocolate';
     single_entry.style.marginTop = '20px';
     var entry_title = document.createElement('a');
@@ -50,6 +51,10 @@ function load_on_search_page(title,summary) {
     var entry_summary = document.createElement('div');
     entry_summary.innerHTML = summary;
     entry_summary.style.color = 'rgb(151,151,151)';
+    // entry_summary.style.backgroundColor ='red';
+    entry_summary.style.maxHeight = '60px';
+    entry_summary.style.overflow ='hidden';
+    entry_summary.style.textOverflow = 'ellipsis';
     single_entry.appendChild(entry_title);
     single_entry.appendChild(entry_summary);
     

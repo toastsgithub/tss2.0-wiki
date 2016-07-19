@@ -52,4 +52,13 @@ function load_content(title){
     });
 }
 
+/**
+ * 读取搜索框内的内容并跳转到搜索结果页面
+ */
+function search_entry() {
+    var keyword = document.getElementById('search_input').value;
+    if(keyword=='')return;
+    var url = '../html/search_result_page.html?entry='+keyword;
+    location.href = url;
+}
 
