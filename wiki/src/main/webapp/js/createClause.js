@@ -5,7 +5,7 @@
 
 
 var countries = [
-    { value: 'Andorra', data: 'AD' },
+    {value: 'Andorra', data: 'AD' },
     {value: 'Boston'},
     {value:'China'},
     {value:'Devon'},
@@ -257,6 +257,24 @@ function testType(){
     }
 }
 
+function testAlias() {
+
+}
+
+
+var alias = [];
+function getAlias(){
+    var alias_input = document.getElementById('alias_input');
+    alias_input.keydown(function () {
+        if(e.keydown()=='/'){
+            var data = alias_input.value;
+            
+        }
+    });
+
+
+}
+
 
 function getTime() {
     var date = new Date();
@@ -280,3 +298,4 @@ function getTags() {
     }
     return  tags;
 }
+
