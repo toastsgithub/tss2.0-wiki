@@ -52,6 +52,17 @@ public class OutLineController {
         wikiOutline.setMap(map);
         return new CommonResult(0);
     }
+    /**
+     *获取大纲列表
+     * @return
+     */
+    @RequestMapping(value = "getTest", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
+    public @ResponseBody Map getOutlineTest() {
+        wikiOutLineForTest wikiOutline = new wikiOutLineForTest();
+        //System.out.println(wikiOutline.getSummary());
+        return wikiOutline.getSummary();
+    }
+
 
     /**
      * 更改条目
