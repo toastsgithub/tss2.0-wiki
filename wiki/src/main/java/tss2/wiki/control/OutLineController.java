@@ -9,6 +9,7 @@ import tss2.wiki.domain.CommonResult;
 import tss2.wiki.model.WikiOutline;
 import tss2.wiki.model.WikiSession;
 import tss2.wiki.model.WikiUser;
+import tss2.wiki.model.wikiOutLineForTest;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -49,6 +50,24 @@ public class OutLineController {
         if (user.getType() < WikiUser.USER_ADMIN) return new CommonResult(1, "Authentication Failed");
         WikiOutline wikiOutline = new WikiOutline();
         wikiOutline.setMap(map);
+        return new CommonResult(0);
+    }
+
+    /**
+     * 更改条目
+     * @param map
+     */
+    @RequestMapping(value = "Test", method = RequestMethod.PUT, produces="application/json;charset=UTF-8")
+    public @ResponseBody
+    CommonResult SummaryTest(HttpServletRequest request, @RequestBody Map map) {
+        System.out.println(map);
+        WikiSession session = sessionService.checkUser(request);
+        if (!session.isValid()) return new CommonResult(1, "Authentication Failed");
+        WikiUser user = session.getUser();
+        if (user.getType() < WikiUser.USER_ADMIN) return new CommonResult(1, "Authentication Failed");
+
+        wikiOutLineForTest wikiOutLineForTest = new wikiOutLineForTest();
+        wikiOutLineForTest.setMap(map);
         return new CommonResult(0);
     }
 
