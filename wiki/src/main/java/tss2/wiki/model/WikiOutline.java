@@ -29,7 +29,7 @@ public class WikiOutline {
         }
         if (result instanceof Map) {
             System.out.println("load successfully");
-            System.out.println();
+            //System.out.println();
             map = (Map<String, ArrayList<Map>>) result;
         }
     }

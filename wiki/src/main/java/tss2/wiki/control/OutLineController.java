@@ -31,7 +31,7 @@ public class OutLineController {
     @RequestMapping(value = "", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
     public @ResponseBody Map getOutline() {
         WikiOutline wikiOutline = new WikiOutline();
-        System.out.println(wikiOutline.getSummary());
+        //System.out.println(wikiOutline.getSummary());
         return wikiOutline.getSummary();
     }
 
@@ -72,7 +72,7 @@ public class OutLineController {
     OutLineResult getOutlineList() {
         OutLineResult result = new OutLineResult();
         WikiOutline wikiOutline = new WikiOutline();
-        System.out.println(wikiOutline.getSummary());
+        //System.out.println(wikiOutline.getSummary());
         visit(wikiOutline.getSummary(), result);
         return result;
     }
