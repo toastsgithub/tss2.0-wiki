@@ -5,10 +5,11 @@
     <title>addAlias</title>
     <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
     <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="../js/jquery.autocomplete.js"></script>
     <script src="../js/verificationLogin.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-default" style="background-color: #ffffff">
@@ -40,7 +41,27 @@
 
     </div>
 </nav>
+
+
+<div style="margin-left: 40px">
+    <div>
+        <label style="margin-right: 30px">别名:</label>
+        <input style="width: 20%">
+    </div>
+    <hr>
+    <div>
+        <input style="width: 20%">
+        <span><button class="btn btn-primary" type="button">搜索</button></span>
+    </div>
+
+    <div id="outline_article" class="row" style="margin-top: 20px; width: 25%">
+        <div id="outline" class="col-sm-6"></div>
+        <div id="article_board" class="col-sm-6"></div>
+    </div>
+</div>
 </body>
+
+<script src="../js/add_alias.js"></script>
 <script>
     get_welcome();
 </script>

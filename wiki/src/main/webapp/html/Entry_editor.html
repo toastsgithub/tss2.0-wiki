@@ -64,6 +64,13 @@
     <!--<hr>-->
 
 
+    <div id="alias" class="row minf">
+        <label class="namlab">别名: </label>
+        <input id="alias_input" class="minf_input"/>
+        <span id="aliasTip" class="tip"></span>
+    </div>
+
+
     <div class="row minf" style="display: block;">
         <label class="namlab">类别：</label>
         <input id="category_input" class="minf_input"/>
@@ -72,7 +79,10 @@
 
     <div class="row minf">
         <label class="namlab">标签：</label>
-        <input id="tags_input" class="minf_input" data-role="tagsinput"/>
+        <div style="width: 20%">
+            <div style="border: solid 1px black; width: 100%"></div>
+            <input id="tags_input" data-role="tagsinput" style="width: 20px;float: right"/>
+        </div>
         <span id="tagTip" class="tip"></span>
     </div>
 
