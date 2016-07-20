@@ -46,8 +46,10 @@ public class WikiMessage {
             um.isread = 0;
             um.save();
         }
-        dao.sent = 1;
-        dao.save();
+        DAOBase[] ms = Message.query().where("messageID = '" + dao.messageID + "'");
+        Message m = (Message) ms[0];
+        m.sent = 1;
+        m.save();
     }
 
     public String[] getToUsers() {

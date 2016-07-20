@@ -95,6 +95,6 @@ public class WikiUser {
 
     public static void main(String[] args) {
         WikiUser user = new WikiUser("dzm14");
-        user.sendMessage("123", "测试消息", "恭喜您看到了这个测试消息");
+        user.sendMessage("12", "测试消息", "恭喜您看到了这个测试消息");
     }
 }

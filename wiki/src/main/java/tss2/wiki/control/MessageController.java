@@ -84,7 +84,7 @@ public class MessageController {
     private SessionService sessionService = new SessionServiceimpl();
 
     public static void main(String[] args) {
-        WikiMessage message = WikiMessage.getMessage("yKCN4OYFNnu5z7vd");
+        WikiMessage message = WikiMessage.getMessage("c202Hw1CB3SmfXpD");
         message.send();
     }
 }

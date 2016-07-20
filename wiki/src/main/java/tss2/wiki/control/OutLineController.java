@@ -9,6 +9,7 @@ import tss2.wiki.domain.CommonResult;
 import tss2.wiki.model.WikiOutline;
 import tss2.wiki.model.WikiSession;
 import tss2.wiki.model.WikiUser;
+import tss2.wiki.model.wikiOutLineForTest;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ public class OutLineController {
     @RequestMapping(value = "", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
     public @ResponseBody Map getOutline() {
         WikiOutline wikiOutline = new WikiOutline();
-        System.out.println(wikiOutline.getSummary());
+        //System.out.println(wikiOutline.getSummary());
         return wikiOutline.getSummary();
     }
 
@@ -49,6 +50,35 @@ public class OutLineController {
         if (user.getType() < WikiUser.USER_ADMIN) return new CommonResult(1, "Authentication Failed");
         WikiOutline wikiOutline = new WikiOutline();
         wikiOutline.setMap(map);
+        return new CommonResult(0);
+    }
+    /**
+     *获取大纲列表
+     * @return
+     */
+    @RequestMapping(value = "getTest", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
+    public @ResponseBody Map getOutlineTest() {
+        wikiOutLineForTest wikiOutline = new wikiOutLineForTest();
+        //System.out.println(wikiOutline.getSummary());
+        return wikiOutline.getSummary();
+    }
+
+
+    /**
+     * 更改条目
+     * @param map
+     */
+    @RequestMapping(value = "Test", method = RequestMethod.PUT, produces="application/json;charset=UTF-8")
+    public @ResponseBody
+    CommonResult SummaryTest(HttpServletRequest request, @RequestBody Map map) {
+        System.out.println(map);
+        WikiSession session = sessionService.checkUser(request);
+        if (!session.isValid()) return new CommonResult(1, "Authentication Failed");
+        WikiUser user = session.getUser();
+        if (user.getType() < WikiUser.USER_ADMIN) return new CommonResult(1, "Authentication Failed");
+
+        wikiOutLineForTest wikiOutLineForTest = new wikiOutLineForTest();
+        wikiOutLineForTest.setMap(map);
         return new CommonResult(0);
     }
 
@@ -72,7 +102,7 @@ public class OutLineController {
     OutLineResult getOutlineList() {
         OutLineResult result = new OutLineResult();
         WikiOutline wikiOutline = new WikiOutline();
-        System.out.println(wikiOutline.getSummary());
+        //System.out.println(wikiOutline.getSummary());
         visit(wikiOutline.getSummary(), result);
         return result;
     }
