@@ -32,3 +32,33 @@
     /*border: solid 1px #3f82c5!important;*/
     /*-webkit-transition: border .5s;*/
 /*}*/
+
+#search_bar{
+    height: 40px;
+    /*background-color: chocolate;*/
+}
+#search_module{
+    float: right;
+}
+#search_input{
+    margin-top:5px;
+    margin-bottom:5px;
+    height: 30px;
+    width: 400px;
+    border: solid 1px #d7d7d7;
+    outline:none;
+    -webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    -ms-transition: all .5s;
+    -o-transition: all .5s;
+    transition: all .5s;
+}
+#search_input:hover,#search_input:focus{
+    border-color: #3d95dd;
+}
+#search_btn{
+    background-color: #3d95dd;
+    color:white;
+    border:solid 0;
+    height: 30px;
+}

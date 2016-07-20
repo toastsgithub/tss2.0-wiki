@@ -4,6 +4,7 @@
 
 // var rawData;
 var all_outline_content=[];
+var current_outline_content = [];
 $.get(
     "/outline",
     null,
@@ -77,20 +78,22 @@ function save_outline() {
  * 无条件存储当前的树的结构以及树节点下的条目内容
  */
 function save_outline_and_entry() {
-    var data_obj = $('#moutline').jstree(true).get_json();
+    var data_obj = $('#moutline').jstree(true).get_json('#',{flat:true,no_state:true,no_data:false});
     
-    // alert(data_obj[0].type);
-    add_all_children(data_obj[0]);
-    $.ajax({
-        url:'/outline/getTest',
-        type:'put',
-        success:function () {
-            alert('success');
-        },
-        error:function () {
-            alert('error');
-        }
-    });
+    alert(JSON.stringify(data_obj));
+    // add_all_children(data_obj[0]);
+    // $.ajax({
+    //     url:'/outline/Test',
+    //     type:'put',
+    //     contentType:'application/json',
+    //     data:JSON.stringify((data_obj[0])),
+    //     success:function () {
+    //         alert('success');
+    //     },
+    //     error:function () {
+    //         alert('error');
+    //     }
+    // });
 }
 
 function add_all_children(node) {
@@ -333,16 +336,21 @@ function load_all_outline_content(){
 function display_outline_content(outline_key) {
     remove_all_child('article_content');
     var has_detected = false;
+    
     for (x in all_outline_content){
 
         if(all_outline_content[x].name == outline_key){
             // alert(JSON.stringify(all_outline_content[x]));
             has_detected = true;
             for (y in all_outline_content[x].content){
+                
                 var content_title = all_outline_content[x].content[y].title;
-
                 //这里是内容摘要
                 var content_abstract = all_outline_content[x].content[y].summary;
+                var temp_obj = new Object();
+                temp_obj.title = content_title;
+                temp_obj.summary = content_abstract;
+                current_outline_content.push(temp_obj);
 
                 // alert(content_title+"]]]");
                 var right_part = document.getElementById('article_content');
@@ -370,6 +378,8 @@ function display_outline_content(outline_key) {
     }
     if(!has_detected){
         load_empty_tip();
+    }else{
+        load_page_btns(current_outline_content);
     }
 
     // var right_part = document.getElementById('article_board');
@@ -416,4 +426,24 @@ function load_empty_tip(){
     embarrasing_text.innerHTML = '这非常的尴尬,但是这个条目下没有内容';
     embarrasing_text.style.fontSize = '20px';
     document.getElementById('article_content').appendChild(embarrassing_div);
+}
+/**
+ * 根据内容数目加载页面的按钮数
+ */
+function load_page_btns(data){
+    alert(JSON.stringify(data));
+    alert(data.length);
+
+    var nav = document.createElement('nav');
+    var ul = document.createElement('ul');
+    ul.className = 'pagination';
+    var li = document.createElement('li');
+    li.appendChild()
+}
+/**
+ *
+ * @param page_num
+ */
+function jump_on_page(page_num) {
+
 }

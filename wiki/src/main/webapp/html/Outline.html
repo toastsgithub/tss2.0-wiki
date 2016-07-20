@@ -80,7 +80,12 @@
 
             </div>
             <div id="article_board" class="col-sm-9">
-                <div id="search_bar"></div>
+                <div id="search_bar">
+                    <div id="search_module">
+                        <input type="text" id="search_input">
+                        <button id="search_btn">search</button>
+                    </div>
+                </div>
                 <div id="article_content"></div>
                 <!--<div id="embarrassing_div">-->
                     <!--<img src="../resource/image/embarrassing_black.png" alt="" style="width: 300px">-->
@@ -105,12 +110,15 @@
                         </li>
                     </ul>
                 </nav>
+
+                <div id="navigator_part"></div>
             </div>
         </div>
     </div>
 
 <!--<button onclick=save_outline()>save</button>-->
-<button onclick=save_outline_and_entry();>select</button>
+<!--<button onclick=save_outline_and_entry();>select</button>-->
+<!--<button onclick=get_test();>get test</button>-->
 </body>
 <script src="../js/outline.js"></script>
 </html>
@@ -126,9 +134,18 @@
         load_all_outline_content();
 
     });
-function temp(param) {
-    alert("hello"+param);
+function get_test() {
+   $.ajax({
+       url:'/outline/getTest',
+       success:function (data) {
+           alert(JSON.stringify(data));
+       },
+       error:function(data){
+           alert('error')
+       }
+   });
 }
+
 </script>
 
 <script>
