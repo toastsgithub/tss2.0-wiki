@@ -8,6 +8,7 @@ import tss2.wiki.domain.*;
 import tss2.wiki.control.service.ContentService;
 import tss2.wiki.control.impl.ContentServiceImpl;
 import tss2.wiki.model.WikiRecord;
+import tss2.wiki.model.WikiReference;
 import tss2.wiki.model.WikiSession;
 import tss2.wiki.model.WikiUser;
 import tss2.wiki.vo.WikiEntryVO;
@@ -41,6 +42,7 @@ public class ContentController {
      *     entry_title: 'c++',
      *     tags: '软件工程/软件开发/需求工程',
      *     content: 'markdown正文',
+     *     reference: '',
      *   }
      * }
      * @param map
@@ -138,11 +140,12 @@ public class ContentController {
     @RequestMapping(value = "/wiki/{title}", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
     public @ResponseBody WikiResult doGet(@PathVariable String title) {
         WikiRecord wikiRecord = new WikiRecord(title);
+        WikiReference wikiReference = new WikiReference(title);
         if (wikiRecord.getContent() == null) {
             return new WikiResult(0);
         }
         wikiRecord.addVisit();
-        return new WikiResult(1, wikiRecord);
+        return new WikiResult(1, wikiRecord,wikiReference);
     }
 
     /**

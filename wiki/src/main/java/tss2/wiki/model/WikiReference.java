@@ -1,7 +1,10 @@
 package tss2.wiki.model;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import tss2.wiki.dao.Reference;
 import tss2.wiki.dao.core.DAOBase;
+import tss2.wiki.util.TimeUtil;
 
 import java.util.ArrayList;
 
@@ -11,17 +14,13 @@ import java.util.ArrayList;
 public class WikiReference {
 
     public WikiReference(String title) {
+        this.title = title;
         loadReferences();
+
     }
 
-    public void addReference(String name, String url, String website) {
-        Reference reference = new Reference();
-        reference.name = name;
-        reference.url = url;
-        reference.websiteName = website;
-        reference.title = getTitle();
-        reference.save();
-        dao.add(reference);
+    public void modify(ArrayList reference){
+        changeToReference(reference);
     }
 
     private void loadReferences() {
@@ -32,13 +31,45 @@ public class WikiReference {
         }
     }
 
-    public void removeReference(String name) {
+    private void changeToReference(ArrayList reference){
+        //JSONArray jsonArray = JSONArray.fromObject(reference);
+        ArrayList<Reference> referenceArrayList = new ArrayList<>();
+        for(int i= 0 ; i < reference.size(); i++ ){
+            JSONObject jsonObject = JSONObject.fromObject(reference.get(i));
+            Reference temp = new Reference();
+            temp.title = title;
+            temp.name = jsonObject.getString("name");
+            temp.url = jsonObject.getString("url");
+            temp.websiteName = jsonObject.getString("websiteName");
+            temp.timestamp = TimeUtil.getTimeStampByDate();
+            referenceArrayList.add(temp);
+        }
+        modifyReference(referenceArrayList);
+    }
+
+    private void addReference(ArrayList<Reference> referenceArrayList) {
+        for(int i = 0;i< referenceArrayList.size();i++){
+            referenceArrayList.get(i).save();
+            dao.add(referenceArrayList.get(i));
+        }
+
+    }
+
+    private void removeReference(){
         for (int i = 0; i < dao.size(); i++) {
-            if (dao.get(i).name.equals(name)) {
+            if (dao.get(i).title.equals(title)) {
                 dao.get(i).delete();    // delete from the database
                 dao.remove(i);          // delete from the list
                 --i;
             }
+        }
+    }
+
+    private void modifyReference(ArrayList<Reference> referenceArrayList) {
+        this.removeReference();
+        for(int i = 0;i< referenceArrayList.size();i++){
+            referenceArrayList.get(i).save();
+            dao.add(referenceArrayList.get(i));
         }
     }
 
@@ -50,6 +81,11 @@ public class WikiReference {
         this.title = title;
     }
 
+    public ArrayList<Reference> getDao() {
+        return dao;
+    }
+
     private String title;
     private ArrayList<Reference> dao;
+
 }
