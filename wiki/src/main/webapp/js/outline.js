@@ -73,6 +73,34 @@ function save_outline() {
     });
     
 }
+/**
+ * 无条件存储当前的树的结构以及树节点下的条目内容
+ */
+function save_outline_and_entry() {
+    var data_obj = $('#moutline').jstree(true).get_json();
+    
+    // alert(data_obj[0].type);
+    add_all_children(data_obj[0]);
+    $.ajax({
+        url:'/outline/getTest',
+        type:'put',
+        success:function () {
+            alert('success');
+        },
+        error:function () {
+            alert('error');
+        }
+    });
+}
+
+function add_all_children(node) {
+    for(x in node.children){
+        // alert(node.children[x].text);
+        //TODO 添加所有的大纲下的子节点
+        node.children[x].entries = [];
+        add_all_children(node.children[x]);
+    }
+}
 
 function show(rowData) {
     var outline = document.getElementById("moutline");
@@ -303,11 +331,13 @@ function load_all_outline_content(){
  */
 //var zhaiyao=["\n  摘要：123321，上山打老虎怎么样SDHCUSIC会发生丢还没看到妇女金额共和国viwegrjhvoigerhvoiejrpvjrepojvifdjvjleq 呢抗日女哦ieqrjfqpoewojgnfkdvfre分部日哈佛"];
 function display_outline_content(outline_key) {
-    remove_all_child('article_board');
+    remove_all_child('article_content');
+    var has_detected = false;
     for (x in all_outline_content){
 
         if(all_outline_content[x].name == outline_key){
             // alert(JSON.stringify(all_outline_content[x]));
+            has_detected = true;
             for (y in all_outline_content[x].content){
                 var content_title = all_outline_content[x].content[y].title;
 
@@ -315,7 +345,7 @@ function display_outline_content(outline_key) {
                 var content_abstract = all_outline_content[x].content[y].summary;
 
                 // alert(content_title+"]]]");
-                var right_part = document.getElementById('article_board');
+                var right_part = document.getElementById('article_content');
                 var new_node = document.createElement('div');
                 // document.getElementById('article_board').style.backgroundColor='red';
                 var the_node = document.createElement('div');
@@ -324,16 +354,22 @@ function display_outline_content(outline_key) {
                 var url = '../html/entry_content.html?entry='+content_title;
                 the_link.href = url;
                 the_link.innerHTML = content_title;
+                the_link.style.fontSize = '20px';
                 the_abstract.innerHTML = content_abstract;
                 the_node.appendChild(the_link);
                 the_node.appendChild(the_abstract);
                 the_node.style.marginTop='10px';
-                the_node.style.backgroundColor='#afd9ee';
+                new_node.style.backgroundColor='#afd9ee';
+                new_node.style.height = '70px';
                 new_node.appendChild(the_node);
                 new_node.style.marginBottom='10px';
+                new_node.onclick = Function('temp("hello");');
                 right_part.appendChild(new_node);
             }
         }
+    }
+    if(!has_detected){
+        load_empty_tip();
     }
 
     // var right_part = document.getElementById('article_board');
@@ -365,4 +401,19 @@ function get_selected_node() {
     var selected_node = $('#moutline').jstree(true).get_selected(true)[0].text;
     alert('selected:'+selected_node);
     return selected_node;
+}
+/**
+ * 加载目录下内容为空的插画提示
+ */
+function load_empty_tip(){
+    var embarrassing_div = document.createElement('div');
+    var image = document.createElement('img');
+    var embarrasing_text = document.createElement('div');
+    embarrassing_div.appendChild(image);
+    embarrassing_div.appendChild(embarrasing_text);
+    image.src = '../resource/image/embarrassing_black.png';
+    image.style.width = '350px';
+    embarrasing_text.innerHTML = '这非常的尴尬,但是这个条目下没有内容';
+    embarrasing_text.style.fontSize = '20px';
+    document.getElementById('article_content').appendChild(embarrassing_div);
 }

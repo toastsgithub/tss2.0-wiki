@@ -1,11 +1,19 @@
+#body{
+    /*padding: 0;*/
+}
 #outline_article{
-    margin-top: 20px;
+    margin-top: 50px;
+    /*background-color: red;*/
 }
 #article_board{
     /*background-color: #f6ebcb;*/
     background-color: #f6f6f6;
     /*background-color: #afd9ee;*/
 
+}
+#moutline{
+    background-color: #ffffff;
+    height: 700px;
 }
 #q,#entry_search{
     outline: none;

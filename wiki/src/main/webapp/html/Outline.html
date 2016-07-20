@@ -19,7 +19,7 @@
 
 </head>
 <body>
-<nav class="navbar navbar-default" style="background-color: #ffffff">
+<nav class="navbar navbar-default navbar-fixed-top" style="background-color: #ffffff;margin: 0">
     <div class="container-fluid">
         <a class="navbar-header" href="../html/Outline.html" style="margin-top: 10px;">
             <img  src="../resource/icon/tss_logo@2x.png" alt="" style="height: 32px">
@@ -60,38 +60,63 @@
 </nav>
 
 <!--正经内容的分割线-->
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-6">
-            <form id="s">
-                <input type="search" id="q" style="border: solid 1px #d3dad8;outline: none" placeholder="大纲查询"/>
-                <button type="submit" class="btn btn-primary">Search</button>
-            </form>
-            </div>
-            <div class="col-sm-6">
-                <input type="text" id="entry_search" placeholder="条目查询" >
-                <button class="btn btn-primary" onclick=search_entry(document.getElementById('entry_search').value);>Search</button>
-            </div>
-        </div>
+    <div class="container" style="padding: 0;margin: 0">
+        <!--<div class="row">-->
+            <!--<div class="col-sm-6">-->
+            <!--<form id="s">-->
+                <!--<input type="search" id="q" style="border: solid 1px #d3dad8;outline: none" placeholder="大纲查询"/>-->
+                <!--<button type="submit" class="btn btn-primary">Search</button>-->
+            <!--</form>-->
+            <!--</div>-->
+            <!--<div class="col-sm-6">-->
+                <!--<input type="text" id="entry_search" placeholder="条目查询" >-->
+                <!--<button class="btn btn-primary" onclick=search_entry(document.getElementById('entry_search').value);>Search</button>-->
+            <!--</div>-->
+        <!--</div>-->
 
 
         <div id="outline_article" class="row">
-            <div id="moutline" class="col-sm-6">
+            <div id="moutline" class="col-sm-3">
 
             </div>
-            <div id="article_board" class="col-sm-6">
-
+            <div id="article_board" class="col-sm-9">
+                <div id="search_bar"></div>
+                <div id="article_content"></div>
+                <!--<div id="embarrassing_div">-->
+                    <!--<img src="../resource/image/embarrassing_black.png" alt="" style="width: 300px">-->
+                    <!--<div id="embarrassing_test">这非常的尴尬,但这个条目下没有内容</div>-->
+                <!--</div>-->
+                <nav>
+                    <ul class="pagination">
+                        <li>
+                            <a href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li>
+                            <a href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </div>
     </div>
 
 <!--<button onclick=save_outline()>save</button>-->
-<button onclick=get_selected_node();>select</button>
+<button onclick=save_outline_and_entry();>select</button>
 </body>
 <script src="../js/outline.js"></script>
 </html>
 <script>
     $(document).ready(function () {
+        load_empty_tip();
         $('#moutline').on("changed.jstree",function (e,data) {
 //            alert("the object:"+JSON.stringify(data.instance));
             var selected_name = data.instance.get_node(data.selected[0]).text;
@@ -101,8 +126,8 @@
         load_all_outline_content();
 
     });
-function temp() {
-    alert(get_entry_of_outline(document.getElementById('entry_search').value));
+function temp(param) {
+    alert("hello"+param);
 }
 </script>
 
