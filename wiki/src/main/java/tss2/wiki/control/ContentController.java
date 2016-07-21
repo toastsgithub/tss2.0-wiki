@@ -36,13 +36,15 @@ public class ContentController {
      * {
      *   operation: 'add',
      *   data: {
+     *     id: '0',
      *     username: '123',
      *     categories: '123123',
      *     summary: '12312',
      *     entry_title: 'c++',
      *     tags: '软件工程/软件开发/需求工程',
+     *     alias: '[]',
      *     content: 'markdown正文',
-     *     reference: '',
+     *     reference: '[]',
      *   }
      * }
      * @param map
@@ -69,6 +71,9 @@ public class ContentController {
     CommonResult putEntry(HttpServletRequest request, @RequestBody Map map) {
         return addEntry(request, map);
     }
+
+
+
 
     /**
      * 获取所有标签信息。
@@ -171,5 +176,10 @@ public class ContentController {
         }
         wikiRecord.delete();
         return new CommonResult(0);
+    }
+
+    @RequestMapping(value = "/keyword", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
+    public @ResponseBody String markKeyWord(@RequestBody String content) {
+        return WikiRecord.polish(content);
     }
 }

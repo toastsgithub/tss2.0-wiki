@@ -4,6 +4,7 @@ import tss2.wiki.dao.core.DAOBase;
 import tss2.wiki.dao.Tag;
 import tss2.wiki.domain.CommonResult;
 import tss2.wiki.control.service.ContentService;
+import tss2.wiki.model.WikiMarkdown;
 import tss2.wiki.model.WikiRecord;
 import tss2.wiki.model.WikiReference;
 import tss2.wiki.model.WikiUser;
@@ -54,6 +55,11 @@ public class ContentServiceImpl implements ContentService {
         ArrayList r =(ArrayList) map.get("reference");
         WikiReference wikiReference = new WikiReference(title);
         wikiReference.modify(r);
+
+        if (summary.equals("")) {
+            WikiMarkdown wikimd = new WikiMarkdown(content);
+            summary = wikimd.getSummary(WikiMarkdown.DEFAULT_SUMMARY_LENGTH);
+        }
 
         WikiUser user = new SessionServiceimpl().getUserBySession(data.getSessionID());
         entry.setContent(user.getUsername(), categories, tags, summary, content, true);

@@ -1,7 +1,10 @@
 package tss2.wiki.dao.core;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.sql.RowSet;
+import java.lang.annotation.Inherited;
 import java.lang.reflect.Field;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,6 +27,7 @@ import java.util.Collections;
  * @see DBAdmin
  * Created by coral on 16-5-2.
  */
+@JsonIgnoreProperties(value = {"getTableName"})
 public abstract class DAOBase {
 
     public int id;
