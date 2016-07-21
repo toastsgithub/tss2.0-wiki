@@ -23,6 +23,7 @@ var origin_width_of_input;
 
 var origin_width_of_alias_input;
 
+var reference_count = 1;
 
 function addClause() {
     // alert("judge");
@@ -305,6 +306,8 @@ function add_alias(alias) {
     var alias_input = document.getElementById('alias_input');
     var new_alias = document.createElement("span");
     var cancel_btn = document.createElement("label");
+
+    
     
     // alert(alias_pool.children[0]);
         if(alias_pool.childElementCount>0) {
@@ -330,13 +333,19 @@ function add_alias(alias) {
     new_alias.innerHTML = alias;
     new_alias.style.borderRadius = '3px';
     new_alias.appendChild(cancel_btn);
-    new_alias.id = tag;
+    new_alias.id = alias;
     new_alias.style.color = "white";
     new_alias.style.backgroundColor = "#3B81C7";
     new_alias.style.padding = '3px';
     new_alias.style.marginRight = "10px";
     alias_input.value = '';
     alias_pool.appendChild(new_alias);
+    
+    cancel_btn.onclick = function(){
+        alias_pool.removeChild(document.getElementById(alias));
+        // tags_input.style.width = (origin_width_of_input - tags_width) + 'px';
+        adjust_tag_input_width();
+    };
     adjust_alias_input_width();
 }
 
@@ -374,3 +383,32 @@ function getTags() {
     return  tags;
 }
 
+function add_reference_input_area() {
+    var reference = document.createElement('div');
+    reference.id = 'ref_item'+reference_count;
+    reference.style.marginLeft = '60px';
+    reference.style.marginTop = '10px';
+    var name_label = document.createElement('span');
+    name_label.style.padding = '2px';
+    name_label.innerHTML = '名称';
+    var name_input = document.createElement('input');
+    name_input.style.width = '100px';
+    var url_label = document.createElement('span');
+    url_label.innerHTML = 'url';
+    url_label.style.padding = '4px';
+    var url_input = document.createElement('input');
+    url_input.style.width = '100px';
+    var source_label =document.createElement('span');
+    source_label.innerHTML = '来源名称';
+    source_label.style.padding = '4px';
+    var source_input = document.createElement('input');
+    source_input.style.width = '100px';
+    reference.appendChild(name_label);
+    reference.appendChild(name_input);
+    reference.appendChild(url_label);
+    reference.appendChild(url_input);
+    reference.appendChild(source_label);
+    reference.appendChild(source_input);
+    document.getElementById('reference').appendChild(reference);
+    reference_count++;
+}
