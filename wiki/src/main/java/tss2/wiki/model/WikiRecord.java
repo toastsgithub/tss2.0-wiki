@@ -196,48 +196,29 @@ public class WikiRecord {
     }
 
 
-    /**
-     * 在某个title后新增别名
-     * @param title
-     * @param alias
-     */
-    public static void addTitieAlias(String title,String alias){
-        DAOBase[] contents = Alias.query().where("title = '"+ title +"'");
-        if(contents.length==0){
-            Alias alias1 = new Alias();
-            alias1.title = title;
-            alias1.alias = alias;
-            alias1.save();
-        }else{
-            Alias alias1 = (Alias)contents[0];
-            if(alias1.alias.contains(alias)){
-                return;
-            }
-            alias1.alias = alias1.alias+"/"+alias;
-            alias1.save();
-        }
-
-    }
 
     /**
      * 重写别名列表
      * @param title
      * @param arrayList
      */
-    public static void Alias(String title,ArrayList arrayList){
+    public static void Alias(long entryid,String title,ArrayList arrayList){
         String str = StringUtil.concatArray("/", arrayList);
-        modifyAlias(title,str);
+        modifyAlias(entryid,title,str);
     }
 
-    private static void modifyAlias(String title,String allalias){
-        DAOBase[] contents = Alias.query().where("title = '"+ title +"'");
+    private static void modifyAlias(long entryid,String title,String allalias){
+        DAOBase[] contents = Alias.query().where("entryid = '"+ entryid +"'");
         if(contents.length == 0){
             Alias alias = new Alias();
+            alias.entryid = entryid;
             alias.title = title;
             alias.alias = title+"/"+allalias;
             alias.save();
         }else{
             Alias alias = (Alias) contents[0];
+            alias.entryid = entryid;
+            alias.title = title;
             alias.alias = title+"/"+allalias;
             alias.save();
         }
@@ -247,10 +228,17 @@ public class WikiRecord {
      * 在别名列表里添加新的一项
      * @param title
      */
-    public static void addTitle(String title){
-        DAOBase[] contents = Alias.query().where("title = '"+ title +"'");
+    public static void addTitle(long entryid,String title){
+        DAOBase[] contents = Alias.query().where("entryid = '"+ entryid +"'");
         if(contents.length==0){
             Alias alias1 = new Alias();
+            alias1.entryid = entryid;
+            alias1.title = title;
+            alias1.alias = title;
+            alias1.save();
+        }else{
+            Alias alias1 = (Alias) contents[0];
+            alias1.entryid = entryid;
             alias1.title = title;
             alias1.alias = title;
             alias1.save();
@@ -329,11 +317,23 @@ public class WikiRecord {
      * @param content       ..
      * @param isSubVersion  ..
      */
-    public void setContent(String username, String[] categories, String[] tags, String summary, String content, boolean isSubVersion) {
+    public void setContent(long entryid,String username, String[] categories, String[] tags, String summary, String content, boolean isSubVersion) {
         String versionStr = getCurrVersionString();
-        addTitle(title);
-        int mainversion = dao.mainversion;
-        int subversion = dao.subversion;
+        addTitle(entryid,title);
+
+        WikiEntry Adao;
+        DAOBase[] contents = WikiEntry.query().where("id = '" + entryid + "'");
+        if (contents.length == 0) {
+            Adao = new WikiEntry();
+            Adao.title = title;
+            Adao.contentPath = null;
+            //addTitle(title);
+        } else {
+            Adao = (WikiEntry) contents[0];
+        }
+
+        int mainversion = Adao.mainversion;
+        int subversion = Adao.subversion;
         if (isSubVersion) {
             subversion += 1;
         }
@@ -363,7 +363,7 @@ public class WikiRecord {
         // add update history
         UpdateHistory history = new UpdateHistory();
         history.contentPath = path;
-        history.title = dao.title;
+        history.title = Adao.title;
         history.tags = strTags;
         history.categories = strCateg;
         history.summary = summary;
@@ -371,16 +371,17 @@ public class WikiRecord {
         history.mainversion = mainversion;
         history.subversion = subversion;
         history.username = username;
+        history.entryid = entryid;
         history.save();
 
         // update wiki entry
-        dao.subversion = subversion;
-        dao.mainversion = mainversion;
-        dao.categories = strCateg;
-        dao.tags = strTags;
-        dao.summery = summary;
-        dao.contentPath = path;
-        dao.save();
+        Adao.subversion = subversion;
+        Adao.mainversion = mainversion;
+        Adao.categories = strCateg;
+        Adao.tags = strTags;
+        Adao.summery = summary;
+        Adao.contentPath = path;
+        Adao.save();
 
         // write content to file system
         WikiFile file = new WikiFile(path);

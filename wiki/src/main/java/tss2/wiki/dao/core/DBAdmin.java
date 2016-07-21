@@ -167,6 +167,8 @@ public class DBAdmin {
 
     private static String getTypeName(String type) {
         switch (type) {
+            case "long":
+            case "Long":
             case "Integer":
             case "int":
                 type = "int(11)";
