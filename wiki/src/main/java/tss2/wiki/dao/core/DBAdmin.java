@@ -94,6 +94,12 @@ public class DBAdmin {
         }
 
         try {
+            if (conn.isClosed()) {
+                conn = DriverManager.getConnection(URL, USER, PASSWD);
+            }
+            if (stmt.isClosed()) {
+                stmt = conn.createStatement();
+            }
             stmt.execute("create table if not EXISTS " + name + " (" + strFields + ", PRIMARY KEY (id));");
             stmt.execute("alter table " + name + " modify id int(11) auto_increment;");
             stmt.execute("alter table " + name + " modify id int(11) default 1;");
@@ -112,6 +118,12 @@ public class DBAdmin {
 
     public static void dropTable(String tableName) {
         try {
+            if (conn.isClosed()) {
+                conn = DriverManager.getConnection(URL, USER, PASSWD);
+            }
+            if (stmt.isClosed()) {
+                stmt = conn.createStatement();
+            }
             stmt.execute("drop table if exists " + tableName + ";");
             System.out.println("- " + tableName);
         } catch (SQLException e) {
@@ -121,6 +133,12 @@ public class DBAdmin {
 
     public static void addColumn(String table, Field field) {
         try {
+            if (conn.isClosed()) {
+                conn = DriverManager.getConnection(URL, USER, PASSWD);
+            }
+            if (stmt.isClosed()) {
+                stmt = conn.createStatement();
+            }
             stmt.execute("alter table " + table + " add column " + field.getName() + " " + getTypeName(field.getType().getSimpleName()) + ";");
             System.out.println("+ " + table + "." + "field " + getTypeName(field.getType().getSimpleName()));
         } catch (SQLException e) {
@@ -130,6 +148,12 @@ public class DBAdmin {
 
     public static void addColumn(String table, String field, String type) {
         try {
+            if (conn.isClosed()) {
+                conn = DriverManager.getConnection(URL, USER, PASSWD);
+            }
+            if (stmt.isClosed()) {
+                stmt = conn.createStatement();
+            }
             stmt.execute("alter table " + table + " add column " + field + " " + getTypeName(type) + ";");
         } catch (SQLException e) {
             //e.printStackTrace();
@@ -142,6 +166,12 @@ public class DBAdmin {
 
     public static void dropColumn(String table, String fieldName) {
         try {
+            if (conn.isClosed()) {
+                conn = DriverManager.getConnection(URL, USER, PASSWD);
+            }
+            if (stmt.isClosed()) {
+                stmt = conn.createStatement();
+            }
             stmt.execute("alter table " + table + " drop column " + fieldName + ";");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -154,6 +184,12 @@ public class DBAdmin {
         ResultSet rs = null;
         ArrayList<String> arrField = new ArrayList<>();
         try {
+            if (conn.isClosed()) {
+                conn = DriverManager.getConnection(URL, USER, PASSWD);
+            }
+            if (stmt.isClosed()) {
+                stmt = conn.createStatement();
+            }
             rs = stmt.executeQuery("desc " + table + ";");
             while (rs.next()) {
                 arrField.add(rs.getString("Field"));
@@ -201,7 +237,12 @@ public class DBAdmin {
         ArrayList<String> tbls = new ArrayList<>();
         ResultSet rs;
         try {
-
+            if (conn.isClosed()) {
+                conn = DriverManager.getConnection(URL, USER, PASSWD);
+            }
+            if (stmt.isClosed()) {
+                stmt = conn.createStatement();
+            }
             rs = stmt.executeQuery("SHOW TABLES;");
             while (rs.next()) {
                 tbls.add(rs.getString("Tables_in_" + dbName));

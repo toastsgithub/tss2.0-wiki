@@ -254,7 +254,7 @@ public class WikiRecord {
         ArrayList<String> aliaslists = new ArrayList<>();
         for(int i = 0;i<contents.length;i++){
             Alias temp = (Alias)contents[i];
-            String[] str = temp.alias.split("/");
+            String[] str = temp.alias.split("[/]");
             for(int j = 0;j < str.length; j++){
                 aliaslists.add(str[j]);
             }
@@ -458,7 +458,7 @@ public class WikiRecord {
             String regex = '[' + StringUtil.concatArray("][", bytes) + ']';
             content = content.replaceFirst(wiki.get("title").toString(), "[" + wiki.get("title").toString() + "](/html/entry_content.html?entry=" + wiki.get("title").toString() + ")");
         }
-        return null;
+        return content;
     }
 
     private WikiEntry dao;
