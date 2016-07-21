@@ -15,6 +15,7 @@ public class MdHeader extends MdComponent {
     public MdHeader(String text) {
         super(text);
         init();
+        setText(text);
     }
 
     public MdHeader(String text, int level) {
@@ -38,8 +39,34 @@ public class MdHeader extends MdComponent {
     public void addSubHeader(String header) {
         subHeaders.add(new MdHeader(header, getLevel() + 1));
     }
+    public void addSubHeader(MdHeader header) {
+        subHeaders.add(header);
+    }
+
+    @Override
+    public void setText(String text) {
+        super.setText(text);
+        text = text.trim();
+        level = 0;
+        for (int i = 0; i < text.length(); i++) {
+            if (text.charAt(i) == '#') {
+                ++level;
+            }
+            else {
+                break;
+            }
+        }
+    }
+
+    public void setContent(MdContent content) {
+        this.content = content;
+    }
+
+    public MdContent getContent() {
+        return content;
+    }
 
     private int level;
-    private MdContent para;
+    private MdContent content;
     private ArrayList<MdHeader> subHeaders;
 }
