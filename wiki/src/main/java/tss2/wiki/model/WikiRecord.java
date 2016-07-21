@@ -59,6 +59,7 @@ public class WikiRecord {
         for(int i = 0;i<contents.length;i++){
             result.add(new TitleAndSummary(((WikiEntry)contents[i]).title,((WikiEntry)contents[i]).summery));
         }
+        result.add(new TitleAndSummary("wen you see me","yes,I got it!"));
         return result;
     }
 
