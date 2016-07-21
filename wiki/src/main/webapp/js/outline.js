@@ -336,12 +336,12 @@ function load_all_outline_content(){
 function display_outline_content(outline_key) {
     remove_all_child('article_content');
     var has_detected = false;
-    
     for (x in all_outline_content){
 
         if(all_outline_content[x].name == outline_key){
             // alert(JSON.stringify(all_outline_content[x]));
             has_detected = true;
+            alert('-->'+JSON.stringify(all_outline_content[x]));
             for (y in all_outline_content[x].content){
                 
                 var content_title = all_outline_content[x].content[y].title;

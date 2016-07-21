@@ -66,7 +66,7 @@
 
     <div id="alias" class="row minf">
         <label class="namlab">别名: </label>
-        <div style="border: solid 1px #d7d7d7;margin-left:70px;width: 700px">
+        <div style="border: solid 1px #d7d7d7;margin-left:70px;width: 700px;background-color: white">
             <span id="alias_bar"></span>
             <input id="alias_input" class="minf_input"/>
         </div>
@@ -106,8 +106,21 @@
     <textarea id="wiki_editor" style="display:none;background-color: #f7f7f7">### Hello Editor.md !</textarea>
 </div>
 
-<button id="submit_btn" class="btn btn-primary" onclick="addClause();">submit</button>
+
 <!--<script src="jquery.min.js"></script>-->
+    <div id="reference">
+        <div id="ref_item1">
+            <span>名称</span>
+            <input type="text" style="width: 100px">
+            <span>url</span>
+            <input type="text" style="width: 100px">
+            <span>来源名称</span>
+            <input type="text" style="width: 100px">
+        </div>
+    </div>
+
+<button id="submit_btn" class="btn btn-primary" onclick="addClause();">submit</button>
+<button id="add_btn" class="btn btn-primary" onclick="add_reference_input_area();">add reference</button>
 <script src="../js/editormd.js"></script>
 <script type="text/javascript">
     var editor_instance;
