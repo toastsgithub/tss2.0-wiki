@@ -19,7 +19,9 @@ var names = [];
 
 var name = false, type = false, tag = false;
 
+var origin_width_of_input;
 
+var origin_width_of_alias_input;
 
 
 function addClause() {
@@ -71,6 +73,8 @@ function addClause() {
     mock_obj2.websiteName = '谷歌';
     var data = {
         operation: "add", data: {
+            id:0,
+            alias:['alias1,alias2,hhh3'],
             time: time,
             username: "123",
             summary: summary,
@@ -133,7 +137,7 @@ function testAll(){
     testName();
     testType();
     testTag();
-    
+    testAlias();
 }
 
 function initialData(){
@@ -186,14 +190,14 @@ function testTag() {
     $("#tags_input").keydown(function (e) {
         if(e.keyCode==13){
             var new_tag_to_add = document.getElementById('tags_input').value;
-            if(document.getElementById("tags_pool").childElementCount>0){
+            if(document.getElementById("tag_bar").childElementCount>0){
                 if(getTags()!=null && $.inArray(new_tag_to_add, getTags())>=0){
                     tag = false;
                     document.getElementById("tagTip").innerHTML = "请勿选择重复标签!";
                     return;
                 }
             }
-            if(document.getElementById("tags_pool").childElementCount>=5){
+            if(document.getElementById("tag_bar").childElementCount>=5){
                 document.getElementById("tagTip").innerHTML = "最多添加5个标签";
                 tag = true;
                 return;
@@ -204,12 +208,13 @@ function testTag() {
         }
     })
 
-
+    
     function add_tags(tag) {
-//        alert("painting:"+tag);
         if(tag=="")return;
-
-        var tag_pool = document.getElementById('tags_pool');
+        if(tag.length>15){
+            tag = tag.substring(0,14);
+        }
+        var tag_pool = document.getElementById('tag_bar');
         var new_tag = document.createElement("span");
         var cancel_btn = document.createElement("label");
 
@@ -225,17 +230,39 @@ function testTag() {
         new_tag.id = tag;
         new_tag.style.color = "white";
         new_tag.style.backgroundColor = "#3B81C7";
-        new_tag.style.padding = '5px';
-        new_tag.style.marginRight = "20px";
+        new_tag.style.padding = '3px';
+        new_tag.style.marginRight = "10px";
 
 
 //        alert("create done");
         tag_pool.appendChild(new_tag);
 //        alert("append done");
-        document.getElementById('tags_input').value = "";
-        cancel_btn.onclick = function(){tag_pool.removeChild(document.getElementById(tag));}
+        var tags_input = document.getElementById('tags_input');
+        tags_input.value = '';
+        // var tags_width = tag_pool.offsetWidth;
+        // alert('width '+tags_width);
+        // tags_input.style.width = (origin_width_of_input - tags_width) + 'px';
+        adjust_tag_input_width();
+        cancel_btn.onclick = function(){
+            tag_pool.removeChild(document.getElementById(tag));
+            // tags_input.style.width = (origin_width_of_input - tags_width) + 'px';
+            adjust_tag_input_width();
+        }
 
     }
+}
+
+function adjust_tag_input_width() {
+    var tags_input = document.getElementById('tags_input');
+    var tag_pool = document.getElementById('tag_bar');
+    var tags_width = tag_pool.offsetWidth;
+    tags_input.style.width = (origin_width_of_input - tags_width) + 'px';
+}
+function adjust_alias_input_width() {
+    var tags_input = document.getElementById('alias_input');
+    var alias_pool = document.getElementById('alias_bar');
+    var alias_width = alias_pool.offsetWidth;
+    tags_input.style.width = (origin_width_of_alias_input - alias_width) + 'px';
 }
 
 function testType(){
@@ -258,21 +285,69 @@ function testType(){
 }
 
 function testAlias() {
+    $('#alias_input').keydown(function (e) {
+        if(e.keyCode==13){
+            var new_alias_to_add = document.getElementById('alias_input').value;
+            if(new_alias_to_add=='')return;
+            // alert(new_alias_to_add);
 
+            //测试条件
+
+            //通过则增加↓
+            add_alias(new_alias_to_add);
+        }
+        
+    })
 }
 
-
-var alias = [];
-function getAlias(){
+function add_alias(alias) {
+    var alias_pool = document.getElementById('alias_bar');
     var alias_input = document.getElementById('alias_input');
-    alias_input.keydown(function () {
-        if(e.keydown()=='/'){
-            var data = alias_input.value;
-            
-        }
-    });
+    var new_alias = document.createElement("span");
+    var cancel_btn = document.createElement("label");
+    
+    // alert(alias_pool.children[0]);
+        if(alias_pool.childElementCount>0) {
+            for (var x=0;x<alias_pool.childElementCount;x++) {
+                // alert(alias_pool.childNodes[x].firstChild.textContent);
+                if(alias_pool.childNodes[x].firstChild.textContent ==alias){
+                    alias_input.value = '';
+                    return;
+                }
+            }
+    }
+    // all_alias.push(alias);
 
 
+    
+
+//        cancel_btn
+    cancel_btn.innerHTML = "×";
+    cancel_btn.style.marginLeft = '3px';
+    cancel_btn.style.color = "#F5F5DC";
+    cancel_btn.style.cursor = 'pointer';
+
+    new_alias.innerHTML = alias;
+    new_alias.style.borderRadius = '3px';
+    new_alias.appendChild(cancel_btn);
+    new_alias.id = tag;
+    new_alias.style.color = "white";
+    new_alias.style.backgroundColor = "#3B81C7";
+    new_alias.style.padding = '3px';
+    new_alias.style.marginRight = "10px";
+    alias_input.value = '';
+    alias_pool.appendChild(new_alias);
+    adjust_alias_input_width();
+}
+
+function getAlias(){
+    var alias_pool = document.getElementById('alias_bar');
+    var all_alias = [];
+    var len = alias_pool.childElementCount;
+    for(var x=0;x<len;x++){
+        all_alias.push(alias_pool.childNodes[x].firstChild.textContent);
+    }
+    return all_alias;
 }
 
 
@@ -289,7 +364,7 @@ function getTime() {
 }
 
 function getTags() {
-    var tags_pool = document.getElementById('tags_pool');
+    var tags_pool = document.getElementById('tag_bar');
     var tags = [];
     var num = tags_pool.childElementCount;
     if(num==0) return null;

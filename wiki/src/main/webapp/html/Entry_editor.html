@@ -66,7 +66,10 @@
 
     <div id="alias" class="row minf">
         <label class="namlab">别名: </label>
-        <input id="alias_input" class="minf_input"/>
+        <div style="border: solid 1px #d7d7d7;margin-left:70px;width: 700px">
+            <span id="alias_bar"></span>
+            <input id="alias_input" class="minf_input"/>
+        </div>
         <span id="aliasTip" class="tip"></span>
     </div>
 
@@ -77,11 +80,14 @@
         <span id="typeTip" class="tip"></span>
     </div>
 
-    <div class="row minf">
+    <div class="row minf" style="">
         <label class="namlab">标签：</label>
-        <div style="width: 20%">
-            <div style="border: solid 1px black; width: 100%"></div>
-            <input id="tags_input" data-role="tagsinput" style="width: 20px;float: right"/>
+        <div style="margin-left:70px;">
+            <div style="border: solid 1px #d7d7d7;background-color:white;height: 26px;width: 700px;">
+                <span id="tag_bar"></span>
+                <input id="tags_input" data-role="tagsinput" style="width: 90%;"/>
+            </div>
+
         </div>
         <span id="tagTip" class="tip"></span>
     </div>
@@ -90,7 +96,7 @@
 
     <div class="row minf">
         <label class="namlab">摘要：</label>
-        <textarea id="summary" class="minf_input" placeholder="若无摘要,则自动提取正文前两百个字作文摘要"  style="width: 80%; height: 100px;resize:none"></textarea>
+        <textarea id="summary" class="minf_input" placeholder="若无摘要,则自动提取正文前两百个字作文摘要"  style="width: 700px; height: 100px;resize:none"></textarea>
     </div>
 </div>
 
@@ -167,7 +173,12 @@
     testAll();
     get_welcome();
 </script>
-
+<script>
+    $(document).ready(function () {
+        origin_width_of_input = document.getElementById('tags_input').offsetWidth;
+        origin_width_of_alias_input = document.getElementById('alias_input').offsetWidth;
+    });
+</script>
 
 
 </body>
