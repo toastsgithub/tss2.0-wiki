@@ -8,6 +8,7 @@ import tss2.wiki.dao.core.DBAdmin;
 import tss2.wiki.domain.RecordsResult;
 import tss2.wiki.domain.TitleAndSummary;
 import tss2.wiki.util.FileUtil;
+import tss2.wiki.util.StringUtil;
 import tss2.wiki.util.TimeUtil;
 
 import java.io.File;
@@ -218,6 +219,30 @@ public class WikiRecord {
     }
 
     /**
+     * 重写别名列表
+     * @param title
+     * @param arrayList
+     */
+    public static void Alias(String title,ArrayList arrayList){
+        String str = StringUtil.concatArray("/", arrayList);
+        modifyAlias(title,str);
+    }
+
+    private static void modifyAlias(String title,String allalias){
+        DAOBase[] contents = Alias.query().where("title = '"+ title +"'");
+        if(contents.length == 0){
+            Alias alias = new Alias();
+            alias.title = title;
+            alias.alias = title+"/"+allalias;
+            alias.save();
+        }else{
+            Alias alias = (Alias) contents[0];
+            alias.alias = title+"/"+allalias;
+            alias.save();
+        }
+    }
+
+    /**
      * 在别名列表里添加新的一项
      * @param title
      */
@@ -231,6 +256,10 @@ public class WikiRecord {
         }
     }
 
+    /**
+     * 获取所有title和alias
+     * @return
+     */
     public  static ArrayList<String> getAlias(){
         DAOBase[] contents = Alias.query().where("");
         ArrayList<String> aliaslists = new ArrayList<>();
@@ -383,11 +412,30 @@ public class WikiRecord {
         return updateHistory.username;
     }
 
+    public long getID(){
+        return dao.id;
+    }
+
+    public ArrayList<String> getAliasByTitle(){
+        DAOBase[] contents = Alias.query().where("title = '"+ dao.title + "'");
+        String[] str = ((Alias)contents[0]).alias.split("/");
+        ArrayList<String> result = new ArrayList<>();
+        if(str.length <= 1){
+            return null;
+        }
+        for(int i = 1; i < str.length;i++){
+            result.add(str[i]);
+        }
+        return result;
+    }
 
     public int getVisits(){
         return dao.visits;
     }
 
+    public String getSummery(){
+        return dao.summery;
+    }
     /**
      * 删除条目，同时删除别名列表里的相应项
      */
@@ -402,10 +450,10 @@ public class WikiRecord {
     private String title;
 
     public static void main(String args[]){
-        //addTitieAlias("测试条目","abc");
-        //System.out.println(getTitleFromAlias("abc"));
-        WikiRecord wikiRecord = new WikiRecord("测试条目");
-        System.out.println(wikiRecord.getDate());
-        //wikiRecord.delete();
+        ArrayList<String> arrayList = new ArrayList<>();
+        arrayList.add("11");
+        arrayList.add("22");
+        arrayList.add("33");
+        Alias("test123",arrayList);
     }
 }

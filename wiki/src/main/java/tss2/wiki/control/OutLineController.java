@@ -53,7 +53,7 @@ public class OutLineController {
         return new CommonResult(0);
     }
     /**
-     *获取大纲列表
+     *获取大纲列表（测试）
      * @return
      */
     @RequestMapping(value = "getTest", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
@@ -65,7 +65,7 @@ public class OutLineController {
 
 
     /**
-     * 更改条目
+     * 更改条目（测试）
      * @param map
      */
     @RequestMapping(value = "Test", method = RequestMethod.PUT, produces="application/json;charset=UTF-8")

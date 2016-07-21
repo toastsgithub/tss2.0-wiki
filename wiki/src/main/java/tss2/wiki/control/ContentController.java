@@ -36,13 +36,15 @@ public class ContentController {
      * {
      *   operation: 'add',
      *   data: {
+     *     id: '0',
      *     username: '123',
      *     categories: '123123',
      *     summary: '12312',
      *     entry_title: 'c++',
      *     tags: '软件工程/软件开发/需求工程',
+     *     alias: '[]',
      *     content: 'markdown正文',
-     *     reference: '',
+     *     reference: '[]',
      *   }
      * }
      * @param map
@@ -69,6 +71,9 @@ public class ContentController {
     CommonResult putEntry(HttpServletRequest request, @RequestBody Map map) {
         return addEntry(request, map);
     }
+
+
+
 
     /**
      * 获取所有标签信息。
