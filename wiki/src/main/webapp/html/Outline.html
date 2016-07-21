@@ -76,9 +76,7 @@
 
 
         <div id="outline_article" class="row">
-            <div id="moutline" class="col-sm-3">
-
-            </div>
+            <div id="moutline" class="col-sm-3"></div>
             <div id="article_board" class="col-sm-9">
                 <div id="search_bar">
                     <div id="search_module">
@@ -86,37 +84,44 @@
                         <button id="search_btn">search</button>
                     </div>
                 </div>
-                <div id="article_content"></div>
+
+
+                <div id="search_result_content" class="tab-content">
+                    <!--<div class="tab-pane active" id="article_content"></div>-->
+
+                </div>
                 <!--<div id="embarrassing_div">-->
                     <!--<img src="../resource/image/embarrassing_black.png" alt="" style="width: 300px">-->
                     <!--<div id="embarrassing_test">这非常的尴尬,但这个条目下没有内容</div>-->
                 <!--</div>-->
-                <nav>
-                    <ul class="pagination">
-                        <li>
-                            <a href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li>
-                            <a href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
+                <div id="nav_part">
+                    <!--<nav>-->
+                        <!--<ul class="pagination">-->
+                            <!--<li>-->
+                                <!--<a href="#" aria-label="Previous">-->
+                                    <!--<span aria-hidden="true">&laquo;</span>-->
+                                <!--</a>-->
+                            <!--</li>-->
+                            <!--<li><a href="#">1</a></li>-->
+                            <!--<li><a href="#">2</a></li>-->
+                            <!--<li><a href="#">3</a></li>-->
+                            <!--<li><a href="#">4</a></li>-->
+                            <!--<li><a href="#">5</a></li>-->
+                            <!--<li>-->
+                                <!--<a href="#" aria-label="Next">-->
+                                    <!--<span aria-hidden="true">&raquo;</span>-->
+                                <!--</a>-->
+                            <!--</li>-->
+                        <!--</ul>-->
+                    <!--</nav>-->
+                </div>
 
                 <div id="navigator_part"></div>
             </div>
         </div>
     </div>
 
-<!--<button onclick=save_outline()>save</button>-->
+<button onclick=save_outline()>save</button>
 <!--<button onclick=save_outline_and_entry();>select</button>-->
 <!--<button onclick=get_test();>get test</button>-->
 </body>

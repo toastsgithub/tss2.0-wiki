@@ -334,52 +334,58 @@ function load_all_outline_content(){
  */
 //var zhaiyao=["\n  摘要：123321，上山打老虎怎么样SDHCUSIC会发生丢还没看到妇女金额共和国viwegrjhvoigerhvoiejrpvjrepojvifdjvjleq 呢抗日女哦ieqrjfqpoewojgnfkdvfre分部日哈佛"];
 function display_outline_content(outline_key) {
-    remove_all_child('article_content');
+    remove_all_child('search_result_content');
+    remove_all_child('nav_part');
     var has_detected = false;
+
     for (x in all_outline_content){
 
         if(all_outline_content[x].name == outline_key){
             // alert(JSON.stringify(all_outline_content[x]));
             has_detected = true;
-            alert('-->'+JSON.stringify(all_outline_content[x]));
-            for (y in all_outline_content[x].content){
-                
-                var content_title = all_outline_content[x].content[y].title;
-                //这里是内容摘要
-                var content_abstract = all_outline_content[x].content[y].summary;
-                var temp_obj = new Object();
-                temp_obj.title = content_title;
-                temp_obj.summary = content_abstract;
-                current_outline_content.push(temp_obj);
+            // alert("keyyyyyyyyyy = " + JSON.stringify(all_outline_content[x]));
+            var content_num = showSearchResult(all_outline_content[x].content, 5);
+            load_page_btns(content_num);
+            
+            // for (y in all_outline_content[x].content){
+            //
+            //         var content_title = all_outline_content[x].content[y].title;
+            //         //这里是内容摘要
+            //         var content_abstract = all_outline_content[x].content[y].summary;
+            //         var temp_obj = new Object();
+            //         temp_obj.title = content_title;
+            //         temp_obj.summary = content_abstract;
+            //         current_outline_content.push(temp_obj);
+            //
+            //         // alert(content_title+"]]]");
+            //         var right_part = document.getElementById('article_content');
+            //         var new_node = document.createElement('div');
+            //         // document.getElementById('article_board').style.backgroundColor='red';
+            //         var the_node = document.createElement('div');
+            //         var the_link = document.createElement('a');
+            //         var the_abstract = document.createElement('div');
+            //         var url = '../html/entry_content.html?entry='+content_title;
+            //         the_link.href = url;
+            //         the_link.innerHTML = content_title;
+            //         the_link.style.fontSize = '20px';
+            //         the_abstract.innerHTML = content_abstract;
+            //         the_node.appendChild(the_link);
+            //     the_node.appendChild(the_abstract);
+            //     the_node.style.marginTop='10px';
+            //     new_node.style.backgroundColor='#afd9ee';
+            //     new_node.style.height = '70px';
+            //     new_node.appendChild(the_node);
+            //     new_node.style.marginBottom='10px';
+            //     new_node.onclick = Function('temp("hello");');
+            //     right_part.appendChild(new_node);
+            // }
 
-                // alert(content_title+"]]]");
-                var right_part = document.getElementById('article_content');
-                var new_node = document.createElement('div');
-                // document.getElementById('article_board').style.backgroundColor='red';
-                var the_node = document.createElement('div');
-                var the_link = document.createElement('a');
-                var the_abstract = document.createElement('div');
-                var url = '../html/entry_content.html?entry='+content_title;
-                the_link.href = url;
-                the_link.innerHTML = content_title;
-                the_link.style.fontSize = '20px';
-                the_abstract.innerHTML = content_abstract;
-                the_node.appendChild(the_link);
-                the_node.appendChild(the_abstract);
-                the_node.style.marginTop='10px';
-                new_node.style.backgroundColor='#afd9ee';
-                new_node.style.height = '70px';
-                new_node.appendChild(the_node);
-                new_node.style.marginBottom='10px';
-                new_node.onclick = Function('temp("hello");');
-                right_part.appendChild(new_node);
-            }
         }
     }
     if(!has_detected){
         load_empty_tip();
     }else{
-        load_page_btns(current_outline_content);
+       
     }
 
     // var right_part = document.getElementById('article_board');
@@ -403,6 +409,7 @@ function remove_all_child(element_id) {
         div.removeChild(div.firstChild);
     }
 }
+
 /**
  * 返回jstree选中的节点的名称
  * @returns selected_node 选中的节点的名称
@@ -412,6 +419,7 @@ function get_selected_node() {
     alert('selected:'+selected_node);
     return selected_node;
 }
+
 /**
  * 加载目录下内容为空的插画提示
  */
@@ -425,20 +433,41 @@ function load_empty_tip(){
     image.style.width = '350px';
     embarrasing_text.innerHTML = '这非常的尴尬,但是这个条目下没有内容';
     embarrasing_text.style.fontSize = '20px';
-    document.getElementById('article_content').appendChild(embarrassing_div);
+    document.getElementById('search_result_content').appendChild(embarrassing_div);
 }
+
 /**
  * 根据内容数目加载页面的按钮数
  */
-function load_page_btns(data){
-    alert(JSON.stringify(data));
-    alert(data.length);
+function load_page_btns(num){
+    
+    var pages = num/5;
+    
 
+    var nav_part = document.getElementById('nav_part');
     var nav = document.createElement('nav');
+    nav_part.appendChild(nav);
+
     var ul = document.createElement('ul');
-    ul.className = 'pagination';
-    var li = document.createElement('li');
-    li.appendChild()
+    ul.className = 'pagination nav ';
+    var previous = document.createElement('li');
+    previous.innerHTML = "<a href='#' aria-label='Previous'><span aria-hidden='true'>&laquo;</span></a>";
+    ul.appendChild(previous);
+    for(var i=1;i<pages+1;i++) {
+        var li = document.createElement('li');
+        if(i==1){
+            li.className = "active";
+        }
+        li.id="page_"+i;
+        li.innerHTML="<a href='#page_content_"+i+"' data-toggle='tab'>"+i+"</a>";
+        ul.appendChild(li);
+    }
+    var after = document.createElement('li');
+    after.innerHTML = "<a href='#' aria-label='Next'><span aria-hidden='true'>&raquo;</span></a>";
+    ul.appendChild(after);
+    nav.appendChild(ul);
+    return pages;
+  
 }
 /**
  *
@@ -446,4 +475,68 @@ function load_page_btns(data){
  */
 function jump_on_page(page_num) {
 
+}
+
+/**
+ * 根据页面nav和点击的大纲内容生成搜索结果
+ * @param content: 所有搜索结果
+ * @param pages: 页数
+ * @param num: 每页显示的条目数
+ * */
+function showSearchResult(content, num){
+    var sr_content = document.getElementById("search_result_content");
+    var content_count = 0;
+    var page_count = 0;
+    var sr_pages = [];
+    for(var x in content){
+        // alert("x = "+ JSON.stringify(content[x].title));
+        if(content_count%num==0){   /* 每满一页 */
+            var new_toggle = document.createElement('div');
+            new_toggle.id = "page_content_" + (page_count+1);
+            if(page_count==0){
+                new_toggle.className = 'tab-pane active';
+            }else{
+                new_toggle.className = 'tab-pane';
+            }
+            sr_content.appendChild(new_toggle);
+            sr_pages.push(new_toggle);
+            page_count++;
+        }
+        /* 获得一个新条目的信息 */
+        var content_title = content[x].title;
+        var content_abstract = content[x].summary;
+        var temp_obj = new Object();
+        temp_obj.title = content_title;
+        temp_obj.summary = content_abstract;
+        content_count++;
+
+        /* 为一个条目创建一个div */
+        // <new_entry_div>
+        //     <new_entry_content_div>
+        //         <new_entry_link></new_entry_link>
+        //         <new_entry_abstract_di></new_entry_abstract_di>
+        //     </new_entry_content_div>
+        // </new_entry_div>
+        var new_entry_div = document.createElement('div');
+        new_entry_div.style.backgroundColor = "rgb(175, 217, 238)";
+        new_entry_div.style.height = "70px";
+        new_entry_div.style.marginBottom = "10px";
+        var new_entry_content_div = document.createElement('div');
+        new_entry_content_div.style.marginTop = "10px";
+        var new_entry_link = document.createElement('a');
+        new_entry_link.href = '../html/entry_content.html?entry='+content_title;
+        new_entry_link.style.fontSize = "20px";
+        new_entry_link.innerHTML = content_title;
+        var new_entry_abstract_div = document.createElement('div');
+        new_entry_abstract_div.innerHTML = content_abstract;
+
+        new_entry_div.appendChild(new_entry_content_div);
+        new_entry_content_div.appendChild(new_entry_link);
+        new_entry_content_div.appendChild(new_entry_abstract_div);
+        sr_pages[page_count-1].appendChild(new_entry_div);
+    }
+    for(var tmp in sr_pages){
+        sr_content.appendChild(sr_pages[tmp]);
+    }
+    return content_count;
 }
