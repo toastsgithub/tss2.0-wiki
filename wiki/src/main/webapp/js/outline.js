@@ -337,17 +337,12 @@ function display_outline_content(outline_key) {
     remove_all_child('search_result_content');
     remove_all_child('nav_part');
     var has_detected = false;
-<<<<<<< HEAD
 
-
-=======
->>>>>>> 817ce3bc78d64911b6969f1dae50153caa7f0a42
     for (x in all_outline_content){
 
         if(all_outline_content[x].name == outline_key){
             // alert(JSON.stringify(all_outline_content[x]));
             has_detected = true;
-<<<<<<< HEAD
             // alert("keyyyyyyyyyy = " + JSON.stringify(all_outline_content[x]));
             var content_num = showSearchResult(all_outline_content[x].content, 5);
             load_page_btns(content_num);
@@ -384,41 +379,7 @@ function display_outline_content(outline_key) {
             //     new_node.onclick = Function('temp("hello");');
             //     right_part.appendChild(new_node);
             // }
-=======
-            alert('-->'+JSON.stringify(all_outline_content[x]));
-            for (y in all_outline_content[x].content){
-                
-                var content_title = all_outline_content[x].content[y].title;
-                //这里是内容摘要
-                var content_abstract = all_outline_content[x].content[y].summary;
-                var temp_obj = new Object();
-                temp_obj.title = content_title;
-                temp_obj.summary = content_abstract;
-                current_outline_content.push(temp_obj);
 
-                // alert(content_title+"]]]");
-                var right_part = document.getElementById('article_content');
-                var new_node = document.createElement('div');
-                // document.getElementById('article_board').style.backgroundColor='red';
-                var the_node = document.createElement('div');
-                var the_link = document.createElement('a');
-                var the_abstract = document.createElement('div');
-                var url = '../html/entry_content.html?entry='+content_title;
-                the_link.href = url;
-                the_link.innerHTML = content_title;
-                the_link.style.fontSize = '20px';
-                the_abstract.innerHTML = content_abstract;
-                the_node.appendChild(the_link);
-                the_node.appendChild(the_abstract);
-                the_node.style.marginTop='10px';
-                new_node.style.backgroundColor='#afd9ee';
-                new_node.style.height = '70px';
-                new_node.appendChild(the_node);
-                new_node.style.marginBottom='10px';
-                new_node.onclick = Function('temp("hello");');
-                right_part.appendChild(new_node);
-            }
->>>>>>> 817ce3bc78d64911b6969f1dae50153caa7f0a42
         }
     }
     if(!has_detected){
