@@ -30,7 +30,7 @@ import java.util.Collections;
 @JsonIgnoreProperties(value = {"getTableName"})
 public abstract class DAOBase {
 
-    public int id;
+    public long id;
 
     public DAOBase() { }
 
@@ -102,6 +102,10 @@ public abstract class DAOBase {
                 for (Field field: getClass().getFields()) {
                     try {
                         switch (field.getType().getSimpleName()) {
+                            case "Long":
+                            case "long":
+                                field.setLong(tmp, rs.getInt(field.getName()));
+                                break;
                             case "Integer":
                             case "int":
                                 field.setInt(tmp, rs.getInt(field.getName()));
@@ -224,6 +228,10 @@ public abstract class DAOBase {
             if (!values.equals("")) values += ", ";
             try {
                 switch (field.getType().getSimpleName()) {
+                    case "Long":
+                    case "long":
+                        values += field.getName() + '=' + field.getLong(this);
+                        break;
                     case "Integer":
                     case "int":
                         values += field.getName() + '=' + field.getInt(this);

@@ -13,6 +13,8 @@ import tss2.wiki.vo.WikiEntryVO;
 import java.util.ArrayList;
 import java.util.Map;
 
+import static tss2.wiki.model.WikiRecord.Alias;
+
 /**
  * Created by 羊驼 on 2016/7/9.
  */
@@ -51,10 +53,16 @@ public class ContentServiceImpl implements ContentService {
             tags[i] = arrTags.get(i).toString();
         }
         String content = map.get("content").toString();
+        long entryid = (long)Integer.parseInt(map.get("id").toString());
 
         ArrayList r =(ArrayList) map.get("reference");
-        WikiReference wikiReference = new WikiReference(title);
+        WikiReference wikiReference = new WikiReference(entryid,title);
         wikiReference.modify(r);
+
+        ArrayList alias = (ArrayList) map.get("alias");
+        Alias(entryid,title,alias);
+
+
 
         if (summary.equals("")) {
             WikiMarkdown wikimd = new WikiMarkdown(content);
@@ -62,7 +70,7 @@ public class ContentServiceImpl implements ContentService {
         }
 
         WikiUser user = new SessionServiceimpl().getUserBySession(data.getSessionID());
-        entry.setContent(user.getUsername(), categories, tags, summary, content, true);
+        entry.setContent(entryid,user.getUsername(), categories, tags, summary, content, true);
         return new CommonResult(0);
     }
 }

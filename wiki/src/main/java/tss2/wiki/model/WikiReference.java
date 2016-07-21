@@ -13,8 +13,18 @@ import java.util.ArrayList;
  */
 public class WikiReference {
 
-    public WikiReference(String title) {
+    public WikiReference(String title){
         this.title = title;
+        dao = new ArrayList<>();
+        DAOBase[] refs = Reference.query().where("title = '" + title + "'");
+        for (DAOBase ref: refs) {
+            dao.add((Reference) ref);
+        }
+    }
+
+    public WikiReference(long entryid,String title) {
+        this.title = title;
+        this.entryid = entryid;
         loadReferences();
 
     }
@@ -25,7 +35,7 @@ public class WikiReference {
 
     private void loadReferences() {
         dao = new ArrayList<>();
-        DAOBase[] refs = Reference.query().where("title = '" + title + "'");
+        DAOBase[] refs = Reference.query().where("entryid = '" + entryid + "'");
         for (DAOBase ref: refs) {
             dao.add((Reference) ref);
         }
@@ -37,6 +47,7 @@ public class WikiReference {
         for(int i= 0 ; i < reference.size(); i++ ){
             JSONObject jsonObject = JSONObject.fromObject(reference.get(i));
             Reference temp = new Reference();
+            temp.entryid = entryid;
             temp.title = title;
             temp.name = jsonObject.getString("name");
             temp.url = jsonObject.getString("url");
@@ -47,13 +58,6 @@ public class WikiReference {
         modifyReference(referenceArrayList);
     }
 
-    private void addReference(ArrayList<Reference> referenceArrayList) {
-        for(int i = 0;i< referenceArrayList.size();i++){
-            referenceArrayList.get(i).save();
-            dao.add(referenceArrayList.get(i));
-        }
-
-    }
 
     private void removeReference(){
         for (int i = 0; i < dao.size(); i++) {
@@ -85,6 +89,7 @@ public class WikiReference {
         return dao;
     }
 
+    private long entryid;
     private String title;
     private ArrayList<Reference> dao;
 

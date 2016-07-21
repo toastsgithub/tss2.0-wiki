@@ -17,6 +17,7 @@ public class UpdateHistory extends DAOBase {
     public String contentPath;
     public String tags;
     public int mainversion, subversion;
+    public long entryid;
 
     public static UpdateHistory query() {
         return new UpdateHistory();
