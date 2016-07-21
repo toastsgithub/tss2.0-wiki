@@ -172,4 +172,9 @@ public class ContentController {
         wikiRecord.delete();
         return new CommonResult(0);
     }
+
+    @RequestMapping(value = "/keyword", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
+    public @ResponseBody String markKeyWord(@RequestBody String content) {
+        return WikiRecord.polish(content);
+    }
 }

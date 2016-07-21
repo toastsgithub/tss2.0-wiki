@@ -8,12 +8,14 @@ import tss2.wiki.dao.core.DBAdmin;
 import tss2.wiki.domain.RecordsResult;
 import tss2.wiki.domain.TitleAndSummary;
 import tss2.wiki.util.FileUtil;
+import tss2.wiki.util.StringUtil;
 import tss2.wiki.util.TimeUtil;
 
 import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Wiki条目的model
@@ -398,14 +400,19 @@ public class WikiRecord {
         aliasDao.delete();
     }
 
+    public static String polish(String content) {
+        DAOBase[] wikis = WikiEntry.query().where("");
+        for (DAOBase wiki: wikis) {
+            char[] bytes = new char[wiki.get("title").toString().length()];
+            for (int i = 0; i < bytes.length; i++) {
+                bytes[i] = wiki.get("title").toString().charAt(i);
+            }
+            String regex = '[' + StringUtil.concatArray("][", bytes) + ']';
+            content = content.replaceFirst(wiki.get("title").toString(), "[" + wiki.get("title").toString() + "](/html/entry_content.html?entry=" + wiki.get("title").toString() + ")");
+        }
+        return null;
+    }
+
     private WikiEntry dao;
     private String title;
-
-    public static void main(String args[]){
-        //addTitieAlias("测试条目","abc");
-        //System.out.println(getTitleFromAlias("abc"));
-        WikiRecord wikiRecord = new WikiRecord("测试条目");
-        System.out.println(wikiRecord.getDate());
-        //wikiRecord.delete();
-    }
 }
