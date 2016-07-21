@@ -117,6 +117,12 @@ function getAllNames() {
     })
 }
 
+function get_all_reference() {
+    var reference = document.getElementById('reference');
+    var result = [];
+    
+}
+
 function testName() {
     var name_tip = document.getElementById('nameTip');
     document.getElementById('name_input').onblur = function () {
@@ -386,7 +392,6 @@ function getTags() {
 function add_reference_input_area() {
     var reference = document.createElement('div');
     reference.id = 'ref_item'+reference_count;
-    reference.style.marginLeft = '60px';
     reference.style.marginTop = '10px';
     var name_label = document.createElement('span');
     name_label.style.padding = '2px';
@@ -397,12 +402,14 @@ function add_reference_input_area() {
     url_label.innerHTML = 'url';
     url_label.style.padding = '4px';
     var url_input = document.createElement('input');
-    url_input.style.width = '100px';
+    url_input.style.width = '200px';
     var source_label =document.createElement('span');
     source_label.innerHTML = '来源名称';
     source_label.style.padding = '4px';
     var source_input = document.createElement('input');
     source_input.style.width = '100px';
+    
+    var cancel_btn
     reference.appendChild(name_label);
     reference.appendChild(name_input);
     reference.appendChild(url_label);
