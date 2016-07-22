@@ -81,6 +81,31 @@ function get_welcome() {
     if(getCookie("login")==1){
         login = true;
         user_name = getCookie("username");
+    }else {
+        // $.get('/user/info', null, function (data) {
+        //     alert("userinfo = " + JSON.stringify(data));
+        //     if(data.login==true){
+        //         login = true;
+        //         user_name = data.data.username;
+        //     }
+        // });
+        $.ajax({
+            url: '/user/info',
+            type: 'get',
+            async: false,
+            data: null,
+            success: function (data) {
+                if(data.login == true){
+                    login = true;
+                    user_name = data.data.username;
+                    document.cookie="login="+1;
+                    document.cookie="username="+user_name;
+                }
+            },
+            error: function (data) {
+                alert("error!");
+            }
+        })
     }
     
     if(login == false){

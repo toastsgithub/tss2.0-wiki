@@ -44,7 +44,25 @@ function load_content(title){
                     flowChart       : true,  // 默认不解析
                     sequenceDiagram : true  // 默认不解析
                 });
-            
+
+            var display_panel = document.getElementById('reference');
+            var tmp = data.reference.dao;
+            if(tmp.length == 0){
+                display_panel.innerHTML = "<p>无</p>";
+            }
+            else{
+                for(var i in tmp){
+                    var name = tmp[i].name;
+                    var url = tmp[i].url;
+                    var link = document.createElement('a');
+                    link.href = url;
+                    link.innerHTML = name;
+                    
+                    var br = document.createElement('br');
+                    display_panel.appendChild(link);
+                    display_panel.appendChild(br);
+                }
+            }
         },
         error:function (data) {
             alert("error"+JSON.stringify(data));
