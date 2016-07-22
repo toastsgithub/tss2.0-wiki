@@ -78,7 +78,7 @@ function addClause() {
             id:0,
             alias:all_alias,
             time: time,
-            username: "123",
+            username: username,
             summary: summary,
             title: title,
             tags: tags,

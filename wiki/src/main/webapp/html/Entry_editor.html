@@ -126,7 +126,7 @@
 
 <button id="submit_btn" class="btn btn-primary" onclick="addClause();">submit</button>
 <button id="add_btn" class="btn btn-primary" onclick="add_reference_input_area();">add reference</button>
-<button id="get_btn" class="btn btn-primary" onclick="getAlias();">get alias</button>
+<button id="get_btn" class="btn btn-primary" onclick="get_user_test();">get alias</button>
 <script src="../js/editormd.js"></script>
 <script type="text/javascript">
     var editor_instance;
@@ -197,6 +197,10 @@
         origin_width_of_input = document.getElementById('tags_input').offsetWidth;
         origin_width_of_alias_input = document.getElementById('alias_input').offsetWidth;
     });
+
+    function get_user_test() {
+        alert('user:'+get_user());
+    }
 </script>
 
 
