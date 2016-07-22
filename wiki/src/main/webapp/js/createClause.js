@@ -100,7 +100,7 @@ function addClause() {
                 alert("create successfully!");
                 window.location = '../html/Outline.html';
             }else{
-                alert("尚未登录或网络不畅通");
+                alert("添加过程中出现错误,原因:"+data.message);
             }
         },
         error: function (data) {
