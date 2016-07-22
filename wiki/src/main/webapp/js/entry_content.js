@@ -80,3 +80,26 @@ function search_entry() {
     location.href = url;
 }
 
+function init_content_info(){
+    
+}
+
+function delete_entry() {
+    var title = location.href.split('?')[1].split('=')[1];
+    var url = '/content/wiki/'+title;
+    $.ajax({
+        url:url,
+        type:'delete',
+        success:function (data) {
+            if(data.error == 0){
+                alert('delete [success]');    
+            }else{
+                alert('delete[fail] and reason is '+data.message);
+            }
+            
+        },
+        error:function (data) {
+            alert('error:'+JSON.stringify(data));
+        }
+    });
+}
