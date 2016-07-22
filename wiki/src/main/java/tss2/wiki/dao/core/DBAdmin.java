@@ -56,6 +56,9 @@ public class DBAdmin {
         }
     }
 
+    /**
+     * 自动添加类中已经定义的但是数据库中不存在的表.
+     */
     public static void migrate() {
         System.out.println("make migrations...");
         ArrayList<String> tbls = getAvailableTables();
@@ -66,13 +69,13 @@ public class DBAdmin {
             }
             if (!contains) createTable(clz);
         }
-        for (String table : tbls) {
+        /*for (String table : tbls) {
             boolean contains = false;
             for (Class clz : tables) {
                 if (table.equals(clz.getSimpleName())) contains = true;
             }
             if (!contains) dropTable(table);
-        }
+        }*/
         System.out.println("finished.");
     }
 
@@ -80,6 +83,12 @@ public class DBAdmin {
         return conn;
     }
 
+    /**
+     * 新建表
+     *
+     * @param name
+     * @param table
+     */
     public static void createTable(String name, Class table) {
         // generate field string
         String strFields = "";
@@ -116,6 +125,10 @@ public class DBAdmin {
         createTable(table.getSimpleName(), table);
     }
 
+    /**
+     * 删除一张表
+     * @param tableName
+     */
     public static void dropTable(String tableName) {
         try {
             if (conn.isClosed()) {
@@ -131,6 +144,12 @@ public class DBAdmin {
         }
     }
 
+    /**
+     * 新增列
+     *
+     * @param table
+     * @param field
+     */
     public static void addColumn(String table, Field field) {
         try {
             if (conn.isClosed()) {
@@ -163,7 +182,11 @@ public class DBAdmin {
 
     }
 
-
+    /**
+     * 删除列
+     * @param table
+     * @param fieldName
+     */
     public static void dropColumn(String table, String fieldName) {
         try {
             if (conn.isClosed()) {
@@ -180,6 +203,12 @@ public class DBAdmin {
         System.out.println("- " + table + "." + "field");
     }
 
+    /**
+     * 获取表的所有域名称
+     *
+     * @param table
+     * @return
+     */
     public static String[] getFields(String table) {
         ResultSet rs = null;
         ArrayList<String> arrField = new ArrayList<>();
@@ -201,6 +230,11 @@ public class DBAdmin {
         return arrField.toArray(res);
     }
 
+    /**
+     * 获取某个类型在数据库中的类型名称
+     * @param type
+     * @return
+     */
     private static String getTypeName(String type) {
         switch (type) {
             case "long":
@@ -232,6 +266,11 @@ public class DBAdmin {
         return type;
     }
 
+    /**
+     * 获取当前数据客中的表列表
+     *
+     * @return
+     */
     public static ArrayList<String> getAvailableTables() {
         // get available tables
         ArrayList<String> tbls = new ArrayList<>();
@@ -253,6 +292,11 @@ public class DBAdmin {
         return tbls;
     }
 
+    /**
+     * 执行一条查询语句,并反悔值.
+     * @param sqlQuery
+     * @return
+     */
     public static RowSet query(String sqlQuery) {
         try {
             if (conn.isClosed()) {
@@ -261,12 +305,14 @@ public class DBAdmin {
             Statement stmt = conn.createStatement();
             CachedRowSet rs = new CachedRowSetImpl();
             ResultSet s = stmt.executeQuery(sqlQuery);
+
             rs.populate(s);
             s.close();
             stmt.close();
             return rs;
 
         } catch (SQLException e) {
+            System.err.println(sqlQuery);
             e.printStackTrace();
             return null;
         }
@@ -284,5 +330,9 @@ public class DBAdmin {
             e.printStackTrace();
             System.err.println(sqlExecute);
         }
+    }
+
+    public static void main(String[] args) {
+        query("show tables;");
     }
 }
