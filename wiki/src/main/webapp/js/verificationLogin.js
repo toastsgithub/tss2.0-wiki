@@ -144,17 +144,24 @@ function getCookie(name){
 
 function deleteCookie(name){
     var date=new Date();
-    date.setTime(date.getTime()-10000); //设定一个过去的时间即可
+    date.setTime(date.getTime()-99999999999999); //设定一个过去的时间即可
     document.cookie=name+"=v; expires="+date.toGMTString();
 }
 
 function clearLogin(){
+    $.ajax({
+        url: '/user/logout',
+        type: 'get',
+        async: false,
+        success: function (data) {},
+        error: function (data) {
+            alert('error!');
+        }
+    });
     deleteCookie("login");
     deleteCookie("username");
-    $.get('/user/logout', null, function (data){
-        
-    }
-    );
+    
+    
 }
 
 
