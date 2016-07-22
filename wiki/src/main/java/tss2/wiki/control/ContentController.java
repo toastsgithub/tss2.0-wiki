@@ -98,6 +98,12 @@ public class ContentController {
         return new OutLineTitleResult(1,stringArrayList);
     }
 
+    @RequestMapping(value = "/getAllTitleAndSummery", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
+    public @ResponseBody ArrayList<OutLineContentResult> getAllTitleAndSummery(){
+        WikiOutline wikiOutline = new WikiOutline();
+        return wikiOutline.getTitleAndSummery();
+    }
+
 
     /**
      * 返回所有条目title和alias
