@@ -7,17 +7,13 @@ import tss2.wiki.control.service.SessionService;
 import tss2.wiki.domain.*;
 import tss2.wiki.control.service.ContentService;
 import tss2.wiki.control.impl.ContentServiceImpl;
-import tss2.wiki.model.WikiRecord;
-import tss2.wiki.model.WikiReference;
-import tss2.wiki.model.WikiSession;
-import tss2.wiki.model.WikiUser;
+import tss2.wiki.model.*;
 import tss2.wiki.vo.WikiEntryVO;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Map;
 
-import static tss2.wiki.model.WikiRecord.getAlias;
 import static tss2.wiki.model.WikiRecord.getContentByCategories;
 import static tss2.wiki.model.WikiRecord.recordFuzzySearch;
 
@@ -109,7 +105,8 @@ public class ContentController {
      */
     @RequestMapping(value = "/getTitleAndAlias", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
     public @ResponseBody ArrayList<String> getTitleAndAlias() {
-        return getAlias();
+        WikiAlias wikiAlias = new WikiAlias();
+        return wikiAlias.getAlias();
     }
 
     /**

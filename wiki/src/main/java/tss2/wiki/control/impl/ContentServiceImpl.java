@@ -4,16 +4,12 @@ import tss2.wiki.dao.core.DAOBase;
 import tss2.wiki.dao.Tag;
 import tss2.wiki.domain.CommonResult;
 import tss2.wiki.control.service.ContentService;
-import tss2.wiki.model.WikiMarkdown;
-import tss2.wiki.model.WikiRecord;
-import tss2.wiki.model.WikiReference;
-import tss2.wiki.model.WikiUser;
+import tss2.wiki.model.*;
 import tss2.wiki.vo.WikiEntryVO;
 
 import java.util.ArrayList;
 import java.util.Map;
 
-import static tss2.wiki.model.WikiRecord.Alias;
 
 /**
  * Created by 羊驼 on 2016/7/9.
@@ -68,7 +64,8 @@ public class ContentServiceImpl implements ContentService {
             entryid = entry.getID();
         }
         ArrayList alias = (ArrayList) map.get("alias");
-        Alias(entryid,title,alias);
+        WikiAlias wikiAlias = new WikiAlias();
+        wikiAlias.Alias(entryid,title,alias);
         WikiReference wikiReference = new WikiReference(entryid,title);
         wikiReference.modify(r);
         return new CommonResult(0);
