@@ -435,6 +435,7 @@ function load_empty_tip(){
     image.style.width = '350px';
     embarrasing_text.innerHTML = '这非常的尴尬,但是这个条目下没有内容';
     embarrasing_text.style.fontSize = '20px';
+    embarrasing_text.style.color = '#d9d9d9';
     document.getElementById('search_result_content').appendChild(embarrassing_div);
 }
 
