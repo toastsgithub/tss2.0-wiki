@@ -70,7 +70,7 @@ public class WikiRecord {
      */
     public static RecordsResult recordFuzzySearch(String search) {
         search = getTitleFromAlias(search);
-
+        System.out.println("search is: "+search);
         DAOBase[] title = WikiEntry.query().where("title like '%" + search + "%'");
         DAOBase[] tags = WikiEntry.query().where("tags like '%" + search + "%'");
         DAOBase[] categories = WikiEntry.query().where("categories like '%" + search + "%'");
@@ -92,7 +92,7 @@ public class WikiRecord {
             result.add((WikiEntry) title[i]);
         }
         result = qsort(result);
-
+        System.out.println("size after title: "+result.size());
         for (int i = 0; i < tags.length; i++) {
             if (contain(result, (WikiEntry) tags[i])) {
             } else {
@@ -100,7 +100,7 @@ public class WikiRecord {
             }
         }
         for (int i = 0; i < categories.length; i++) {
-            if (contain(result, (WikiEntry) categories[i]) && contain(R1, (WikiEntry) categories[i])) {
+            if (contain(result, (WikiEntry) categories[i]) || contain(R1, (WikiEntry) categories[i])) {
             } else {
                 R2.add((WikiEntry) categories[i]);
             }
@@ -112,7 +112,7 @@ public class WikiRecord {
         for (int i = 0; i < R1.size(); i++) {
             result.add(R1.get(i));
         }
-
+        System.out.println("size after categories and tags: "+result.size());
 
         for (int i = 0; i < summery.length; i++) {
             if (contain(result, (WikiEntry) summery[i])) {
@@ -124,7 +124,7 @@ public class WikiRecord {
         for (int i = 0; i < R3.size(); i++) {
             result.add(R3.get(i));
         }
-
+        System.out.println("size after summery: "+result.size());
         for (int i = 0; i < alllist.size(); i++) {
             if (search(alllist.get(i).contentPath, search)) {
                 if (contain(result, alllist.get(i))) {
@@ -150,6 +150,8 @@ public class WikiRecord {
     private static boolean search(String path, String search) {
         //WikiRecord wikiRecord = new WikiRecord(wikiEntry.title);
         String content = FileUtil.loadStringFromAbsolutePath(path);
+        //System.out.println("path:"+path);
+        //System.out.println("content:"+content);
         if (content == null) {
             return false;
         }
