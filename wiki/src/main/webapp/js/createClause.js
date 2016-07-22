@@ -75,7 +75,7 @@ function addClause() {
     var data = {
         operation: "add", data: {
             id:0,
-            alias:['alias1,alias2,hhh3'],
+            alias:['alias1','alias2','hhh3'],
             time: time,
             username: "123",
             summary: summary,
