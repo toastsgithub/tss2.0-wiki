@@ -80,8 +80,11 @@ function save_outline() {
  */
 function save_outline_and_entry() {
     var data_obj = $('#moutline').jstree(true).get_json('#',{flat:true,no_state:true,no_data:false});
-    
+    data_obj[0].text = '测试修改';
+    data_obj[0].entries = ['title1','title2','title3'];
     alert(JSON.stringify(data_obj));
+    var data_obj2 = $('#moutline').jstree(true).get_json('#',{flat:true,no_state:true,no_data:false});
+    alert(JSON.stringify(data_obj2));
     // add_all_children(data_obj[0]);
     // $.ajax({
     //     url:'/outline/Test',
@@ -573,4 +576,8 @@ function showSearchResult(content, num){
         sr_content.appendChild(sr_pages[tmp]);
     }
     return content_count;
+}
+
+function show_all_buffer() {
+    alert('buffer '+JSON.stringify(all_outline_content));
 }

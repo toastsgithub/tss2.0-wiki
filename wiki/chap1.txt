@@ -548,22 +548,22 @@ BREAKDOWN OF TOPICS FOR SOFTWARE DESIGN
 
 The breakdown of topics for the Software Design KA is shown in Figure 2.1.
 
-1.Software Design Fundamentals
+1.  Software Design Fundamentals
 
 The concepts, notions, and terminology intro- duced here form an underlying basis for under- standing the role and scope of software design.
 
-1.1.General Design Concepts
+1.1.    General Design Concepts
 [4*, c1]
 
 In the general sense, design can be viewed as a form of problem solving. For example, the con- cept of a wicked problem—a problem with no definitive  solution—is  interesting  in  terms  of
 understanding the limits of design. A number of other notions and concepts are also of interest in understanding design in its general sense: goals, constraints, alternatives, representations, and solutions (see Problem Solving Techniques in the Computing Foundations KA).
 
-1.2.Context of Software Design
+1.2.    Context of Software Design
 [4*, c3]
 
 Software design is an important part of the soft- ware development process. To understand the role of software design, we must see how it fits in the software development life cycle. Thus, it is important to understand the major characteris- tics of software requirements analysis, software design, software construction, software testing, and software maintenance.
 
-1.3.Software Design Process
+1.3.    Software Design Process
 [4*, c2]
 
 Software design is generally considered a two- step process:
@@ -577,7 +577,7 @@ Software design is generally considered a two- step process:
 
 The output of these two processes is a set of models and artifacts that record the major deci- sions that have been taken, along with an explana- tion of the rationale for each nontrivial decision. By recording the rationale, long-term maintain- ability of the software product is enhanced.
 
-1.4.Software Design Principles
+1.4.    Software Design Principles
 [4*] [5*, c6, c7, c21] [6*, c1, c8, c9]
 
 A principle is “a comprehensive and fundamen- tal law, doctrine, or assumption” [7]. Software design principles are key notions that provide the basis for many different software design approaches and concepts. Software design princi- ples include abstraction; coupling and cohesion; decomposition and modularization; encapsula- tion/information hiding; separation of interface and implementation; sufficiency, completeness, and primitiveness; and separation of concerns.
@@ -591,7 +591,7 @@ software is divided into a number of smaller named components having well-define
 •Sufficiency, completeness, and primitiveness. Achieving sufficiency and completeness means ensuring that a software component captures all the important characteristics of an abstraction and nothing more. Primitive- ness means the design should be based on patterns that are easy to implement.
 •Separation of concerns. A concern  is  an “area of interest with respect to a software design” [8]. A design concern is an area of design that is relevant to one or more of its stakeholders. Each architecture view frames one or more concerns. Separating concerns by views allows interested stakeholders to focus on a few things at a time and offers a means of managing complexity [9].
 
-2.Key Issues in Software Design
+2.  Key Issues in Software Design
 
 A number of key issues must be dealt with when designing software. Some are quality concerns that all software must address—for example, performance, security, reliability, usability, etc. Another important issue is how to decompose, organize, and package software components. This is so fundamental that all design approaches address it in one way or another (see section 1.4, Software Design Principles, and topic 7, Soft- ware Design Strategies and Methods). In contrast, other issues “deal with some aspect of software’s behavior that is not in the application domain, but  which  addresses  some  of  the  supporting
 
@@ -607,25 +607,25 @@ domains” [10]. Such issues, which often crosscut the system’s functionality,
 
 ware’s functional decomposition, but rather to be properties that affect the performance or seman- tics of the components in systemic ways” [11]. A number of these key, crosscutting issues are discussed in the following sections (presented in alphabetical order).
 
-2.1.Concurrency
+2.1.    Concurrency
 [5*, c18]
 
 Design for concurrency is concerned with decom- posing software into processes, tasks, and threads and dealing with related issues of efficiency, atomicity, synchronization, and scheduling.
 
-2.2.Control and Handling of Events
+2.2.    Control and Handling of Events
 [5*, c21]
 
 This design issue is concerned with how to organize data and control flow as well as how to handle reactive and temporal events through various mechanisms such as implicit invocation and call-backs.
 
-2.3.Data Persistence
+2.3.    Data Persistence
 This design issue is concerned with how to struc- ture and organize interactions with users as well as the presentation of information (for example, separation of presentation and business logic using the Model-View-Controller approach). Note that this topic does not specify user interface details, which is the task of user interface design (see topic 4, User Interface Design).
 
-2.7. Security
+2.7.    Security
 [5*, c12, c18] [13*, c4]
 
 Design for security is concerned with how to pre- vent unauthorized disclosure, creation, change, deletion, or denial of access to information and other resources. It is also concerned with how to tolerate security-related attacks or violations by limiting damage, continuing service, speeding repair and recovery, and failing and recovering securely. Access control is a fundamental con- cept of security, and one should also ensure the proper use of cryptology.
 
-3.Software Structure and Architecture
+3.  Software Structure and Architecture
 
 [12*, c9]
 
@@ -6131,7 +6131,7 @@ c2s3.1
 
 
 
-Bott et al. 2000 [1*]
+Bottetal. 2000 [1*]
 Voland 2003 [3*]
 Sommerville 2011 [4*]
 McConnell 2004 [5*]
@@ -6211,8 +6211,7 @@ ACRONYMS
 EVM	Earned Value Management
 IRR	Internal Rate of Return
 
-MARR	Minimum Acceptable Rate of
-Return
+MARR	Minimum Acceptable Rate ofReturn
 SDLC	Software Development Life Cycle
 SPLC	Software Product Life Cycle
 ROI	Return on Investment
@@ -6226,8 +6225,8 @@ Software engineering economics is about mak- ing decisions related to software e
 Economics is the study of value, costs, resources, and their relationship in a given context or situation. In the discipline of software engi- neering, activities have costs, but the resulting software itself has economic attributes as well. Software engineering economics provides a way to study the attributes of software and software processes in a systematic way that relates them to economic measures. These economic measures can be weighed and analyzed when making deci- sions that are within the scope of a software orga- nization and those within the integrated scope of an entire producing or acquiring business.
 Software engineering economics is concerned with aligning software technical decisions with
 the business goals of the organization. In all types of organizations—be it “for-profit,” “not- for-profit,” or governmental—this translates into sustainably staying in business. In “for-profit” organizations this additionally relates to achiev- ing a tangible return on the invested capital— both assets and capital employed. This KA has been formulated in a way to address all types of organizations independent of focus, product and service portfolio, or capital ownership and taxa- tion restrictions.
-Decisions like “Should we use a specific compo- nent?” may look easy from a technical perspective, but can have serious implications on the business viability of a software project and the resulting product. Often engineers wonder whether such concerns apply at all, as they are “only engi- neers.” Economic analysis and decision-making are important engineering considerations because engineers are capable of evaluating decisions both technically and from a business perspective. The contents of this knowledge area are important top- ics for software engineers to be aware of even if they are never actually involved in concrete busi- ness decisions; they will have a well-rounded view of business issues and the role technical consid- erations play in making business decisions. Many engineering proposals and decisions, such as make versus buy, have deep intrinsic economic impacts that should be considered explicitly.
-This KA first covers the foundations, key ter- minology, basic concepts, and common practices of software engineering economics to indicate how decision-making in software engineering includes, or should include a business perspec- tive. It then provides a life cycle perspective, highlights risk and uncertainty management, and shows how economic analysis methods are used. Some practical considerations finalize the knowl- edge area.
+Decisions like “Should we use a specific component?” may look easy from a technical perspective, but can have serious implications on the business viability of a software project and the resulting product. Often engineers wonder whether such concerns apply at all, as they are “only engi- neers.” Economic analysis and decision-making are important engineering considerations because engineers are capable of evaluating decisions both technically and from a business perspective. The contents of this knowledge area are important top- ics for software engineers to be aware of even if they are never actually involved in concrete busi- ness decisions; they will have a well-rounded view of business issues and the role technical consid- erations play in making business decisions. Many engineering proposals and decisions, such as make versus buy, have deep intrinsic economic impacts that should be considered explicitly.
+This KA first covers the foundations, key terminology, basic concepts, and common practices of software engineering economics to indicate how decision-making in software engineering includes, or should include a business perspec- tive. It then provides a life cycle perspective, highlights risk and uncertainty management, and shows how economic analysis methods are used. Some practical considerations finalize the knowl- edge area.
 
 
 12-1
@@ -6235,77 +6234,6 @@ This KA first covers the foundations, key ter- minology, basic concepts, and com
 
 
 
-
-
-
-
-
-
-
-
-
-Goal s,	The “Good
-Fin an ce	I-+ Product	←＋ Est imates, and	Decis ion	Enough”
-Plan s	An a l ysis	Prin ciple
-
-Esti mation	M in i mum	Fri ction- Accountin g	卡＋ Proj ect	卡＋ Techn iques	Acceptab l e	Free
-R ate of Return	Econ omy
-
-Controlling	「＋ Program	f-+ Addr酬	R eturn on	Ecosystems
-Un certainty	Invest m ent
-
-R eturn on	」OITshormg Cash Fl ow	Po口folio	Prioritization	Capital		and
-Employed	Outsourcing
-
-
-Decision - Ma ki ng
-
-Product L ife	Deci sion s
-
-Cost-B巳n巳日1
-
-Process	Cycl e	und er Ri sk	An a l ysis
-
-Proj ect Li止	Deci sions	Cost-
-
-Va luation
-Cycl e
-und巳r	Effecti ven ess
-Uncertainty	An a lysis
-
-
-
-Inflation	←＋ Proposa l s		Break-Even An al ysis
-Depreci ation	I-+   ：白c引ss引＇I.盯】 】sn	Bu siness     Case
-
-
-
-Taxati on
-
-
-Horizon
-M ultipl e Attribute Evaluation
-
-
-Time-Value of	Price and	。”imization
-Mon ey	Prici n g	An a l ysi s
-
-
-E ffi cien cy	f-+ Cost and Costing
-
-
-Effecti ven ess	卡＿＿. Perfonnan ce
-Measurement
-
-
-Produ cti v i ty	「＿＿. Ea rn ed Va l ue Man agem ent
-
-
-Tenni nat1on
-Deci si on s
-
-R eplacem ent
-and Retirem ent Deci si on s
 
 Figure 12.1. Breakdown of Topics for the Software Engineering Economics KA
 
