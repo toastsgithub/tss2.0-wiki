@@ -1,6 +1,8 @@
 package tss2.wiki.dao;
 
 import tss2.wiki.dao.core.DAOBase;
+import tss2.wiki.model.WikiMessage;
+import tss2.wiki.util.StringUtil;
 
 /**
  * 消息表
@@ -18,5 +20,18 @@ public class Message extends DAOBase {
 
     public static Message query() {
         return new Message();
+    }
+
+    public static void main(String[] args) {
+        Message message = new Message();
+        message.messageID = StringUtil.generateTokener(16);
+        message.fromUser = "123";
+        message.toUser = "dzm14";
+        message.title = "这是一条测试信息";
+        message.detail = "消息内容";
+        message.save();
+
+        WikiMessage wm = WikiMessage.getMessage(message.messageID);
+        wm.send();
     }
 }

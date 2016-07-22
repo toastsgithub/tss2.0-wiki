@@ -59,6 +59,7 @@ $.get(
  */
 function save_outline() {
     var data_obj = $('#moutline').jstree(true).get_json();
+    alert(JSON.stringify(data_obj[0]));
     $.ajax({
         url:'/outline',
         type:'put',
