@@ -56,13 +56,6 @@ public class ContentServiceImpl implements ContentService {
         long entryid = (long)Integer.parseInt(map.get("id").toString());
 
         ArrayList r =(ArrayList) map.get("reference");
-        WikiReference wikiReference = new WikiReference(entryid,title);
-        wikiReference.modify(r);
-
-        ArrayList alias = (ArrayList) map.get("alias");
-        Alias(entryid,title,alias);
-
-
 
         if (summary.equals("")) {
             WikiMarkdown wikimd = new WikiMarkdown(content);
@@ -70,7 +63,14 @@ public class ContentServiceImpl implements ContentService {
         }
 
         WikiUser user = new SessionServiceimpl().getUserBySession(data.getSessionID());
-        entry.setContent(entryid,user.getUsername(), categories, tags, summary, content, true);
+        entry.setContent(entryid, user.getUsername(), categories, tags, summary, content, true);
+        if (entryid == 0) {
+            entryid = entry.getID();
+        }
+        ArrayList alias = (ArrayList) map.get("alias");
+        Alias(entryid,title,alias);
+        WikiReference wikiReference = new WikiReference(entryid,title);
+        wikiReference.modify(r);
         return new CommonResult(0);
     }
 }

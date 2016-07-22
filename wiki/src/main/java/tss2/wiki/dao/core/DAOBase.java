@@ -30,7 +30,7 @@ import java.util.Collections;
 @JsonIgnoreProperties(value = {"getTableName"})
 public abstract class DAOBase {
 
-    public long id;
+    public long id = 0;
 
     public DAOBase() { }
 

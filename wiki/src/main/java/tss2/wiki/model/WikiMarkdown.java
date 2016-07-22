@@ -98,14 +98,12 @@ public class WikiMarkdown {
             FileInputStream fis = new FileInputStream("/home/coral/桌面/a.md");
             Scanner scanner = new Scanner(fis);
             while (scanner.hasNext()) {
-                md += scanner.next() + "\n";
+                md += scanner.nextLine() + "\n";
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        WikiMarkdown wikimd = new WikiMarkdown(md);
-        // wikimd.printHeaders();
-        System.out.println(wikimd.getSummary(160));
+        System.out.println(WikiRecord.polish(md));
     }
 
     public void printHeaders() {
