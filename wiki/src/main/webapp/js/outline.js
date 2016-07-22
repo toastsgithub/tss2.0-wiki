@@ -520,22 +520,53 @@ function showSearchResult(content, num){
         //         <new_entry_abstract_di></new_entry_abstract_di>
         //     </new_entry_content_div>
         // </new_entry_div>
+        //-----------------------革命的开始--------------------------
+        // var new_entry_div = document.createElement('div');
+        // new_entry_div.style.backgroundColor = "rgb(175, 217, 238)";
+        // new_entry_div.style.height = "70px";
+        // new_entry_div.style.marginBottom = "10px";
+        // var new_entry_content_div = document.createElement('div');
+        // new_entry_content_div.style.marginTop = "10px";
+        // var new_entry_link = document.createElement('a');
+        // new_entry_link.href = '../html/entry_content.html?entry='+content_title;
+        // new_entry_link.style.fontSize = "20px";
+        // new_entry_link.innerHTML = content_title;
+        // var new_entry_abstract_div = document.createElement('div');
+        // new_entry_abstract_div.innerHTML = content_abstract;
+        //
+        // new_entry_div.appendChild(new_entry_content_div);
+        // new_entry_content_div.appendChild(new_entry_link);
+        // new_entry_content_div.appendChild(new_entry_abstract_div);
+        // sr_pages[page_count-1].appendChild(new_entry_div);
+        //-----------------------革命的分界线--------------------------
         var new_entry_div = document.createElement('div');
-        new_entry_div.style.backgroundColor = "rgb(175, 217, 238)";
-        new_entry_div.style.height = "70px";
-        new_entry_div.style.marginBottom = "10px";
-        var new_entry_content_div = document.createElement('div');
-        new_entry_content_div.style.marginTop = "10px";
+        new_entry_div.className = 'panel panel-primary';
+        // new_entry_div.style.marginBottom = "10px";
+        var new_entry_head_div = document.createElement('div');
+        new_entry_head_div.className = 'panel-heading';
+        new_entry_head_div.style.padding = '2px';
+        new_entry_head_div.style.paddingLeft = '10px';
+        
+        // var new_entry_content_div = document.createElement('div');
+        // new_entry_content_div.className = 'panel-body';
+        
         var new_entry_link = document.createElement('a');
         new_entry_link.href = '../html/entry_content.html?entry='+content_title;
         new_entry_link.style.fontSize = "20px";
+        new_entry_link.style.fontWeight = '200';
+        new_entry_link.style.color = 'white';
         new_entry_link.innerHTML = content_title;
+        
         var new_entry_abstract_div = document.createElement('div');
+        new_entry_abstract_div.className = 'panel-body';
         new_entry_abstract_div.innerHTML = content_abstract;
 
-        new_entry_div.appendChild(new_entry_content_div);
-        new_entry_content_div.appendChild(new_entry_link);
-        new_entry_content_div.appendChild(new_entry_abstract_div);
+        new_entry_head_div.appendChild(new_entry_link);
+        new_entry_div.appendChild(new_entry_head_div);
+        new_entry_div.appendChild(new_entry_abstract_div);
+        
+        // new_entry_content_div.appendChild(new_entry_link);
+        // new_entry_content_div.appendChild(new_entry_abstract_div);
         sr_pages[page_count-1].appendChild(new_entry_div);
     }
     for(var tmp in sr_pages){

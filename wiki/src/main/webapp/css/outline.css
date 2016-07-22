@@ -14,6 +14,7 @@
 #moutline{
     background-color: #ffffff;
     height: 700px;
+    overflow: scroll;
 }
 #q,#entry_search{
     outline: none;
