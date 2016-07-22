@@ -5,6 +5,7 @@ import tss2.wiki.dao.Tag;
 import tss2.wiki.domain.CommonResult;
 import tss2.wiki.control.service.ContentService;
 import tss2.wiki.model.*;
+import tss2.wiki.util.StringUtil;
 import tss2.wiki.vo.WikiEntryVO;
 
 import java.util.ArrayList;
@@ -39,6 +40,12 @@ public class ContentServiceImpl implements ContentService {
 
     private CommonResult add(WikiEntryVO data) {
         Map map = (Map) data.getData().get("data");
+
+        ArrayList alias = (ArrayList) map.get("alias");
+        if(contain(alias)){
+            return new CommonResult(1,"Alias Exist");
+        }
+
         String title = map.get("title").toString();
         WikiRecord entry = new WikiRecord(title);
         String summary = map.get("summary").toString();
@@ -63,11 +70,28 @@ public class ContentServiceImpl implements ContentService {
         if (entryid == 0) {
             entryid = entry.getID();
         }
-        ArrayList alias = (ArrayList) map.get("alias");
+
+
         WikiAlias wikiAlias = new WikiAlias();
         wikiAlias.Alias(entryid,title,alias);
         WikiReference wikiReference = new WikiReference(entryid,title);
         wikiReference.modify(r);
         return new CommonResult(0);
     }
+
+    private boolean contain(ArrayList alias){
+        ArrayList<String> aliasList = new ArrayList<>();
+        WikiAlias wikiAlias = new WikiAlias();
+        aliasList = wikiAlias.getAlias();
+        for(int i = 0;i < alias.size();i++){
+            for(int j = 0;j < aliasList.size();j++){
+                if(aliasList.get(j).equals(alias.get(i).toString())){
+                    System.out.println("Alias Exist!!!");
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 }
