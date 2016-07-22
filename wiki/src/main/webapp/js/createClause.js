@@ -265,6 +265,7 @@ function adjust_tag_input_width() {
     var tags_width = tag_pool.offsetWidth;
     tags_input.style.width = (origin_width_of_input - tags_width) + 'px';
 }
+
 function adjust_alias_input_width() {
     var tags_input = document.getElementById('alias_input');
     var alias_pool = document.getElementById('alias_bar');
@@ -398,24 +399,45 @@ function add_reference_input_area() {
     name_label.innerHTML = '名称';
     var name_input = document.createElement('input');
     name_input.style.width = '100px';
+    name_input.id = 'reference_name_' + reference_count;
     var url_label = document.createElement('span');
     url_label.innerHTML = 'url';
     url_label.style.padding = '4px';
     var url_input = document.createElement('input');
     url_input.style.width = '200px';
-    var source_label =document.createElement('span');
-    source_label.innerHTML = '来源名称';
-    source_label.style.padding = '4px';
-    var source_input = document.createElement('input');
-    source_input.style.width = '100px';
+    url_input.id = 'reference_url_' + reference_count;
     
-    var cancel_btn
+    var reference_delete = document.createElement('span');
+    reference_delete.innerHTML = "x";
+    reference_delete.id = "reference_delete_" + reference_count;
+    reference_delete.style.marginLeft = '20px'
+    
+    // var source_label =document.createElement('span');
+    // source_label.innerHTML = '来源名称';
+    // source_label.style.padding = '4px';
+    // var source_input = document.createElement('input');
+    // source_input.style.width = '100px';
+    
+    // var cancel_btn
     reference.appendChild(name_label);
     reference.appendChild(name_input);
     reference.appendChild(url_label);
     reference.appendChild(url_input);
-    reference.appendChild(source_label);
-    reference.appendChild(source_input);
+    reference.appendChild(reference_delete);
+    // reference.appendChild(source_label);
+    // reference.appendChild(source_input);
     document.getElementById('reference').appendChild(reference);
     reference_count++;
+}
+
+function get_reference(){
+    var reference = document.getElementById('reference');
+    var child = reference.childNodes
+    alert(reference.childElementCount)
+    alert(child.length);
+    alert(JSON.stringify(child));
+    // for(var i = 0; i < child.length; i++){
+    //     alert(child[i]);
+    //     // alert(child[i].childNodes[1].value + "    " + child[i].childNodes[3].value);
+    // }
 }
