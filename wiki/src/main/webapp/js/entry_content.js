@@ -92,7 +92,8 @@ function delete_entry() {
         type:'delete',
         success:function (data) {
             if(data.error == 0){
-                alert('delete [success]');    
+                alert('delete [success]');
+                location.href = '../html/Outline.html';
             }else{
                 alert('delete[fail] and reason is '+data.message);
             }
