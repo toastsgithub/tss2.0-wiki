@@ -430,7 +430,8 @@ function load_empty_tip(){
     var embarrasing_text = document.createElement('div');
     embarrassing_div.appendChild(image);
     embarrassing_div.appendChild(embarrasing_text);
-    image.src = '../resource/image/embarrassing_black.png';
+    image.src = '../resource/image/embarrassing_gray.png';
+    embarrassing_div.style.textAlign = "center";
     image.style.width = '350px';
     embarrasing_text.innerHTML = '这非常的尴尬,但是这个条目下没有内容';
     embarrasing_text.style.fontSize = '20px';

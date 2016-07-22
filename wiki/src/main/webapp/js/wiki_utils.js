@@ -28,21 +28,26 @@ function remove_disable(element_id) {
  * return
  */
 function get_user() {
+    var username = 'nobody';
     $.ajax({
         url:'/user/info',
-        type:'post',
+        async:false,
+        type:'get',
         success:function (data) {
-            if(data.login){
-                return data.data;
+            alert('got:'+JSON.stringify(data));
+            var status = data.login;
+            if(status==1){
+                username = data.data.username;
             }else{
-                return null
+                username = null;
             }
         },
         error:function (data) {
-            // alert('error');
-            return null
+            alert('error');
+            username = null;
         }
     });
+    return username;
 }
 /**
  * 右下角显示消息提示的方法

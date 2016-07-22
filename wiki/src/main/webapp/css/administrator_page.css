@@ -1,11 +1,11 @@
 #left_part{
-    background-color: #01a252;
-    width: 200px;
-    height: 1000px;
+    background-color: #ffffff;
+    height: 800px;
+    padding: 0;
 }
 
 #right_part{
-    background-color: burlywood;
+    /*background-color: burlywood;*/
 }
 #tool_box{
     margin-top:30px;

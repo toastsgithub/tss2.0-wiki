@@ -72,12 +72,14 @@ function addClause() {
     mock_obj2.name = '这是一条谷歌记录';
     mock_obj2.url = 'www.google.com';
     mock_obj2.websiteName = '谷歌';
+    var all_alias = getAlias();
+    alert(all_alias);
     var data = {
         operation: "add", data: {
             id:0,
-            alias:['alias1,alias2,hhh3'],
+            alias:all_alias,
             time: time,
-            username: "123",
+            username: username,
             summary: summary,
             title: title,
             tags: tags,

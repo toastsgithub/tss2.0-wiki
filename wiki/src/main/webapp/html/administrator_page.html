@@ -16,7 +16,7 @@
 </head>
 <body>
 
-<nav class="navbar navbar-default" style="background-color: #ffffff">
+<nav class="navbar navbar-default" style="background-color: #ffffff;margin: 0">
     <div class="container-fluid">
         <a class="navbar-header" href="http://localhost:8080" style="margin-top: 10px;">
             <img  src="../resource/icon/tss_logo@2x.png" alt="" style="height: 32px">
@@ -39,19 +39,25 @@
     </div>
 </nav>
 
-<div id="main_content" class="container-fluid" style="padding: 0;margin: 0;background-color: #1b6d85">
+<div id="main_content" class="container-fluid" style="padding: 0;margin: 0;">
     <div class="row" style="margin: 0">
-        <div id="left_part" class="col-xs-3">
-            <div id="tool_box">
-                <div class="tool_btn">
-                    ??
-                </div>
+        <div id="left_part" class="col-lg-2 col-md-3 col-xs-3">
+            <div class="btn-group-vertical" role="group" aria-label="..." style="width: 100%;margin-top:20px;">
+                <button type="button" class="btn btn-default" onclick=location='../html/Entry_editor.html'>增加条目</button>
+                <button type="button" class="btn btn-default">删除条目</button>
+                <button type="button" class="btn btn-default">修改大纲</button>
+                <button type="button" class="btn btn-default">消息中心<span class="badge">65535</span></button>
             </div>
+            <!--<div id="tool_box">-->
+                <!--<div class="tool_btn">-->
+                    <!--??-->
+                <!--</div>-->
+            <!--</div>-->
         </div>
 
 
-        <div id="right_part" class="col-xs-9">
-            <img src="../resource/image/embarrassing_pic.png" alt="" style="width: 300px;">
+        <div id="right_part" class="col-lg-10 col-md-9 col-xs-9">
+            <img src="../resource/image/embarrassing_pic.png" alt="" style="width: 500px;" class="img-responsive">
         </div>
     </div>
 </div>
