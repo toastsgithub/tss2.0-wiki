@@ -431,6 +431,7 @@ function load_empty_tip(){
     embarrassing_div.appendChild(image);
     embarrassing_div.appendChild(embarrasing_text);
     image.src = '../resource/image/embarrassing_black.png';
+    embarrassing_div.style.textAlign = "center";
     image.style.width = '350px';
     embarrasing_text.innerHTML = '这非常的尴尬,但是这个条目下没有内容';
     embarrasing_text.style.fontSize = '20px';
