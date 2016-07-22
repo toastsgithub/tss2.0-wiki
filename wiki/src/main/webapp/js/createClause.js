@@ -73,6 +73,7 @@ function addClause() {
     mock_obj2.url = 'www.google.com';
     mock_obj2.websiteName = '谷歌';
     var all_alias = getAlias();
+    alert(all_alias);
     var data = {
         operation: "add", data: {
             id:0,
