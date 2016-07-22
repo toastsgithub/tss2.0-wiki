@@ -23,7 +23,8 @@ var origin_width_of_input;
 
 var origin_width_of_alias_input;
 
-var reference_count = 1;
+var reference_count = 0;
+
 
 function addClause() {
     // alert("judge");
@@ -409,10 +410,11 @@ function add_reference_input_area() {
     url_input.style.width = '200px';
     url_input.id = 'reference_url_' + reference_count;
     
-    var reference_delete = document.createElement('span');
+    var reference_delete = document.createElement('label');
     reference_delete.innerHTML = "x";
     reference_delete.id = "reference_delete_" + reference_count;
-    reference_delete.style.marginLeft = '20px'
+    reference_delete.style.marginLeft = '20px';
+    reference_delete.style.cursor = 'pointer';
     
     // var source_label =document.createElement('span');
     // source_label.innerHTML = '来源名称';
@@ -429,17 +431,32 @@ function add_reference_input_area() {
     // reference.appendChild(source_label);
     // reference.appendChild(source_input);
     document.getElementById('reference').appendChild(reference);
+    reference_delete.onclick = delete_reference;
     reference_count++;
 }
 
 function get_reference(){
     var reference = document.getElementById('reference');
-    var child = reference.childNodes
-    alert(reference.childElementCount)
-    alert(child.length);
-    alert(JSON.stringify(child));
-    // for(var i = 0; i < child.length; i++){
-    //     alert(child[i]);
-    //     // alert(child[i].childNodes[1].value + "    " + child[i].childNodes[3].value);
-    // }
+    var child = reference.childNodes;
+    var reference_result = [];
+    for(var i = 0; i < child.length; i++){
+        var reference_name = child[i].childNodes[1].value;
+        var reference_link = child[i].childNodes[3].value;
+        if("reference_name"=="" || reference_link == ""){
+            // do not push
+        }else {
+            var obj = {"reference_name": reference_name, "reference_link": reference_link};
+            reference_result.push(obj);
+        }
+    }
+    alert(JSON.stringify(reference_result));
+}
+
+function delete_reference(){
+    var tmp = this.id.split("_");
+    var count = tmp[2];
+    // alert("count = " + count);
+    var refer = document.getElementById('reference');
+    refer.removeChild(document.getElementById('ref_item'+count));
+    
 }

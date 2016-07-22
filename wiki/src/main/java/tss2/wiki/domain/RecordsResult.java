@@ -1,7 +1,6 @@
 package tss2.wiki.domain;
 
 import tss2.wiki.dao.WikiEntry;
-import tss2.wiki.model.WikiRecord;
 
 import java.util.ArrayList;
 

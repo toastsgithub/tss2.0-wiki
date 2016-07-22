@@ -429,15 +429,25 @@ public class WikiRecord {
         return content;
     }
 
+    public static String polishForDisplay(String content) {
+        DAOBase[] wikis = WikiEntry.query().where("");
+        for (DAOBase wiki : wikis) {
+            char[] bytes = new char[wiki.get("title").toString().length()];
+            for (int i = 0; i < bytes.length; i++) {
+                bytes[i] = wiki.get("title").toString().charAt(i);
+            }
+            String regex = '[' + StringUtil.concatArray("][", bytes) + ']';
+            content = content.replaceFirst(wiki.get("title").toString(), "<span class='wiki_match' href='/html/entry_content.html?entry=" + wiki.get("title").toString() + "'>" + wiki.get("title").toString() + "</span>");
+        }
+        return content;
+    }
+
+
     private WikiEntry dao;
     private String title;
     private static WikiAlias wikiAlias;
 
     public static void main(String args[]) {
-        //addTitieAlias("测试条目","abc");
-        //System.out.println(getTitleFromAlias("abc"));
-        WikiRecord wikiRecord = new WikiRecord("测试条目");
-        System.out.println(wikiRecord.getDate());
-        //wikiRecord.delete();
+        System.out.println(polishForDisplay("我正在进行测试,看看如果段段丢了搜狗能不能搜到了"));
     }
 }
