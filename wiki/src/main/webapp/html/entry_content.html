@@ -15,7 +15,12 @@
     <script src="../js/entry_content.js"></script>
     <script src="../js/showdown.min.js"></script>
     <script src="../js/verificationLogin.js"></script>
-    <script src="../js"></script>
+    <!--tooltips的依赖-->
+    <script src="../js/messenger.min.js"></script>
+    <script src="../js/messenger-theme-future.js"></script>
+    <script src="../js/wiki_utils.js"></script>
+    <link rel="stylesheet" href="../css/messenger-theme-future.css">
+    <link rel="stylesheet" href="../css/messenger.css">
 
     <script src="../editormd_lib/marked.min.js"></script>
     <script src="../editormd_lib/prettify.min.js"></script>
@@ -63,32 +68,38 @@
 
     </div>
 </nav>
-<div class="row" style="">
-    <div id="left_part" class="col-sm-2">
+<div class="container-fluid">
+    <div class="row" style="">
+        <div id="left_part" class="col-sm-2">
 
-    </div>
+        </div>
 
-    <div id="right_part" class="col-xs-10">
+        <div id="right_part" class="col-xs-10">
 
-        <div id="search_module">
-            <div id="search_and_btn">
-                <input type="text" id="search_input">
-                <button id="search_btn" onclick=search_entry();>search</button>
+            <div id="search_module" class="row" style="margin-top: 10px;">
+                <div id="search_and_btn" class="input-group col-lg-5 col-md-6 col-sm-7">
+                    <input id="search_input" type="text" class="form-control" placeholder="Search for...">
+                        <span class="input-group-btn">
+                            <button id='search_btn' class="btn btn-primary" type="button" style="outline: none">Search</button>
+                        </span>
+                    <!--<input type="text" id="search_input">-->
+                    <!--<button id="search_btn" onclick=search_entry();>search</button>-->
+                </div>
             </div>
-        </div>
-        <div id="article_info">
-            <div id="article_title">title</div>
-            <div id="last_update_time">最后更新日期:</div>
-            <div id="access_times">访问次数:</div>
-        </div>
-        <div id="test-editormd-view"></div>
-        <div style="margin-left: 20px">
-            <div id="reference_title">
-                <h3>参考资料</h3>
+            <div id="article_info">
+                <div id="article_title">title</div>
+                <div id="last_update_time">最后更新日期:</div>
+                <div id="access_times">访问次数:</div>
             </div>
-            <div id="reference"></div>
-        </div>
+            <div id="test-editormd-view"></div>
+            <div style="margin-left: 20px">
+                <div id="reference_title">
+                    <h3>参考资料</h3>
+                </div>
+                <div id="reference"></div>
+            </div>
 
+        </div>
     </div>
 </div>
 
@@ -100,7 +111,7 @@
         document.getElementById('article_title').innerHTML = entry_name;
 //        alert(entry_name);
         load_content(entry_name);
-
+        init_content();
 //        alert("ready");
 //        $('#jstree_demo_div').jstree();
 

@@ -60,7 +60,7 @@
 </nav>
 
 <!--正经内容的分割线-->
-    <div class="container-fluid" style="padding: 0;margin: 0">
+    <div class="container-fluid" style="">
         <!--<div class="row">-->
             <!--<div class="col-sm-6">-->
             <!--<form id="s">-->
@@ -75,13 +75,17 @@
         <!--</div>-->
 
 
-        <div id="outline_article" class="row">
+        <div id="outline_article" class="row" style="">
             <div id="moutline" class="col-sm-3"></div>
             <div id="article_board" class="col-sm-9" style="padding-left: 30px;padding-right: 30px;">
                 <div id="search_bar">
-                    <div id="search_module">
-                        <input type="text" id="search_input">
-                        <button id="search_btn">search</button>
+                    <div id="search_module" class="input-group">
+                        <input id="search_input" type="text" class="form-control" placeholder="Search for...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" type="button">Search</button>
+                            </span>
+                        <!--<input type="text" id="search_input">-->
+                        <!--<button id="search_btn">search</button>-->
                     </div>
                 </div>
 
@@ -90,30 +94,9 @@
                     <!--<div class="tab-pane active" id="article_content"></div>-->
 
                 </div>
-                <!--<div id="embarrassing_div">-->
-                    <!--<img src="../resource/image/embarrassing_black.png" alt="" style="width: 300px">-->
-                    <!--<div id="embarrassing_test">这非常的尴尬,但这个条目下没有内容</div>-->
-                <!--</div>-->
+
                 <div id="nav_part">
-                    <!--<nav>-->
-                        <!--<ul class="pagination">-->
-                            <!--<li>-->
-                                <!--<a href="#" aria-label="Previous">-->
-                                    <!--<span aria-hidden="true">&laquo;</span>-->
-                                <!--</a>-->
-                            <!--</li>-->
-                            <!--<li><a href="#">1</a></li>-->
-                            <!--<li><a href="#">2</a></li>-->
-                            <!--<li><a href="#">3</a></li>-->
-                            <!--<li><a href="#">4</a></li>-->
-                            <!--<li><a href="#">5</a></li>-->
-                            <!--<li>-->
-                                <!--<a href="#" aria-label="Next">-->
-                                    <!--<span aria-hidden="true">&raquo;</span>-->
-                                <!--</a>-->
-                            <!--</li>-->
-                        <!--</ul>-->
-                    <!--</nav>-->
+
                 </div>
 
                 <div id="navigator_part"></div>
@@ -132,6 +115,7 @@
 <script>
     $(document).ready(function () {
         load_empty_tip();
+        init_outline_page();
         $('#moutline').on("changed.jstree",function (e,data) {
 //            alert("the object:"+JSON.stringify(data.instance));
             var selected_name = data.instance.get_node(data.selected[0]).text;

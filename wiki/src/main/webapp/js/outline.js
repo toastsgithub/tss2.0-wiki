@@ -229,8 +229,7 @@ function is_array(data) {
  */
 function search_entry(entry_key) {
     if(entry_key == "")return ;
-    alert("you enter the:"+entry_key);
-    window.location.href="../html/entry_content.html";
+    window.location.href="../html/search_result_page.html?entry="+entry_key;
 }
 
 /**
@@ -274,23 +273,35 @@ function get_entry_of_outline(outline_key) {
  * @params none
  */
 function load_all_outline_content(){
+    //--------------------革命的分界线------------------------
+    // $.ajax({
+    //     url:'/outline/list',
+    //     // async:false,
+    //     type:'get',
+    //     success:function (data) {
+    //         for (x in data.data){
+    //             var list = get_entry_of_outline(data.data[x]);
+    //
+    //             // var temp_obj = new Object();
+    //             // temp_obj.name = data.data[x];
+    //             // temp_obj.content = list;
+    //             // all_outline_content.push(temp_obj);
+    //         }
+    //
+    //     },
+    //     error:function(data){
+    //         //    do nothing
+    //     }
+    // });
+    //--------------------革命的分界线------------------------
     $.ajax({
-        url:'/outline/list',
-        // async:false,
+        url:'/content/getAllTitleAndSummery',
         type:'get',
         success:function (data) {
-            for (x in data.data){
-                var list = get_entry_of_outline(data.data[x]);
-                
-                // var temp_obj = new Object();
-                // temp_obj.name = data.data[x];
-                // temp_obj.content = list;
-                // all_outline_content.push(temp_obj);
-            }
-
+            all_outline_content = data;
         },
-        error:function(data){
-            //    do nothing
+        error:function (data) {
+            alert('error'+JSON.stringify(data));
         }
     });
 }
@@ -580,4 +591,15 @@ function showSearchResult(content, num){
 
 function show_all_buffer() {
     alert('buffer '+JSON.stringify(all_outline_content));
+}
+/**
+ * 初始化部分事件监听等
+ */
+function init_outline_page() {
+    document.getElementById('search_input').addEventListener('keydown',function (e) {
+        if(e.keyCode == 13){
+            var keyword = document.getElementById('search_input').value;
+            search_entry(keyword);
+        }
+    })
 }

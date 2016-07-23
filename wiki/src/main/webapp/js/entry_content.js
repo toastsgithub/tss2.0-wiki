@@ -7,6 +7,7 @@
  * @params title
  */
 function load_content(title){
+    show_tips(0,'内容加载中,请稍候');
     var url = '/content/wiki/'+title;
     // alert('url'+url);
     $.ajax({
@@ -14,6 +15,7 @@ function load_content(title){
         type:'get',
         // data:{title:title},
         success:function (data) {
+            show_tips(1,'内容加载完毕');
             // alert(JSON.stringify(data));
             var markdown_data = data.data.content;
             var converter = new showdown.Converter(),
@@ -80,8 +82,15 @@ function search_entry() {
     location.href = url;
 }
 
-function init_content_info(){
-    
+function init_content(){
+    document.getElementById('search_input').addEventListener('keydown',function (e) {
+        if(e.keyCode == 13){
+            search_entry();
+        }
+    });
+    document.getElementById('search_btn').addEventListener('click',function () {
+        search_entry();
+    })
 }
 
 function delete_entry() {

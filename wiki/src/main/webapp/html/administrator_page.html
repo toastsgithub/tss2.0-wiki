@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="../css/wiki_navigator.css">
     <link rel="stylesheet" href="../css/administrator_page.css">
     <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="../js/admin_common.js"></script>
     <title>Admin</title>
 </head>
 <body>
@@ -46,7 +47,7 @@
                 <button type="button" class="btn btn-default" onclick=location='../html/Entry_editor.html'>增加条目</button>
                 <button type="button" class="btn btn-default">删除条目</button>
                 <button type="button" class="btn btn-default">修改大纲</button>
-                <button type="button" class="btn btn-default">消息中心<span class="badge">65535</span></button>
+                <button type="button" class="btn btn-default">消息中心<span class="badge" id="message_num"></span></button>
             </div>
             <!--<div id="tool_box">-->
                 <!--<div class="tool_btn">-->
@@ -59,21 +60,29 @@
         <div id="right_part" class="col-lg-10 col-md-9 col-xs-9">
             <img src="../resource/image/embarrassing_pic.png" alt="" style="width: 500px;" class="img-responsive">
 
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <a href="">Panel title</a>
-                </div>
-                <div class="panel-body">
-                    Panel content
-                    Panel contentPanel contentPanel contentPanel contentPanel contentPanel contentPanel contentPanel contentPanel contentPanel content
-                    Panel contentPanel contentPanel contentPanel contentPanel contentPanel contentPanel contentPanel contentPanel contentPanel content
-                    Panel contentPanel contentPanel contentPanel contentPanel contentPanel contentPanel contentPanel contentPanel contentPanel content
-                    Panel contentPanel contentPanel contentPanel contentPanel contentPanel contentPanel contentPanel contentPanel contentPanel content
-                </div>
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">条目名称</span>
+                <input type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
+            </div>
+
+            <div class="input-group" style="margin-top:10px;">
+                <span class="input-group-addon" id="basic-addon2">别名</span>
+                <input type="text" class="form-control" placeholder="" aria-describedby="basic-addon2">
+            </div>
+
+            <div class="input-group" style="margin-top:10px;">
+                <span class="input-group-addon" id="basic-addon3">类别</span>
+                <input type="text" class="form-control" placeholder="" aria-describedby="basic-addon2">
             </div>
 
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        init_admin_common();
+    })
+</script>
 </body>
 </html>
