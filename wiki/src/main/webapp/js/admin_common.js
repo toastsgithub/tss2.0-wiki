@@ -12,7 +12,6 @@ function load_message_num() {
         type:'get',
         success:function (data) {
             if (data.error==0){
-                alert('success '+data.data.length);
                 document.getElementById('message_num').innerHTML = data.data.length;
             }else{
                 alert('http返回的内容存在错误');

@@ -13,6 +13,12 @@
     <link rel="stylesheet" href="../css/administrator_page.css">
     <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="../js/admin_common.js"></script>
+    <script src="../js/admin_message.js"></script>
+
+    <!--datatable 表格控件-->
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.js"></script>
+    <!--datatable 表格控件-->
     <title>Admin</title>
 </head>
 <body>
@@ -47,43 +53,32 @@
                 <button type="button" class="btn btn-default" onclick=location='../html/Entry_editor.html'>增加条目</button>
                 <button type="button" class="btn btn-default">删除条目</button>
                 <button type="button" class="btn btn-default">修改大纲</button>
-                <button type="button" class="btn btn-default" onclick=location.href='../html/admin_message_page.html'>消息中心<span class="badge" id="message_num"></span></button>
+                <button type="button" class="btn btn-default">消息中心<span class="badge" id="message_num"></span></button>
             </div>
-            <!--<div id="tool_box">-->
-                <!--<div class="tool_btn">-->
-                    <!--??-->
-                <!--</div>-->
-            <!--</div>-->
         </div>
 
 
         <div id="right_part" class="col-lg-10 col-md-9 col-xs-9">
-            <img src="../resource/image/embarrassing_pic.png" alt="" style="width: 500px;" class="img-responsive">
+            <table id="message_table" class="display table table-bordered">
+                <thead>
+                <tr>
+                    <th>消息标题</th>
+                    <th>来源</th>
+                </tr>
+                </thead>
+                <tbody>
 
-            <div class="input-group">
-                <span class="input-group-addon" id="basic-addon1">条目名称</span>
-                <input type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
-            </div>
+                </tbody>
+            </table>
 
-            <div class="input-group" style="margin-top:10px;">
-                <span class="input-group-addon" id="basic-addon2">别名</span>
-                <input type="text" class="form-control" placeholder="" aria-describedby="basic-addon2">
-            </div>
-
-            <div class="input-group" style="margin-top:10px;">
-                <span class="input-group-addon" id="basic-addon3">类别</span>
-                <input type="text" class="form-control" placeholder="" aria-describedby="basic-addon2">
-            </div>
-
-            <span class="glyphicon glyphicon-question-sign" id="test_btn" data-toggle="tooltip" data-placement="left" title="这是一个提示消息,可能会提示你怎么使用左侧的输入框,来确保您没有输入一些非法的(或不支持的)数据"></span>
         </div>
     </div>
 </div>
 
 <script>
     $(document).ready(function () {
-        $('#test_btn').tooltip();
         init_admin_common();
+        init_message_table();
     })
 </script>
 </body>
