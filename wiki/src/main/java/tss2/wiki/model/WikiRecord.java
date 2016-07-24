@@ -249,7 +249,12 @@ public class WikiRecord {
 
     public String[] getTags() {
         String tags = dao.tags;
-        return tags.split("[/]");
+        String[] ta = tags.split("[/]");
+        String[] re = new String[0];
+        if(ta[0].equals("")){
+            return re;
+        }
+        return ta;
     }
 
     public String getCurrVersionString() {
@@ -387,17 +392,15 @@ public class WikiRecord {
         return dao.id;
     }
 
-    public ArrayList<String> getAliasByTitle() {
+    public String[] getAliasByTitle() {
         DAOBase[] contents = Alias.query().where("title = '" + dao.title + "'");
         String[] str = ((Alias) contents[0]).alias.split("/");
-        ArrayList<String> result = new ArrayList<>();
-        if (str.length <= 1) {
-            return null;
+        String[] re = new String[0];
+        if(str.length==1){
+            return re;
         }
-        for (int i = 1; i < str.length; i++) {
-            result.add(str[i]);
-        }
-        return result;
+        //System.out.println("length is "+str.length);
+        return str;
     }
 
     public int getVisits() {

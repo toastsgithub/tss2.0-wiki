@@ -1,4 +1,6 @@
-package tss2.wiki.dao.core;
+package tss2.wiki.dao;
+
+import tss2.wiki.dao.core.DAOBase;
 
 /**
  * Created by coral on 16-7-24.
