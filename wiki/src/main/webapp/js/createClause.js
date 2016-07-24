@@ -25,28 +25,8 @@ var origin_width_of_alias_input;
 
 var reference_count = 0;
 
-function get_reference(){
-    alert("why not carry?");
-    var reference = document.getElementById('reference');
-    var child = reference.childNodes;
-    var reference_result = [];
-    for(var i = 0; i < child.length; i++){
-        var reference_name = child[i].childNodes[1].value;
-        var reference_link = child[i].childNodes[3].value;
-        if("reference_name"=="" || reference_link == ""){
-            // do not push
-        }else {
-            var obj = {"name": reference_name, "url": reference_link};
-            reference_result.push(obj);
-        }
-    }
-    alert(JSON.stringify(reference_result));
-    return reference_result;
-}
-
 function addClause() {
     // alert("judge");
-    alert("???");
     var reference = document.getElementById('reference');
     var child = reference.childNodes;
     var reference_result = [];
@@ -60,8 +40,6 @@ function addClause() {
             reference_result.push(obj);
         }
     }
-    alert("???");
-    alert("reference = " + JSON.stringify(reference_result));
     if (!name && type && tag) {
         return;
     } else {
@@ -123,6 +101,8 @@ function addClause() {
             reference: reference_result
         }
     };
+    alert("data = " + JSON
+            .stringify(data));
     $.ajax({
         type: "post",
         url: "/content",
