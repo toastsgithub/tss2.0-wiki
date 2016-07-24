@@ -24,6 +24,17 @@ function init_message_table(){
     alert('message load done');
 
     load_message();
+    //以下是行选择的事件
+    $('#message_table tbody').on( 'click', 'tr', function () {
+        table.$('tr.selected').removeClass('selected');
+        $(this).addClass('selected');
+        var selected_row = table.row('.selected').index();
+        var value = table.cell(selected_row,1).data();
+        var url = "/html/duck_stockDetail.html"+"?code="+value;
+        window.location.href = url;
+//            showStockChart(value);
+//                }
+    } );
 }
 
 
