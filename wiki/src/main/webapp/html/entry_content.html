@@ -48,7 +48,7 @@
                     <li><a href="../html/Outline.html" onclick="">管理大纲(管理员)</a></li>
                     <li><a href="../html/create_Entry.html">增加条目(管理员)</a></li>
                     <li role="separator" class="divider"></li>
-                    <li><a href="../html/Entry_editor.html?action=modify">编辑条目</a></li>
+                    <li><a id="edit_old" href="../html/edit_oldentry.html?action=modify&title=">编辑条目</a></li>
                     <li><a href="#" onclick=delete_entry();>删除条目</a></li>
                     <li><a href="#">请求增加条目(敬请期待)</a></li>
                 </ul>
@@ -112,6 +112,7 @@
 //        alert(entry_name);
         load_content(entry_name);
         init_content();
+        document.getElementById('edit_old').href = "/html/edit_oldentry.html?action=modify&title="+entry_name;
 //        alert("ready");
 //        $('#jstree_demo_div').jstree();
 
