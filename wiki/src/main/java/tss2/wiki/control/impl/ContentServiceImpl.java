@@ -66,17 +66,21 @@ public class ContentServiceImpl implements ContentService {
         }
 
         WikiUser user = new SessionServiceimpl().getUserBySession(data.getSessionID());
-        entry.setContent(entryid, user.getUsername(), categories, tags, summary, content, true);
-        if (entryid == 0) {
-            entryid = entry.getID();
+        if(user.getType()==1){
+
+            entry.setContent(entryid, user.getUsername(), categories, tags, summary, content, true);
+            if (entryid == 0) {
+                entryid = entry.getID();
+            }
+
+            WikiAlias wikiAlias = new WikiAlias();
+            wikiAlias.Alias(entryid,title,alias);
+            WikiReference wikiReference = new WikiReference(entryid,title);
+            wikiReference.modify(r);
+            return new CommonResult(0,"add successfully!");
         }
+        return null;
 
-
-        WikiAlias wikiAlias = new WikiAlias();
-        wikiAlias.Alias(entryid,title,alias);
-        WikiReference wikiReference = new WikiReference(entryid,title);
-        wikiReference.modify(r);
-        return new CommonResult(0);
     }
 
     private boolean contain(ArrayList alias){
