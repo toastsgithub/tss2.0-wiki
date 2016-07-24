@@ -12,13 +12,12 @@ function init_message_table(){
             {data:'title'},
             {data:'fromUser'}
         ],
-        columnsDefs:[{
+        columnDefs:[{
             'targets':[0],
-            'data':'消息标题',
+            // 'data':'消息标题',
             'render':function (data,type,full) {
-                alert('done');
-                return 'ascii';
-                // return '<a href=\"http:www.baidu.com\">'
+                // return 'ascii';
+                return '<a href=\"http://www.baidu.com\">'+data+'</a>';
             }
         }]
     });
