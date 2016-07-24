@@ -2,6 +2,7 @@
  * Created by duanzhengmou on 7/23/16.
  * Copyright © 2016 duanzhengmou. All rights reserved.
  */
+var all_message;
 
 function init_message_table(){
     alert('init begin');
@@ -25,6 +26,7 @@ function load_message() {
         type:'get',
         success:function(data){
             if(data.error==0){
+                all_message = data;
                 table.rows.add(data.data).draw();
             }else{
                 alert('服务器响应内容中有错误');
