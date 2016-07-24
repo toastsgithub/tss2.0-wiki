@@ -299,7 +299,7 @@ public class WikiRecord {
         } else {
             mainversion += 1;
         }
-        String path = FILE_PATH_PREFIX + getTitle() + "/" + mainversion + "." + subversion + FILE_PATH_SUFFIX;
+        String path = String.format("%s%d/%d.%d%s", FILE_PATH_PREFIX, getID(), mainversion, subversion, FILE_PATH_SUFFIX);
         File fp = new File(FILE_PATH_PREFIX + getTitle() + "/");
         if (!fp.exists()) {
             boolean result = fp.mkdirs();
@@ -342,7 +342,7 @@ public class WikiRecord {
         dao.save();
 
         if (dao.id == 0) {
-            DAOBase[] daos = WikiEntry.query().where("title = '" + dao.title + "' and mainversion = " + mainversion + " and subversion = " + subversion);
+            DAOBase[] daos = WikiEntry.query().where(String.format("title = '%s' and mainversion = %d and subversion = %d", dao.title, mainversion, subversion));
             dao.id = Long.valueOf(daos[0].get("id").toString());
         }
 
