@@ -51,7 +51,7 @@ public class WikiReference {
             temp.title = title;
             temp.name = jsonObject.getString("name");
             temp.url = jsonObject.getString("url");
-            temp.websiteName = jsonObject.getString("websiteName");
+            //temp.websiteName = jsonObject.getString("websiteName");
             temp.timestamp = TimeUtil.getTimeStampByDate();
             referenceArrayList.add(temp);
         }
