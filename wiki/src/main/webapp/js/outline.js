@@ -601,5 +601,10 @@ function init_outline_page() {
             var keyword = document.getElementById('search_input').value;
             search_entry(keyword);
         }
+    });
+    document.getElementById('search_btn').addEventListener('click',function () {
+        alert('done');
+        var keyword = document.getElementById('search_input').value;
+        search_entry(keyword);
     })
 }

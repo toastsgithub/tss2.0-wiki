@@ -25,10 +25,21 @@ var origin_width_of_alias_input;
 
 var reference_count = 0;
 
-
 function addClause() {
     // alert("judge");
-   
+    var reference = document.getElementById('reference');
+    var child = reference.childNodes;
+    var reference_result = [];
+    for(var i = 0; i < child.length; i++){
+        var reference_name = child[i].childNodes[1].value;
+        var reference_link = child[i].childNodes[3].value;
+        if("reference_name"=="" || reference_link == ""){
+            // do not push
+        }else {
+            var obj = {"name": reference_name, "url": reference_link};
+            reference_result.push(obj);
+        }
+    }
     if (!name && type && tag) {
         return;
     } else {
@@ -74,6 +85,7 @@ function addClause() {
     mock_obj2.url = 'www.google.com';
     mock_obj2.websiteName = '谷歌';
     var all_alias = getAlias();
+   
     alert(all_alias);
     var data = {
         operation: "add", data: {
@@ -86,12 +98,15 @@ function addClause() {
             tags: tags,
             categories: catagories,
             content: content,
-            reference:[mock_obj,mock_obj2]
+            reference: reference_result
         }
     };
+    alert("data = " + JSON
+            .stringify(data));
     $.ajax({
         type: "post",
         url: "/content",
+        async: false,
         contentType: 'application/json;charset=utf-8',
         data: JSON.stringify(data),
         success: function (data) {
@@ -386,7 +401,7 @@ function getTags() {
     var tags_pool = document.getElementById('tag_bar');
     var tags = [];
     var num = tags_pool.childElementCount;
-    if(num==0) return null;
+    if(num==0) return tags;
     for(var i =0; i<num;i++){
         tags.push(tags_pool.childNodes[i].firstChild.textContent);
     }
@@ -435,22 +450,7 @@ function add_reference_input_area() {
     reference_count++;
 }
 
-function get_reference(){
-    var reference = document.getElementById('reference');
-    var child = reference.childNodes;
-    var reference_result = [];
-    for(var i = 0; i < child.length; i++){
-        var reference_name = child[i].childNodes[1].value;
-        var reference_link = child[i].childNodes[3].value;
-        if("reference_name"=="" || reference_link == ""){
-            // do not push
-        }else {
-            var obj = {"reference_name": reference_name, "reference_link": reference_link};
-            reference_result.push(obj);
-        }
-    }
-    alert(JSON.stringify(reference_result));
-}
+
 
 function delete_reference(){
     var tmp = this.id.split("_");
