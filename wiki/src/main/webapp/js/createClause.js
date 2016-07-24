@@ -421,7 +421,7 @@ function getTags() {
     var tags_pool = document.getElementById('tag_bar');
     var tags = [];
     var num = tags_pool.childElementCount;
-    if(num==0) return null;
+    if(num==0) return tags;
     for(var i =0; i<num;i++){
         tags.push(tags_pool.childNodes[i].firstChild.textContent);
     }
