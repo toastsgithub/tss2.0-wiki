@@ -38,6 +38,7 @@ public class DBAdmin {
             User2Message.class,
             UpdateHistory.class,
             Verifying.class,
+            VerifyingReference.class,
             WikiEntry.class,
     };
 
