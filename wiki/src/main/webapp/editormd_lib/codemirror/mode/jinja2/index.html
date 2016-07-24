@@ -34,7 +34,7 @@
 {% if app.get(&#39;_route&#39;) == (&#39;_home&#39;) %}home{% endif %}
 {% if app.session.flashbag.has(&#39;message&#39;) %}
   {% for message in app.session.flashbag.get(&#39;message&#39;) %}
-    {{ message.content }}
+    {{ message.detail }}
   {% endfor %}
 {% endif %}
 {{ path(&#39;_home&#39;, {&#39;section&#39;: app.request.get(&#39;section&#39;)}) }}

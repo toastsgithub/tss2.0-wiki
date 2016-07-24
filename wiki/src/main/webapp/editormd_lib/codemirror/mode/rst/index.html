@@ -74,7 +74,7 @@ inline markup delimiters, they have to be escaped with a backslash.
 Be aware of some restrictions of this markup:
 
 * it may not be nested,
-* content may not start or end with whitespace: ``* text*`` is wrong,
+* detail may not start or end with whitespace: ``* text*`` is wrong,
 * it must be separated from surrounding text by non-word characters.  Use a
   backslash escaped space to work around that: ``thisis\ *one*\ word``.
 
@@ -83,7 +83,7 @@ These restrictions may be lifted in future versions of the docutils.
 reST also allows for custom "interpreted text roles"', which signify that the
 enclosed text should be interpreted in a specific way.  Sphinx uses this to
 provide semantic markup and cross-referencing of identifiers, as described in
-the appropriate section.  The general syntax is ``:rolename:`content```.
+the appropriate section.  The general syntax is ``:rolename:`detail```.
 
 Standard reST provides the following roles:
 
@@ -349,7 +349,7 @@ Do *not* use the directives :dudir:`sectnum`, :dudir:`header` and
 
 Directives added by Sphinx are described in :ref:`sphinxmarkup`.
 
-Basically, a directive consists of a name, arguments, options and content. (Keep
+Basically, a directive consists of a name, arguments, options and detail. (Keep
 this terminology in mind, it is used in the next chapter describing custom
 directives.)  Looking at this example, ::
 
@@ -363,9 +363,9 @@ directives.)  Looking at this example, ::
 remainder of the first line and the second line, as well as one option
 ``module`` (as you can see, options are given in the lines immediately following
 the arguments and indicated by the colons).  Options must be indented to the
-same level as the directive content.
+same level as the directive detail.
 
-The directive content follows after a blank line and is indented relative to the
+The directive detail follows after a blank line and is indented relative to the
 directive start.
 
 

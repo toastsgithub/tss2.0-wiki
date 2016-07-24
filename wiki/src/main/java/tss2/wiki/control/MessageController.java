@@ -39,7 +39,7 @@ public class MessageController {
         ArrayList<WikiMessage> messages = user.getMessageList();
         MessageListResult result = new MessageListResult(0);
         for (WikiMessage message: messages) {
-            result.addMessage(message.getMessageID(), message.getFromUser(), message.getTitle());
+            result.addMessage(message.getMessageID(), message.getFromUser(), message.getTitle(), message.getDetail());
         }
         return result;
     }
