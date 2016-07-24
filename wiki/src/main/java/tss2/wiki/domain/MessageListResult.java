@@ -40,19 +40,29 @@ public class MessageListResult {
         return data;
     }
 
-    public void addMessage(String messageID, String fromUser, String title) {
-        data.add(new SimpleMessage(messageID, fromUser, title));
+    public void addMessage(String messageID, String fromUser, String title, String content) {
+        data.add(new SimpleMessage(messageID, fromUser, title, content));
     }
 
     public class SimpleMessage {
         String title;
         String messageID;
         String fromUser;
+        String detail;
 
-        public SimpleMessage(String messageID, String fromUser, String title) {
+        public SimpleMessage(String messageID, String fromUser, String title, String content) {
             setTitle(title);
             setFromUser(fromUser);
             setMessageID(messageID);
+            setDetail(content);
+        }
+
+        public String getDetail() {
+            return detail;
+        }
+
+        public void setDetail(String detail) {
+            this.detail = detail;
         }
 
         public String getTitle() {

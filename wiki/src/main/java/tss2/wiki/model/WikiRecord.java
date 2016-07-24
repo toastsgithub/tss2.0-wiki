@@ -300,6 +300,8 @@ public class WikiRecord {
             mainversion += 1;
         }
 
+        dao.subversion = subversion;
+        dao.mainversion = mainversion;
         if (dao.id == 0) {
             dao.save();
             DAOBase[] daos = WikiEntry.query().where(String.format("title = '%s' and mainversion = %d and subversion = %d", dao.title, mainversion, subversion));
@@ -340,8 +342,6 @@ public class WikiRecord {
 
 
         // update wiki entry
-        dao.subversion = subversion;
-        dao.mainversion = mainversion;
         dao.categories = strCateg;
         dao.tags = strTags;
         dao.summery = summary;

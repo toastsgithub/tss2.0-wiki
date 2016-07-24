@@ -278,7 +278,7 @@ a document that can be systematically reviewed, evaluated, and approved. For com
 
 5.1.	System Definition Document
 
-This document (sometimes known as the user requirements document or concept of operations document) records the system requirements. It defines the high-level system requirements from the domain perspective. Its readership includes representatives of the system users/customers (marketing may play these roles for market- driven software), so its content must be couched in terms of the domain. The document lists the system requirements along with background information about the overall objectives for the system, its target environment, and a statement of the constraints, assumptions, and nonfunctional requirements. It may include conceptual models designed to illustrate the system context, usage scenarios, and the principal domain entities, as well as workflows.
+This document (sometimes known as the user requirements document or concept of operations document) records the system requirements. It defines the high-level system requirements from the domain perspective. Its readership includes representatives of the system users/customers (marketing may play these roles for market- driven software), so its detail must be couched in terms of the domain. The document lists the system requirements along with background information about the overall objectives for the system, its target environment, and a statement of the constraints, assumptions, and nonfunctional requirements. It may include conceptual models designed to illustrate the system context, usage scenarios, and the principal domain entities, as well as workflows.
 
 5.2.	System Requirements Specification
 
@@ -804,7 +804,7 @@ Various tools and techniques can help in analyz- ing and evaluating software des
 Measures can be used to assess or to quanti- tatively estimate various aspects of a software design; for example, size, structure, or quality. Most measures that have been proposed depend on the approach used for producing the design. These measures are classified in two broad categories:
 
 •Function-based (structured) design  mea- sures: measures obtained by analyzing func- tional decomposition; generally represented using a structure chart (sometimes called a hierarchical diagram) on which various mea- sures can be computed.
-•Object-oriented design measures: the design structure is typically represented as a class diagram, on which various measures can be computed. Measures on the properties of the internal content of each class can also be computed.
+•Object-oriented design measures: the design structure is typically represented as a class diagram, on which various measures can be computed. Measures on the properties of the internal detail of each class can also be computed.
 
 6.Software Design Notations
 
@@ -2903,7 +2903,7 @@ Tests cannot be executed in the most meaning- ful place–the production system.
 2.1.3. Impact Analysis
 [1*, c5s2.5] [2*, c13s3]
 
-Impact analysis describes how to conduct, cost- effectively, a complete analysis of the impact of a change in existing software. Maintainers must possess an intimate knowledge of the software’s structure and content. They use that knowledge to perform impact analysis, which identifies all systems and software products affected by a soft- ware change request and develops an estimate of the resources needed to accomplish the change. Additionally, the risk of making the change is determined. The change request, sometimes called a modification request (MR) and often called a problem report (PR), must first be analyzed and translated into software terms. Impact analysis is performed after a change request enters the soft- ware configuration management process. IEEE 14764 states the impact analysis tasks:
+Impact analysis describes how to conduct, cost- effectively, a complete analysis of the impact of a change in existing software. Maintainers must possess an intimate knowledge of the software’s structure and detail. They use that knowledge to perform impact analysis, which identifies all systems and software products affected by a soft- ware change request and develops an estimate of the resources needed to accomplish the change. Additionally, the risk of making the change is determined. The change request, sometimes called a modification request (MR) and often called a problem report (PR), must first be analyzed and translated into software terms. Impact analysis is performed after a change request enters the soft- ware configuration management process. IEEE 14764 states the impact analysis tasks:
 IEEE 14764 [1*, c3s4] defines maintainability as the capability of the software product to be modified. Modifications may include corrections, improvements, or adaptation of the software to changes in environment as well as changes in requirements and functional specifications.
 As a primary software quality characteristic, maintainability should be specified, reviewed, and controlled during software development activi- ties in order to reduce maintenance costs. When done successfully, the software’s maintainability will improve. Maintainability is often difficult to achieve because the subcharacteristics are often not an important focus during the process of soft- ware development. The developers are, typically, more preoccupied with many other activities and frequently prone to disregard the maintainer’s requirements. This in turn can, and often does, result in a lack of software documentation and test environments, which is a leading cause of difficul- ties in program comprehension and subsequent impact analysis. The presence of systematic and mature processes, techniques, and tools helps to enhance the maintainability of software.
 
@@ -3101,7 +3101,7 @@ An important activity for software maintenance is planning, and maintainers must
 At the individual request level, planning is carried out during the impact analysis (see sec- tion 2.1.3, Impact Analysis). The release/version planning activity requires that the maintainer:
 
 •collect the dates of availability of individual requests,
-•agree with users on the content of subsequent releases/versions,
+•agree with users on the detail of subsequent releases/versions,
 •identify   potential   conflicts   and   develop
 alternatives,
 •assess the risk of a given release and develop a  back-out plan  in  case  problems  should arise, and
@@ -3121,7 +3121,7 @@ The next step is to develop a corresponding software maintenance plan. This plan
 [1*, c5s1.2.3] [2*, c11]
 
 IEEE 14764 describes software configuration management as a critical element of the mainte- nance process. Software configuration manage- ment procedures should provide for the verifica- tion, validation, and audit of each step required to identify, authorize, implement, and release the software product.
-It is not sufficient to simply track modifica- tion requests or problem reports. The software product and any changes made to it must be con- trolled. This control is established by implement- ing and enforcing an approved software configu- ration management (SCM) process. The Software Configuration Management KA provides details of SCM and discusses the process by which soft- ware change requests are submitted, evaluated, and approved. SCM for software maintenance is different from SCM for software development in the number of small changes that must be con- trolled on operational software. The SCM pro- cess is implemented by developing and following a software configuration management plan and operating procedures. Maintainers participate in Configuration Control Boards to determine the content of the next release/version.
+It is not sufficient to simply track modifica- tion requests or problem reports. The software product and any changes made to it must be con- trolled. This control is established by implement- ing and enforcing an approved software configu- ration management (SCM) process. The Software Configuration Management KA provides details of SCM and discusses the process by which soft- ware change requests are submitted, evaluated, and approved. SCM for software maintenance is different from SCM for software development in the number of small changes that must be con- trolled on operational software. The SCM pro- cess is implemented by developing and following a software configuration management plan and operating procedures. Maintainers participate in Configuration Control Boards to determine the detail of the next release/version.
 
 
 
@@ -3184,7 +3184,7 @@ Once software has reached the end of its use- ful life, it must be retired. An a
 This topic encompasses tools that are particularly important in software maintenance where exist- ing software is being modified. Examples regard- ing program comprehension include
 •program slicers, which select only parts of a
 program affected by a change;
-•static analyzers, which allow general view- ing and summaries of a program content;
+•static analyzers, which allow general view- ing and summaries of a program detail;
 •dynamic analyzers, which allow the main- tainer to trace the execution path of a program;
 •data flow analyzers, which allow the main- tainer to track all possible data flows of a program;
 •cross-referencers, which generate indices of program components; and
@@ -4488,7 +4488,7 @@ Additional factors to be considered when defining and tailoring a software life 
 3.Software Process Assessment and Improvement
 [2*, p188, p194] [3*, c26] [4*, p397, c15]
 
-This topic addresses software process assess- ment models, software process assessment meth- ods, software process improvement models, and continuous and staged process ratings. Software process assessments are used to evaluate the form and content of a software process, which may be specified by a standardized set of criteria. In some instances, the terms “process appraisal” and “capability evaluation” are used instead of process assessment. Capability evaluations are typically performed by an acquirer (or potential acquirer) or by an external agent on behalf of an acquirer (or potential acquirer). The results are used as an indicator of whether the software processes used by a supplier (or potential sup- plier) are acceptable to the acquirer. Performance appraisals are typically performed within an orga- nization to identify software processes in need of improvement or to determine whether a process (or processes) satisfies the criteria at a given level of process capability or maturity.
+This topic addresses software process assess- ment models, software process assessment meth- ods, software process improvement models, and continuous and staged process ratings. Software process assessments are used to evaluate the form and detail of a software process, which may be specified by a standardized set of criteria. In some instances, the terms “process appraisal” and “capability evaluation” are used instead of process assessment. Capability evaluations are typically performed by an acquirer (or potential acquirer) or by an external agent on behalf of an acquirer (or potential acquirer). The results are used as an indicator of whether the software processes used by a supplier (or potential sup- plier) are acceptable to the acquirer. Performance appraisals are typically performed within an orga- nization to identify software processes in need of improvement or to determine whether a process (or processes) satisfies the criteria at a given level of process capability or maturity.
 Process assessments are performed at the lev- els of entire organizations, organizational units within organizations, and individual projects. Assessment may involve issues such as assess- ing whether software process entry and exit cri- teria are being met, to review risk factors and risk management, or to identify lessons learned. Process assessment is carried out using both an assessment model and an assessment method. The model can provide a norm for a benchmarking
 
 
@@ -5896,7 +5896,7 @@ All software professionals must be aware of legal restrictions on import, export
 
 1.7.9.Cybercrime
 
-Cybercrime refers  to  any  crime  that  involves a computer, computer software, computer net- works, or embedded software controlling a sys- tem. The computer or software may have been used in the commission of a crime or it may have been the target. This category of crime includes fraud, unauthorized access, spam, obscene or offensive content, threats, harassment, theft of sensitive personal data or trade secrets, and use of one computer to damage or infiltrate other networked computers and automated system controls.
+Cybercrime refers  to  any  crime  that  involves a computer, computer software, computer net- works, or embedded software controlling a sys- tem. The computer or software may have been used in the commission of a crime or it may have been the target. This category of crime includes fraud, unauthorized access, spam, obscene or offensive detail, threats, harassment, theft of sensitive personal data or trade secrets, and use of one computer to damage or infiltrate other networked computers and automated system controls.
 Computer and software users commit fraud by altering electronic data to facilitate illegal activ- ity. Forms of unauthorized access include hack- ing, eavesdropping, and using computer systems in a way that is concealed from their owners.
 Many countries have separate laws to cover cybercrimes, but it has sometimes been difficult to prosecute cybercrimes due to a lack of pre- cisely framed statutes. The software engineer has a professional obligation to consider the threat of cybercrime and to understand how the software system will protect or endanger software and user information from accidental or malicious access, use, modification, destruction, or disclosure.
 
@@ -6512,7 +6512,7 @@ A replacement decision is made when an organi- zation already has a particular a
 
 Goals  in  software  engineering  economics  are
 mostly business goals (or business objectives).
-A business goal relates business needs (such as increasing profitability) to investing resources (such as starting a project or launching a prod- uct with a given budget, content, and timing). Goals apply to operational planning (for instance, to reach a certain milestone at a given date or to extend software testing by some time to achieve a desired quality level—see Key Issues in the Soft- ware Testing KA) and to the strategic level (such as reaching a certain profitability or market share in a stated time period).
+A business goal relates business needs (such as increasing profitability) to investing resources (such as starting a project or launching a prod- uct with a given budget, detail, and timing). Goals apply to operational planning (for instance, to reach a certain milestone at a given date or to extend software testing by some time to achieve a desired quality level—see Key Issues in the Soft- ware Testing KA) and to the strategic level (such as reaching a certain profitability or market share in a stated time period).
 An estimate is a well-founded evaluation of resources and time that will be needed to achieve stated goals (see Effort, Schedule, and Cost Esti- mation in the Software Engineering Management KA and Maintenance Cost Estimation in the Soft- ware Maintenance KA). A software estimate is used to determine whether the project goals can be achieved within the constraints on schedule, budget, features, and quality attributes. Estimates are typically internally generated and are not necessarily visible externally. Estimates should not be driven exclusively by the project goals because this could make an estimate overly opti- mistic. Estimation is a periodic activity; estimates should be continually revised during a project.
 A plan describes the activities and milestones that are necessary in order to reach the goals of
 
@@ -6950,7 +6950,7 @@ When we use abstraction in our problem formula- tion and solution, we may use di
 
 
 
-at different times—in other words, we work on dif- ferent levels of abstraction as the situation calls. Most of the time, these different levels of abstrac- tion are organized in a hierarchy. There are many ways to structure a particular hierarchy and the criteria used in determining the specific content of each layer in the hierarchy varies depending on the individuals performing the work.
+at different times—in other words, we work on dif- ferent levels of abstraction as the situation calls. Most of the time, these different levels of abstrac- tion are organized in a hierarchy. There are many ways to structure a particular hierarchy and the criteria used in determining the specific detail of each layer in the hierarchy varies depending on the individuals performing the work.
 Sometimes, a hierarchy of abstraction is sequen- tial, which means that each layer has one and only one predecessor (lower) layer and one and only one successor (upper) layer—except the upmost layer (which has no successor) and the bottommost layer (which has no predecessor). Sometimes, however, the hierarchy is organized in a tree-like structure, which means each layer can have more than one predecessor layer but only one successor layer. Occasionally, a hierarchy can have a many- to-many structure, in which each layer can have multiple predecessors and successors. At no time, shall there be any loop in a hierarchy.
 A hierarchy often forms naturally in task decom- position. Often, a task analysis can be decomposed in a hierarchical fashion, starting with the larger tasks and goals of the organization and breaking each of them down into smaller subtasks that can again be further subdivided This continuous divi- sion of tasks into smaller ones would produce a hierarchical structure of tasks-subtasks.
 
@@ -7010,7 +7010,7 @@ In general, a programming language supports such constructs as variables, data t
 4.3.Low-Level Programming Languages
 
 Programming language can be classified into two classes: low-level languages and high-level lan- guages. Low-level languages can be understood by a computer with no or minimal assistance and typically include machine languages and assem- bly languages. A machine language uses ones and zeros to represent instructions and variables, and is directly understandable by a computer. An assembly language contains the same instructions as a machine language but the instructions and variables have symbolic names that are easier for humans to remember.
-Assembly languages cannot be directly under- stood by a computer and must be translated into a machine language by a utility program called an assembler. There often exists a correspondence between the instructions of an assembly language and a machine language, and the translation from assembly code to machine code is straightfor- ward. For example, “add r1, r2, r3” is an assem- bly instruction for adding the content of register r2 and r3 and storing the sum into register r1. This instruction can be easily translated into machine code “0001 0001 0010 0011.” (Assume the oper- ation code for addition is 0001, see Figure 13.2).
+Assembly languages cannot be directly under- stood by a computer and must be translated into a machine language by a utility program called an assembler. There often exists a correspondence between the instructions of an assembly language and a machine language, and the translation from assembly code to machine code is straightfor- ward. For example, “add r1, r2, r3” is an assem- bly instruction for adding the detail of register r2 and r3 and storing the sum into register r1. This instruction can be easily translated into machine code “0001 0001 0010 0011.” (Assume the oper- ation code for addition is 0001, see Figure 13.2).
 
 add	r1,	r2,	r3
 0001	0001	0010	0011
@@ -7376,7 +7376,7 @@ The above query selects all the Component_No and its corresponding quantity from
 
 A DBMS system provides the following capabilities:
 
-•Database development is used to define and organize the content, relationships, and struc- ture of the data needed to build a database.
+•Database development is used to define and organize the detail, relationships, and struc- ture of the data needed to build a database.
 •Database interrogation is used for accessing the data in a database for information retrieval and report generation. End users can selec- tively retrieve and display information and produce printed reports. This is the operation that most users know about databases.
 •Database Maintenance is used to add, delete, update, and correct the data in a database.
 •Application Development is used to develop prototypes of data entry screens, queries, forms, reports, tables, and labels for a proto- typed application. It also refers to the use of 4th Generation Language or application gen- erators to develop or generate program code.
@@ -7392,7 +7392,7 @@ The organization of the actual data in a database depends on the database model.
 
 12.6.Data Mining
 
-One often has to know what to look for before querying a database. This type of “pinpointing” access does not make full use of the vast amount of information stored in the database, and in fact reduces the database into a collection of discrete records. To take full advantage of a database, one can perform statistical analysis and pattern dis- covery on the content of a database using a tech- nique called data mining. Such operations can be used to support a number of business activities that include, but are not limited to, marketing, fraud detection, and trend analysis.
+One often has to know what to look for before querying a database. This type of “pinpointing” access does not make full use of the vast amount of information stored in the database, and in fact reduces the database into a collection of discrete records. To take full advantage of a database, one can perform statistical analysis and pattern dis- covery on the detail of a database using a tech- nique called data mining. Such operations can be used to support a number of business activities that include, but are not limited to, marketing, fraud detection, and trend analysis.
 Numerous ways for performing data mining have been invented in the past decade and include such common techniques as class description, class discrimination, cluster analysis, association analysis, and outlier analysis.
 
 13.Network Communication Basics
@@ -9343,7 +9343,7 @@ The design of a software product is guided by the features to be included and th
 
 A basic question to be asked for any measure- ment method is whether the proposed measure- ment method is truly measuring the concept with good quality. Reliability and validity are the two most important criteria to address this question.
 The reliability of a measurement method is the extent to which the application of the mea- surement method yields consistent measurement results. Essentially, reliability refers to the consis- tency of the values obtained when the same item is measured a number of times. When the results agree with each other, the measurement method is said to be reliable. Reliability usually depends on the operational definition. It can be quantified by using the index of variation, which is com- puted as the ratio between the standard deviation and the mean. The smaller the index, the more reliable the measurement results.
-Validity refers to whether the measurement method really measures what we intend to mea- sure. Validity of a  measurement  method  may be looked at from three different perspectives: namely, construct validity, criteria validity, and content validity.
+Validity refers to whether the measurement method really measures what we intend to mea- sure. Validity of a  measurement  method  may be looked at from three different perspectives: namely, construct validity, criteria validity, and detail validity.
 
 3.4.Assessing Reliability
 software engineers use the term “design” within their own context; while there are some common- alities, there are also many differences between engineering design as discussed in this section and software engineering design as discussed in the Software Design KA. The scope of engineer- ing design is generally viewed as much broader than that of software design. The primary aim of this section is to identify the concepts needed to develop a clear understanding regarding the pro- cess of engineering design.
@@ -9820,7 +9820,7 @@ format.
 OTHER DETAILED GUIDELINES
 
 When referencing the Guide to the Software Engineering Body of Knowledge, use the title “SWEBOK Guide.”
-For the purpose of simplicity, avoid footnotes and try to include their content in the main text.
+For the purpose of simplicity, avoid footnotes and try to include their detail in the main text.
 Use explicit references to standards, as opposed
 to simply inserting numbers referencing items in
 the bibliography. We believe this approach allows the reader to be better exposed to the source and scope of a standard.
@@ -9829,7 +9829,7 @@ To make sure that some information in the SWEBOK Guide does not become rapidly o
 
 EDITING
 
-Editors of the SWEBOK Guide as well as profes- sional copy editors will edit KA Descriptions. Editing includes copy editing (grammar, punc- tuation, and capitalization), style editing (confor- mance to the Computer Society style guide), and content editing (flow, meaning, clarity, direct- ness, and organization). The final editing will be a collaborative process in which the Editors of the SWEBOK Guide and the KA Editors work together to achieve a concise, well-worded, and useful KA Description.
+Editors of the SWEBOK Guide as well as profes- sional copy editors will edit KA Descriptions. Editing includes copy editing (grammar, punc- tuation, and capitalization), style editing (confor- mance to the Computer Society style guide), and detail editing (flow, meaning, clarity, direct- ness, and organization). The final editing will be a collaborative process in which the Editors of the SWEBOK Guide and the KA Editors work together to achieve a concise, well-worded, and useful KA Description.
 
 RELEASE OF COPYRIGHT
 
@@ -9975,10 +9975,10 @@ the use of the term can be further explored.
 
 
 The vocabulary is descriptive, rather than pre- scriptive; it gathers up all of the definitions from all of the relevant standards, as well as a few other sources, rather than choosing among com- peting definitions.
-The content of the 24765 standard is freely accessible online at www.computer.org/sevocab. Two standards, 12207 and 15288, provide a complete set of processes for the entire life cycle of a system or a software product. The two stan- dards are aligned for concurrent use on a single project  or  in  a  single  organization.  They  are mentioned here because they are often used as a framework for explaining or localizing the role of
+The detail of the 24765 standard is freely accessible online at www.computer.org/sevocab. Two standards, 12207 and 15288, provide a complete set of processes for the entire life cycle of a system or a software product. The two stan- dards are aligned for concurrent use on a single project  or  in  a  single  organization.  They  are mentioned here because they are often used as a framework for explaining or localizing the role of
 other standards in the life cycle.
 It defines the construct of a good requirement, provides attributes and characteristics of require- ments, and discusses the iterative and recursive application of requirements processes through- out the life cycle. ISO/IEC/IEEE 29148:2011 provides additional guidance in the application of requirements engineering and management processes for requirements-related activities in ISO/IEC 12207:2008 and ISO/IEC 15288:2008.
-Information items applicable to the engineering of requirements and their content are defined. The content of ISO/IEC/IEEE 29148:2011 can be added to the existing set of requirements- related life cycle processes defined by ISO/IEC 12207:2008 or ISO/IEC 15288:2008, or it can be used independently.
+Information items applicable to the engineering of requirements and their detail are defined. The detail of ISO/IEC/IEEE 29148:2011 can be added to the existing set of requirements- related life cycle processes defined by ISO/IEC 12207:2008 or ISO/IEC 15288:2008, or it can be used independently.
 
 
 A multipart ISO/IEC standard provides princi- ples and methods for “sizing” software based on
@@ -10040,7 +10040,7 @@ ships among the items of the software and detailed design (for describing the in
 
 ISO/IEC/IEEE 42010:2011 Systems and Software Engineering—Architecture Description
 
-ISO/IEC/IEEE 42010:2011 addresses the cre- ation, analysis, and sustainment of architec- tures of systems through the use of architecture descriptions. A conceptual model of architecture description is established. The required contents of an architecture description are specified. Archi- tecture viewpoints, architecture frameworks and architecture description languages are introduced for codifying conventions and common practices of architecture description. The required content of architecture viewpoints, architecture frame- works and architecture  description  languages is specified. Annexes provide the motivation and background for key concepts and terminol- ogy and examples of applying ISO/IEC/IEEE 42010:2011.
+ISO/IEC/IEEE 42010:2011 addresses the cre- ation, analysis, and sustainment of architec- tures of systems through the use of architecture descriptions. A conceptual model of architecture description is established. The required contents of an architecture description are specified. Archi- tecture viewpoints, architecture frameworks and architecture description languages are introduced for codifying conventions and common practices of architecture description. The required detail of architecture viewpoints, architecture frame- works and architecture  description  languages is specified. Annexes provide the motivation and background for key concepts and terminol- ogy and examples of applying ISO/IEC/IEEE 42010:2011.
 
 
 Like ISO/IEC/IEEE 42010, the next stan- dard treats software “design” as an abstraction, independent of its representation in a document. Accordingly, the standard places provisions on
@@ -10060,7 +10060,7 @@ itself.
 
 IEEE Std. 1016-2009 Standard for Information Technology—Systems Design—Software Design Descriptions
 
-This standard describes software designs and establishes the information content and organiza- tion of a software design description (SDD). An SDD is a representation of a software design to be used for recording design information and com- municating that design information to key design
+This standard describes software designs and establishes the information detail and organiza- tion of a software design description (SDD). An SDD is a representation of a software design to be used for recording design information and com- municating that design information to key design
 
 
 
@@ -10088,7 +10088,7 @@ ISO/IEC TR 24772:2013 Information Technology— Programming  Languages—Guidanc
 
 IEEE Std. 26514-2010 Standard Adoption of ISO/ IEC 26514:2008 Systems and Software Engineer- ing—Requirements for Designers and Developers of User Documentation
 
-This standard provides requirements for the design and development of software user docu- mentation as part of the life cycle processes. It defines the documentation process from the view- point of the documentation developer and also covers the documentation product. It specifies the structure, content, and format for user documen- tation and also provides informative guidance for user documentation style. It is independent of the software tools that may be used to produce docu- mentation and applies to both printed documenta- tion and onscreen documentation. Much of this
+This standard provides requirements for the design and development of software user docu- mentation as part of the life cycle processes. It defines the documentation process from the view- point of the documentation developer and also covers the documentation product. It specifies the structure, detail, and format for user documen- tation and also provides informative guidance for user documentation style. It is independent of the software tools that may be used to produce docu- mentation and applies to both printed documenta- tion and onscreen documentation. Much of this
 Language Selection and Use
 
 ISO/IEC TR 24772:2013 specifies software pro- gramming language vulnerabilities to be avoided in the development of systems where assured behavior is required for security, safety, mis- sion-critical, and business-critical software. In general, this guidance is applicable to the soft- ware developed, reviewed, or maintained for any application.
@@ -10152,7 +10152,7 @@ and resource information to assist with the imple- mentation and usage of the st
 
 
 
-IEEE and ISO/IEC JTC 1/SC 7 are cooperating in a project to develop a single comprehensive standard that covers all aspects of testing. One can hope for publication of the four-part standard by 2014. Portions of the content remain contro- versial. One taxonomical issue is whether “static methods”—such as inspection, review, and static analysis—should fall within the scope of “test- ing” or should be distinguished as “verification and validation.” Although the resolution of the issue is probably of little importance to users of the standard, it assumes great importance to the
+IEEE and ISO/IEC JTC 1/SC 7 are cooperating in a project to develop a single comprehensive standard that covers all aspects of testing. One can hope for publication of the four-part standard by 2014. Portions of the detail remain contro- versial. One taxonomical issue is whether “static methods”—such as inspection, review, and static analysis—should fall within the scope of “test- ing” or should be distinguished as “verification and validation.” Although the resolution of the issue is probably of little importance to users of the standard, it assumes great importance to the
 It specifies processes for use in testing and reviewing of user documentation. It is not lim- ited to the test and review phase of the life cycle, but includes activities throughout the information management and documentation management processes.
 
 
@@ -10229,7 +10229,7 @@ Software project management can be regarded as a specialization of “project ma
 
 configuration items, controlling changes, report-
 
-ing the status of configuration items, as well as software builds and release engineering. Its pre- decessor defined only the contents of a software configuration management plan. This standard addresses what CM activities are to be done, when they are to happen in the life cycle, and what plan- ning and resources are required. It also describes the content areas for a CM plan. The standard sup- ports ISO/IEC/IEEE 12207:2008 and ISO/IEC/ IEEE 15288:2008 and adheres to the terminology
+ing the status of configuration items, as well as software builds and release engineering. Its pre- decessor defined only the contents of a software configuration management plan. This standard addresses what CM activities are to be done, when they are to happen in the life cycle, and what plan- ning and resources are required. It also describes the detail areas for a CM plan. The standard sup- ports ISO/IEC/IEEE 12207:2008 and ISO/IEC/ IEEE 15288:2008 and adheres to the terminology
 IEEE Std. 1490-2011 Guide—Adoption of the Proj- ect Management Institute (PMI®) Standard, A Guide to the Project Management Body of Knowl- edge (PMBOK® Guide)—Fourth Edition
 
 The PMBOK® Guide identifies that  subset  of the project management body of knowledge gen- erally recognized as good practice. “Generally recognized” means the knowledge and practices described are applicable to most projects most of
@@ -10259,14 +10259,14 @@ The purpose of risk management is to iden- tify potential managerial and technic
 
 ISO/IEC/IEEE 16326:2009 Systems and Soft- ware Engineering—Life  Cycle  Processes—Project Management
 
-ISO/IEC/IEEE 16326:2009 provides normative content specifications for project management plans  covering  software  projects  and  software-
+ISO/IEC/IEEE 16326:2009 provides normative detail specifications for project management plans  covering  software  projects  and  software-
 
 The analysis of risk and risk mitigation depends crucially upon measurement. This international standard provides an elaboration of the measure- ment process from ISO/IEC/IEEE 15288:2008 and ISO/IEC/IEEE 12207:2008.
 
 intensive system projects. It also provides detailed
 
 discussion and advice on applying a set of proj- ect processes that are common to both the soft- ware and system life cycle as covered by ISO/IEC 12207:2008 (IEEE Std. 12207-2008) and ISO/IEC
-15288:2008 (IEEE Std. 15288-2008), respectively. The discussion and advice are intended to aid in the preparation of the normative content of project management plans. ISO/IEC/IEEE  16326:2009 is the result of the harmonization of ISO/IEC TR 16326:1999 and IEEE Std. 1058-1998.
+15288:2008 (IEEE Std. 15288-2008), respectively. The discussion and advice are intended to aid in the preparation of the normative detail of project management plans. ISO/IEC/IEEE  16326:2009 is the result of the harmonization of ISO/IEC TR 16326:1999 and IEEE Std. 1058-1998.
 IEEE Std. 15939-2008 Standard Adoption of ISO/ IEC 15939:2007 Systems and Software Engineer- ing—Measurement Process
 
 ISO/IEC 15939 defines a measurement process applicable to system and software  engineer- ing and management disciplines. The process is described through a model that defines the activi- ties of the measurement process that are required to adequately specify what measurement infor- mation is required, how the measures and analy- sis results are to be applied, and how to determine
@@ -10305,7 +10305,7 @@ Sometimes user documentation is acquired regardless of whether the software it d
 
 and to documentation produced internally, as well
 
-as to documentation contracted to outside service organizations. It provides an overview of the soft- ware documentation and information management processes, and also presents aspects of portfolio planning and content management that user docu- mentation managers apply. It covers management activities in starting a project, including setting up procedures and specifications, establishing infrastructure, and building a team. It includes examples of roles needed on a user documentation team. It addresses measurements and estimates needed for management control, and the use of supporting processes such as change management, schedule and cost control, resource management, and quality management and process improve- ment. It includes requirements for key documents produced for user documentation  management, including documentation plans and documentation management plans. ISO/IEC/IEEE 26511:2012 is independent of the software tools that may be used
+as to documentation contracted to outside service organizations. It provides an overview of the soft- ware documentation and information management processes, and also presents aspects of portfolio planning and detail management that user docu- mentation managers apply. It covers management activities in starting a project, including setting up procedures and specifications, establishing infrastructure, and building a team. It includes examples of roles needed on a user documentation team. It addresses measurements and estimates needed for management control, and the use of supporting processes such as change management, schedule and cost control, resource management, and quality management and process improve- ment. It includes requirements for key documents produced for user documentation  management, including documentation plans and documentation management plans. ISO/IEC/IEEE 26511:2012 is independent of the software tools that may be used
 ISO/IEC/IEEE 26512:2011 Systems and Software Engineering—Requirements for Acquirers and Sup- pliers of User Documentation
 
 ISO/IEC/IEEE 26512:2011 was developed to assist users of ISO/IEC/IEEE 15288:2008 or ISO/ IEC/IEEE 12207:2008 to acquire or supply soft- ware user documentation as part of the software life cycle processes. It defines the documentation process from the acquirer’s standpoint and the supplier’s standpoint. ISO/IEC/IEEE 26512:2011 covers the requirements for information items used in the acquisition of user documentation products: the acquisition plan, document specification, state- ment of work, request for proposals, and proposal. It provides an overview of the software user docu- mentation and information management processes which may require acquisition and supply of soft- ware user documentation products and services. It addresses the preparation of requirements for
@@ -10319,7 +10319,7 @@ software user documentation. These requirements are central to the user document
 
 The next two standards are mentioned here because they supply information used in manage- ment decision-making.
 improved practices. For example, one might pro- pose an improved practice for software require- ments analysis. A naïve treatment might relate the description to an early stage of the life cycle model. A superior approach is to describe the practice in the context of a process that can be applied at any stage of the life cycle. The require- ments analysis process, for example, is neces- sary for the development stage, for maintenance, and often for retirement, so an improved practice described in terms of the requirements analysis process can be applied to any of those stages.
-The two key standards are ISO/IEC/IEEE 12207, Software Life Cycle Processes, and ISO/ IEC/IEEE 15288, System Life Cycle Processes. The two standards have distinct histories, but they were both revised in 2008 to align their pro- cesses, permitting their interoperable use across a wide spectrum of projects ranging from a stand- alone software component to a system with neg- ligible software content. Both are being revised
+The two key standards are ISO/IEC/IEEE 12207, Software Life Cycle Processes, and ISO/ IEC/IEEE 15288, System Life Cycle Processes. The two standards have distinct histories, but they were both revised in 2008 to align their pro- cesses, permitting their interoperable use across a wide spectrum of projects ranging from a stand- alone software component to a system with neg- ligible software detail. Both are being revised
 
  		again with the intent of containing an identical
 
@@ -10364,7 +10364,7 @@ Standard for Systems and Software Engineering— System Life Cycle Processes
 ISO/IEC 15288:2008 establishes a common framework for describing the life cycle of sys- tems created by humans. It defines a set of processes and associated terminology. These processes can be applied at any level in the hierarchy of a system’s structure. Selected sets of these processes can be applied throughout the life cycle for managing and performing the stages of a system’s life cycle. This is accom- plished through the involvement of all interested parties, with the ultimate goal of achieving cus- tomer satisfaction.
 ISO/IEC 15288:2008 also provides processes that support the definition, control, and improve- ment of the life cycle processes used within an organization or a project. Organizations and projects can use these life cycle processes when acquiring and supplying systems.
 ISO/IEC 15288:2008 concerns those systems that are man-made and may be configured with one or more of the following: hardware, software, data, humans, processes (e.g., processes for pro- viding service to users), procedures (e.g., opera- tor instructions), facilities, materials, and natu- rally occurring entities. When a system element is software, the software life cycle processes docu-
-information items (information products, docu- mentation) to be developed and revised during systems and software life cycles and service management processes. It specifies the purpose and content of all identified systems and software data records and life cycle information items, as well as records and information items for infor- mation technology service management. The information item contents are defined according to generic document types (description, plan, pol- icy, procedure, report, request, and specification) and the specific purpose of the document. For simplicity of reference, each information item is described as if it were published as a separate document. However, information items may be unpublished but available in a repository for ref- erence, divided into separate documents or vol- umes, or combined with other information items into one document. ISO/IEC/IEEE 15289:2011 is based on the life cycle processes specified in ISO/IEC  12207:2008  (IEEE  Std.  12207-2008)
+information items (information products, docu- mentation) to be developed and revised during systems and software life cycles and service management processes. It specifies the purpose and detail of all identified systems and software data records and life cycle information items, as well as records and information items for infor- mation technology service management. The information item contents are defined according to generic document types (description, plan, pol- icy, procedure, report, request, and specification) and the specific purpose of the document. For simplicity of reference, each information item is described as if it were published as a separate document. However, information items may be unpublished but available in a repository for ref- erence, divided into separate documents or vol- umes, or combined with other information items into one document. ISO/IEC/IEEE 15289:2011 is based on the life cycle processes specified in ISO/IEC  12207:2008  (IEEE  Std.  12207-2008)
 and  ISO/IEC  15288:2008  (IEEE  Std.  15288-
 2008), and the service management processes specified in ISO/IEC 20000-1:2005 and ISO/IEC 20000-2:2005.
 
@@ -10379,7 +10379,7 @@ ISO/IEC 15288:2008 and ISO/IEC 12207:2008
 are harmonized for concurrent use on a single project or in a single organization.
 
 
-Those two standards specify that processes may produce items of information but do not pre- scribe their content or format. The next standard provides help with that.
+Those two standards specify that processes may produce items of information but do not pre- scribe their detail or format. The next standard provides help with that.
 IEEE Std. 24748.2-2012 Guide—Adoption of ISO/ IEC TR 24748-2:2011 Systems and Software Engi- neering—Life Cycle Management—Part 2: Guide to the Application of ISO/IEC 15288 (System Life Cycle Processes)
 
 ISO/IEC TR 24748-2 is a guide for the applica- tion of ISO/IEC 15288:2008. It addresses sys- tem, life cycle, process, organizational, project, and adaptation concepts, principally through reference to ISO/IEC TR 24748-1 and ISO/IEC
@@ -10448,7 +10448,7 @@ process standards, one may not be surprised to learn that their model for proces
 
 IEEE Std. 24774-2012 Guide—Adoption of ISO/IEC TR 24474:2010 Systems and Software Engineer- ing—Life Cycle Management—Guidelines for Pro- cess Description
 
-An increasing number of international, national, and industry standards describe process  mod- els. These models are developed for a range of purposes including process implementation and assessment. The terms and descriptions used in such models vary in format, content, and level of prescription. ISO/IEC TR 24774:2010 pres- ents guidelines for the elements used most fre- quently in describing a process: the title, pur- pose, outcomes, activities, task, and information item. Whilst the primary purpose of ISO/IEC TR 24774:2010 is to encourage consistency in stan- dard process reference models, the guidelines it provides can be applied to any process model developed for any purpose.
+An increasing number of international, national, and industry standards describe process  mod- els. These models are developed for a range of purposes including process implementation and assessment. The terms and descriptions used in such models vary in format, detail, and level of prescription. ISO/IEC TR 24774:2010 pres- ents guidelines for the elements used most fre- quently in describing a process: the title, pur- pose, outcomes, activities, task, and information item. Whilst the primary purpose of ISO/IEC TR 24774:2010 is to encourage consistency in stan- dard process reference models, the guidelines it provides can be applied to any process model developed for any purpose.
 
 
 A very small entity (VSE) is an enterprise, an organization, a department, or a project having up to 25 people. The ISO/IEC 29110 series “pro- files” large standards, such as ISO/IEC 12207 for software and ISO/IEC 15288 for systems, into smaller ones for VSEs. ISO 29110 is applicable to
@@ -10709,7 +10709,7 @@ currently  aligned  with  an  obsolete  edition  of
 
 IEEE Std. 730-2002 Standard for Software Quality Assurance Plans
 
-The standard specifies the format and content of
+The standard specifies the format and detail of
 software quality assurance plans.
 SQuaRE provides
 
@@ -10771,7 +10771,7 @@ quality assurance;
 •establishing measures of quality characteris- tics in support of these activities.
 Evaluation (SQuaRE)—Common Industry Format (CIF) for Usability
 
-A family of international standards, named the Common  Industry  Formats  (CIF),  documents the specification and evaluation of the usability of interactive systems. It provides a general over- view of the CIF framework and contents, defini- tions, and the relationship of the framework ele- ments. The intended users of the framework are identified, as well as the situations in which the framework may be applied. The assumptions and constraints of the framework are also enumerated. The framework content includes the following:
+A family of international standards, named the Common  Industry  Formats  (CIF),  documents the specification and evaluation of the usability of interactive systems. It provides a general over- view of the CIF framework and contents, defini- tions, and the relationship of the framework ele- ments. The intended users of the framework are identified, as well as the situations in which the framework may be applied. The assumptions and constraints of the framework are also enumerated. The framework detail includes the following:
 
 •consistent terminology and classification of specification, evaluation, and reporting;
 •a definition of the type and scope of formats and the high-level structure to be used for documenting required information and the results of evaluation.
@@ -10912,7 +10912,7 @@ level requirements. In addition, it does not pre- scribe the way in which integr
 ISO/IEC 15026-3:2011 can be used alone or with other parts of ISO/IEC 15026. It can be used with a variety of technical and specialized risk analysis and development approaches. ISO/IEC
 IEEE Std. 1228-1994 Standard for Software Safety Plans
 
-The minimum acceptable requirements for the content of a software safety plan are established. This standard applies to the software safety plan used for the development, procurement, mainte- nance, and retirement of safety-critical software.
+The minimum acceptable requirements for the detail of a software safety plan are established. This standard applies to the software safety plan used for the development, procurement, mainte- nance, and retirement of safety-critical software.
 
 
 
