@@ -14,6 +14,7 @@ public class Verifying extends DAOBase {
     public String tags;
     public String categories;
     public String contentPath;
+    public String alias;
     public int refused;
 
     public static Verifying query() {
