@@ -2,9 +2,9 @@ package tss2.wiki.dao.core;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import tss2.wiki.util.TimeUtil;
 
 import javax.sql.RowSet;
-import java.lang.annotation.Inherited;
 import java.lang.reflect.Field;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,6 +29,8 @@ import java.util.Collections;
  */
 @JsonIgnoreProperties(value = {"getTableName"})
 public abstract class DAOBase {
+
+    public String timestamp;
 
     public long id = 0;
 
@@ -152,6 +154,7 @@ public abstract class DAOBase {
      * This method can ben override.
      */
     public void save() {
+        timestamp = TimeUtil.getTimeStampBySecond();
         ResultSet rs = DBAdmin.query("select * from " + getTableName() + " where (id = " + this.get("id") + ");");
         String sql = "";
         try {

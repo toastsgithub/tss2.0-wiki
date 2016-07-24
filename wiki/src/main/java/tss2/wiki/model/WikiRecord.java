@@ -437,7 +437,7 @@ public class WikiRecord {
                 bytes[i] = wiki.get("title").toString().charAt(i);
             }
             String regex = '[' + StringUtil.concatArray("][", bytes) + ']';
-            content = content.replaceFirst(wiki.get("title").toString(), "<span class='wiki_match' href='/html/entry_content.html?entry=" + wiki.get("title").toString() + "'>" + wiki.get("title").toString() + "</span>");
+            content = content.replaceFirst(wiki.get("title").toString(), "<span class='wiki_match' href='http://121.42.184.4:8080/html/entry_content.html?entry=" + wiki.get("title").toString() + "'>" + wiki.get("title").toString() + "</span>");
         }
         return content;
     }
