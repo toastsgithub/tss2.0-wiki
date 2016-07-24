@@ -164,7 +164,3 @@ function clearLogin(){
     
 }
 
-
-function userChangeRecord() {
-
-}
