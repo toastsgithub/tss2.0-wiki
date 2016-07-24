@@ -29,15 +29,17 @@ public class DBAdmin {
     // register classes here
     private static Class[] tables = {
             Alias.class,
-            User.class,
-            WikiEntry.class,
-            UpdateHistory.class,
+            Message.class,
+            Reference.class,
+            Session.class,
             Summary.class,
             Tag.class,
-            Session.class,
-            Message.class,
+            User.class,
             User2Message.class,
-            Reference.class
+            UpdateHistory.class,
+            Verifying.class,
+            VerifyingReference.class,
+            WikiEntry.class,
     };
 
     static {
@@ -69,7 +71,7 @@ public class DBAdmin {
             }
             if (!contains) createTable(clz);
         }
-        /*for (String table : tbls) {
+        /*for (String table : tbls) {   // 删除未被定义的表
             boolean contains = false;
             for (Class clz : tables) {
                 if (table.equals(clz.getSimpleName())) contains = true;
@@ -83,12 +85,6 @@ public class DBAdmin {
         return conn;
     }
 
-    /**
-     * 新建表
-     *
-     * @param name
-     * @param table
-     */
     public static void createTable(String name, Class table) {
         // generate field string
         String strFields = "";
@@ -109,13 +105,13 @@ public class DBAdmin {
             if (stmt.isClosed()) {
                 stmt = conn.createStatement();
             }
-            stmt.execute("create table if not EXISTS " + name + " (" + strFields + ", PRIMARY KEY (id));");
-            stmt.execute("alter table " + name + " modify id int(11) auto_increment;");
-            stmt.execute("alter table " + name + " modify id int(11) default 1;");
-            stmt.execute("alter table " + name + " modify id int(11) auto_increment;");
+            stmt.execute(String.format("create table if not EXISTS %s (%s, PRIMARY KEY (id));", name, strFields));
+            stmt.execute(String.format("alter table %s modify id int(11) auto_increment;", name));
+            stmt.execute(String.format("alter table %s modify id int(11) default 1;", name));
+            stmt.execute(String.format("alter table %s modify id int(11) auto_increment;", name));
         } catch (SQLException e) {
             e.printStackTrace();
-            System.err.println("create table if not EXISTS " + name + " (" + strFields + ", PRIMARY KEY (id));");
+            System.err.printf("create table if not EXISTS %s (%s, PRIMARY KEY (id));%n", name, strFields);
             return;
         }
         System.out.println("+ " + name);
@@ -127,6 +123,7 @@ public class DBAdmin {
 
     /**
      * 删除一张表
+     *
      * @param tableName
      */
     public static void dropTable(String tableName) {
@@ -137,7 +134,7 @@ public class DBAdmin {
             if (stmt.isClosed()) {
                 stmt = conn.createStatement();
             }
-            stmt.execute("drop table if exists " + tableName + ";");
+            stmt.execute(String.format("drop table if exists %s;", tableName));
             System.out.println("- " + tableName);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -158,8 +155,8 @@ public class DBAdmin {
             if (stmt.isClosed()) {
                 stmt = conn.createStatement();
             }
-            stmt.execute("alter table " + table + " add column " + field.getName() + " " + getTypeName(field.getType().getSimpleName()) + ";");
-            System.out.println("+ " + table + "." + "field " + getTypeName(field.getType().getSimpleName()));
+            stmt.execute(String.format("alter table %s add column %s %s;", table, field.getName(), getTypeName(field.getType().getSimpleName())));
+            System.out.printf("+ %s.field %s%n", table, getTypeName(field.getType().getSimpleName()));
         } catch (SQLException e) {
             //e.printStackTrace();
         }
@@ -173,20 +170,15 @@ public class DBAdmin {
             if (stmt.isClosed()) {
                 stmt = conn.createStatement();
             }
-            stmt.execute("alter table " + table + " add column " + field + " " + getTypeName(type) + ";");
+            stmt.execute(String.format("alter table %s add column %s %s;", table, field, getTypeName(type)));
         } catch (SQLException e) {
             //e.printStackTrace();
             return;
         }
-        System.out.println("+ " + table + "." + field + " " + getTypeName(type));
+        System.out.printf("+ %s.%s %s%n", table, field, getTypeName(type));
 
     }
 
-    /**
-     * 删除列
-     * @param table
-     * @param fieldName
-     */
     public static void dropColumn(String table, String fieldName) {
         try {
             if (conn.isClosed()) {
@@ -195,20 +187,14 @@ public class DBAdmin {
             if (stmt.isClosed()) {
                 stmt = conn.createStatement();
             }
-            stmt.execute("alter table " + table + " drop column " + fieldName + ";");
+            stmt.execute(String.format("alter table %s drop column %s;", table, fieldName));
         } catch (SQLException e) {
             e.printStackTrace();
             return;
         }
-        System.out.println("- " + table + "." + "field");
+        System.out.printf("- %s.field%n", table);
     }
 
-    /**
-     * 获取表的所有域名称
-     *
-     * @param table
-     * @return
-     */
     public static String[] getFields(String table) {
         ResultSet rs = null;
         ArrayList<String> arrField = new ArrayList<>();
@@ -219,7 +205,7 @@ public class DBAdmin {
             if (stmt.isClosed()) {
                 stmt = conn.createStatement();
             }
-            rs = stmt.executeQuery("desc " + table + ";");
+            rs = stmt.executeQuery(String.format("desc %s;", table));
             while (rs.next()) {
                 arrField.add(rs.getString("Field"));
             }
@@ -230,11 +216,6 @@ public class DBAdmin {
         return arrField.toArray(res);
     }
 
-    /**
-     * 获取某个类型在数据库中的类型名称
-     * @param type
-     * @return
-     */
     private static String getTypeName(String type) {
         switch (type) {
             case "long":
@@ -266,11 +247,7 @@ public class DBAdmin {
         return type;
     }
 
-    /**
-     * 获取当前数据客中的表列表
-     *
-     * @return
-     */
+
     public static ArrayList<String> getAvailableTables() {
         // get available tables
         ArrayList<String> tbls = new ArrayList<>();
@@ -292,11 +269,6 @@ public class DBAdmin {
         return tbls;
     }
 
-    /**
-     * 执行一条查询语句,并反悔值.
-     * @param sqlQuery
-     * @return
-     */
     public static RowSet query(String sqlQuery) {
         try {
             if (conn.isClosed()) {
@@ -333,6 +305,6 @@ public class DBAdmin {
     }
 
     public static void main(String[] args) {
-        query("show tables;");
+
     }
 }

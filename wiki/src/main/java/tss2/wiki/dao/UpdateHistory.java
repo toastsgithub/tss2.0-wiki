@@ -11,7 +11,6 @@ import tss2.wiki.util.TimeUtil;
 public class UpdateHistory extends DAOBase {
     public String title;
     public String username;
-    public String timestamp;
     public String summary;
     public String categories;
     public String contentPath;

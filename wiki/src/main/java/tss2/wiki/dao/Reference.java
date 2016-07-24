@@ -11,8 +11,6 @@ public class Reference extends DAOBase {
     public String title;
     public String name;
     public String url;
-    public String websiteName;
-    public String timestamp;
     public long entryid;
 
     public String getTableName() {

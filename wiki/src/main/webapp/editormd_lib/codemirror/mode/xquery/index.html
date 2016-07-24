@@ -172,11 +172,11 @@ declare function json:print-name-value($x as element()) as xs:string? {
   indicates the JSON serialization should write the node, even if single, as an
   array, and the attribute @type that can be set to &quot;boolean&quot; or &quot;number&quot; to
   dictate the value should be written as that type (unquoted).  There's also
-  an @quote attribute that when set to true writes the inner content as text
+  an @quote attribute that when set to true writes the inner detail as text
   rather than as structured JSON, useful for sending some XHTML over the
   wire.
   &lt;p/&gt;
-  Text nodes within mixed content are ignored.
+  Text nodes within mixed detail are ignored.
 
   @param $x Element node to convert
   @return String holding JSON serialized representation of $x

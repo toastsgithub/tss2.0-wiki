@@ -299,7 +299,16 @@ public class WikiRecord {
         } else {
             mainversion += 1;
         }
-        String path = FILE_PATH_PREFIX + getTitle() + "/" + mainversion + "." + subversion + FILE_PATH_SUFFIX;
+
+        dao.subversion = subversion;
+        dao.mainversion = mainversion;
+        if (dao.id == 0) {
+            dao.save();
+            DAOBase[] daos = WikiEntry.query().where(String.format("title = '%s' and mainversion = %d and subversion = %d", dao.title, mainversion, subversion));
+            dao.id = Long.valueOf(daos[0].get("id").toString());
+        }
+
+        String path = String.format("%s%d/%d.%d%s", FILE_PATH_PREFIX, getID(), mainversion, subversion, FILE_PATH_SUFFIX);
         File fp = new File(FILE_PATH_PREFIX + getTitle() + "/");
         if (!fp.exists()) {
             boolean result = fp.mkdirs();
@@ -333,18 +342,11 @@ public class WikiRecord {
 
 
         // update wiki entry
-        dao.subversion = subversion;
-        dao.mainversion = mainversion;
         dao.categories = strCateg;
         dao.tags = strTags;
         dao.summery = summary;
         dao.contentPath = path;
         dao.save();
-
-        if (dao.id == 0) {
-            DAOBase[] daos = WikiEntry.query().where("title = '" + dao.title + "' and mainversion = " + mainversion + " and subversion = " + subversion);
-            dao.id = Long.valueOf(daos[0].get("id").toString());
-        }
 
         history.entryid = dao.id;
         history.save();
@@ -437,7 +439,7 @@ public class WikiRecord {
                 bytes[i] = wiki.get("title").toString().charAt(i);
             }
             String regex = '[' + StringUtil.concatArray("][", bytes) + ']';
-            content = content.replaceFirst(wiki.get("title").toString(), "<span class='wiki_match' href='/html/entry_content.html?entry=" + wiki.get("title").toString() + "'>" + wiki.get("title").toString() + "</span>");
+            content = content.replaceFirst(wiki.get("title").toString(), "<span class='wiki_match' href='http://121.42.184.4:8080/html/entry_content.html?entry=" + wiki.get("title").toString() + "'>" + wiki.get("title").toString() + "</span>");
         }
         return content;
     }

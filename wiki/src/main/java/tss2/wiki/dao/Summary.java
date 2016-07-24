@@ -11,7 +11,6 @@ import tss2.wiki.util.TimeUtil;
  */
 public class Summary extends DAOBase {
     public String summaryJO;
-    public String timestamp;
     public int version = 0;
 
     public static Summary query() {

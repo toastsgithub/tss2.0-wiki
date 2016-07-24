@@ -73,8 +73,8 @@ function testAll(){
 
 }
 function initText(editor) {
-  var content = 'Class rocket\nPrivate quality as Double\nPublic Sub launch() as String\nif quality > 0.8\nlaunch = "Successful"\nElse\nlaunch = "Failed"\nEnd If\nEnd sub\nEnd class\n';
-  editor.setValue(content);
+  var detail = 'Class rocket\nPrivate quality as Double\nPublic Sub launch() as String\nif quality > 0.8\nlaunch = "Successful"\nElse\nlaunch = "Failed"\nEnd If\nEnd sub\nEnd class\n';
+  editor.setValue(detail);
   for (var i =0; i< editor.lineCount(); i++) editor.indentLine(i);
 }
 function init() {
