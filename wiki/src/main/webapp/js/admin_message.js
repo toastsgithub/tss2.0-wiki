@@ -11,7 +11,16 @@ function init_message_table(){
         columns:[
             {data:'title'},
             {data:'fromUser'}
-        ]
+        ],
+        columnsDefs:[{
+            'targets':[0],
+            'data':'消息标题',
+            'render':function (data,type,full) {
+                alert('done');
+                return 'ascii';
+                // return '<a href=\"http:www.baidu.com\">'
+            }
+        }]
     });
     alert('message load done');
 
