@@ -2,6 +2,7 @@
  * Created by duanzhengmou on 7/23/16.
  * Copyright © 2016 duanzhengmou. All rights reserved.
  */
+var all_message;
 
 function init_message_table(){
     alert('init begin');
@@ -10,7 +11,16 @@ function init_message_table(){
         columns:[
             {data:'title'},
             {data:'fromUser'}
-        ]
+        ],
+        columnsDefs:[{
+            'targets':[0],
+            'data':'消息标题',
+            'render':function (data,type,full) {
+                alert('done');
+                return 'ascii';
+                // return '<a href=\"http:www.baidu.com\">'
+            }
+        }]
     });
     alert('message load done');
 
@@ -25,6 +35,7 @@ function load_message() {
         type:'get',
         success:function(data){
             if(data.error==0){
+                all_message = data;
                 table.rows.add(data.data).draw();
             }else{
                 alert('服务器响应内容中有错误');
