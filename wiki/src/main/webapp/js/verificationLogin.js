@@ -109,7 +109,7 @@ function get_welcome() {
     }
     
     if(login == false){
-        document.getElementById("login_button").innerHTML="<a href='http://localhost:8080/html/login.html'>登录</a>";
+        document.getElementById("login_button").innerHTML="<a href='../html/login.html'>登录</a>";
         document.getElementById("welcome_tip").innerHTML="";
         return null;
     }

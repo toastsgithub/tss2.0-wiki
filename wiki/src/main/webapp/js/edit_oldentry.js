@@ -25,7 +25,13 @@ function get_entry_data(){
             var title_input = decodeURI(title);
             alert("title = " + title_input);
             $("#name_input").val(title_input);
-            load_data(title, alias, category, tags, summary, content, reference);
+            if(alias==[]){
+                //do nothing
+            }else{
+                
+            }
+            $("#category_input").val(category[0]);
+            // if(tags==[])
         },
         error: function (data) {
             alert("error");
@@ -33,7 +39,4 @@ function get_entry_data(){
     });
 }
 
-function load_data(title, alias, category, tags, summary, content, reference){
-    alert("??");
-    $("#name_input").val(title);
-}
+
