@@ -68,11 +68,10 @@
 <div id="main_content" class="container-fluid" style="padding: 0;margin: 0;">
     <div class="row" style="margin: 0">
         <h1>我的修改记录</h1>
-            <table id="message_table" class="display table table-bordered">
+            <table id="message_table" class="display table table-bordered" style="width: 600px">
                 <thead>
-                <tr style="width: 600px">
-                    <th style="width: 50px">ID</th>
-                    <th style="width: 300px">消息标题</th>
+                <tr>
+                    <th style="width: 300px">条目标题</th>
                     <th style="width: 100px">状态</th>
                     <th style="width: 150px">时间</th>
                 </tr>
@@ -82,27 +81,7 @@
                 </tbody>
             </table>
             <!--<button onclick=pop_test()>pop out</button>-->
-
-            <div id="pop_test" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div id="msg_title" class="modal-header">
-                            <span class="glyphicon glyphicon-envelope"></span>
-                            <span id="message_title">TITLE</span>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        </div>
-                        <div class="modal-header">
-                            <span class="glyphicon glyphicon-user"></span>
-                            <span>from</span>
-                            <span id="from_user">user</span>
-                        </div>
-                        <div id="msg_content" class="modal-body">
-                            <div id="message_content">content</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="test_part"></div>
+            <!--<div id="test_part"></div>-->
         </div>
     </div>
 </div>
