@@ -14,6 +14,8 @@ import java.util.ArrayList;
  */
 public class WikiMessage {
 
+    private int isread = 0;
+
     private WikiMessage() { }
 
     public static WikiMessage getMessage(String messageID) {
@@ -36,6 +38,14 @@ public class WikiMessage {
         dao.save();
     }
 
+    public void setIsread(int isread) {
+        this.isread = isread;
+    }
+
+    public int getIsread() {
+        return isread;
+    }
+
     public void send() {
         if (dao.sent == 1) return;
         for (String to : dao.toUser.split("[/]")) {
@@ -52,8 +62,20 @@ public class WikiMessage {
         m.save();
     }
 
+    public void setIsread(String toUser) {
+        DAOBase[] ums = User2Message.query().where(String.format("messageID = '%s' and toUser = '%s'", getMessageID(), toUser));
+        for (DAOBase um: ums) {
+            ((User2Message) um).isread = 1;
+            um.save();
+        }
+    }
+
     public String[] getToUsers() {
         return dao.toUser.split("[/]");
+    }
+
+    public String getTimestamp() {
+        return dao.timestamp;
     }
 
     public String getTitle() {

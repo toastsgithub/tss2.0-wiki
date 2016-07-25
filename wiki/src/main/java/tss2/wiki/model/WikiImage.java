@@ -1,5 +1,11 @@
 package tss2.wiki.model;
 
+import tss2.wiki.dao.Image;
+import tss2.wiki.util.StringUtil;
+import tss2.wiki.util.TimeUtil;
+
+import java.io.File;
+
 /**
  * TODO: 增加对插入图片的支持.
  *
@@ -7,31 +13,21 @@ package tss2.wiki.model;
  */
 public class WikiImage {
 
-    public String getFloderPath() {
-        return floderPath;
+    public WikiImage() {
     }
 
-    public String getName() {
-        return name;
+    public String getId() {
+        if (dao.imageId == null || dao.imageId.equals("")) {
+            dao.imageId = StringUtil.concatArray("", TimeUtil.getTimeStampBySecond().split("[ -:]")) + StringUtil.generateTokener(4);
+        }
+        return dao.imageId;
     }
 
-    public String getPath() {
-        return path;
+    public File getFile() {
+        if (dao.path == null || dao.path.equals("")) {
+            return null;
+        }
+        return new File(dao.path);
     }
-
-    public void setFloderPath(String floderPath) {
-        this.floderPath = floderPath;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
-    }
-
-    private String path;
-    private String name;
-    private String floderPath;
+    private Image dao;
 }
