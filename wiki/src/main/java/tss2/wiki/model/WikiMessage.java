@@ -62,6 +62,7 @@ public class WikiMessage {
                         um.save();
                     }
                 }
+                continue;
             }
             User2Message um = new User2Message();
             um.fromUser = dao.fromUser;
