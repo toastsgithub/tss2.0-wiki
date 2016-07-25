@@ -29,6 +29,7 @@ public class DBAdmin {
     // register classes here
     private static Class[] tables = {
             Alias.class,
+            Image.class,
             Message.class,
             Reference.class,
             Session.class,

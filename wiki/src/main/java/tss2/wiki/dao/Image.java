@@ -7,6 +7,7 @@ import tss2.wiki.dao.core.DAOBase;
  */
 public class Image extends DAOBase {
     public String path;
+    public String format;
     public String imageId;
 
     public static Image query() {
