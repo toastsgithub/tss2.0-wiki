@@ -215,8 +215,8 @@ function initial_data_for_old_edit() {
 function initialData(){
 //提前获得所有的数据
     $(document).ready(function () {
+        // document.getElementById('wiki_editor').innerHTML ='#Title\n\nContent?';
 
-        // document.getElementById('wiki_editor').innerHTML ='#Title\n\nContent';
         $('#tags_input').autocomplete({
             lookup: countries
 //            serviceUrl: '/content/tags'
@@ -507,6 +507,7 @@ function delete_reference(){
     refer.removeChild(document.getElementById('ref_item'+count));
     
 }
+
 
 // function create_entry(){
 //     var scan_entry = $("#scan_entry").val();

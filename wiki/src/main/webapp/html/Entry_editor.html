@@ -124,6 +124,7 @@
 <button id="submit_btn" class="btn btn-primary" onclick="addClause();">submit</button>
 <button id="add_btn" class="btn btn-primary" onclick="add_reference_input_area();">add reference</button>
 <button class="btn btn-primary" onclick="get_reference()">get</button>
+
 <button class="btn btn-primary" onclick="scan_content()">scan</button>
 <!--<div>-->
     <!--<input id="scan_entry"  type="checkbox" checked>-->
@@ -139,6 +140,7 @@
 <script type="text/javascript">
     var editor_instance;
     $(function() {
+        alert('editor');
         var editor = editormd("editormd", {
             width  : "90%", // 编辑器宽
             height  : 540, // 编辑器高
@@ -180,6 +182,8 @@
          });
          */
         editor_instance =editor;
+        document.getElementById('wiki_editor').innerHTML ='#hello world';
+
     });
     function show_html() {
         alert("获取html源内容:\n----------\n"+editor_instance.getHTML());
