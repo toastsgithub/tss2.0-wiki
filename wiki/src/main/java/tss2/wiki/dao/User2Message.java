@@ -2,6 +2,7 @@ package tss2.wiki.dao;
 
 import tss2.wiki.dao.core.DAOBase;
 import tss2.wiki.dao.core.DBAdmin;
+import tss2.wiki.util.TimeUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,6 +24,7 @@ public class User2Message extends DAOBase {
 
     @Override
     public void save() {
+        timestamp = TimeUtil.getTimeStampBySecond();
         String keystring = "toUser = '" + toUser + "' and " +
                 "messageID = '" + messageID + "'" ;
         ResultSet rs = DBAdmin.query("select * from " + getTableName() + " where (" + keystring + ");");

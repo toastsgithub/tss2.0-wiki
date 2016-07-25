@@ -314,7 +314,7 @@ public class WikiRecord {
         }
 
         String path = String.format("%s%d/%d.%d%s", FILE_PATH_PREFIX, getID(), mainversion, subversion, FILE_PATH_SUFFIX);
-        File fp = new File(FILE_PATH_PREFIX + getTitle() + "/");
+        File fp = new File(FILE_PATH_PREFIX + getID() + "/");
         if (!fp.exists()) {
             boolean result = fp.mkdirs();
         }

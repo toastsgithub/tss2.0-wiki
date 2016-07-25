@@ -2,6 +2,7 @@ package tss2.wiki.control;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import tss2.wiki.control.impl.SessionServiceimpl;
 import tss2.wiki.control.service.SessionService;
 import tss2.wiki.domain.*;
@@ -135,7 +136,8 @@ public class ContentController {
      * @return
      */
     @RequestMapping(value = "/wiki/{title}", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
-    public @ResponseBody WikiResult doGet(@PathVariable String title) {
+    public @ResponseBody WikiResult doGet(HttpServletRequest request, @PathVariable String title) {
+        title = getTitle(request);
         WikiRecord wikiRecord = new WikiRecord(title);
         WikiReference wikiReference = new WikiReference(title);
         if (wikiRecord.getContent() == null) {
@@ -143,6 +145,11 @@ public class ContentController {
         }
         wikiRecord.addVisit();
         return new WikiResult(1, wikiRecord,wikiReference);
+    }
+
+    private String getTitle(HttpServletRequest request) {
+        String url = request.getRequestURI();
+        return url.substring("/content/wiki/".length());
     }
 
     /**

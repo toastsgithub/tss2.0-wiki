@@ -1,10 +1,7 @@
 package tss2.wiki.model;
 
 import tss2.wiki.dao.Image;
-import tss2.wiki.util.StringUtil;
-import tss2.wiki.util.TimeUtil;
-
-import java.io.File;
+import tss2.wiki.dao.core.DAOBase;
 
 /**
  * TODO: 增加对插入图片的支持.
@@ -13,21 +10,18 @@ import java.io.File;
  */
 public class WikiImage {
 
-    public WikiImage() {
-    }
+    private WikiImage() { }
 
-    public String getId() {
-        if (dao.imageId == null || dao.imageId.equals("")) {
-            dao.imageId = StringUtil.concatArray("", TimeUtil.getTimeStampBySecond().split("[ -:]")) + StringUtil.generateTokener(4);
-        }
-        return dao.imageId;
-    }
-
-    public File getFile() {
-        if (dao.path == null || dao.path.equals("")) {
+    public static WikiImage loadImage(String imageId) {
+        WikiImage image = new WikiImage();
+        DAOBase[] images = Image.query().where(String.format("imageId = '%s'", image));
+        if (images.length > 0) {
+            image.dao = (Image) images[0];
+        } else {
             return null;
         }
-        return new File(dao.path);
+        return image;
     }
+
     private Image dao;
 }

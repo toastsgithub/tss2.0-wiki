@@ -27,7 +27,7 @@ public class Message extends DAOBase {
         message.messageID = StringUtil.generateTokener(16);
         message.fromUser = "123";
         message.toUser = "dzm14";
-        message.title = "这是一条测试信息";
+        message.title = "段段段段段段狗";
         message.detail = "消息内容";
         message.save();
 
