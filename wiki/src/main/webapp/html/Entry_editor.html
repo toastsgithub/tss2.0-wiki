@@ -15,10 +15,16 @@
     <link rel="stylesheet" href="../css/wiki_navigator.css">
     <link rel="stylesheet" href="../css/editor.css">
     <link rel="stylesheet" href="../css/auto_complete.css">
+    <link rel="stylesheet" href="../css/highlight.css">
+    <link rel="stylesheet" href="../css/bootstrap-switch.min.css">
+    <link href="http://getbootstrap.com/assets/css/docs.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/main.css">
+
     <script src="../js/createClause.js"></script>
     <script src="../js/jquery.autocomplete.js"></script>
     <script src="../js/wiki_utils.js"></script>
     <script src="../js/verificationLogin.js"></script>
+    <script src="../js/bootstrap-switch.min.js"></script>
     <script>
         var judge_type = false;
     </script>
@@ -44,7 +50,7 @@
         </ul>
 
         <ul class="nav navbar-nav" style="float: right">
-            <li class="dropdown">
+            <li class="dropdown" id="welcome_user">
                 <ul class="dropdown-menu">
                     <li><a href="" onclick="clearLogin();">退出登录</a></li>
                     <li><a href="../html/changeRecord.html">我的修改记录</a> </li>
@@ -119,6 +125,17 @@
 <button id="add_btn" class="btn btn-primary" onclick="add_reference_input_area();">add reference</button>
 <button class="btn btn-primary" onclick="get_reference()">get</button>
 
+<button class="btn btn-primary" onclick="scan_content()">scan</button>
+<!--<div>-->
+    <!--<input id="scan_entry"  type="checkbox" checked>-->
+<!--</div>-->
+
+<!--<script>-->
+    <!--// 我是和上面的checkbox一起的不要删掉我!!!-->
+    <!--$(function(argument) {-->
+        <!--$('[type="checkbox"]').bootstrapSwitch();-->
+    <!--})-->
+<!--</script>-->
 <script src="../js/editormd.js"></script>
 <script type="text/javascript">
     var editor_instance;
