@@ -47,6 +47,11 @@ public class WikiMessage {
         return isread;
     }
 
+    public static void main(String[] args) {
+        WikiMessage message = new WikiMessage("123", "#1", "123", "123123123");
+        message.send();
+    }
+
     public void send() {
         if (dao.sent == 1) return;
         for (String to : dao.toUser.split("[/]")) {

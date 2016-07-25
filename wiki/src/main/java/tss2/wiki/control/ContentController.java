@@ -2,7 +2,6 @@ package tss2.wiki.control;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import tss2.wiki.control.impl.SessionServiceimpl;
 import tss2.wiki.control.service.SessionService;
 import tss2.wiki.domain.*;
@@ -12,6 +11,8 @@ import tss2.wiki.model.*;
 import tss2.wiki.vo.WikiEntryVO;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -136,8 +137,9 @@ public class ContentController {
      * @return
      */
     @RequestMapping(value = "/wiki/{title}", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
-    public @ResponseBody WikiResult doGet(HttpServletRequest request, @PathVariable String title) {
+    public @ResponseBody WikiResult doGet(HttpServletRequest request, @PathVariable String title) throws UnsupportedEncodingException {
         title = getTitle(request);
+        title = URLDecoder.decode(title, "utf-8");
         WikiRecord wikiRecord = new WikiRecord(title);
         WikiReference wikiReference = new WikiReference(title);
         if (wikiRecord.getContent() == null) {
@@ -159,7 +161,9 @@ public class ContentController {
      * @return
      */
     @RequestMapping(value = "/wiki/{title}", method = RequestMethod.DELETE, produces="application/json;charset=UTF-8")
-    public @ResponseBody CommonResult deleteEntry(HttpServletRequest request, @PathVariable String title) {
+    public @ResponseBody CommonResult deleteEntry(HttpServletRequest request, @PathVariable String title) throws UnsupportedEncodingException {
+        title = getTitle(request);
+        title = URLDecoder.decode(title, "utf-8");
         WikiSession session = sessionService.checkUser(request);
         if (!session.isValid()) {
             return new CommonResult(1, "Authentication Failed");
