@@ -12,10 +12,6 @@ import tss2.wiki.model.WikiImage;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Scanner;
 
 /**
  * Created by coral on 16-7-25.

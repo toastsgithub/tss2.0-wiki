@@ -51,11 +51,11 @@ public class MessageController {
             return new MessageResult(1);
         }
         WikiUser user = session.getUser();
-        WikiMessage message = user.getMessageDetail(user.getUsername(), messageID);
-        message.setIsread(user.getUsername());
+        WikiMessage message = user.getMessageDetail(user, messageID);
         if (message == null) {
             return new MessageResult(1);
         }
+        message.setIsread(user.getUsername());
         return new MessageResult(0, message.getFromUser(), message.getTitle(), message.getDetail());
     }
 
