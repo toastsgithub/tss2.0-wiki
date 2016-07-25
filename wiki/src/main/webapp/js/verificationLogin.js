@@ -107,7 +107,7 @@ function get_welcome() {
             }
         })
     }
-    alert("login = " + login);
+    // alert("login = " + login);
     if(login == false){
         document.getElementById("login_button").innerHTML="<a href='../html/login.html'>登录</a>";
         document.getElementById("welcome_tip").innerHTML="";

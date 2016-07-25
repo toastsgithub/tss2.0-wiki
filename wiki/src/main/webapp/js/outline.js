@@ -35,7 +35,7 @@ $.get(
             "types" : {
                 "default" : {
                     "icon" : "glyphicon glyphicon-book"
-                },
+                }
                 // "demo" : {
                 //     "icon" : "glyphicon glyphicon-ok"
                 // }

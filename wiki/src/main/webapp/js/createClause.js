@@ -214,17 +214,17 @@ function initial_data_for_old_edit() {
 
 function initialData(){
 //提前获得所有的数据
+    
     $(document).ready(function () {
+        alert('init done');
         // document.getElementById('wiki_editor').innerHTML ='#Title\n\nContent?';
+
+
 
         $('#tags_input').autocomplete({
             lookup: countries
 //            serviceUrl: '/content/tags'
         });
-
-
-
-
         $.get('/outline/list',null,function(data){
             var sourceData = data.data;
             for(var i=0;i<sourceData.length;i++){
@@ -235,7 +235,8 @@ function initialData(){
             });
 
         });
-
+        
+        
         $.ajax({
             type: 'get',
             url:'/content/tags',
