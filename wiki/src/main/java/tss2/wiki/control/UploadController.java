@@ -24,7 +24,7 @@ import java.util.Scanner;
 public class UploadController {
 
     @RequestMapping(value = "/image", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
-    public @ResponseBody String getFile(@RequestParam(value = "image") MultipartFile file) {
+    public @ResponseBody String getFile(@RequestParam(value = "editormd-image-file") MultipartFile file) {
         try {
             InputStream is = file.getInputStream();
             Scanner scanner = new Scanner(is);
