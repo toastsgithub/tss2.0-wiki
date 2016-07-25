@@ -42,9 +42,7 @@ public class ContentServiceImpl implements ContentService {
         Map map = (Map) data.getData().get("data");
 
         ArrayList alias = (ArrayList) map.get("alias");
-        if(contain(alias)){
-        //    return new CommonResult(1,"Alias Exist");
-        }
+
 
         String title = map.get("title").toString();
         WikiRecord entry = new WikiRecord(title);
@@ -64,6 +62,12 @@ public class ContentServiceImpl implements ContentService {
             summary = wikimd.getSummary(WikiMarkdown.DEFAULT_SUMMARY_LENGTH);
         }
 
+        if(entryid == 0){
+            if(contain(alias)){
+                return new CommonResult(1,"Alias Exist");
+            }
+        }
+
         WikiUser user = new SessionServiceimpl().getUserBySession(data.getSessionID());
         if(user.getType()==1){
             entry.setContent(entryid, user.getUsername(), categories, tags, summary, content, true);
@@ -74,12 +78,14 @@ public class ContentServiceImpl implements ContentService {
             wikiAlias.Alias(entryid,title,alias);
             WikiReference wikiReference = new WikiReference(entryid,title);
             wikiReference.modify(r);
-            return new CommonResult(0,"add successfully!");
+            return new CommonResult(0,"add/modify successfully!");
         }else{
             WikiVerifying wikiVerifying = new WikiVerifying();
             wikiVerifying.setContent(entryid,user.getUsername(),title,tags,categories,content,alias);
             WikiVerifyingReference wikiVerifyingReference = new WikiVerifyingReference(wikiVerifying.getID());
             wikiVerifyingReference.modify(r);
+            WikiMessage wikiMessage = new WikiMessage(user.getUsername(),"#1","有新的提交信息","用户"+user.getUsername()+"提交了《"+title+"》的修改申请");
+            wikiMessage.send();
             return new CommonResult(0,"submit successfully!");
         }
 

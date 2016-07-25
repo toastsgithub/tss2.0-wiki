@@ -1,5 +1,6 @@
 package tss2.wiki.model;
 
+import tss2.wiki.dao.User;
 import tss2.wiki.dao.core.DAOBase;
 import tss2.wiki.dao.Message;
 import tss2.wiki.dao.User2Message;
@@ -46,9 +47,28 @@ public class WikiMessage {
         return isread;
     }
 
+    public static void main(String[] args) {
+        WikiMessage message = new WikiMessage("123", "#1", "123", "123123123");
+        message.send();
+    }
+
     public void send() {
         if (dao.sent == 1) return;
         for (String to : dao.toUser.split("[/]")) {
+            if (to.startsWith("#")) {
+                DAOBase[] users = User.query().where("");
+                for (DAOBase user: users) {
+                    if (("#" + ((User) user).type).equals(to)) {
+                        User2Message um = new User2Message();
+                        um.fromUser = dao.fromUser;
+                        um.messageID = dao.messageID;
+                        um.toUser = ((User) user).username;
+                        um.isread = 0;
+                        um.save();
+                    }
+                }
+                continue;
+            }
             User2Message um = new User2Message();
             um.fromUser = dao.fromUser;
             um.messageID = dao.messageID;

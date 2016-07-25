@@ -35,7 +35,7 @@ public class WikiVerifying {
         } else {
             dao = (Verifying) contents[0];
         }
-        String path = String.format("verifying/%d/%d", title,username);
+        String path = String.format("verifying/%s/%s", title,username);
         WikiFile file = new WikiFile(path);
         file.setContent(content);
         String strCateg = "";
