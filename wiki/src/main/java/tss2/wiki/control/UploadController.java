@@ -12,6 +12,9 @@ import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Scanner;
 
 /**
  * Created by coral on 16-7-25.
@@ -22,7 +25,18 @@ public class UploadController {
 
     @RequestMapping(value = "/image", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
     public @ResponseBody String getFile(@RequestParam(value = "image") MultipartFile file) {
-        return file.getName();
+        try {
+            InputStream is = file.getInputStream();
+            Scanner scanner = new Scanner(is);
+            String result = "";
+            while (scanner.hasNext()) {
+                result += scanner.nextLine() + "\n";
+            }
+            return result;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) throws ServletException {
