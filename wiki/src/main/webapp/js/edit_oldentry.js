@@ -23,7 +23,7 @@ function get_entry_data(){
             var content = data.data.content;
             var reference = data.reference.dao;
             var title_input = decodeURI(title);
-            alert("title = " + title_input);
+            // alert("title = " + title_input);
             $("#name_input").val(title_input);
             subimit_id = data.data.id;
             if(alias==[]){

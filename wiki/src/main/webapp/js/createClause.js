@@ -60,7 +60,7 @@ function addClause() {
     var tags = getTags();
     var catagories = document.getElementById("category_input").value;
     var username = get_user();
-    alert("current user-->"+username);
+    // alert("current user-->"+username);
     var content = show_markdown();
     //这里摘要的提取还需要精细化
 
@@ -90,7 +90,7 @@ function addClause() {
     // mock_obj2.websiteName = '谷歌';
     var all_alias = getAlias();
    
-    alert(all_alias);
+    // alert(all_alias);
     var data = {
         operation: "add", data: {
             id:subimit_id,
@@ -105,8 +105,8 @@ function addClause() {
             reference: reference_result
         }
     };
-    alert("data = " + JSON
-            .stringify(data));
+    // alert("data = " + JSON
+    //         .stringify(data));
     $.ajax({
         type: "post",
         url: "/content",
