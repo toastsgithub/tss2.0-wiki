@@ -395,12 +395,17 @@ public class WikiRecord {
     public String[] getAliasByTitle() {
         DAOBase[] contents = Alias.query().where("title = '" + dao.title + "'");
         String[] str = ((Alias) contents[0]).alias.split("/");
+        String[] strings = new String[str.length-1];
         String[] re = new String[0];
         if(str.length==1){
             return re;
+        }else{
+            for(int i = 0;i < str.length-1; i++){
+                strings[i] = str[i+1];
+            }
         }
         //System.out.println("length is "+str.length);
-        return str;
+        return strings;
     }
 
     public int getVisits() {

@@ -53,8 +53,8 @@
 <div class="container" style="width: 90%">
     <div id="name" class="row minf">
         <label class="namlab">条目名称：</label>
-        <input id="name_input" class="minf_input"/>
-        <span id="nameTip" class="tip"></span>
+        <input id="name_input" class="minf_input" readonly="readonly"/>
+        <!--<span id="nameTip" class="tip"></span>-->
     </div>
     <!--<hr>-->
 
@@ -157,8 +157,11 @@
 
 </script>
 <script>
+    name = true;
     initial_data_for_old_edit();
-    testAll();
+    testType();
+    testTag();
+    testAlias();
     get_welcome();
     $(document).ready(function () {
         origin_width_of_input = document.getElementById('tags_input').offsetWidth;

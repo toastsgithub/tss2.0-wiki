@@ -42,9 +42,7 @@ public class ContentServiceImpl implements ContentService {
         Map map = (Map) data.getData().get("data");
 
         ArrayList alias = (ArrayList) map.get("alias");
-        if(contain(alias)){
-        //    return new CommonResult(1,"Alias Exist");
-        }
+
 
         String title = map.get("title").toString();
         WikiRecord entry = new WikiRecord(title);
@@ -62,6 +60,12 @@ public class ContentServiceImpl implements ContentService {
         if (summary.equals("")) {
             WikiMarkdown wikimd = new WikiMarkdown(content);
             summary = wikimd.getSummary(WikiMarkdown.DEFAULT_SUMMARY_LENGTH);
+        }
+
+        if(entryid == 0){
+            if(contain(alias)){
+                return new CommonResult(1,"Alias Exist");
+            }
         }
 
         WikiUser user = new SessionServiceimpl().getUserBySession(data.getSessionID());

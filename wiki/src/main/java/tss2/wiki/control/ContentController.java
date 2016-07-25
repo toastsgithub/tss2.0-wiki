@@ -53,7 +53,7 @@ public class ContentController {
         WikiSession session = sessionService.checkUser(request);
         if (!session.isValid()) return new CommonResult(1, "Authentication Failed");
         WikiUser user = session.getUser();
-        if (user.getType() < WikiUser.USER_ADMIN) return new CommonResult(1, "Poor Privilege");
+        //if (user.getType() < WikiUser.USER_ADMIN) return new CommonResult(1, "Poor Privilege");
         return contentService.process(new WikiEntryVO(session, map));
     }
 

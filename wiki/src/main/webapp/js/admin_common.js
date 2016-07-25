@@ -12,7 +12,13 @@ function load_message_num() {
         type:'get',
         success:function (data) {
             if (data.error==0){
-                document.getElementById('message_num').innerHTML = data.data.length;
+                var unread_num = 0;
+                for (x in data.data){
+                    if(data.data[x].isread == 0){
+                        unread_num++;
+                    }
+                }
+                document.getElementById('message_num').innerHTML = unread_num;
             }else{
                 alert('http返回的内容存在错误');
             }
