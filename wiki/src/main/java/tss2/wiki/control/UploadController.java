@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 
 import javax.servlet.ServletException;
@@ -20,7 +21,7 @@ import java.io.File;
 public class UploadController {
 
     @RequestMapping(value = "/image", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
-    public @ResponseBody String getFile(@RequestParam(value = "image") File file) {
+    public @ResponseBody String getFile(@RequestParam(value = "image") MultipartFile file) {
         return file.getName();
     }
 
