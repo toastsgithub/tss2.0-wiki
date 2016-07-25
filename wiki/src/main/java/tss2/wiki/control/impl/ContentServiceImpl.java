@@ -43,7 +43,7 @@ public class ContentServiceImpl implements ContentService {
 
         ArrayList alias = (ArrayList) map.get("alias");
         if(contain(alias)){
-            return new CommonResult(1,"Alias Exist");
+        //    return new CommonResult(1,"Alias Exist");
         }
 
         String title = map.get("title").toString();
@@ -59,7 +59,6 @@ public class ContentServiceImpl implements ContentService {
         long entryid = (long)Integer.parseInt(map.get("id").toString());
 
         ArrayList r =(ArrayList) map.get("reference");
-
         if (summary.equals("")) {
             WikiMarkdown wikimd = new WikiMarkdown(content);
             summary = wikimd.getSummary(WikiMarkdown.DEFAULT_SUMMARY_LENGTH);
@@ -67,19 +66,22 @@ public class ContentServiceImpl implements ContentService {
 
         WikiUser user = new SessionServiceimpl().getUserBySession(data.getSessionID());
         if(user.getType()==1){
-
             entry.setContent(entryid, user.getUsername(), categories, tags, summary, content, true);
             if (entryid == 0) {
                 entryid = entry.getID();
             }
-
             WikiAlias wikiAlias = new WikiAlias();
             wikiAlias.Alias(entryid,title,alias);
             WikiReference wikiReference = new WikiReference(entryid,title);
             wikiReference.modify(r);
             return new CommonResult(0,"add successfully!");
+        }else{
+            WikiVerifying wikiVerifying = new WikiVerifying();
+            wikiVerifying.setContent(entryid,user.getUsername(),title,tags,categories,content,alias);
+            WikiVerifyingReference wikiVerifyingReference = new WikiVerifyingReference(wikiVerifying.getID());
+            wikiVerifyingReference.modify(r);
+            return new CommonResult(0,"submit successfully!");
         }
-        return null;
 
     }
 
