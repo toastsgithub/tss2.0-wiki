@@ -216,7 +216,7 @@ function initialData(){
 //提前获得所有的数据
     $(document).ready(function () {
 
-        document.getElementById('wiki_editor').innerHTML ='#Title\n\nContent';
+        // document.getElementById('wiki_editor').innerHTML ='#Title\n\nContent';
         $('#tags_input').autocomplete({
             lookup: countries
 //            serviceUrl: '/content/tags'
@@ -506,4 +506,49 @@ function delete_reference(){
     var refer = document.getElementById('reference');
     refer.removeChild(document.getElementById('ref_item'+count));
     
+}
+
+// function create_entry(){
+//     var scan_entry = $("#scan_entry").val();
+//     if(scan_entry=="on"){
+//         var new_data;
+//         var old_data = show_markdown();
+//         $.ajax({
+//             url: '/content/keyword',
+//             type: 'post',
+//             async: false,
+//             data: old_data,
+//            
+//
+//         })
+//     }
+//
+//     alert($("#checkcheck").val());
+// }
+
+
+// alert("exm??");
+// $("#wiki_editor").html("尽然没有任何反应????");
+// alert("heiheihei");
+
+function scan_content() {
+    var old_content = show_markdown();
+    alert("old_data = " + old_content);
+    $.ajax({
+        url: '/content/keyword',
+        type: 'post',
+        data: old_content,
+        // contentType: Text,
+        success: function (data) {
+            
+            alert(data);
+            var new_content = decodeURI(data);
+            alert("data = " + new_content);
+            editor_instance.setValue(new_content);
+            alert("扫描完成");
+        },
+        error: function (data) {
+            alert('error!'+JSON.stringify(data));
+        }
+    })
 }
