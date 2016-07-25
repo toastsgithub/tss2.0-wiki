@@ -80,8 +80,8 @@ public class ContentServiceImpl implements ContentService {
             wikiVerifying.setContent(entryid,user.getUsername(),title,tags,categories,content,alias);
             WikiVerifyingReference wikiVerifyingReference = new WikiVerifyingReference(wikiVerifying.getID());
             wikiVerifyingReference.modify(r);
+            return new CommonResult(0,"submit successfully!");
         }
-        return null;
 
     }
 
