@@ -170,6 +170,10 @@ function getNum(data){
     }
     return count;
 }
+
+
+
+
 /**
  * 递归遍历节点
  * @param father 父节点json对象
@@ -211,6 +215,9 @@ function read_json(father,data) {
         }
     }
 }
+
+
+
 /**
  * 判断参数是否为array
  * @param data 任意对象类型
@@ -222,6 +229,9 @@ function is_array(data) {
     return Object.prototype.toString.call(data)=='[object Array]';//!!!!!!!<<-----此处有精华
 
 }
+
+
+
 /**
  * 根据搜索的条目执行相关跳转,如果传入字符串不合法(如为空)则do nothing,若有其他判断条件则在此方法中扩展
  * @status work well
@@ -231,6 +241,9 @@ function search_entry(entry_key) {
     if(entry_key == "")return ;
     window.location.href="../html/search_result_page.html?entry="+entry_key;
 }
+
+
+
 
 /**
  * 根据大纲节点的名称获取该节点下的所有条目,并构造对象,存储到全局数组中
@@ -266,6 +279,9 @@ function get_entry_of_outline(outline_key) {
     });
     // return result;
 }
+
+
+
 
 /**
  * 在页面一加载的时候同时启动该方法,请求所有大纲的内容,并保存到全局数组中
@@ -413,6 +429,9 @@ function display_outline_content(outline_key) {
 
 }
 
+
+
+
 /**
  * 移除该元素下的所有子元素
  * @param element_id
@@ -425,6 +444,8 @@ function remove_all_child(element_id) {
     }
 }
 
+
+
 /**
  * 返回jstree选中的节点的名称
  * @returns selected_node 选中的节点的名称
@@ -434,6 +455,8 @@ function get_selected_node() {
     alert('selected:'+selected_node);
     return selected_node;
 }
+
+
 
 /**
  * 加载目录下内容为空的插画提示
@@ -452,6 +475,8 @@ function load_empty_tip(){
     embarrasing_text.style.color = '#d9d9d9';
     document.getElementById('search_result_content').appendChild(embarrassing_div);
 }
+
+
 
 /**
  * 根据内容数目加载页面的按钮数
@@ -592,6 +617,8 @@ function showSearchResult(content, num){
 function show_all_buffer() {
     alert('buffer '+JSON.stringify(all_outline_content));
 }
+
+
 /**
  * 初始化部分事件监听等
  */

@@ -2,7 +2,7 @@
  * Created by zhengyunzhi on 16/7/9.
  */
 
-
+var subimit_id = 0;
 
 var countries = [
     {value: 'Andorra', data: 'AD' },
@@ -43,7 +43,11 @@ function addClause() {
     if (!name && type && tag) {
         return;
     } else {
-        document.getElementById("nameTip").innerHTML = "";
+        try {
+            document.getElementById("nameTip").innerHTML = "";
+        }catch (err){
+            // do nothing
+        }
         document.getElementById("typeTip").innerHTML = "";
         document.getElementById("tagTip").innerHTML = "";
     }
@@ -56,7 +60,7 @@ function addClause() {
     var tags = getTags();
     var catagories = document.getElementById("category_input").value;
     var username = get_user();
-    alert("current user-->"+username);
+    // alert("current user-->"+username);
     var content = show_markdown();
     //这里摘要的提取还需要精细化
 
@@ -86,10 +90,10 @@ function addClause() {
     // mock_obj2.websiteName = '谷歌';
     var all_alias = getAlias();
    
-    alert(all_alias);
+    // alert(all_alias);
     var data = {
         operation: "add", data: {
-            id:0,
+            id:subimit_id,
             alias:all_alias,
             time: time,
             username: username,
@@ -101,8 +105,8 @@ function addClause() {
             reference: reference_result
         }
     };
-    alert("data = " + JSON
-            .stringify(data));
+    // alert("data = " + JSON
+    //         .stringify(data));
     $.ajax({
         type: "post",
         url: "/content",
@@ -163,6 +167,49 @@ function testAll(){
     testType();
     testTag();
     testAlias();
+}
+
+function initial_data_for_old_edit() {
+    $(document).ready(function () {
+
+        $('#tags_input').autocomplete({
+            lookup: countries
+//            serviceUrl: '/content/tags'
+        });
+
+
+
+
+        $.get('/outline/list',null,function(data){
+            var sourceData = data.data;
+            for(var i=0;i<sourceData.length;i++){
+                types.push(sourceData[i]);
+            }
+            $('#category_input').autocomplete({
+                lookup: types
+            });
+
+        });
+
+        $.ajax({
+            type: 'get',
+            url:'/content/tags',
+            success:function (data) {
+                for (var i=0;i<data.data.length;i++){
+                    countries.push({value:data.data[i]});
+                }
+//                countries.push({value:"hello"});
+//                alert("append done");
+            },
+            error:function () {
+                alert("网络连接不畅通");
+            }
+        });
+
+
+    });
+
+    getAllNames();
 }
 
 function initialData(){
@@ -233,48 +280,48 @@ function testTag() {
         }
     })
 
-    
-    function add_tags(tag) {
-        if(tag=="")return;
-        if(tag.length>15){
-            tag = tag.substring(0,14);
-        }
-        var tag_pool = document.getElementById('tag_bar');
-        var new_tag = document.createElement("span");
-        var cancel_btn = document.createElement("label");
+}
+
+function add_tags(tag) {
+    if(tag=="")return;
+    if(tag.length>15){
+        tag = tag.substring(0,14);
+    }
+    var tag_pool = document.getElementById('tag_bar');
+    var new_tag = document.createElement("span");
+    var cancel_btn = document.createElement("label");
 
 //        cancel_btn
-        cancel_btn.innerHTML = "×";
-        cancel_btn.style.marginLeft = '3px';
-        cancel_btn.style.color = "#F5F5DC";
-        cancel_btn.style.cursor = 'pointer';
+    cancel_btn.innerHTML = "×";
+    cancel_btn.style.marginLeft = '3px';
+    cancel_btn.style.color = "#F5F5DC";
+    cancel_btn.style.cursor = 'pointer';
 
-        new_tag.innerHTML = tag;
-        new_tag.style.borderRadius = '3px';
-        new_tag.appendChild(cancel_btn);
-        new_tag.id = tag;
-        new_tag.style.color = "white";
-        new_tag.style.backgroundColor = "#3B81C7";
-        new_tag.style.padding = '3px';
-        new_tag.style.marginRight = "10px";
+    new_tag.innerHTML = tag;
+    new_tag.style.borderRadius = '3px';
+    new_tag.appendChild(cancel_btn);
+    new_tag.id = tag;
+    new_tag.style.color = "white";
+    new_tag.style.backgroundColor = "#3B81C7";
+    new_tag.style.padding = '3px';
+    new_tag.style.marginRight = "10px";
 
 
 //        alert("create done");
-        tag_pool.appendChild(new_tag);
+    tag_pool.appendChild(new_tag);
 //        alert("append done");
-        var tags_input = document.getElementById('tags_input');
-        tags_input.value = '';
-        // var tags_width = tag_pool.offsetWidth;
-        // alert('width '+tags_width);
+    var tags_input = document.getElementById('tags_input');
+    tags_input.value = '';
+    // var tags_width = tag_pool.offsetWidth;
+    // alert('width '+tags_width);
+    // tags_input.style.width = (origin_width_of_input - tags_width) + 'px';
+    adjust_tag_input_width();
+    cancel_btn.onclick = function(){
+        tag_pool.removeChild(document.getElementById(tag));
         // tags_input.style.width = (origin_width_of_input - tags_width) + 'px';
         adjust_tag_input_width();
-        cancel_btn.onclick = function(){
-            tag_pool.removeChild(document.getElementById(tag));
-            // tags_input.style.width = (origin_width_of_input - tags_width) + 'px';
-            adjust_tag_input_width();
-        }
-
     }
+
 }
 
 function adjust_tag_input_width() {

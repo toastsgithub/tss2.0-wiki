@@ -8,8 +8,8 @@ import tss2.wiki.dao.core.DAOBase;
  * Created by coral on 16-7-24.
  */
 public class Verifying extends DAOBase {
-    public int authorid;
-    public int wikiId;
+    public String username;
+    public long wikiId;
     public String title;
     public String tags;
     public String categories;
