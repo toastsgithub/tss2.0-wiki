@@ -8,10 +8,12 @@ function init_message_table(){
     var table = $('#message_table').DataTable({
         data:null,
         columns:[
+            
             {data:'isread'},
             {data:'title'},
-            // {data:'date'},
-            {data:'fromUser'}
+            {data:'timestamp'},
+            {data:'fromUser'},
+            {data:'messageID'}
         ],
         columnDefs:[{
             'targets':[0],
@@ -31,14 +33,20 @@ function init_message_table(){
     });
 
     load_message();
+    // hide id column
+    table.column(4).visible(false);
     //以下是行选择的事件
     $('#message_table tbody').on( 'click', 'tr', function () {
         table.$('tr.selected').removeClass('selected');
         $(this).addClass('selected');
         var selected_row = table.row('.selected').index();
-        alert('select :'+JSON.stringify(table.row('.selected')));
+        // document.getElementById('test_part').innerHTML = JSON.stringify(test_cache);
+        
+        
         if (selected_row == undefined) return ;
         var value = table.cell(selected_row,1).data();
+        var id = table.cell(selected_row,4).data();
+        read_msg(id);
         pop_test(value);
         // var url = "/html/duck_stockDetail.html"+"?code="+value;
         // window.location.href = url;
@@ -47,8 +55,18 @@ function init_message_table(){
     } );
 }
 
-function read_msg() {
-    
+function read_msg(id) {
+    var url = '/message/'+id;
+    $.ajax({
+        url:url,
+        type:'get',
+        success:function (data) {
+            
+        },
+        error:function (data) {
+            
+        }
+    });
 }
 function load_message() {
     var table = $('#message_table').DataTable();
