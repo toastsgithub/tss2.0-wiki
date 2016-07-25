@@ -39,7 +39,7 @@ public class MessageController {
         ArrayList<WikiMessage> messages = user.getMessageList();
         MessageListResult result = new MessageListResult(0);
         for (WikiMessage message: messages) {
-            result.addMessage(message.getMessageID(), message.getFromUser(), message.getTitle(), message.getDetail());
+            result.addMessage(message.getMessageID(), message.getFromUser(), message.getTitle(), message.getDetail(), message.getTimestamp(), message.getIsread());
         }
         return result;
     }
@@ -52,6 +52,7 @@ public class MessageController {
         }
         WikiUser user = session.getUser();
         WikiMessage message = user.getMessageDetail(user.getUsername(), messageID);
+        message.setIsread(user.getUsername());
         if (message == null) {
             return new MessageResult(1);
         }

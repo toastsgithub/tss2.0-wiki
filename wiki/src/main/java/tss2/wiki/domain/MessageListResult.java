@@ -40,21 +40,41 @@ public class MessageListResult {
         return data;
     }
 
-    public void addMessage(String messageID, String fromUser, String title, String content) {
-        data.add(new SimpleMessage(messageID, fromUser, title, content));
+    public void addMessage(String messageID, String fromUser, String title, String content, String timestamp, int isread) {
+        data.add(new SimpleMessage(messageID, fromUser, title, content, timestamp, isread));
     }
 
     public class SimpleMessage {
+        int isread;
         String title;
         String messageID;
         String fromUser;
         String detail;
+        String timestamp;
 
-        public SimpleMessage(String messageID, String fromUser, String title, String content) {
+        public SimpleMessage(String messageID, String fromUser, String title, String content, String timestamp, int isread) {
             setTitle(title);
             setFromUser(fromUser);
             setMessageID(messageID);
             setDetail(content);
+            setTimestamp(timestamp);
+            setIsread(isread);
+        }
+
+        public int getIsread() {
+            return isread;
+        }
+
+        public void setIsread(int isread) {
+            this.isread = isread;
+        }
+
+        public void setTimestamp(String timestamp) {
+            this.timestamp = timestamp;
+        }
+
+        public String getTimestamp() {
+            return timestamp;
         }
 
         public String getDetail() {
