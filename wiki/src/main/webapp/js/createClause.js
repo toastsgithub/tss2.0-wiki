@@ -527,25 +527,18 @@ function delete_reference(){
 // }
 
 
-// alert("exm??");
-// $("#wiki_editor").html("尽然没有任何反应????");
-// alert("heiheihei");
+
 
 function scan_content() {
     var old_content = show_markdown();
-    alert("old_data = " + old_content);
+    
     $.ajax({
         url: '/content/keyword',
         type: 'post',
         data: old_content,
-        // contentType: Text,
+        contentType: 'text/plain;charset=utf-8',
         success: function (data) {
-            
-            alert(data);
-            var new_content = decodeURI(data);
-            alert("data = " + new_content);
-            editor_instance.setValue(new_content);
-            alert("扫描完成");
+            editor_instance.setValue(data);
         },
         error: function (data) {
             alert('error!'+JSON.stringify(data));
