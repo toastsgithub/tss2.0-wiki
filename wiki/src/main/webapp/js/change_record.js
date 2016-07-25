@@ -11,7 +11,7 @@ function getRecord(){
             {data:'timestamp'}
         ],
         columnDefs:[{
-            'targets':[2],
+            'targets':[1],
             // 'data':'状态',
             'render':function (data,type,full) {
                 // return 'ascii';
@@ -28,13 +28,20 @@ function getRecord(){
                     return '<span>修改成功</span>';
                 }
             }
-        }]
+        },
+            {
+                'targets':[0],
+                'render':function (data,type,full) {
+                    return '<a href="http://www.baidu.com">百度一下</a>'
+                }
+            }]
     });
 load_message();
 }
 
 function load_message() {
     var table = $('#message_table').DataTable();
+    // table.rows.add([{'title':'标题','state':1,'timestamp':2016}]);
     $.ajax({
         url: '/modify/list',
         type: 'get',
