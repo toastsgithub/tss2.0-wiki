@@ -75,15 +75,15 @@ function addClause() {
     // alert("info");
 
     //mock data
-    var mock_obj = new Object();
-    mock_obj.name = '这是一条新闻';
-    mock_obj.url = 'www.baidu.com';
-    mock_obj.websiteName = '凤凰网';
-    
-    var mock_obj2 = new Object();
-    mock_obj2.name = '这是一条谷歌记录';
-    mock_obj2.url = 'www.google.com';
-    mock_obj2.websiteName = '谷歌';
+    // var mock_obj = new Object();
+    // mock_obj.name = '这是一条新闻';
+    // mock_obj.url = 'www.baidu.com';
+    // mock_obj.websiteName = '凤凰网';
+    //
+    // var mock_obj2 = new Object();
+    // mock_obj2.name = '这是一条谷歌记录';
+    // mock_obj2.url = 'www.google.com';
+    // mock_obj2.websiteName = '谷歌';
     var all_alias = getAlias();
    
     alert(all_alias);

@@ -2,6 +2,10 @@
  * Created by duanzhengmou on 7/14/16.
  */
 
+
+
+
+
 /**
  * 加载页面时请求并加载词条内容
  * @params title
@@ -113,3 +117,4 @@ function delete_entry() {
         }
     });
 }
+

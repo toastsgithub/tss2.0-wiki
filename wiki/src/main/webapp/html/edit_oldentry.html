@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>modify</title>
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="../css/editormd.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../css/wiki_navigator.css">
+    <link rel="stylesheet" href="../css/editor.css">
+    <link rel="stylesheet" href="../css/auto_complete.css">
+    <script src="../js/createClause.js"></script>
+    <script src="../js/jquery.autocomplete.js"></script>
+    <script src="../js/wiki_utils.js"></script>
+    <script src="../js/verificationLogin.js"></script>
+    <script src="../js/edit_oldentry.js"></script>
+</head>
+<body>
+
+
+
+<nav class="navbar navbar-default" style="background-color: #ffffff">
+    <div class="container-fluid">
+        <a class="navbar-header" href="../html/Outline.html" style="margin-top: 10px;">
+            <img  src="../resource/icon/tss_logo@2x.png" alt="" style="height: 32px">
+        </a>
+        <ul class="nav navbar-nav">
+            <li class="dropdown">
+                <ul class="dropdown-menu">
+                    <li><a href="../html/Outline.html" onclick="">管理大纲(管理员)</a></li>
+                    <li><a href="../html/create_Entry.html">增加条目(管理员)</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">请求增加条目(敬请期待)</a></li>
+                </ul>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">选项<span class="caret"></span></a>
+            </li>
+            <li id="login_button"></li>
+        </ul>
+
+        <ul class="nav navbar-nav" style="float: right">
+            <li class="dropdown">
+                <ul class="dropdown-menu">
+                    <li><a href="" onclick="clearLogin();">退出登录</a></li>
+                </ul>
+                <a href="#" id="welcome_tip" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
+            </li>
+        </ul>
+
+    </div>
+</nav>
+
+<div class="container" style="width: 90%">
+    <div id="name" class="row minf">
+        <label class="namlab">条目名称：</label>
+        <input id="name_input" class="minf_input"/>
+        <span id="nameTip" class="tip"></span>
+    </div>
+    <!--<hr>-->
+
+
+    <div id="alias" class="row minf">
+        <label class="namlab">别名: </label>
+        <div style="border: solid 1px #d7d7d7;margin-left:70px;width: 700px;background-color: white">
+            <span id="alias_bar"></span>
+            <input id="alias_input" class="minf_input"/>
+        </div>
+        <span id="aliasTip" class="tip"></span>
+    </div>
+
+
+    <div class="row minf" style="display: block;">
+        <label class="namlab">类别：</label>
+        <input id="category_input" class="minf_input"/>
+        <span id="typeTip" class="tip"></span>
+    </div>
+
+    <div class="row minf" style="">
+        <label class="namlab">标签：</label>
+        <div style="margin-left:70px;">
+            <div style="border: solid 1px #d7d7d7;background-color:white;height: 26px;width: 700px;">
+                <span id="tag_bar"></span>
+                <input id="tags_input" data-role="tagsinput" style="width: 90%;"/>
+            </div>
+
+        </div>
+        <span id="tagTip" class="tip"></span>
+    </div>
+
+    <div id="tags_pool" class="row minf" ></div>
+
+    <div class="row minf">
+        <label class="namlab">摘要：</label>
+        <textarea id="summary" class="minf_input" placeholder="若无摘要,则自动提取正文前两百个字作文摘要"  style="width: 700px; height: 100px;resize:none"></textarea>
+    </div>
+</div>
+
+
+<div id="editormd">
+    <!--这个textarea可以写也可以不写，因为Editormd会自动追加-->
+    <textarea id="wiki_editor" style="display:none;background-color: #f7f7f7">### Hello Editor.md !</textarea>
+</div>
+
+
+<div id="add_ref_btn">
+    <span class="glyphicon glyphicon-pencil"></span>
+    增加引用
+</div>
+<!--<script src="jquery.min.js"></script>-->
+<div id="reference" style="margin-left: 60px"></div>
+
+<button id="submit_btn" class="btn btn-primary" onclick="addClause();">submit</button>
+<button id="add_btn" class="btn btn-primary" onclick="add_reference_input_area();">add reference</button>
+<button class="btn btn-primary" onclick="get_reference()">get</button>
+<script src="../js/editormd.js"></script>
+<script type="text/javascript">
+    var editor_instance;
+    $(function() {
+        var editor = editormd("editormd", {
+            width  : "90%", // 编辑器宽
+            height  : 540, // 编辑器高
+            path  : '../editormd_lib/', // Editormd目录里面的lib目录路径
+//            theme : "dark", // 编辑器主题
+            previewTheme : "chrome", // 预览区主题
+            editorTheme : "3024-day", // 编辑区主题
+            codeFold : true, // 启用代码折叠
+            saveHTMLToTextarea : true,    // 保存 HTML 到 Textarea
+            searchReplace : true, // 启用搜索替换
+            htmlDecode : "style,script,iframe|on*", // 开启 HTML 标签解析，为了安全性，默认不开启
+            emoji : true, // 启用emoji表情
+            taskList : true, // 任务列表
+            tocm      : true,         // Using [TOCM]
+            tex : true,               // 开启科学公式TeX语言支持，默认关闭
+            flowChart : true,         // 开启流程图支持，默认关闭
+            sequenceDiagram : true,   // 开启时序/序列图支持，默认关闭,
+            imageUpload : true, // 启用图片上传
+            imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"], // 允许上传的图片类型
+            imageUploadURL : "index.php?s=uploadArticleImg}", // 处理图片上传功能的地址
+            onload : function() { // 加载完毕的回调函数
+                console.info('EditorMD 加载完毕!');
+            }
+        });
+        editor_instance =editor;
+    });
+    function show_html() {
+        alert("获取html源内容:\n----------\n"+editor_instance.getHTML());
+    }
+    function show_markdown() {
+//        alert("you got me ");
+//        alert(editor_instance.getMarkdown());
+        return editor_instance.getMarkdown();
+    }
+    function getMyName(){
+        var myName='<%=session.getAttribute("MYNAME")%>';
+        alert(myName);
+    }
+
+</script>
+<script>
+    initialData();
+    testAll();
+    get_welcome();
+</script>
+<script>
+    $(document).ready(function () {
+        origin_width_of_input = document.getElementById('tags_input').offsetWidth;
+        origin_width_of_alias_input = document.getElementById('alias_input').offsetWidth;
+    });
+
+    function get_user_test() {
+        alert('user:'+get_user());
+    }
+
+    get_entry_data();
+</script>
+
+
+</body>
+
+
+</html>
