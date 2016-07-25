@@ -14,6 +14,7 @@
     <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="../js/admin_common.js"></script>
     <script src="../js/admin_message.js"></script>
+    <script src="../js/verificationLogin.js"></script>
 
     <!--datatable 表格控件-->
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.css">
@@ -23,25 +24,35 @@
 </head>
 <body>
 
-<nav class="navbar navbar-default" style="background-color: #ffffff;margin: 0">
+<nav class="navbar navbar-default" style="background-color: #ffffff;padding: 0;margin: 0;">
     <div class="container-fluid">
-        <a class="navbar-header" href="../html/login.html" style="margin-top: 10px;">
+        <a class="navbar-header" href="../html/Outline.html" style="margin-top: 10px;">
             <img  src="../resource/icon/tss_logo@2x.png" alt="" style="height: 32px">
         </a>
         <ul class="nav navbar-nav">
-            <li><a href="/html/login.html">登录</a></li>
             <li class="dropdown">
                 <ul class="dropdown-menu">
                     <li><a href="../html/Outline.html" onclick="">管理大纲(管理员)</a></li>
                     <li><a href="../html/create_Entry.html">增加条目(管理员)</a></li>
                     <li role="separator" class="divider"></li>
+                    <li><a id="edit_old" href="../html/edit_oldentry.html?action=modify&title=">编辑条目</a></li>
+                    <li><a href="#" onclick=delete_entry();>删除条目</a></li>
                     <li><a href="#">请求增加条目(敬请期待)</a></li>
                 </ul>
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">选项<span class="caret"></span></a>
             </li>
+            <li id="login_button"></li>
         </ul>
 
-
+        <ul class="nav navbar-nav" style="float: right">
+            <li class="dropdown" id="welcome_user">
+                <ul class="dropdown-menu">
+                    <li><a href="" onclick="clearLogin();">退出登录</a></li>
+                    <li><a href="../html/changeRecord.html">我的修改记录</a> </li>
+                </ul>
+                <a href="#" id="welcome_tip" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
+            </li>
+        </ul>
 
     </div>
 </nav>
@@ -101,6 +112,7 @@
 </div>
 
 <script>
+    get_welcome();
     $(document).ready(function () {
         init_admin_common();
         init_message_table();
