@@ -25,6 +25,7 @@ function get_entry_data(){
             var title_input = decodeURI(title);
             alert("title = " + title_input);
             $("#name_input").val(title_input);
+            subimit_id = data.data.id;
             if(alias==[]){
                 //do nothing
             }else{

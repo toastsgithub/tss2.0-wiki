@@ -2,7 +2,7 @@
  * Created by zhengyunzhi on 16/7/9.
  */
 
-
+var subimit_id = 0;
 
 var countries = [
     {value: 'Andorra', data: 'AD' },
@@ -43,7 +43,11 @@ function addClause() {
     if (!name && type && tag) {
         return;
     } else {
-        document.getElementById("nameTip").innerHTML = "";
+        try {
+            document.getElementById("nameTip").innerHTML = "";
+        }catch (err){
+            // do nothing
+        }
         document.getElementById("typeTip").innerHTML = "";
         document.getElementById("tagTip").innerHTML = "";
     }
@@ -89,7 +93,7 @@ function addClause() {
     alert(all_alias);
     var data = {
         operation: "add", data: {
-            id:0,
+            id:subimit_id,
             alias:all_alias,
             time: time,
             username: username,
