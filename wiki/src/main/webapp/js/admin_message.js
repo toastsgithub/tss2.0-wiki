@@ -8,7 +8,7 @@ function init_message_table(){
     var table = $('#message_table').DataTable({
         data:null,
         columns:[
-            {data:'messageID'},
+            {data:'isread'},
             {data:'title'},
             // {data:'date'},
             {data:'fromUser'}
@@ -18,7 +18,14 @@ function init_message_table(){
             // 'data':'消息标题',
             'render':function (data,type,full) {
                 // return 'ascii';
-                return '<span class=\"glyphicon glyphicon-comment\" style=\"color: #3b81c7\"></span><span>未读</span>';
+                // alert(data+" "+type+" "+JSON.stringify(full));
+                if(data == 1) {
+                    //已读
+                    return '<span class=\"glyphicon glyphicon-comment\" style=\"\"></span><span>已读</span>';
+                }else{
+                    //未读
+                    return '<span class=\"glyphicon glyphicon-comment\" style=\"color: #3b81c7\"></span><span>未读</span>';
+                }
             }
         }]
     });
@@ -29,7 +36,7 @@ function init_message_table(){
         table.$('tr.selected').removeClass('selected');
         $(this).addClass('selected');
         var selected_row = table.row('.selected').index();
-        // alert('select :'+selected_row);
+        alert('select :'+JSON.stringify(table.row('.selected')));
         if (selected_row == undefined) return ;
         var value = table.cell(selected_row,1).data();
         pop_test(value);
@@ -40,7 +47,9 @@ function init_message_table(){
     } );
 }
 
-
+function read_msg() {
+    
+}
 function load_message() {
     var table = $('#message_table').DataTable();
     $.ajax({
