@@ -8,7 +8,9 @@ function init_message_table(){
     var table = $('#message_table').DataTable({
         data:null,
         columns:[
+            {data:'messageID'},
             {data:'title'},
+            // {data:'date'},
             {data:'fromUser'}
         ],
         columnDefs:[{
@@ -16,7 +18,7 @@ function init_message_table(){
             // 'data':'消息标题',
             'render':function (data,type,full) {
                 // return 'ascii';
-                return '<a href=\"http://www.baidu.com\">'+data+'</a>';
+                return '<span class=\"glyphicon glyphicon-comment\" style=\"color: #3b81c7\"></span><span>未读</span>';
             }
         }]
     });
@@ -27,7 +29,9 @@ function init_message_table(){
         table.$('tr.selected').removeClass('selected');
         $(this).addClass('selected');
         var selected_row = table.row('.selected').index();
-        var value = table.cell(selected_row,0).data();
+        // alert('select :'+selected_row);
+        if (selected_row == undefined) return ;
+        var value = table.cell(selected_row,1).data();
         pop_test(value);
         // var url = "/html/duck_stockDetail.html"+"?code="+value;
         // window.location.href = url;
@@ -47,7 +51,7 @@ function load_message() {
                 all_message = data.data;
                 table.rows.add(data.data).draw();
             }else{
-                alert('服务器响应内容中有错误');
+                alert('服务器响应内容中有错误:'+data.message);
             }
         },
         error:function (data) {
