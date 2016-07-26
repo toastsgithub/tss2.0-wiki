@@ -6,7 +6,6 @@
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
     <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
     <!--<script src="../js/editormd.js"></script>-->
-    <link rel="stylesheet" href="../css/editormd.css">
     <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <!-- 可选的Bootstrap主题文件（一般不用引入） -->
     <!--<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">-->
@@ -15,6 +14,7 @@
     <link rel="stylesheet" href="../css/wiki_navigator.css">
     <link rel="stylesheet" href="../css/editor.css">
     <link rel="stylesheet" href="../css/auto_complete.css">
+    <link rel="stylesheet" href="../css/change_record.css">
     <script src="../js/createClause.js"></script>
     <script src="../js/jquery.autocomplete.js"></script>
     <script src="../js/wiki_utils.js"></script>
@@ -23,6 +23,12 @@
     <script>
         var judge_type = false;
     </script>
+
+    <!--datatable 表格控件-->
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.js"></script>
+    <!--datatable 表格控件-->
+
 </head>
 <body>
 <!--<link rel="stylesheet" href="editormd.min.css" />-->
@@ -46,7 +52,7 @@
         </ul>
 
         <ul class="nav navbar-nav" style="float: right">
-            <li class="dropdown">
+            <li class="dropdown" id="welcome_user">
                 <ul class="dropdown-menu">
                     <li><a href="" onclick="clearLogin();">退出登录</a></li>
                     <li><a href="../html/changeRecord.html">我的修改记录</a> </li>
@@ -58,10 +64,33 @@
     </div>
 </nav>
 
+<!--正经内容的分割线-->
+<div id="main_content" class="container-fluid" style="padding: 0;margin: 0;">
+    <div class="row" style="margin: 0">
+        <h1>我的修改记录</h1>
+            <table id="message_table" class="display table table-bordered" style="width: 600px">
+                <thead>
+                <tr>
+                    <th style="width: 300px">条目标题</th>
+                    <th style="width: 100px">状态</th>
+                    <th style="width: 150px">时间</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+            <!--<button onclick=pop_test()>pop out</button>-->
+            <!--<div id="test_part"></div>-->
+        </div>
+    </div>
+</div>
+
 <script>
-    get_welcome();
+    $(document).ready(function () {
+        getRecord();
+    })
 
 </script>
-
 </body>
 </html>

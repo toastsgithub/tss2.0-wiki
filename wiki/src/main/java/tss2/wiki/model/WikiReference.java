@@ -9,6 +9,8 @@ import tss2.wiki.util.TimeUtil;
 import java.util.ArrayList;
 
 /**
+ * wiki条目的参考资料～
+ *
  * Created by coral on 16-7-18.
  */
 public class WikiReference {

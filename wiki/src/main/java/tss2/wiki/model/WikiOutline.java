@@ -17,7 +17,7 @@ import java.util.Map;
  */
 public class WikiOutline {
 
-    static String path = "/home/coral/文档/Tencent Files/2419335621/FileRecv/summary.dat";
+    static String path;
 
     private static void loadPath() {
         path = WikiOutline.class.getClassLoader().getResource("").getPath().replaceAll("[%][2][0]", " ") + "summary.dat";
@@ -31,6 +31,7 @@ public class WikiOutline {
             FileUtil.writeObjectToAbsolutePath(path, map);
             return;
         }
+
         if (result instanceof Map) {
             System.out.println("load successfully");
             //System.out.println();

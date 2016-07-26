@@ -13,6 +13,9 @@ import java.util.Collection;
 import java.util.Collections;
 
 /**
+ * wiki用户类。
+ * 注意权限区分不在这里！
+ *
  * Created by 羊驼 on 2016/7/10.
  */
 public class WikiUser {
@@ -82,12 +85,12 @@ public class WikiUser {
         return result;
     }
 
-    public WikiMessage getMessageDetail(String reader, String messageID) {
+    public WikiMessage getMessageDetail(WikiUser reader, String messageID) {
         WikiMessage message = WikiMessage.getMessage(messageID);
         if (message == null) return null;
         ArrayList<String> arrTo = new ArrayList<>();
         Collections.addAll(arrTo, message.getToUsers());
-        if (arrTo.contains(reader))
+        if (arrTo.contains(reader.getUsername()) || arrTo.contains("#" + reader.getType()))
             return message;
         else return null;
     }

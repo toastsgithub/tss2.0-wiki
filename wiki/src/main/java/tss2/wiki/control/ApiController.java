@@ -27,10 +27,10 @@ public class ApiController {
         return null;
     }
 
-    @RequestMapping(value = "/entry/search", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/search", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
     public @ResponseBody List<SimplerWikiPojo> searchWikisByKey(@RequestParam(value = "q") String q) {
         RecordsResult rr = WikiRecord.recordFuzzySearch(q);
-        List<SimplerWikiPojo> result = rr.getList().stream().map(entry -> new SimplerWikiPojo(entry.id, entry.title)).collect(Collectors.toList());
+        List<SimplerWikiPojo> result = rr.getList().stream().map(entry -> new SimplerWikiPojo(entry.id, entry.title, entry.summery)).collect(Collectors.toList());
         return result;
     }
 
@@ -44,20 +44,26 @@ class SimpleWikiPojo {
     public long id;
     public String title;
     public String summary;
+    public String url;
 
     public SimpleWikiPojo(long id, String title, String summary) {
         this.id = id;
         this.title = title;
         this.summary = summary;
+        this.url = "http://121.42.184.4:8080/html/entry_content.html?entry=" + title;
     }
 }
 
 class SimplerWikiPojo {
     public long id;
     public String title;
+    public String url;
+    public String summary;
 
-    public SimplerWikiPojo(long id, String title) {
+    public SimplerWikiPojo(long id, String title, String summary) {
         this.id = id;
         this.title = title;
+        this.url = "http://121.42.184.4:8080/html/entry_content.html?entry=" + title;
+        this.summary = summary;
     }
 }

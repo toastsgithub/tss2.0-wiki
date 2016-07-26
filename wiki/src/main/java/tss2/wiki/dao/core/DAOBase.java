@@ -34,7 +34,9 @@ public abstract class DAOBase {
 
     public long id = 0;
 
-    public DAOBase() { }
+    public DAOBase() {
+        timestamp = TimeUtil.getTimeStampBySecond();
+    }
 
     public DAOBase[] where(String whereStatment) {
         return where(whereStatment, "");
@@ -154,7 +156,6 @@ public abstract class DAOBase {
      * This method can ben override.
      */
     public void save() {
-        timestamp = TimeUtil.getTimeStampBySecond();
         ResultSet rs = DBAdmin.query("select * from " + getTableName() + " where (id = " + this.get("id") + ");");
         String sql = "";
         try {

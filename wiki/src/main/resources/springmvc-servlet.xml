@@ -23,6 +23,7 @@
     <mvc:resources mapping="/plugins/**" location="/plugins/"/>
     <mvc:resources mapping="/resource/**" location="/resource/"/>
     <mvc:resources mapping="/wikimd/**" location="/wikimd/"/>
+	<mvc:resources mapping="/file/image/**" location="/images/"/>
     <context:annotation-config />
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

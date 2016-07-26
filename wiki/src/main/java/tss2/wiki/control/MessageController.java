@@ -51,11 +51,11 @@ public class MessageController {
             return new MessageResult(1);
         }
         WikiUser user = session.getUser();
-        WikiMessage message = user.getMessageDetail(user.getUsername(), messageID);
-        message.setIsread(user.getUsername());
+        WikiMessage message = user.getMessageDetail(user, messageID);
         if (message == null) {
             return new MessageResult(1);
         }
+        message.setIsread(user.getUsername());
         return new MessageResult(0, message.getFromUser(), message.getTitle(), message.getDetail());
     }
 
@@ -81,10 +81,21 @@ public class MessageController {
         return new CommonResult(0);
     }
 
+    @RequestMapping(value = "wiki", method = RequestMethod.GET)
+    public void requestAddition(HttpServletRequest request, @RequestParam String title) {
+        String username;
+        WikiSession session = sessionService.checkUser(request);
+        if (!session.isValid()) {
+            username = "匿名用户";
+        }
+        WikiUser user = session.getUser();
+        username = " 用户" + user.getUsername() + " ";
+        WikiMessage message = new WikiMessage(user.getUsername(), "#1", "请求增加条目" + title,
+                String.format("%s请求增加条目“%s”，[点击这里](http://localhost:8080/html/Entry_editor.html?title=%s)增加这个条目。" +
+                        "或者(点击这里)[]通知这个用户词条已经被创建。", username, title, title));
+        message.send();
+    }
+
     private UserServiceImpl userService = new UserServiceImpl();
     private SessionService sessionService = new SessionServiceimpl();
-
-    public static void main(String[] args) {
-
-    }
 }
