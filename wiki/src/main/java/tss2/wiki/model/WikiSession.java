@@ -10,7 +10,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * 会话model
+ * 实现了用户的会话控制。
  *
  * Created by 羊驼 on 2016/7/10.
  */

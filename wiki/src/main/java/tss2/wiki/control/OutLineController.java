@@ -9,7 +9,6 @@ import tss2.wiki.domain.CommonResult;
 import tss2.wiki.model.WikiOutline;
 import tss2.wiki.model.WikiSession;
 import tss2.wiki.model.WikiUser;
-import tss2.wiki.model.wikiOutLineForTest;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
