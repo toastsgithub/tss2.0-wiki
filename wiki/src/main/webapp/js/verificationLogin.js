@@ -28,7 +28,7 @@ function verif(){
                 show_illegal_tip();
            } else {
                 if(location.search.split("=")[1]=="editor"){
-                    location.href = "../html/Entry_editor.html";
+                    location.href = "../html/New_entry_editor.html";
                 }else {
                     location.href = "../html/Outline.html";
                 }
