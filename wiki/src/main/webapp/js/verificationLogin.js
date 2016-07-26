@@ -27,7 +27,11 @@ function verif(){
             } else if (data.included==false){
                 show_illegal_tip();
            } else {
-                location.href = "../html/Outline.html";
+                if(location.search.split("=")[1]=="editor"){
+                    location.href = "../html/Entry_editor.html";
+                }else {
+                    location.href = "../html/Outline.html";
+                }
             }
             remove_disable('login_btn');
         },
@@ -103,7 +107,7 @@ function get_welcome() {
         document.getElementById("welcome_tip").innerHTML="";
         document.getElementById("welcome_user").style.visibility="hidden";
         alert("hidden");
-        return null;
+        return false;
     }
     else{
         var date = new Date();
@@ -122,7 +126,7 @@ function get_welcome() {
         }
         document.getElementById("login_button").innerHTML="";
         document.getElementById("welcome_tip").innerHTML=welcome+document.getElementById("welcome_tip").innerHTML;
-
+        return true;
     }
 }
 
@@ -154,5 +158,9 @@ function clearLogin(){
             alert('error!');
         }
     });
+}
+
+function n_user_message(id){
+
 }
 
