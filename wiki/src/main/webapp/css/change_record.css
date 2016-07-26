@@ -9,7 +9,12 @@
     /*background-color: #e4b9b9;*/
     background-color: #f6f6f6;
 }
-
+h1{
+    color: #2aa198;
+   font-family: "Palatino Linotype",Palatino,Serif;
+    font-style: italic;
+    font-weight: bold;
+}
 #q,#entry_search{
     outline: none;
     height: 32px;

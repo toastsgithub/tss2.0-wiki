@@ -9,7 +9,7 @@ import tss2.wiki.util.StringUtil;
 import java.util.ArrayList;
 
 /**
- * WikiMessage.
+ * 消息。负责消息的分发。
  *
  * Created by coral on 16-7-12.
  */

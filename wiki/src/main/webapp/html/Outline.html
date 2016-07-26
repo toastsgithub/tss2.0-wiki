@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Outline</title>
-    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+    <!--<script src="../js/jquery.js"></script>-->
+    <!--<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>-->
     <!--<script src="../js/outline.js"></script>-->
     <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <!-- 可选的Bootstrap主题文件（一般不用引入） -->
@@ -14,8 +17,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
     <link rel="stylesheet" href="../css/outline.css">
     <link rel="stylesheet" href="../css/wiki_navigator.css">
+    <link rel="stylesheet" href="../css/jquery-ui.min.css">
+
+    <!--<script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>-->
+
     <script src="../js/wiki_utils.js"></script>
     <script src="../js/verificationLogin.js"></script>
+
+    <!--<script src="../js/jquery-ui.js"></script>-->
+    <style>
+        /*#resizable { width: 150px; height: 150px; padding: 0.5em; }*/
+    </style>
 
 </head>
 <body>
@@ -33,7 +45,7 @@
             <li class="dropdown">
                 <ul class="dropdown-menu">
                     <li><a href="../html/Outline.html" onclick="">管理大纲(管理员)</a></li>
-                    <li><a href="../html/create_Entry.html">增加条目(管理员)</a></li>
+                    <li><a href="../html/Entry_editor.html">增加条目(管理员)</a></li>
                     <li role="separator" class="divider"></li>
                     <li><a href="#">请求增加条目(敬请期待)</a></li>
                     <li><a href="../html/administrator_page.html">管理控制台</a></li>
@@ -76,17 +88,24 @@
         <!--</div>-->
 
 
+
         <div id="outline_article" class="row" style="">
-            <div id="moutline" class="col-sm-3"></div>
-            <div id="article_board" class="col-sm-9" style="padding-left: 30px;padding-right: 30px;">
-                <div id="search_bar">
-                    <div id="search_module" class="input-group">
-                        <input id="search_input" type="text" class="form-control" placeholder="Search for...">
-                            <span class="input-group-btn">
-                                <button id="search_btn" class="btn btn-primary" type="button">Search</button>
-                            </span>
-                        <!--<input type="text" id="search_input">-->
-                        <!--<button id="search_btn">search</button>-->
+
+            <div id="resizable" style="background-color: red;padding: 0;" class="col-sm-4">
+                <div id="moutline"  style="background-color: blue"></div>
+            </div>
+
+            <div id="article_board" class="col-sm-8" style="padding-left: 30px;padding-right: 30px;">
+                <div class="container-fluid">
+                    <div class="row" id="search_bar" style="float: right;">
+                        <div id="search_module" class="input-group col-sm-9 col-md-7 col-lg-6">
+                            <input id="search_input" type="text" class="form-control" placeholder="Search for...">
+                                <span class="input-group-btn">
+                                    <button id="search_btn" class="btn btn-primary" type="button">Search</button>
+                                </span>
+                            <!--<input type="text" id="search_input">-->
+                            <!--<button id="search_btn">search</button>-->
+                        </div>
                     </div>
                 </div>
 
@@ -136,6 +155,10 @@ function get_test() {
        }
    });
 }
+
+    $(function() {
+        $( "#resizable" ).resizable({maxWidth:400,minWidth:200});
+    });
 
 </script>
 

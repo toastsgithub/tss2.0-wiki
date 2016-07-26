@@ -41,7 +41,7 @@
             <li class="dropdown">
                 <ul class="dropdown-menu">
                     <li><a href="../html/Outline.html" onclick="">管理大纲(管理员)</a></li>
-                    <li><a href="../html/create_Entry.html">增加条目(管理员)</a></li>
+                    <li><a href="../html/Entry_editor.html">增加条目(管理员)</a></li>
                     <li role="separator" class="divider"></li>
                     <li><a href="#">请求增加条目(敬请期待)</a></li>
                     <li><a href="../html/administrator_page.html">管理控制台</a></li>
@@ -68,7 +68,8 @@
 <div id="main_content" class="container-fluid" style="padding: 0;margin: 0;">
     <div class="row" style="margin: 0">
         <h1>我的修改记录</h1>
-            <table id="message_table" class="display table table-bordered" style="width: 600px">
+            <table id="message_table" class="display table table-bordered" >
+                <!--style="width: 600px"-->
                 <thead>
                 <tr>
                     <th style="width: 300px">条目标题</th>
@@ -92,5 +93,6 @@
     })
 
 </script>
+<script>get_welcome();</script>
 </body>
 </html>

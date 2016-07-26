@@ -1,7 +1,6 @@
 package tss2.wiki.model;
 
 import net.sf.json.JSONObject;
-import tss2.wiki.dao.Reference;
 import tss2.wiki.dao.VerifyingReference;
 import tss2.wiki.dao.core.DAOBase;
 import tss2.wiki.util.TimeUtil;

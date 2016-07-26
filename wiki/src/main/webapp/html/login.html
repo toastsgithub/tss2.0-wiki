@@ -34,7 +34,7 @@
             <li class="dropdown">
                 <ul class="dropdown-menu">
                     <li><a href="../html/Outline.html" onclick="">管理大纲(管理员)</a></li>
-                    <li><a href="../html/create_Entry.html">增加条目(管理员)</a></li>
+                    <li><a href="../html/Entry_editor.html">增加条目(管理员)</a></li>
                     <li role="separator" class="divider"></li>
                     <li><a href="#">请求增加条目(敬请期待)</a></li>
                 </ul>
@@ -73,7 +73,7 @@
                     <div id="forget">
 
                     </div>
-                    <div id="forget_btn" class="ayuthaya" onclick="location='http://www.baidu.com'">forget password?</div>
+                    <!--<div id="forget_btn" class="ayuthaya" onclick="location='http://www.baidu.com'">forget password?</div>-->
                     <button id="login_btn" type="button" class="btn btn-primary" style="font-size: 20px" onclick=verif();>sign in</button>
                     <!--<div id="login_btn" class="btn btn-default">-->
                         <!--sign in-->
@@ -101,4 +101,14 @@
 </div>
 
 </body>
+
+<script>
+    $(document).ready(function () {
+        document.getElementById('login_module').addEventListener('keydown',function (e) {
+            if(e.keyCode == 13){
+                verif();
+            }
+        });
+    })    
+</script>
 </html>

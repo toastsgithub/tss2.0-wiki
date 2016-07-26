@@ -27,8 +27,6 @@ function verif(){
             } else if (data.included==false){
                 show_illegal_tip();
            } else {
-                document.cookie="login="+1;
-                document.cookie="username="+username;
                 location.href = "../html/Outline.html";
             }
             remove_disable('login_btn');
@@ -78,17 +76,7 @@ function get_welcome() {
 
     var login = false;
     var user_name;
-    if(getCookie("login")==1){
-        login = true;
-        user_name = getCookie("username");
-    }else {
-        // $.get('/user/info', null, function (data) {
-        //     alert("userinfo = " + JSON.stringify(data));
-        //     if(data.login==true){
-        //         login = true;
-        //         user_name = data.data.username;
-        //     }
-        // });
+
         $.ajax({
             url: '/user/info',
             type: 'get',
@@ -98,16 +86,18 @@ function get_welcome() {
                 if(data.login == true){
                     login = true;
                     user_name = data.data.username;
-                    document.cookie="login="+1;
-                    document.cookie="username="+user_name;
                 }
             },
             error: function (data) {
                 alert("error!");
             }
         })
-    }
-    // alert("login = " + login);
+// <<<<<<< HEAD
+//     }
+//     // alert("login = " + login);
+// =======
+//     alert("login = " + login);
+// >>>>>>> 3f9759c4453981c290be6201066930c94f659481
     if(login == false){
         document.getElementById("login_button").innerHTML="<a href='../html/login.html'>登录</a>";
         document.getElementById("welcome_tip").innerHTML="";
@@ -164,9 +154,5 @@ function clearLogin(){
             alert('error!');
         }
     });
-    deleteCookie("login");
-    deleteCookie("username");
-    
-    
 }
 

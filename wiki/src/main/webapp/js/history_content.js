@@ -1,10 +1,6 @@
 /**
- * Created by duanzhengmou on 7/14/16.
+ * Created by wh on 2016/7/26.
  */
-
-
-
-
 
 /**
  * 加载页面时请求并加载词条内容
@@ -21,42 +17,35 @@ function load_content(title){
         success:function (data) {
             show_tips(1,'内容加载完毕');
             // alert(JSON.stringify(data));
-            var markdown_data;
-            if (data.data) {
-                markdown = data.data.content;
-                var converter = new showdown.Converter(),
-                    // text      = '#hello, markdown!\n\n|name|age|\n|--|--|\n|Toast|20|',
-                    text      = markdown_data,
-                    html      = converter.makeHtml(text);
-                // alert(data.visits);
-                document.getElementById('access_times').innerHTML+=data.data.visits;
-                document.getElementById('last_update_time').innerHTML+=data.data.date;
-            } else {
-                markdown_data = '当前不存在条目*' + title + '* 的详细内容。你可以[创建这个条目](http://localhost:8080/html/Entry_editor.html?title=' + title + ')。' +
-                                '或者你也[请求新增这个条目](/message/wiki?title=' + title + ')。 你也可以将这个条目创建为已存在条目的别名)。';
-            }
-
+            var markdown_data = data.data.content;
+            var converter = new showdown.Converter(),
+            // text      = '#hello, markdown!\n\n|name|age|\n|--|--|\n|Toast|20|',
+                text      = markdown_data,
+                html      = converter.makeHtml(text);
+            // alert(data.visits);
+            document.getElementById('access_times').innerHTML+=data.data.visits;
+            document.getElementById('last_update_time').innerHTML+=data.data.date;
             // alert(html);
-                //----------以下是内容的渲染-----------------
-                var testEditormdView;
+            //----------以下是内容的渲染-----------------
+            var testEditormdView;
 
-                var markdown = html;
-                testEditormdView = editormd.markdownToHTML("test-editormd-view", {
-                    markdown        : markdown_data ,//+ "\r\n" + $("#append-test").text(),
-                    //htmlDecode      : true,       // 开启 HTML 标签解析，为了安全性，默认不开启
-                    htmlDecode      : "style,script,iframe",  // you can filter tags decode
-                    //toc             : false,
-                    tocm            : true,    // Using [TOCM]
-                    tocContainer    : "#left_part", // 自定义 ToC 容器层
-                    //gfm             : false,
-                    //tocDropdown     : true,
-                    // markdownSourceCode : true, // 是否保留 Markdown 源码，即是否删除保存源码的 Textarea 标签
-                    emoji           : true,
-                    taskList        : true,
-                    tex             : true,  // 默认不解析
-                    flowChart       : true,  // 默认不解析
-                    sequenceDiagram : true  // 默认不解析
-                });
+            var markdown = html;
+            testEditormdView = editormd.markdownToHTML("test-editormd-view", {
+                markdown        : markdown_data ,//+ "\r\n" + $("#append-test").text(),
+                //htmlDecode      : true,       // 开启 HTML 标签解析，为了安全性，默认不开启
+                htmlDecode      : "style,script,iframe",  // you can filter tags decode
+                //toc             : false,
+                tocm            : true,    // Using [TOCM]
+                tocContainer    : "#left_part", // 自定义 ToC 容器层
+                //gfm             : false,
+                //tocDropdown     : true,
+                // markdownSourceCode : true, // 是否保留 Markdown 源码，即是否删除保存源码的 Textarea 标签
+                emoji           : true,
+                taskList        : true,
+                tex             : true,  // 默认不解析
+                flowChart       : true,  // 默认不解析
+                sequenceDiagram : true  // 默认不解析
+            });
 
             var display_panel = document.getElementById('reference');
             var tmp = data.reference.dao;
@@ -70,7 +59,7 @@ function load_content(title){
                     var link = document.createElement('a');
                     link.href = url;
                     link.innerHTML = name;
-                    
+
                     var br = document.createElement('br');
                     display_panel.appendChild(link);
                     display_panel.appendChild(br);
@@ -117,7 +106,7 @@ function delete_entry() {
             }else{
                 alert('delete[fail] and reason is '+data.message);
             }
-            
+
         },
         error:function (data) {
             alert('error:'+JSON.stringify(data));
