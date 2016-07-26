@@ -503,31 +503,57 @@ function add_reference_input_area() {
 
 function add_reference_input_area2() {
     var reference = document.createElement('div');
-    reference.id = 'ref_item'+reference_count;
-    reference.style.marginTop = '10px';
-    var colOne = document.createElement('div');
-    var colTwo = document.createElement('div');
-    var inputGroupOne = document.createElement('div');
-    var inputGroupTwo = document.createElement('div');
-    var name_label = document.createElement('span');
-    name_label.style.padding = '2px';
-    name_label.innerHTML = '名称';
-    var name_input = document.createElement('input');
-    name_input.style.width = '100px';
-    name_input.id = 'reference_name_' + reference_count;
-    var url_label = document.createElement('span');
-    url_label.innerHTML = 'url';
-    url_label.style.padding = '4px';
-    var url_input = document.createElement('input');
-    url_input.style.width = '200px';
-    url_input.id = 'reference_url_' + reference_count;
-    var inputGroupBtn = document.createElement('span');
-    var reference_delete = document.createElement('button');
-    reference_delete.innerHTML = "x";
-    reference_delete.id = "reference_delete_" + reference_count;
-    reference_delete.style.marginLeft = '20px';
-    reference_delete.style.cursor = 'pointer';
+    reference.style.marginBottom = '10px';
+    reference.className = 'row';
+    // reference.id = 'ref_item'+reference_count;
+    // reference.style.marginTop = '10px';
 
+    var colOne = document.createElement('div');
+    colOne.className = 'col-sm-4';
+    var colTwo = document.createElement('div');
+    colTwo.className = 'col-sm-8';
+
+    var inputGroupOne = document.createElement('div');
+    inputGroupOne.className = 'input-group';
+    var inputGroupTwo = document.createElement('div')
+    inputGroupTwo.className = 'input-group';
+
+    var name_label = document.createElement('span');
+    // name_label.style.padding = '2px';
+    name_label.innerHTML = '名称';
+    name_label.className = 'input-group-addon';
+    var name_input = document.createElement('input');
+    name_input.type = 'text';
+    name_input.className = 'form-control';
+    name_input.placeholder = '';
+    // name_input.style.width = '100px';
+    // name_input.id = 'reference_name_' + reference_count;
+
+    var url_label = document.createElement('span');
+    url_label.innerHTML = 'URL';
+    url_label.className = 'input-group-addon';
+    // url_label.style.padding = '4px';
+
+    var url_input = document.createElement('input');
+    url_input.type = 'text';
+    url_input.className = 'form-control';
+    url_input.placeholder = '';
+    // url_input.style.width = '200px';
+    // url_input.id = 'reference_url_' + reference_count;
+
+    var inputGroupBtn = document.createElement('span');
+    inputGroupBtn.className = 'input-group-btn';
+
+    var reference_delete = document.createElement('button');
+    reference_delete.className = 'btn btn-danger';
+    reference_delete.type = 'button';
+    // reference_delete.innerHTML = "x";
+    // reference_delete.id = "reference_delete_" + reference_count;
+    // reference_delete.style.marginLeft = '20px';
+    // reference_delete.style.cursor = 'pointer';
+
+    var sp = document.createElement('span');
+    sp.className = 'glyphicon glyphicon-remove';
 
     // var cancel_btn
     reference.appendChild(colOne);
@@ -540,7 +566,7 @@ function add_reference_input_area2() {
     inputGroupTwo.appendChild(url_input);
     inputGroupTwo.appendChild(inputGroupBtn);
     inputGroupBtn.appendChild(reference_delete);
-    
+    reference_delete.appendChild(sp);
     
     document.getElementById('reference').appendChild(reference);
     reference_delete.onclick = delete_reference;
