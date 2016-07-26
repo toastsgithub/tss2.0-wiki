@@ -122,7 +122,8 @@ function addClause() {
             }else{
                 alert("添加过程中出现错误,原因:"+data.message);
                 if(data.message == "Authentication Failed"){
-                    window.location = "../html/login.html";
+                    alert("登录信息超时,请重新登录");
+                    window.location = '../html/login.html';
                 }
             }
         },
