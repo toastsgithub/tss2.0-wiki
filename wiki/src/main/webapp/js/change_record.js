@@ -32,7 +32,8 @@ function getRecord(){
             {
                 'targets':[0],
                 'render':function (data,type,full) {
-                    return '<a href="http://www.baidu.com">百度一下</a>'
+                    return '<a href="../html/historyContent.html">'+data+'</a>'
+                       
                 }
             }]
     });
@@ -62,6 +63,6 @@ function load_message() {
 function click_entry() {
     var keyword = document.getElementById('search_input').value;
     if(keyword=='')return;
-    var url = '../html/search_result_page.html?entry='+keyword;
+    var url = '../html/search_result_page.html?entry='+data;
     location.href = url;
 }
