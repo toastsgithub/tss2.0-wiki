@@ -7,6 +7,7 @@ var all_message;
 function init_message_table(){
     var table = $('#message_table').DataTable({
         data:null,
+        order:[[2,'desc']],
         columns:[
 
             {data:'isread'},
@@ -45,6 +46,7 @@ function init_message_table(){
 
         if (selected_row == undefined) return ;
         var value = table.cell(selected_row,1).data();
+        table.cell(selected_row,0).data(1).draw();
         var id = table.cell(selected_row,4).data();
         read_msg(id);
         pop_test(value);
@@ -56,7 +58,7 @@ function init_message_table(){
 }
 
 function read_msg(id) {
-    alert('reading:'+id);
+    // alert('reading:'+id);
     var url = '/message/'+id;
     $.ajax({
         url:url,

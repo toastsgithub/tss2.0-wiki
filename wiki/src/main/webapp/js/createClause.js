@@ -26,25 +26,25 @@ var origin_width_of_alias_input;
 var reference_count = 0;
 
 function addClause() {
-    alert("judge");
+    // alert("judge");
     var reference = document.getElementById('reference');
     var child = reference.childNodes;
     // alert(reference.innerHTML);
-    alert(child[0].childNodes[0].childNodes[0].childNodes[1]);
-    alert('child num:'+reference.childNodes.length);
+    // alert(child[0].childNodes[0].childNodes[0].childNodes[1]);
+    // alert('child num:'+reference.childNodes.length);
     var reference_result = [];
     for(var i = 0; i < child.length; i++){
         var reference_name = child[i].childNodes[0].childNodes[0].childNodes[1].value;
-        var reference_link = child[i].childNodes[1].childNodes[0].childNodes[2].value;
+        var reference_link = child[i].childNodes[1].childNodes[0].childNodes[1].value;
         if(reference_name=="" || reference_link == ""){
             // do not push
         }else {
             var obj = {"name": reference_name, "url": reference_link};
+            alert('pushed: '+JSON.stringify(obj));
             reference_result.push(obj);
         }
     }
     alert(JSON.stringify(reference_result));
-    alert('here')
     if (!(name && type && tag)) {
         return;
     } else {
@@ -58,6 +58,7 @@ function addClause() {
     }
     // alert("judge done");
     make_disable('submit_btn');
+    show_tips(0,'正在提交中,请稍候');
 
     var time = getTime();
     var title = document.getElementById("name_input").value;
@@ -110,8 +111,8 @@ function addClause() {
             reference: reference_result
         }
     };
-    // alert("data = " + JSON
-    //         .stringify(data));
+    alert("data = " + JSON
+            .stringify(data));
     $.ajax({
         type: "post",
         url: "/content",
@@ -122,10 +123,10 @@ function addClause() {
             // alert(JSON.stringify(data));
             remove_disable('submit_btn');
             if(data.error==0){
-                alert("create successfully!");
+                show_tips(0,'添加成功!');
                 window.location = '../html/Outline.html';
             }else{
-                alert("添加过程中出现错误,原因:"+data.message);
+                show_tips(1,"添加错误,原因:"+data.message);
                 if(data.message == "Authentication Failed"){
                     alert("登录信息超时,请重新登录");
                     window.location = '../html/login.html';
@@ -134,6 +135,7 @@ function addClause() {
         },
         error: function (data) {
             remove_disable('submit_btn');
+            document.getElementById('test_area').innerHTML = JSON.stringify(data);
             alert("error");
         }
     })
@@ -157,6 +159,7 @@ function get_all_reference() {
 function testName() {
     var name_tip = document.getElementById('nameTip');
     document.getElementById('name_input').onblur = function () {
+        
     if(names.indexOf(this.value)!=-1){
         name_tip.innerHTML="该条目名称已存在";
         name = false;
@@ -172,8 +175,8 @@ function testName() {
 
 
 function testAll(){
-    // testName();
-    // testType();
+    testName();
+    testType();
     testTag();
     testAlias();
 }
@@ -225,7 +228,6 @@ function initialData(){
 //提前获得所有的数据
     
     $(document).ready(function () {
-        alert('init done');
         // document.getElementById('wiki_editor').innerHTML ='#Title\n\nContent?';
 
 
@@ -275,18 +277,18 @@ function testTag() {
             if(document.getElementById("tag_bar").childElementCount>0){
                 if(getTags()!=null && $.inArray(new_tag_to_add, getTags())>=0){
                     tag = false;
-                    // document.getElementById("tagTip").innerHTML = "请勿选择重复标签!";
-                    show_tips(0,'请勿重复输入标签');
+                    document.getElementById("tagTip").innerHTML = "请勿选择重复标签!";
+                    // show_tips(0,'请勿重复输入标签');
                     return;
                 }
             }
             if(document.getElementById("tag_bar").childElementCount>=5){
-                // document.getElementById("tagTip").innerHTML = "最多添加5个标签";
-                show_tips(0,'最多添加5个标签');
+                document.getElementById("tagTip").innerHTML = "最多添加5个标签";
+                // show_tips(0,'最多添加5个标签');
                 tag = true;
                 return;
             }
-            // document.getElementById("tagTip").innerHTML = "";
+            document.getElementById("tagTip").innerHTML = "";
             add_tags(new_tag_to_add);
             tag = true;
         }

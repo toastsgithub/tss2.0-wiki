@@ -7,8 +7,8 @@ var all_message;
 function init_message_table(){
     var table = $('#message_table').DataTable({
         data:null,
+        order:[[2,'desc']],
         columns:[
-            
             {data:'isread'},
             {data:'title'},
             {data:'timestamp'},
@@ -46,6 +46,7 @@ function init_message_table(){
         if (selected_row == undefined) return ;
         var value = table.cell(selected_row,1).data();
         var id = table.cell(selected_row,4).data();
+        table.cell(selected_row,0).data(1).draw();
         read_msg(id);
         pop_test(value);
         // var url = "/html/duck_stockDetail.html"+"?code="+value;
@@ -56,13 +57,15 @@ function init_message_table(){
 }
 
 function read_msg(id) {
-    alert('reading:'+id);
+    // alert('reading:'+id);
     var url = '/message/'+id;
     $.ajax({
         url:url,
         type:'get',
         success:function (data) {
-            alert('bingo');
+            // alert('bingo');
+            var table = $('#message_table').DataTable();
+            table.draw();
         },
         error:function (data) {
             alert("errorrrrrrr");
@@ -118,4 +121,10 @@ function pop_test(title) {
     document.getElementById('message_content').innerHTML = content;
     document.getElementById('from_user').innerHTML = user;
     $('#pop_test').modal();
+}
+
+function test_data_set() {
+    var table = $('#message_table').DataTable();
+    table.cell(0,0).data('??').draw();
+    // alert(JSON.stringify(table.cell(0,0)));
 }

@@ -77,8 +77,9 @@
         <div class="col-sm-6" style="margin-bottom: 10px;">
             <div class="input-group">
                 <span class="input-group-addon">条目名称</span>
-                <input type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
+                <input type="text" class="form-control" placeholder="" aria-describedby="basic-addon1" id="name_input">
             </div>
+            <div id="nameTip"></div>
         </div>
         <div class="col-sm-6">
             <!--<div class="input-group">-->
@@ -92,6 +93,7 @@
                 <span class="form-control" style="height: inherit">
                     <span id="alias_bar" style="padding-right: 3px;"></span>
                     <input type="text" name="" id="alias_input" style="width: 200px;height: inherit">
+
                 </span>
             </div>
         </div>
@@ -103,6 +105,7 @@
                 <span class="input-group-addon">类别</span>
                 <input id="category_input" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
             </div>
+            <div id="typeTip"></div>
         </div>
         <div class="col-sm-6">
             <!--<div class="input-group">-->
@@ -117,6 +120,7 @@
                     <input type="text" name="" id="tags_input" style="width: 200px;height: inherit">
                 </span>
             </div>
+            <div id="tagTip"></div>
         </div>
     </div>
 
@@ -124,7 +128,7 @@
         <div class="col-sm-12">
             <div class="input-group">
                 <span class="input-group-addon">摘要</span>
-                <textarea class="form-control" placeholder="若无摘要,自动提取正文前150个字符作为摘要" aria-describedby="basic-addon1" rows="4" style="resize: none"></textarea>
+                <textarea id='summary' class="form-control" placeholder="若无摘要,自动提取正文前150个字符作为摘要" aria-describedby="basic-addon1" rows="4" style="resize: none"></textarea>
             </div>
         </div>
     </div>
@@ -146,7 +150,7 @@
             <div class="btn-group-vertical" style="width: 100%">
                 <button id="add_btn" class="btn btn-default" onclick="add_reference_input_area2();">增加引用</button>
                 <button class="btn btn-default" onclick=scan_content();>扫描</button>
-                <button class="btn btn-primary" onclick=addClause();>提交</button>
+                <button id="submit_btn" class="btn btn-primary" onclick=addClause();>提交</button>
             </div>
 
         </div>
@@ -154,7 +158,7 @@
 
 
     </div>
-
+    <div id="test_area"></div>
 
 </div>
 <!--<div id="reference" style="margin-left: 60px"></div>-->
