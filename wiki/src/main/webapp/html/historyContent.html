@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HistoryContent</title>
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <!--<script src="../js/editormd.js"></script>-->
+    <link rel="stylesheet" href="../css/editormd.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../css/wiki_navigator.css">
+    <link rel="stylesheet" href="../css/entry_content.css">
+    <script src="../js/history_content.js"></script>
+    <script src="../js/showdown.min.js"></script>
+    <script src="../js/verificationLogin.js"></script>
+    <!--tooltips的依赖-->
+    <script src="../js/messenger.min.js"></script>
+    <script src="../js/messenger-theme-future.js"></script>
+    <script src="../js/wiki_utils.js"></script>
+    <link rel="stylesheet" href="../css/messenger-theme-future.css">
+    <link rel="stylesheet" href="../css/messenger.css">
+
+    <script src="../editormd_lib/marked.min.js"></script>
+    <script src="../editormd_lib/prettify.min.js"></script>
+    <script src="../editormd_lib/raphael.min.js"></script>
+    <script src="../editormd_lib/underscore.min.js"></script>
+    <script src="../editormd_lib/sequence-diagram.min.js"></script>
+    <script src="../editormd_lib/flowchart.min.js"></script>
+    <script src="../editormd_lib/jquery.flowchart.min.js"></script>
+    <script src="../js/editormd.js"></script>
+
+
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>-->
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />-->
+
+</head>
+<body>
+<nav class="navbar navbar-default" style="background-color: #ffffff;padding: 0;margin: 0;">
+    <div class="container-fluid">
+        <a class="navbar-header" href="../html/Outline.html" style="margin-top: 10px;">
+            <img  src="../resource/icon/tss_logo@2x.png" alt="" style="height: 32px">
+        </a>
+        <ul class="nav navbar-nav">
+            <li class="dropdown">
+                <ul class="dropdown-menu">
+                    <li><a href="../html/Outline.html" onclick="">管理大纲(管理员)</a></li>
+                    <li><a href="../html/create_Entry.html">增加条目(管理员)</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">请求增加条目(敬请期待)</a></li>
+                    <li><a href="../html/administrator_page.html">管理控制台</a></li>
+                </ul>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">选项<span class="caret"></span></a>
+            </li>
+            <li id="login_button"></li>
+        </ul>
+
+        <ul class="nav navbar-nav" style="float: right">
+            <li class="dropdown" id="welcome_user">
+                <ul class="dropdown-menu">
+                    <li><a href="" onclick="clearLogin();">退出登录</a></li>
+                    <li><a href="../html/changeRecord.html">我的修改记录</a> </li>
+                </ul>
+                <a href="#" id="welcome_tip" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
+            </li>
+        </ul>
+
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row" style="">
+        <div id="left_part" class="col-sm-2">
+
+        </div>
+
+        <div id="right_part" class="col-xs-10">
+
+            <div id="search_module" class="row" style="margin-top: 10px;">
+                <div id="search_and_btn" class="input-group col-lg-5 col-md-6 col-sm-7">
+                    <input id="search_input" type="text" class="form-control" placeholder="Search for...">
+                        <span class="input-group-btn">
+                            <button id='search_btn' class="btn btn-primary" type="button" style="outline: none">Search</button>
+                        </span>
+                    <!--<input type="text" id="search_input">-->
+                    <!--<button id="search_btn" onclick=search_entry();>search</button>-->
+                </div>
+            </div>
+            <div id="article_info">
+                <div id="article_title">title</div>
+                <div id="last_update_time">最后更新日期:</div>
+                <div id="access_times">访问次数:</div>
+            </div>
+            <div id="test-editormd-view"></div>
+            <div style="margin-left: 20px">
+                <div id="reference_title">
+                    <h3>参考资料</h3>
+                </div>
+                <div id="reference"></div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+<script>
+    $(document).ready(function () {
+        var param = location.href.split("?")[1].split("=")[1];
+        var entry_name = decodeURI(param);
+        document.getElementById('article_title').innerHTML = entry_name;
+//        alert(entry_name);
+        load_content(entry_name);
+        init_content();
+        document.getElementById('edit_old').href = "/html/edit_oldentry.html?action=modify&title="+entry_name;
+//        alert("ready");
+//        $('#jstree_demo_div').jstree();
+
+//        $(function() {
+//            alert("test");
+//            var testEditormdView;
+//
+//                var markdown = "##title\n\n content\n\n|name|age|\n|--|--|\n|dzm|20|";
+//                testEditormdView = editormd.markdownToHTML("test-editormd-view", {
+//                    markdown        : markdown ,//+ "\r\n" + $("#append-test").text(),
+//                    //htmlDecode      : true,       // 开启 HTML 标签解析，为了安全性，默认不开启
+//                    htmlDecode      : "style,script,iframe",  // you can filter tags decode
+//                    //toc             : false,
+//                    tocm            : true,    // Using [TOCM]
+//                    //tocContainer    : "#custom-toc-container", // 自定义 ToC 容器层
+//                    //gfm             : false,
+//                    //tocDropdown     : true,
+//                    // markdownSourceCode : true, // 是否保留 Markdown 源码，即是否删除保存源码的 Textarea 标签
+//                    emoji           : true,
+//                    taskList        : true,
+//                    tex             : true,  // 默认不解析
+//                    flowChart       : true,  // 默认不解析
+//                    sequenceDiagram : true,  // 默认不解析
+//                });
+//        });
+//        alert("complete");
+
+    });
+    $("#search_input").keydown(function (e){
+        if (e.keyCode==13){
+//            var keyword = document.getElementById('search_input').value;
+            search_entry();
+        }
+    });
+</script>
+
+<script>get_welcome();</script>
+
+</html>
