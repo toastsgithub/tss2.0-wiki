@@ -56,15 +56,16 @@ function init_message_table(){
 }
 
 function read_msg(id) {
+    alert('reading:'+id);
     var url = '/message/'+id;
     $.ajax({
         url:url,
         type:'get',
         success:function (data) {
-            
+            alert('bingo');
         },
         error:function (data) {
-            
+            alert("errorrrrrrr");
         }
     });
 }
