@@ -40,7 +40,7 @@ function addClause() {
             reference_result.push(obj);
         }
     }
-    if (!name && type && tag) {
+    if (!(name && type && tag)) {
         return;
     } else {
         try {
