@@ -21,14 +21,22 @@ function load_content(title){
         success:function (data) {
             show_tips(1,'内容加载完毕');
             // alert(JSON.stringify(data));
-            var markdown_data = data.data.content;
-            var converter = new showdown.Converter(),
-                // text      = '#hello, markdown!\n\n|name|age|\n|--|--|\n|Toast|20|',
-                text      = markdown_data,
-                html      = converter.makeHtml(text);
-            // alert(data.visits);
-            document.getElementById('access_times').innerHTML+=data.data.visits;
-            document.getElementById('last_update_time').innerHTML+=data.data.date;
+            var markdown_data;
+            if (data.data.content) {
+                markdown = data.data.content;
+                var converter = new showdown.Converter(),
+                    // text      = '#hello, markdown!\n\n|name|age|\n|--|--|\n|Toast|20|',
+                    text      = markdown_data,
+                    html      = converter.makeHtml(text);
+                // alert(data.visits);
+                document.getElementById('access_times').innerHTML+=data.data.visits;
+                document.getElementById('last_update_time').innerHTML+=data.data.date;
+            } else {
+                markdown_data = '当前不存在条目*' + title + '* 的详细内容。你可以[创建这个条目](http://localhost:8080/html/Entry_editor.html?title=' + title + ')。' +
+                                '或者你也[请求新增这个条目](/message/wiki?title=' + title + ')。 你也可以将这个条目创建为已存在条目的别名)。';
+
+            }
+
             // alert(html);
                 //----------以下是内容的渲染-----------------
                 var testEditormdView;

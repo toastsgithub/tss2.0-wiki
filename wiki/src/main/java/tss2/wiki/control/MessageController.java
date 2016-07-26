@@ -81,8 +81,8 @@ public class MessageController {
         return new CommonResult(0);
     }
 
-    @RequestMapping(value = "wiki", method = RequestMethod.GET)
-    public void requestAddition(HttpServletRequest request, @RequestParam String title) {
+    @RequestMapping(value = "/wiki", method = RequestMethod.GET)
+    public void requestAddition(HttpServletRequest request, @RequestParam(value = "title", required = true) String title) {
         String username;
         WikiSession session = sessionService.checkUser(request);
         if (!session.isValid()) {
