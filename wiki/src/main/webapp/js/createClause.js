@@ -501,6 +501,51 @@ function add_reference_input_area() {
     reference_count++;
 }
 
+function add_reference_input_area2() {
+    var reference = document.createElement('div');
+    reference.id = 'ref_item'+reference_count;
+    reference.style.marginTop = '10px';
+    var colOne = document.createElement('div');
+    var colTwo = document.createElement('div');
+    var inputGroupOne = document.createElement('div');
+    var inputGroupTwo = document.createElement('div');
+    var name_label = document.createElement('span');
+    name_label.style.padding = '2px';
+    name_label.innerHTML = '名称';
+    var name_input = document.createElement('input');
+    name_input.style.width = '100px';
+    name_input.id = 'reference_name_' + reference_count;
+    var url_label = document.createElement('span');
+    url_label.innerHTML = 'url';
+    url_label.style.padding = '4px';
+    var url_input = document.createElement('input');
+    url_input.style.width = '200px';
+    url_input.id = 'reference_url_' + reference_count;
+    var inputGroupBtn = document.createElement('span');
+    var reference_delete = document.createElement('button');
+    reference_delete.innerHTML = "x";
+    reference_delete.id = "reference_delete_" + reference_count;
+    reference_delete.style.marginLeft = '20px';
+    reference_delete.style.cursor = 'pointer';
+
+
+    // var cancel_btn
+    reference.appendChild(colOne);
+    colOne.appendChild(inputGroupOne);
+    inputGroupOne.appendChild(name_label);
+    inputGroupOne.appendChild(name_input);
+    reference.appendChild(colTwo);
+    colTwo.appendChild(inputGroupTwo);
+    inputGroupTwo.appendChild(url_label);
+    inputGroupTwo.appendChild(url_input);
+    inputGroupTwo.appendChild(inputGroupBtn);
+    inputGroupBtn.appendChild(reference_delete);
+    
+    
+    document.getElementById('reference').appendChild(reference);
+    reference_delete.onclick = delete_reference;
+    reference_count++;
+}
 
 
 function delete_reference(){
