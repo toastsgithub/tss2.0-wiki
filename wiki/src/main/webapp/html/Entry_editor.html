@@ -25,9 +25,6 @@
     <script src="../js/wiki_utils.js"></script>
     <script src="../js/verificationLogin.js"></script>
     <script src="../js/bootstrap-switch.min.js"></script>
-    <script>
-        var judge_type = false;
-    </script>
 </head>
 <body>
 <!--<link rel="stylesheet" href="editormd.min.css" />-->
@@ -51,6 +48,7 @@
         </ul>
 
         <ul class="nav navbar-nav" style="float: right">
+            <li id="message"></li>
             <li class="dropdown" id="welcome_user">
                 <ul class="dropdown-menu">
                     <li><a href="" onclick="clearLogin();">退出登录</a></li>
@@ -202,7 +200,11 @@
 <script>
     initialData();
     testAll();
-    get_welcome();
+    var login = get_welcome();
+    alert("!!!!!!!!!login  = " + login);
+    if(!login){
+        window.location = "../html/login.html?next=editor";
+    }
 </script>
 <script>
     $(document).ready(function () {
