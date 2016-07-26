@@ -26,7 +26,7 @@ var origin_width_of_alias_input;
 var reference_count = 0;
 
 function addClause() {
-    // alert("judge");
+    alert("judge");
     var reference = document.getElementById('reference');
     var child = reference.childNodes;
     var reference_result = [];
@@ -163,8 +163,8 @@ function testName() {
 
 
 function testAll(){
-    testName();
-    testType();
+    // testName();
+    // testType();
     testTag();
     testAlias();
 }
@@ -266,20 +266,20 @@ function testTag() {
             if(document.getElementById("tag_bar").childElementCount>0){
                 if(getTags()!=null && $.inArray(new_tag_to_add, getTags())>=0){
                     tag = false;
-                    document.getElementById("tagTip").innerHTML = "请勿选择重复标签!";
+                    // document.getElementById("tagTip").innerHTML = "请勿选择重复标签!";
                     return;
                 }
             }
             if(document.getElementById("tag_bar").childElementCount>=5){
-                document.getElementById("tagTip").innerHTML = "最多添加5个标签";
+                // document.getElementById("tagTip").innerHTML = "最多添加5个标签";
                 tag = true;
                 return;
             }
-            document.getElementById("tagTip").innerHTML = "";
+            // document.getElementById("tagTip").innerHTML = "";
             add_tags(new_tag_to_add);
             tag = true;
         }
-    })
+    });
 
 }
 
