@@ -81,7 +81,7 @@ public class ContentServiceImpl implements ContentService {
             return new CommonResult(0,"add/modify successfully!");
         }else{
             WikiVerifying wikiVerifying = new WikiVerifying();
-            wikiVerifying.setContent(entryid,user.getUsername(),title,tags,categories,content,alias);
+            wikiVerifying.setContent(entryid,user.getUsername(),title,tags,categories,content,alias,summary);
             WikiVerifyingReference wikiVerifyingReference = new WikiVerifyingReference(wikiVerifying.getID());
             wikiVerifyingReference.modify(r);
             WikiMessage wikiMessage = new WikiMessage(user.getUsername(),"#1","有新的提交信息","用户"+user.getUsername()+"提交了《"+title+"》的修改申请");
