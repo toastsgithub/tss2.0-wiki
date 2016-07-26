@@ -29,27 +29,32 @@ function addClause() {
     alert("judge");
     var reference = document.getElementById('reference');
     var child = reference.childNodes;
+    // alert(reference.innerHTML);
+    alert(child[0].childNodes[0].childNodes[0].childNodes[1]);
+    alert('child num:'+reference.childNodes.length);
     var reference_result = [];
     for(var i = 0; i < child.length; i++){
-        var reference_name = child[i].childNodes[1].value;
-        var reference_link = child[i].childNodes[3].value;
-        if("reference_name"=="" || reference_link == ""){
+        var reference_name = child[i].childNodes[0].childNodes[0].childNodes[1].value;
+        var reference_link = child[i].childNodes[1].childNodes[0].childNodes[2].value;
+        if(reference_name=="" || reference_link == ""){
             // do not push
         }else {
             var obj = {"name": reference_name, "url": reference_link};
             reference_result.push(obj);
         }
     }
+    alert(JSON.stringify(reference_result));
+    alert('here')
     if (!(name && type && tag)) {
         return;
     } else {
-        try {
-            document.getElementById("nameTip").innerHTML = "";
-        }catch (err){
-            // do nothing
-        }
-        document.getElementById("typeTip").innerHTML = "";
-        document.getElementById("tagTip").innerHTML = "";
+        // try {
+        //     document.getElementById("nameTip").innerHTML = "";
+        // }catch (err){
+        //     // do nothing
+        // }
+        // document.getElementById("typeTip").innerHTML = "";
+        // document.getElementById("tagTip").innerHTML = "";
     }
     // alert("judge done");
     make_disable('submit_btn');
@@ -271,11 +276,13 @@ function testTag() {
                 if(getTags()!=null && $.inArray(new_tag_to_add, getTags())>=0){
                     tag = false;
                     // document.getElementById("tagTip").innerHTML = "请勿选择重复标签!";
+                    show_tips(0,'请勿重复输入标签');
                     return;
                 }
             }
             if(document.getElementById("tag_bar").childElementCount>=5){
                 // document.getElementById("tagTip").innerHTML = "最多添加5个标签";
+                show_tips(0,'最多添加5个标签');
                 tag = true;
                 return;
             }
@@ -506,7 +513,7 @@ function add_reference_input_area2() {
     var reference = document.createElement('div');
     reference.style.marginBottom = '10px';
     reference.className = 'row';
-    // reference.id = 'ref_item'+reference_count;
+    reference.id = 'ref_item'+reference_count;
     // reference.style.marginTop = '10px';
 
     var colOne = document.createElement('div');
@@ -516,7 +523,7 @@ function add_reference_input_area2() {
 
     var inputGroupOne = document.createElement('div');
     inputGroupOne.className = 'input-group';
-    var inputGroupTwo = document.createElement('div')
+    var inputGroupTwo = document.createElement('div');
     inputGroupTwo.className = 'input-group';
 
     var name_label = document.createElement('span');
@@ -528,7 +535,7 @@ function add_reference_input_area2() {
     name_input.className = 'form-control';
     name_input.placeholder = '';
     // name_input.style.width = '100px';
-    // name_input.id = 'reference_name_' + reference_count;
+    name_input.id = 'reference_name_' + reference_count;
 
     var url_label = document.createElement('span');
     url_label.innerHTML = 'URL';
@@ -540,7 +547,7 @@ function add_reference_input_area2() {
     url_input.className = 'form-control';
     url_input.placeholder = '';
     // url_input.style.width = '200px';
-    // url_input.id = 'reference_url_' + reference_count;
+    url_input.id = 'reference_url_' + reference_count;
 
     var inputGroupBtn = document.createElement('span');
     inputGroupBtn.className = 'input-group-btn';
@@ -549,7 +556,7 @@ function add_reference_input_area2() {
     reference_delete.className = 'btn btn-danger';
     reference_delete.type = 'button';
     // reference_delete.innerHTML = "x";
-    // reference_delete.id = "reference_delete_" + reference_count;
+    reference_delete.id = "reference_delete_" + reference_count;
     // reference_delete.style.marginLeft = '20px';
     // reference_delete.style.cursor = 'pointer';
 
