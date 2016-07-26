@@ -4,10 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import tss2.wiki.control.impl.SessionServiceimpl;
 import tss2.wiki.control.service.SessionService;
-import tss2.wiki.domain.Entry;
-import tss2.wiki.domain.EntryResult;
-import tss2.wiki.domain.HistoryListResult;
-import tss2.wiki.domain.ModifyHistory;
+import tss2.wiki.domain.*;
+import tss2.wiki.model.WikiAdministrator;
 import tss2.wiki.model.WikiModifyInfor;
 import tss2.wiki.model.WikiSession;
 import tss2.wiki.model.WikiUser;
@@ -56,6 +54,22 @@ public class ModifyController {
             return new EntryResult(1,"No Such Entry");
         }
         return new EntryResult(0,entry);
+    }
+
+
+    @RequestMapping(value = "/Adminis", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
+    public @ResponseBody AdminisResult Adminis(HttpServletRequest request, @RequestParam(value = "id") long id, @RequestParam(value = "agree") int agree) {
+        WikiSession session = sessionService.checkUser(request);
+        WikiModifyInfor wikiModifyInfor = new WikiModifyInfor();
+        if (!session.isValid()) return new AdminisResult(1, "Authentication Failed");
+        WikiUser user = session.getUser();
+        WikiAdministrator wikiAdministrator = new WikiAdministrator();
+        if(agree == 1){
+            wikiAdministrator.agree(id);
+        }else {
+            wikiAdministrator.reject(user.getUsername(),id);
+        }
+        return new AdminisResult(0,"Success!");
     }
 
 }
