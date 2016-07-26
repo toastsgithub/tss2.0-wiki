@@ -24,7 +24,7 @@ public class WikiVerifying {
         }
     }
 
-    public void setContent(long wikiId, String username, String title, String[] tags, String[] categories, String content, ArrayList alias) {
+    public void setContent(long wikiId, String username, String title, String[] tags, String[] categories, String content, ArrayList alias,String summery) {
         DAOBase[] contents = Verifying.query().where("title = '" + title + "' and username = '" + username + "'");
         if (contents.length == 0) {
             dao = new Verifying();
@@ -67,6 +67,7 @@ public class WikiVerifying {
         dao.alias = strAlias;
         dao.contentPath = path;
         dao.refused = 0;
+        dao.summery = summery;
         dao.save();
 
         DAOBase[] contentS = Verifying.query().where("title = '" + title + "' and username = '" + username + "'");

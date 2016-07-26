@@ -13,6 +13,9 @@ import java.util.Collection;
 import java.util.Collections;
 
 /**
+ * wiki用户类。
+ * 注意权限区分不在这里！
+ *
  * Created by 羊驼 on 2016/7/10.
  */
 public class WikiUser {

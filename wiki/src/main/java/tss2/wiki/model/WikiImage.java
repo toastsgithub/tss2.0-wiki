@@ -9,7 +9,8 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * TODO: 增加对插入图片的支持.
+ * 增加对插入图片的支持. 保存图片并为图片分配一个唯一的
+ * url和编号。
  *
  * Created by 羊驼 on 2016/7/11.
  */

@@ -12,6 +12,8 @@ import tss2.wiki.model.WikiImage;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by coral on 16-7-25.
@@ -20,10 +22,15 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping(value = "/files")
 public class UploadController {
 
-    @RequestMapping(value = "/image", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
-    public @ResponseBody String getFile(@RequestParam(value = "editormd-image-file") MultipartFile multipartFile) {
+    @RequestMapping(value = "/image", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    public @ResponseBody
+    Map getFile(@RequestParam(value = "editormd-image-file") MultipartFile multipartFile) {
         WikiImage image = new WikiImage(multipartFile);
-        return image.getImageUrl();
+        Map result = new HashMap();
+        result.put("success", 1);
+        result.put("message", "上传成功");
+        result.put("url", image.getImageUrl());
+        return result;
     }
 
     protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) throws ServletException {
