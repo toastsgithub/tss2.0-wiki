@@ -121,6 +121,9 @@ function addClause() {
                 window.location = '../html/Outline.html';
             }else{
                 alert("添加过程中出现错误,原因:"+data.message);
+                if(data.message == "Authentication Failed"){
+                    window.location = "../html/login.html";
+                }
             }
         },
         error: function (data) {
