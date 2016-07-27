@@ -94,17 +94,25 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div id="msg_title" class="modal-header">
-                <span class="glyphicon glyphicon-envelope"></span>
+                <span class="glyphicon glyphicon-exclamation-sign"></span>
                 <span id="message_title">提示</span>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-header">
-                <span class="glyphicon glyphicon-user"></span>
-                <span>from</span>
-                <span id="from_user">user</span>
+                <!--<span class="glyphicon glyphicon-user"></span>-->
+                <!--<span>from</span>-->
+                <span>这是一个敏感操作,请问继续吗?</span>
             </div>
             <div id="msg_content" class="modal-body">
-                <div id="message_content">content</div>
+                <!--<input type="text" placeholder="请输入'确认'来继续提交" class="form-control">-->
+                <!--<button class="btn btn-danger">继续提交</button>-->
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="请输入'确认' 来继续提交" id="change_confirm_input">
+                    <span class="input-group-btn">
+                        <button class="btn btn-danger" type="button" onclick=confirm_test();>继续提交</button>
+                    </span>
+                </div>
+
             </div>
         </div>
     </div>
@@ -150,6 +158,16 @@
 
     function confirm_change() {
         $('#pop_test').modal();
+    }
+    function confirm_test() {
+        var confirm = document.getElementById('change_confirm_input').value;
+        alert(confirm);
+        if(confirm == '确认'){
+            save_outline();
+        }else{
+//            confirm_change()
+            show_tips(1,'确认输入错误');
+        }
     }
 </script>
 </body>
