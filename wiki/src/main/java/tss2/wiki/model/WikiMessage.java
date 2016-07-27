@@ -29,6 +29,10 @@ public class WikiMessage {
         }
     }
 
+    public WikiMessage(Message message) {
+        dao = message;
+    }
+
     public WikiMessage(String fromUser, String toUser, String title, String detail) {
         dao = new Message();
         dao.messageID = StringUtil.generateTokener(16);
@@ -45,6 +49,14 @@ public class WikiMessage {
 
     public int getIsread() {
         return isread;
+    }
+
+    public int getIsread(String toUser) {
+        DAOBase[] ums = User2Message.query().where(String.format("messageID = '%s' and toUser = '%s'", getMessageID(), toUser));
+        for (DAOBase um: ums) {
+            return ((User2Message) um).isread;
+        }
+        return 0;
     }
 
     public static void main(String[] args) {
@@ -88,6 +100,7 @@ public class WikiMessage {
             ((User2Message) um).isread = 1;
             um.save();
         }
+        isread = 1;
     }
 
     public String[] getToUsers() {

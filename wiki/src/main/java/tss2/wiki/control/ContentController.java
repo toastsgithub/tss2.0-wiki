@@ -124,6 +124,11 @@ public class ContentController {
      */
     @RequestMapping(value = "/fuzzysearch", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
     public @ResponseBody RecordsResult fuzzySearch(@RequestParam(value = "search") String search) {
+        try {
+            search = URLDecoder.decode(search, "utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         RecordsResult recordsResult = recordFuzzySearch(search);
         if(recordsResult.getList().size()==0){
             return new RecordsResult(0);

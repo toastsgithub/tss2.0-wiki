@@ -32,6 +32,7 @@
     <script src="../js/wiki_utils.js"></script>
     <script src="../js/verificationLogin.js"></script>
     <script src="../js/bootstrap-switch.min.js"></script>
+    <script src="../js/verificationLogin.js"></script>
     <script>
         var judge_type = false;
     </script>
@@ -79,7 +80,8 @@
                 <span class="input-group-addon">条目名称</span>
                 <input type="text" class="form-control" placeholder="" aria-describedby="basic-addon1" id="name_input">
             </div>
-            <div id="nameTip"></div>
+
+            <div id="nameTip" class="input_tip"></div>
         </div>
         <div class="col-sm-6">
             <!--<div class="input-group">-->
@@ -105,7 +107,7 @@
                 <span class="input-group-addon">类别</span>
                 <input id="category_input" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
             </div>
-            <div id="typeTip"></div>
+            <div id="typeTip" class="input_tip"></div>
         </div>
         <div class="col-sm-6">
             <!--<div class="input-group">-->
@@ -120,7 +122,7 @@
                     <input type="text" name="" id="tags_input" style="width: 200px;height: inherit">
                 </span>
             </div>
-            <div id="tagTip"></div>
+            <div id="tagTip" class="input_tip"></div>
         </div>
     </div>
 
@@ -161,15 +163,12 @@
     <div id="test_area"></div>
 
 </div>
-<!--<div id="reference" style="margin-left: 60px"></div>-->
 
-<!--<button id="submit_btn" class="btn btn-primary" onclick="addClause();">submit</button>-->
-<!--<button id="add_btn" class="btn btn-primary" onclick="add_reference_input_area();">add reference</button>-->
-<!--<button class="btn btn-primary" onclick="get_reference()">get</button>-->
-
-<!--<button class="btn btn-primary" onclick="scan_content()">scan</button>-->
 
 <script src="../js/editormd.js"></script>
+<script>
+
+</script>
 <script type="text/javascript">
     var editor_instance;
     $(function() {
@@ -230,10 +229,14 @@
 <script>
     initialData();
     testAll();
-//    get_welcome();
+    get_welcome();
 </script>
 <script>
     $(document).ready(function () {
+        var  title = location.href.split('?')[1];
+        if(title!= undefined){
+             document.getElementById('name_input').value = title.split('=')[1];
+        }
 //        origin_width_of_input = document.getElementById('tags_input').offsetWidth;
 //        origin_width_of_alias_input = document.getElementById('alias_input').offsetWidth;
     });
@@ -246,9 +249,4 @@
 
 </body>
 
-
-<!--<div class="input-group">-->
-    <!--<span class="input-group-addon">名称</span>-->
-    <!--<input type="text" class="form-control" placeholder="" id="reference_name_0">-->
-<!--</div>-->
 </html>

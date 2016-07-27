@@ -7,6 +7,7 @@ import tss2.wiki.dao.core.DAOBase;
 import tss2.wiki.domain.RecordsResult;
 import tss2.wiki.model.WikiRecord;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,6 +17,9 @@ import java.util.stream.Collectors;
 @Controller
 @RequestMapping(value = "/api")
 public class ApiController {
+
+    public static final String HOST_URL = "http://121.42.184.4:8080/";
+
     @RequestMapping(value = "/entry/{id}", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
     public @ResponseBody
     SimpleWikiPojo getWikiEntryById(@PathVariable long id) {
@@ -28,15 +32,15 @@ public class ApiController {
     }
 
     @RequestMapping(value = "/search", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
-    public @ResponseBody List<SimplerWikiPojo> searchWikisByKey(@RequestParam(value = "q") String q) {
+    public @ResponseBody List<SimpleWikiPojo> searchWikisByKey(@RequestParam(value = "q") String q) {
         RecordsResult rr = WikiRecord.recordFuzzySearch(q);
-        List<SimplerWikiPojo> result = rr.getList().stream().map(entry -> new SimplerWikiPojo(entry.id, entry.title, entry.summery)).collect(Collectors.toList());
+        List<SimpleWikiPojo> result = rr.getList().stream().map(entry -> new SimpleWikiPojo(entry.id, entry.title, entry.summery)).collect(Collectors.toList());
         return result;
     }
 
-    @RequestMapping(value = "/keymatch", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-    public @ResponseBody String polish(@RequestParam(value = "content") String content) {
-        return WikiRecord.polishForDisplay(content);
+    @RequestMapping(value = "/keymatch", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
+    public @ResponseBody String polish(HttpServletRequest request, @RequestParam(value = "type") String type, @RequestParam(value = "content") String content) {
+        return WikiRecord.polishForDisplay(type, content);
     }
 }
 
@@ -50,20 +54,6 @@ class SimpleWikiPojo {
         this.id = id;
         this.title = title;
         this.summary = summary;
-        this.url = "http://121.42.184.4:8080/html/entry_content.html?entry=" + title;
-    }
-}
-
-class SimplerWikiPojo {
-    public long id;
-    public String title;
-    public String url;
-    public String summary;
-
-    public SimplerWikiPojo(long id, String title, String summary) {
-        this.id = id;
-        this.title = title;
-        this.url = "http://121.42.184.4:8080/html/entry_content.html?entry=" + title;
-        this.summary = summary;
+        this.url = ApiController.HOST_URL + "html/entry_content.html?entry=" + title;
     }
 }

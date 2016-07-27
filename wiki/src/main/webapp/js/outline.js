@@ -40,7 +40,7 @@ $.get(
                 //     "icon" : "glyphicon glyphicon-ok"
                 // }
             },
-            "plugins" : ["wholerow","types",'search','unique','contextmenu']
+            "plugins" : ["wholerow","types",'search','unique']
             // "plugins" : ["dnd","contextmenu","wholerow","types",'search','unique']
         });
         $("#s").submit(function(e) {
@@ -53,28 +53,28 @@ $.get(
 
 
 // var rowData={"软件":[{"一班":[{"二班":["说好的孙浩大哥呢"]},"考拉","浣熊"]},{"三班":["喵"]},{"四班":["歪歪"]},{"怎么这么多":["好烦啊","我编不下去了"]},"还有？？"]};
-/**
- * 无条件读取当前的树的结构并发送到后端保存
- * @params:none
- */
-function save_outline() {
-    var data_obj = $('#moutline').jstree(true).get_json();
-    alert(JSON.stringify(data_obj[0]));
-    $.ajax({
-        url:'/outline',
-        type:'put',
-        contentType:'application/json',
-        data:JSON.stringify(data_obj[0]),
-        success:function () {
-
-            alert("success");
-        },
-        error:function (data) {
-            alert('error'+JSON.stringify(data));
-        }
-    });
-    
-}
+// /**
+//  * 无条件读取当前的树的结构并发送到后端保存
+//  * @params:none
+//  */
+// function save_outline() {
+//     var data_obj = $('#moutline').jstree(true).get_json();
+//     alert(JSON.stringify(data_obj[0]));
+//     $.ajax({
+//         url:'/outline',
+//         type:'put',
+//         contentType:'application/json',
+//         data:JSON.stringify(data_obj[0]),
+//         success:function () {
+//
+//             alert("success");
+//         },
+//         error:function (data) {
+//             alert('error'+JSON.stringify(data));
+//         }
+//     });
+//    
+// }
 /**
  * 无条件存储当前的树的结构以及树节点下的条目内容
  */
@@ -363,7 +363,6 @@ function load_all_outline_content(){
  * 在大纲树的点击事件中触发
  * @param outline_key 大纲节点名称
  */
-//var zhaiyao=["\n  摘要：123321，上山打老虎怎么样SDHCUSIC会发生丢还没看到妇女金额共和国viwegrjhvoigerhvoiejrpvjrepojvifdjvjleq 呢抗日女哦ieqrjfqpoewojgnfkdvfre分部日哈佛"];
 function display_outline_content(outline_key) {
     remove_all_child('search_result_content');
     remove_all_child('nav_part');
@@ -581,6 +580,7 @@ function showSearchResult(content, num){
         //-----------------------革命的分界线--------------------------
         var new_entry_div = document.createElement('div');
         new_entry_div.className = 'panel panel-primary';
+        new_entry_div.style.horizAlign = "center";
         // new_entry_div.style.marginBottom = "10px";
         var new_entry_head_div = document.createElement('div');
         new_entry_head_div.className = 'panel-heading';
