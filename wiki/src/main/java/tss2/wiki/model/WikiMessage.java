@@ -43,6 +43,14 @@ public class WikiMessage {
         dao.save();
     }
 
+    public void setIsread(int isread) {
+        this.isread = isread;
+    }
+
+    public int getIsread() {
+        return isread;
+    }
+
     public int getIsread(String toUser) {
         DAOBase[] ums = User2Message.query().where(String.format("messageID = '%s' and toUser = '%s'", getMessageID(), toUser));
         for (DAOBase um: ums) {
