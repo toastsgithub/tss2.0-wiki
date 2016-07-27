@@ -72,29 +72,34 @@
         </div>
 
         <div id="right_part" class="col-xs-10">
+            <div class="panel panel-default" style="margin-top: 20px">
+                <div class="panel-heading"><span>提交内容</span></div>
+                <div class="panel-body">
+                    <div id="article_info">
+                        <div id="article_title">title</div>
+                        <div id="category">目录:</div>
+                        <div id="alias">别名:</div>
+                        <div id="tags">标签:</div>
+                    </div>
+                    <div id="test-editormd-view"></div>
+                    <div style="margin-left: 20px">
+                        <div id="reference_title">
+                            <h3>参考资料</h3>
+                        </div>
+                        <div id="reference"></div>
 
-            <div id="search_module" class="row" style="margin-top: 10px;">
-                <div id="search_and_btn" class="input-group col-lg-5 col-md-6 col-sm-7">
-                    <input id="search_input" type="text" class="form-control" placeholder="Search for...">
-                        <span class="input-group-btn">
-                            <button id='search_btn' class="btn btn-primary" type="button" style="outline: none">Search</button>
-                        </span>
-                    <!--<input type="text" id="search_input">-->
-                    <!--<button id="search_btn" onclick=search_entry();>search</button>-->
+                    </div>
+
                 </div>
             </div>
-            <div id="article_info">
-                <div id="article_title">title</div>
-                <div id="last_update_time">最后更新日期:</div>
-                <div id="access_times">访问次数:</div>
-            </div>
-            <div id="test-editormd-view"></div>
-            <div style="margin-left: 20px">
-                <div id="reference_title">
-                    <h3>参考资料</h3>
+            <div id="verify_bar">
+                <div class="btn-group" style="width: 100%">
+                    <button id="add_btn" class="btn btn-primary" onclick=verify(1)>审核通过</button>
+                    <button class="btn btn-danger" onclick=verify(0)>拒绝添加</button>
                 </div>
-                <div id="reference"></div>
             </div>
+
+
 
         </div>
     </div>
@@ -103,51 +108,50 @@
 </body>
 <script>
     $(document).ready(function () {
-        var param = location.href.split("?")[1].split("=")[1];
+//        var param = location.href.split("?")[1].split("=")[1];
+        var param = location.href.split('?')[1].split('&')[0].split('=')[1];
+        var id = location.href.split('?')[1].split('&')[1].split('=')[1];
         var entry_name = decodeURI(param);
         document.getElementById('article_title').innerHTML = entry_name;
 //        alert(entry_name);
-        load_content(entry_name);
-        document.getElementById('edit_old').href = "/html/edit_oldentry.html?action=modify&title="+entry_name;
+        load_content(id);
+//        document.getElementById('edit_old').href = "/html/edit_oldentry.html?action=modify&title="+entry_name;
 
 
     });
-//    $("#search_input").keydown(function (e){
-//        if (e.keyCode==13){
-//            var keyword = document.getElementById('search_input').value;
-//            search_entry();
-//        }
-//    });
+
 </script>
 
 <script>get_welcome();</script>
 
 <script>
-    function load_content(title){
+    function load_content(id){
         show_tips(0,'内容加载中,请稍候');
         var url = '/modify/singleHistory';
+
         // alert('url'+url);
         $.ajax({
             url:url,
             type:'get',
-             data:{state:title},
+             data:{state:0,id:id},
             success:function (data) {
                 show_tips(1,'内容加载完毕');
                 // alert(JSON.stringify(data));
                 var markdown_data;
-                if (data.data) {
-                    markdown_data = data.data.content;
+//                if (data.data) {
+                    markdown_data = data.entry.content;
                     var converter = new showdown.Converter(),
                     // text      = '#hello, markdown!\n\n|name|age|\n|--|--|\n|Toast|20|',
                             text      = markdown_data,
                             html      = converter.makeHtml(text);
                     // alert(data.visits);
-                    document.getElementById('access_times').innerHTML+=data.data.visits;
-                    document.getElementById('last_update_time').innerHTML+=data.data.date;
-                } else {
-                    markdown_data = '当前不存在条目*' + title + '* 的详细内容。你可以[创建这个条目](http://localhost:8080/html/Entry_editor.html?title=' + title + ')。' +
-                            '或者你也[请求新增这个条目](/message/wiki?title=' + title + ')。 你也可以将这个条目创建为已存在条目的别名)。';
-                }
+                    document.getElementById('category').innerHTML+=data.entry.categories;
+                    document.getElementById('alias').innerHTML+=data.entry.alias;
+                    document.getElementById('tags').innerHTML+=data.entry.tags;
+//                } else {
+//                    markdown_data = '当前不存在条目*' + id + '* 的详细内容。你可以[创建这个条目](http://localhost:8080/html/Entry_editor.html?title=' + title + ')。' +
+//                            '或者你也[请求新增这个条目](/message/wiki?title=' + title + ')。 你也可以将这个条目创建为已存在条目的别名)。';
+//                }
 
                 // alert(html);
                 //----------以下是内容的渲染-----------------
@@ -195,5 +199,23 @@
             }
         });
     }
+    
+    function verify(state) {
+        // 1 pass  , 0 refuse
+        var id = location.href.split('?')[1].split('&')[1].split('=')[1];
+        alert(id);
+        $.ajax({
+            url:'/modify/Adminis',
+            data:{agree:state,id:id},
+            success:function (data) {
+                alert('success');
+            },
+            error:function (data) {
+                alert('error');
+            }
+        });
+
+    }
+
 </script>
 </html>
