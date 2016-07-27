@@ -45,6 +45,9 @@ public class WikiAdministrator {
                 verifyingReferenceArrayList.get(i).delete();
             }
         }
+
+
+
     }
 
 
@@ -54,7 +57,7 @@ public class WikiAdministrator {
         verifying.refused = 1;
         verifying.save();
 
-        WikiMessage wikiMessage = new WikiMessage(admin,verifying.username,"有新的反馈信息","管理员"+admin+"拒绝了你的修改申请");
+        WikiMessage wikiMessage = new WikiMessage(admin,verifying.username,"您有新的反馈信息","管理员"+admin+"拒绝了你的修改申请");
         wikiMessage.send();
     }
 }

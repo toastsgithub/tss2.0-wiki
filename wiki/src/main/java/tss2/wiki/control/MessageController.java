@@ -96,6 +96,19 @@ public class MessageController {
         message.send();
     }
 
+    @RequestMapping(value = "send", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+    public @ResponseBody CommonResult send(HttpServletRequest request, @RequestParam(value = "to") String to,@RequestParam(value = "message") String message) {
+        WikiSession session = sessionService.checkUser(request);
+        if (!session.isValid()) {
+            return new CommonResult(1, "Authentication Failed");
+        }
+        WikiUser user = session.getUser();
+        WikiMessage wikiMessage = new WikiMessage(user.getUsername(),to,"管理员"+user.getUsername()+"对您修改的回复",message);
+        wikiMessage.send();
+        return new  CommonResult(0);
+    }
+
+
     private UserServiceImpl userService = new UserServiceImpl();
     private SessionService sessionService = new SessionServiceimpl();
 }
