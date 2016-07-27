@@ -63,6 +63,9 @@ function load_content(title){
                     flowChart       : true,  // 默认不解析
                     sequenceDiagram : true  // 默认不解析
                 });
+<<<<<<< HEAD
+            
+=======
 
             var display_panel = document.getElementById('reference');
             var tmp;
@@ -89,6 +92,7 @@ function load_content(title){
                     display_panel.appendChild(br);
                 }
             }
+>>>>>>> 97c7d3f05ea18de72d1e63a0ea39ce99756fbefe
         },
         error:function (data) {
             alert("error"+JSON.stringify(data));

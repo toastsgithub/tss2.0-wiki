@@ -84,7 +84,6 @@
             <div id="article_info">
                 <div id="article_title">title</div>
                 <div id="last_update_time">最后更新日期:</div>
-                <div id="access_times">访问次数:</div>
             </div>
             <div id="test-editormd-view"></div>
             <div style="margin-left: 20px">
@@ -101,14 +100,20 @@
 </body>
 <script>
     $(document).ready(function () {
-        var param = location.href.split("?")[1].split("=")[1];
-        var entry_name = decodeURI(param);
-        document.getElementById('article_title').innerHTML = entry_name;
-//        alert(entry_name);
-        load_content(entry_name);
-        init_content();
-        document.getElementById('edit_old').href = "/html/edit_oldentry.html?action=modify&title="+entry_name;
-
+        var url = location.href.split(/[?=&]/g);
+        var state;
+        var id;
+        for (var i in url) {
+            if (url[i] === 'state') {
+                state = url[++i];
+                i--;
+            }
+            if (url[i] === 'id') {
+                id = url[++i];
+                i--;
+            }
+        }
+        showSearchResult(state, id);
     });
     $("#search_input").keydown(function (e){
         if (e.keyCode==13){
