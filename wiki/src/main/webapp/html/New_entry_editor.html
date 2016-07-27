@@ -161,15 +161,12 @@
     <div id="test_area"></div>
 
 </div>
-<!--<div id="reference" style="margin-left: 60px"></div>-->
 
-<!--<button id="submit_btn" class="btn btn-primary" onclick="addClause();">submit</button>-->
-<!--<button id="add_btn" class="btn btn-primary" onclick="add_reference_input_area();">add reference</button>-->
-<!--<button class="btn btn-primary" onclick="get_reference()">get</button>-->
-
-<!--<button class="btn btn-primary" onclick="scan_content()">scan</button>-->
 
 <script src="../js/editormd.js"></script>
+<script>
+
+</script>
 <script type="text/javascript">
     var editor_instance;
     $(function() {
@@ -234,6 +231,10 @@
 </script>
 <script>
     $(document).ready(function () {
+        var  title = location.href.split('?')[1];
+        if(title!= undefined){
+             document.getElementById('name_input').value = title.split('=')[1];
+        }
 //        origin_width_of_input = document.getElementById('tags_input').offsetWidth;
 //        origin_width_of_alias_input = document.getElementById('alias_input').offsetWidth;
     });
@@ -246,9 +247,4 @@
 
 </body>
 
-
-<!--<div class="input-group">-->
-    <!--<span class="input-group-addon">名称</span>-->
-    <!--<input type="text" class="form-control" placeholder="" id="reference_name_0">-->
-<!--</div>-->
 </html>
