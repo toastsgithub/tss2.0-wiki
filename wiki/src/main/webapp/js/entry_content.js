@@ -34,6 +34,9 @@ function load_content(title){
             } else {
                 markdown_data = '当前不存在条目*' + title + '* 的详细内容。你可以[创建这个条目](http://localhost:8080/html/Entry_editor.html?title=' + title + ')。' +
                                 '或者你也[请求新增这个条目](/message/wiki?title=' + title + ')。 你也可以将这个条目创建为已存在条目的别名)。';
+                document.getElementById('drop_menu').removeChild(document.getElementById('edit_old').parentNode);
+                document.getElementById('drop_menu').removeChild(document.getElementById('delete_entry').parentNode);
+            
             }
 
             // alert(html);
@@ -59,7 +62,14 @@ function load_content(title){
                 });
 
             var display_panel = document.getElementById('reference');
-            var tmp = data.reference.dao;
+            var tmp;
+            
+            try{ 
+                tmp = data.reference.dao;
+            }
+            catch (e) {
+                tmp = "";
+            }
             if(tmp.length == 0){
                 display_panel.innerHTML = "<p>无</p>";
             }
