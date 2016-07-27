@@ -1,6 +1,4 @@
 body{
-	background-color: #eeeee6;
-	min-width: 1200px;
 }
 .minf{
 	margin-bottom: 20px;
@@ -41,17 +39,20 @@ body{
     /*background-color: rgb(151,151,151);*/
 }
 #tags_input{
-	outline:none;
-	border: 0;
-	background-color: transparent;
+	/*outline:none;*/
+	/*border: 0;*/
+	/*background-color: transparent;*/
 }
-#alias_input{
+#alias_input,#tags_input{
 	width: 96%;
 	border: 0;
 	outline: none;
 	background-color: transparent;
 }
 
-#reference{
-	background-color: #01a252;
+/*------------------*/
+
+
+#alias_div{
+
 }

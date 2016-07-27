@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>changeRecord</title>
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
     <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
     <!--<script src="../js/editormd.js"></script>-->
@@ -10,29 +9,22 @@
     <!-- 可选的Bootstrap主题文件（一般不用引入） -->
     <!--<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">-->
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="../css/wiki_navigator.css">
-    <link rel="stylesheet" href="../css/editor.css">
-    <link rel="stylesheet" href="../css/auto_complete.css">
-    <link rel="stylesheet" href="../css/change_record.css">
-    <script src="../js/createClause.js"></script>
-    <script src="../js/jquery.autocomplete.js"></script>
-    <script src="../js/wiki_utils.js"></script>
+    <link rel="stylesheet" href="../css/administrator_page.css">
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <!--<script src="../js/admin_common.js"></script>-->
+    <script src="../js/user_message_page.js"></script>
     <script src="../js/verificationLogin.js"></script>
-    <script src="../js/change_record.js"></script>
-    <script>
-        var judge_type = false;
-    </script>
 
     <!--datatable 表格控件-->
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.css">
     <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.js"></script>
     <!--datatable 表格控件-->
-
+    <title>Admin</title>
 </head>
 <body>
-<!--<link rel="stylesheet" href="editormd.min.css" />-->
-<nav class="navbar navbar-default" style="background-color: #ffffff">
+
+<nav class="navbar navbar-default" style="background-color: #ffffff;padding: 0;margin: 0;">
     <div class="container-fluid">
         <a class="navbar-header" href="../html/Outline.html" style="margin-top: 10px;">
             <img  src="../resource/icon/tss_logo@2x.png" alt="" style="height: 32px">
@@ -64,17 +56,25 @@
     </div>
 </nav>
 
-<!--正经内容的分割线-->
 <div id="main_content" class="container-fluid" style="padding: 0;margin: 0;">
     <div class="row" style="margin: 0">
-        <h1>我的修改记录</h1>
-            <table id="message_table" class="display table table-bordered" >
-                <!--style="width: 600px"-->
+        <div id="left_part" class="col-lg-2 col-md-3 col-xs-3">
+            <div class="btn-group-vertical" role="group" aria-label="..." style="width: 100%;margin-top:20px;">
+                <button type="button" class="btn btn-default" onclick=location.href='../html/user_message_page.html'>消息中心<span class="badge" id="message_num"></span></button>
+                <button type="button" class="btn btn-default" onclick=location.href='../html/changeRecord.html'>编辑记录</button>
+            </div>
+        </div>
+
+
+        <div id="right_part" class="col-lg-10 col-md-9 col-xs-9">
+            <table id="message_table" class="display table table-bordered" style="cursor: pointer">
                 <thead>
                 <tr>
-                    <th style="width: 300px">条目标题</th>
-                    <th style="width: 100px">状态</th>
+
+                    <th style="width: 50px">状态</th>
+                    <th>消息标题</th>
                     <th style="width: 150px">时间</th>
+                    <th style="width: 80px">来源</th>
                     <th>id</th>
                 </tr>
                 </thead>
@@ -83,17 +83,39 @@
                 </tbody>
             </table>
             <!--<button onclick=pop_test()>pop out</button>-->
-            <!--<div id="test_part"></div>-->
+
+            <div id="pop_test" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" style="cursor: default">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div id="msg_title" class="modal-header">
+                            <span class="glyphicon glyphicon-envelope"></span>
+                            <span id="message_title">TITLE</span>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div class="modal-header">
+                            <span class="glyphicon glyphicon-user"></span>
+                            <span>from</span>
+                            <span id="from_user">user</span>
+                        </div>
+                        <div id="msg_content" class="modal-body">
+                            <div id="message_content">content</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="test_part"></div>
         </div>
     </div>
 </div>
 
 <script>
+    get_welcome();
     $(document).ready(function () {
-        getRecord();
+//        init_admin_common();
+        init_message_table();
+
     })
 
 </script>
-<script>get_welcome();</script>
 </body>
 </html>

@@ -35,12 +35,12 @@ $.get(
             "types" : {
                 "default" : {
                     "icon" : "glyphicon glyphicon-book"
-                },
+                }
                 // "demo" : {
                 //     "icon" : "glyphicon glyphicon-ok"
                 // }
             },
-            "plugins" : ["wholerow","types",'search','unique','contextmenu']
+            "plugins" : ["wholerow","types",'search','unique']
             // "plugins" : ["dnd","contextmenu","wholerow","types",'search','unique']
         });
         $("#s").submit(function(e) {
