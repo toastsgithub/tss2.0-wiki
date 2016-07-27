@@ -91,14 +91,14 @@
 
         <div id="outline_article" class="row" style="">
 
-            <div id="resizable" style="background-color: red;padding: 0;" class="col-sm-4">
-                <div id="moutline"  style="background-color: blue"></div>
+            <div id="resizable" style="background-color: red;padding: 0; height: 700px; width: 320px" class="col-sm-4 col-lg-5">
+                <div id="moutline"  style="background-color: ghostwhite"></div>
             </div>
 
-            <div id="article_board" class="col-sm-8" style="padding-left: 30px;padding-right: 30px;">
+            <div id="article_board" class="col-sm-8 col-lg-7" style="padding-left: 30px;padding-right: 30px;">
                 <div class="container-fluid">
                     <div class="row" id="search_bar" style="float: right;">
-                        <div id="search_module" class="input-group col-sm-9 col-md-7 col-lg-6">
+                        <div id="search_module" class="input-group col-sm-9 col-md-7 col-lg-12">
                             <input id="search_input" type="text" class="form-control" placeholder="Search for...">
                                 <span class="input-group-btn">
                                     <button id="search_btn" class="btn btn-primary" type="button">Search</button>
@@ -157,7 +157,7 @@ function get_test() {
 }
 
     $(function() {
-        $( "#resizable" ).resizable({maxWidth:400,minWidth:200});
+        $( "#resizable" ).resizable({maxWidth:450,minWidth:200});
     });
 
 </script>
