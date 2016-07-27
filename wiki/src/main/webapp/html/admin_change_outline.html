@@ -21,6 +21,7 @@
 <script src="../js/messenger.min.js"></script>
 <script src="../js/messenger-theme-future.js"></script>
 <script src="../js/wiki_utils.js"></script>
+<script src="../js/admin_common.js"></script>
 <link rel="stylesheet" href="../css/messenger-theme-future.css">
 <link rel="stylesheet" href="../css/messenger.css">
 
@@ -121,6 +122,10 @@
 </div>
 
 <script>
+    get_welcome();
+    init_admin_common();
+
+
     $(document).ready(function () {
         init_tree();
     });

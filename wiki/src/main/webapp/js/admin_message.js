@@ -48,6 +48,7 @@ function init_message_table(){
         var id = table.cell(selected_row,4).data();
         table.cell(selected_row,0).data(1).draw();
         read_msg(id);
+        
         pop_test(value);
         // var url = "/html/duck_stockDetail.html"+"?code="+value;
         // window.location.href = url;
@@ -66,6 +67,7 @@ function read_msg(id) {
             // alert('bingo');
             var table = $('#message_table').DataTable();
             table.draw();
+            load_message_num();
         },
         error:function (data) {
             alert("errorrrrrrr");

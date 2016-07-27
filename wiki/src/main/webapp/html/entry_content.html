@@ -36,7 +36,7 @@
     <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />-->
 
 </head>
-<body>
+<body id="123123">
 <nav class="navbar navbar-default" style="background-color: #ffffff;padding: 0;margin: 0;">
     <div class="container-fluid">
         <a class="navbar-header" href="../html/Outline.html" style="margin-top: 10px;">
@@ -44,12 +44,12 @@
         </a>
         <ul class="nav navbar-nav">
             <li class="dropdown">
-                <ul class="dropdown-menu">
+                <ul id="drop_menu" class="dropdown-menu">
                     <li><a href="../html/Outline.html" onclick="">管理大纲(管理员)</a></li>
                     <li><a href="../html/Entry_editor.html">增加条目(管理员)</a></li>
                     <li role="separator" class="divider"></li>
-                    <li><a id="edit_old" href="../html/edit_oldentry.html?action=modify&title=">编辑条目</a></li>
-                    <li><a href="#" onclick=delete_entry();>删除条目</a></li>
+                    <li><a id="edit_old" href="edit_old__Entry.html?action=modify&title=">编辑条目</a></li>
+                    <li><a id="delete_entry" href="#" onclick=delete_entry();>删除条目</a></li>
                     <li><a href="#">请求增加条目(敬请期待)</a></li>
                 </ul>
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">选项<span class="caret"></span></a>

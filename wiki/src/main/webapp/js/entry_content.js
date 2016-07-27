@@ -34,6 +34,9 @@ function load_content(title){
             } else {
                 markdown_data = '当前不存在条目*' + title + '* 的详细内容。你可以[创建这个条目](http://localhost:8080/html/Entry_editor.html?title=' + title + ')。' +
                                 '或者你也[请求新增这个条目](/message/wiki?title=' + title + ')。 你也可以将这个条目创建为已存在条目的别名)。';
+                document.getElementById('drop_menu').removeChild(document.getElementById('edit_old').parentNode);
+                document.getElementById('drop_menu').removeChild(document.getElementById('delete_entry').parentNode);
+            
             }
 
             // alert(html);
@@ -57,7 +60,36 @@ function load_content(title){
                     flowChart       : true,  // 默认不解析
                     sequenceDiagram : true  // 默认不解析
                 });
+<<<<<<< HEAD
             
+=======
+
+            var display_panel = document.getElementById('reference');
+            var tmp;
+            
+            try{ 
+                tmp = data.reference.dao;
+            }
+            catch (e) {
+                tmp = "";
+            }
+            if(tmp.length == 0){
+                display_panel.innerHTML = "<p>无</p>";
+            }
+            else{
+                for(var i in tmp){
+                    var name = tmp[i].name;
+                    var url = tmp[i].url;
+                    var link = document.createElement('a');
+                    link.href = url;
+                    link.innerHTML = name;
+                    
+                    var br = document.createElement('br');
+                    display_panel.appendChild(link);
+                    display_panel.appendChild(br);
+                }
+            }
+>>>>>>> 97c7d3f05ea18de72d1e63a0ea39ce99756fbefe
         },
         error:function (data) {
             alert("error"+JSON.stringify(data));

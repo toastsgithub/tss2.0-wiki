@@ -492,9 +492,9 @@ function load_page_btns(num){
 
     var ul = document.createElement('ul');
     ul.className = 'pagination nav ';
-    var previous = document.createElement('li');
-    previous.innerHTML = "<a href='#' aria-label='Previous'><span aria-hidden='true'>&laquo;</span></a>";
-    ul.appendChild(previous);
+    // var previous = document.createElement('li');
+    // previous.innerHTML = "<a href='#' aria-label='Previous'><span aria-hidden='true'>&laquo;</span></a>";
+    // ul.appendChild(previous);
     for(var i=1;i<pages+1;i++) {
         var li = document.createElement('li');
         if(i==1){
@@ -504,9 +504,9 @@ function load_page_btns(num){
         li.innerHTML="<a href='#page_content_"+i+"' data-toggle='tab'>"+i+"</a>";
         ul.appendChild(li);
     }
-    var after = document.createElement('li');
-    after.innerHTML = "<a href='#' aria-label='Next'><span aria-hidden='true'>&raquo;</span></a>";
-    ul.appendChild(after);
+    // var after = document.createElement('li');
+    // after.innerHTML = "<a href='#' aria-label='Next'><span aria-hidden='true'>&raquo;</span></a>";
+    // ul.appendChild(after);
     nav.appendChild(ul);
     return pages;
   
