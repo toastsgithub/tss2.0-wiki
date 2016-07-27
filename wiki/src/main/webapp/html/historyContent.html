@@ -72,17 +72,14 @@
 </nav>
 <div class="container-fluid">
     <div class="row" style="">
+        <div id="left_part" class="col-sm-2">
+
+        </div>
+
         <div id="right_part" class="col-xs-10">
 
             <div id="search_module" class="row" style="margin-top: 10px;">
-                <div id="search_and_btn" class="input-group col-lg-5 col-md-6 col-sm-7">
-                    <input id="search_input" type="text" class="form-control" placeholder="Search for...">
-                        <span class="input-group-btn">
-                            <button id='search_btn' class="btn btn-primary" type="button" style="outline: none">Search</button>
-                        </span>
-                    <!--<input type="text" id="search_input">-->
-                    <!--<button id="search_btn" onclick=search_entry();>search</button>-->
-                </div>
+
             </div>
             <div id="article_info">
                 <div id="article_title">title</div>
@@ -111,7 +108,6 @@
         load_content(entry_name);
         init_content();
         document.getElementById('edit_old').href = "/html/edit_oldentry.html?action=modify&title="+entry_name;
-
 
     });
     $("#search_input").keydown(function (e){
