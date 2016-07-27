@@ -2,13 +2,19 @@
  * Created by wh on 2016/7/25.
  */
 var all_message;
+var view_message;
+/**
+ * 显示数据到页面中
+ * */
 function getRecord(){
     var table = $('#message_table').DataTable({
         data:null,
         columns:[
             {data:'title'},
             {data:'state'},
-            {data:'timestamp'}
+            {data:'timestamp'},
+            {data:'wikiId'}
+            
         ],
         columnDefs:[{
             'targets':[1],
@@ -37,9 +43,26 @@ function getRecord(){
                 }
             }]
     });
-load_message();
+    $('#message_table tbody').on( 'click', 'tr', function () {
+        table.$('tr.selected').removeClass('selected');
+        $(this).addClass('selected');
+        var selected_row = table.row('.selected').index();
+        // document.getElementById('test_part').innerHTML = JSON.stringify(test_cache);
+
+
+        if (selected_row == undefined) return ;
+       var state = table.cell(selected_row,1).data();
+        var id = table.cell(selected_row,3).data();
+        showSearchResult(state,id);
+    } );
+
+    load_message();
+    table.column(3).visible(false);
 }
 
+/**
+ * 从后端获取数据
+ * */
 function load_message() {
     var table = $('#message_table').DataTable();
     // table.rows.add([{'title':'标题','state':1,'timestamp':2016}]);
@@ -65,4 +88,28 @@ function click_entry() {
     if(keyword=='')return;
     var url = '../html/search_result_page.html?entry='+data;
     location.href = url;
+}
+
+/**
+ * 根据页面点击从后端获取数据
+ * @param state: 每条信息的状态
+ * @param id: 每条信息的wikiId
+ * */
+function showSearchResult(state, id){
+    $.ajax({
+        url: '/modify/singleHistory',
+        type: 'get',
+        data:{state:state,id:id},
+        success: function (data) {
+            if (data.error == 0) {
+                view_message = data.entry;
+
+            } else {
+                alert('服务器响应内容中有错误:' + data.message);
+            }
+        },
+        error: function (data) {
+            alert('error');
+        }
+    });
 }
