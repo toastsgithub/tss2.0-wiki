@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>更改大纲</title>
+</head>
+
+<script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+<!--<script src="../js/outline.js"></script>-->
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<!-- 可选的Bootstrap主题文件（一般不用引入） -->
+<!--<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">-->
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+<link rel="stylesheet" href="../css/wiki_navigator.css">
+<link rel="stylesheet" href="../css/admin_change_outline.css">
+<!--<script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>-->
+
+<script src="../js/wiki_utils.js"></script>
+<script src="../js/verificationLogin.js"></script>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top" style="background-color: #ffffff;margin: 0;">
+    <div class="container-fluid">
+        <a class="navbar-header" href="../html/Outline.html" style="margin-top: 10px;">
+            <img  src="../resource/icon/tss_logo@2x.png" alt="" style="height: 32px">
+        </a>
+        <!--<div class="navbar-header navbar-right" style=";margin-top: 10px;">-->
+        <!--<div id="about_btn" class="" style="" onclick="location='../html/about.html'">About</div>-->
+        <!--<div id="help_btn" class="" style="" onclick="location='../html/help.html'">Help</div>-->
+        <!--</div>-->
+        <ul class="nav navbar-nav">
+            <!--<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>-->
+            <li class="dropdown">
+                <ul class="dropdown-menu">
+                    <li><a href="../html/Outline.html" onclick="">管理大纲(管理员)</a></li>
+                    <li><a href="../html/Entry_editor.html">增加条目(管理员)</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">请求增加条目(敬请期待)</a></li>
+                    <li><a href="../html/administrator_page.html">管理控制台</a></li>
+                </ul>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">选项<span class="caret"></span></a>
+            </li>
+            <li id="login_button"></li>
+
+        </ul>
+
+        <ul class="nav navbar-nav" style="float: right">
+            <li class="dropdown" id="welcome_user">
+                <ul class="dropdown-menu">
+                    <li><a href="" onclick="clearLogin();">退出登录</a></li>
+                    <li><a href="../html/changeRecord.html">我的修改记录</a> </li>
+                </ul>
+                <a href="#" id="welcome_tip" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
+            </li>
+        </ul>
+        <!--<div class="welcome" id="welcome_tip" style="float: right"></div>-->
+
+    </div>
+</nav>
+
+<div id="main_content" class="container-fluid" style="padding: 0;margin: 0;">
+    <div class="row" style="margin: 0;margin-top: 50px;">
+        <div id="left_part" class="col-lg-2 col-md-3 col-xs-3">
+            <div class="btn-group-vertical" role="group" aria-label="..." style="width: 100%;margin-top:20px;">
+                <button type="button" class="btn btn-default" onclick=location='../html/Entry_editor.html'>增加条目</button>
+                <button type="button" class="btn btn-default" onclick=location='../html/admin_change_outline.html'>修改大纲</button>
+                <button type="button" class="btn btn-default" onclick=location.href='../html/admin_message_page.html'>消息中心<span class="badge" id="message_num"></span></button>
+            </div>
+            <!--<div id="tool_box">-->
+            <!--<div class="tool_btn">-->
+            <!--??-->
+            <!--</div>-->
+            <!--</div>-->
+        </div>
+
+
+        <div id="right_part" class="col-lg-10 col-md-9 col-xs-9">
+            <div class="panel panel-default" style="margin-top: 20px">
+                <div class="panel-heading">当前大纲</div>
+                <div class="panel-body">
+                    <div id="outline"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        init_tree();
+    });
+    function init_tree() {
+        $.get(
+                "/outline",
+                null,
+                function (data) {
+                    // alert("data below----\n"+JSON.stringify(data));
+                    // rawData=eval("("+data+")");
+                    // show(rawData);
+                    // var json_data = {"软件":[{"一班":[{"二班":["说好的孙浩大哥呢"]},{"考拉":["考拉爸爸"]},{"浣熊":[]}]},{"三班":["瞄","好多"]},{"四班":["歪歪","就是多"]},{"怎么这么多":["好烦","编不下去了"]},"还有??"]};
+
+                    // alert("--->"+json_data_2);
+
+                    // var root_node = new Object();
+                    // root_node.text = "知识体系";
+                    // root_node.children = [];
+                    // all_data = root_node;
+                    // read_json(root_node,data);//读取到的数据为string 类型的,要转成obj (返回数据类型 可能跟请求方式和参数有关)
+
+                    // alert(JSON.stringify(root_node));
+                    $('#outline').jstree({
+                        'core' : {
+                            // "themes" : {
+                            //     "dots" : true // no connecting dots between dots
+                            // },
+                            "check_callback":true,
+
+                            'data' : data
+                        },
+                        "types" : {
+                            "default" : {
+                                "icon" : "glyphicon glyphicon-book"
+                            },
+                            // "demo" : {
+                            //     "icon" : "glyphicon glyphicon-ok"
+                            // }
+                        },
+                        "plugins" : ["wholerow","types",'search','unique','contextmenu']
+                        // "plugins" : ["dnd","contextmenu","wholerow","types",'search','unique']
+                    });
+                    $("#s").submit(function(e) {
+                        e.preventDefault();
+                        $("#moutline").jstree(true).search($("#q").val());
+                    });
+                }
+        );
+    }
+</script>
+</body>
+</html>
