@@ -31,6 +31,9 @@ function load_content(title){
                 // alert(data.visits);
                 document.getElementById('access_times').innerHTML+=data.data.visits;
                 document.getElementById('last_update_time').innerHTML+=data.data.date;
+                document.getElementById('category').innerHTML+=data.data.categories;
+                document.getElementById('tags').innerHTML+=data.data.tags;
+                document.getElementById('last_editor').innerHTML+=data.data.editor;
             } else {
                 markdown_data = '当前不存在条目*' + title + '* 的详细内容。你可以[创建这个条目](http://localhost:8080/html/Entry_editor.html?title=' + title + ')。' +
                                 '或者你也[请求新增这个条目](/message/wiki?title=' + title + ')。 你也可以将这个条目创建为已存在条目的别名)。';
