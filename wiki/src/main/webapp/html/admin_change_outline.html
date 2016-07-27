@@ -17,6 +17,12 @@
 <link rel="stylesheet" href="../css/wiki_navigator.css">
 <link rel="stylesheet" href="../css/admin_change_outline.css">
 <!--<script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>-->
+<!--tooltips的依赖-->
+<script src="../js/messenger.min.js"></script>
+<script src="../js/messenger-theme-future.js"></script>
+<script src="../js/wiki_utils.js"></script>
+<link rel="stylesheet" href="../css/messenger-theme-future.css">
+<link rel="stylesheet" href="../css/messenger.css">
 
 <script src="../js/wiki_utils.js"></script>
 <script src="../js/verificationLogin.js"></script>
@@ -39,7 +45,7 @@
                     <li><a href="../html/Entry_editor.html">增加条目(管理员)</a></li>
                     <li role="separator" class="divider"></li>
                     <li><a href="#">请求增加条目(敬请期待)</a></li>
-                    <li><a href="../html/administrator_page.html">管理控制台</a></li>
+                    <li><a href="../html/admin_message_page.html">管理控制台</a></li>
                 </ul>
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">选项<span class="caret"></span></a>
             </li>
@@ -65,26 +71,51 @@
     <div class="row" style="margin: 0;margin-top: 50px;">
         <div id="left_part" class="col-lg-2 col-md-3 col-xs-3">
             <div class="btn-group-vertical" role="group" aria-label="..." style="width: 100%;margin-top:20px;">
-                <button type="button" class="btn btn-default" onclick=location='../html/Entry_editor.html'>增加条目</button>
+                <button type="button" class="btn btn-default" onclick=location='../html/New_entry_editor.html'>增加条目</button>
                 <button type="button" class="btn btn-default" onclick=location='../html/admin_change_outline.html'>修改大纲</button>
                 <button type="button" class="btn btn-default" onclick=location.href='../html/admin_message_page.html'>消息中心<span class="badge" id="message_num"></span></button>
             </div>
-            <!--<div id="tool_box">-->
-            <!--<div class="tool_btn">-->
-            <!--??-->
-            <!--</div>-->
-            <!--</div>-->
+
         </div>
 
 
         <div id="right_part" class="col-lg-10 col-md-9 col-xs-9">
             <div class="panel panel-default" style="margin-top: 20px">
-                <div class="panel-heading">当前大纲</div>
+                <div class="panel-heading"><span>当前大纲</span></div>
                 <div class="panel-body">
                     <div id="outline"></div>
+                    <button class="btn btn-default" style="margin-top:20px;" onclick=confirm_change();>保存当前设置</button>
                 </div>
             </div>
 
+        </div>
+    </div>
+</div>
+
+<div id="pop_test" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" style="cursor: default">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div id="msg_title" class="modal-header">
+                <span class="glyphicon glyphicon-exclamation-sign"></span>
+                <span id="message_title">提示</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-header">
+                <!--<span class="glyphicon glyphicon-user"></span>-->
+                <!--<span>from</span>-->
+                <span>这是一个敏感操作,请问继续吗?</span>
+            </div>
+            <div id="msg_content" class="modal-body">
+                <!--<input type="text" placeholder="请输入'确认'来继续提交" class="form-control">-->
+                <!--<button class="btn btn-danger">继续提交</button>-->
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="请输入'确认' 来继续提交" id="change_confirm_input">
+                    <span class="input-group-btn">
+                        <button class="btn btn-danger" type="button" onclick=confirm_test();>继续提交</button>
+                    </span>
+                </div>
+
+            </div>
         </div>
     </div>
 </div>
@@ -98,20 +129,7 @@
                 "/outline",
                 null,
                 function (data) {
-                    // alert("data below----\n"+JSON.stringify(data));
-                    // rawData=eval("("+data+")");
-                    // show(rawData);
-                    // var json_data = {"软件":[{"一班":[{"二班":["说好的孙浩大哥呢"]},{"考拉":["考拉爸爸"]},{"浣熊":[]}]},{"三班":["瞄","好多"]},{"四班":["歪歪","就是多"]},{"怎么这么多":["好烦","编不下去了"]},"还有??"]};
 
-                    // alert("--->"+json_data_2);
-
-                    // var root_node = new Object();
-                    // root_node.text = "知识体系";
-                    // root_node.children = [];
-                    // all_data = root_node;
-                    // read_json(root_node,data);//读取到的数据为string 类型的,要转成obj (返回数据类型 可能跟请求方式和参数有关)
-
-                    // alert(JSON.stringify(root_node));
                     $('#outline').jstree({
                         'core' : {
                             // "themes" : {
@@ -138,6 +156,43 @@
                     });
                 }
         );
+    }
+
+    function confirm_change() {
+        $('#pop_test').modal();
+    }
+    function confirm_test() {
+        var confirm = document.getElementById('change_confirm_input').value;
+        if(confirm == '确认'){
+            $('#pop_test').modal('hide');
+            save_outline();
+        }else{
+//            confirm_change()
+            show_tips(0,'确认输入错误');
+        }
+    }
+    /**
+     * 无条件读取当前的树的结构并发送到后端保存
+     * @params:none
+     */
+    function save_outline() {
+        var data_obj = $('#outline').jstree(true).get_json();
+        alert(JSON.stringify(data_obj[0]));
+        $.ajax({
+            url:'/outline',
+            type:'put',
+            contentType:'application/json',
+            data:JSON.stringify(data_obj[0]),
+            success:function () {
+
+                show_tips(1,'更改成功')
+            },
+            error:function (data) {
+                show_tips(0,'更改失败');
+                alert('error'+JSON.stringify(data));
+            }
+        });
+
     }
 </script>
 </body>
