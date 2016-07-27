@@ -75,11 +75,14 @@ public class WikiUser {
     public ArrayList<WikiMessage> getMessageList() {
         DAOBase[] ums = User2Message.query().where("toUser = '" + getUsername() + "'");
         ArrayList<WikiMessage> result = new ArrayList<>();
-        for (DAOBase um: ums) {
-            WikiMessage message = WikiMessage.getMessage(um.get("messageID").toString());
-            if (message != null) {
-                message.setIsread(((User2Message) um).isread);
-                result.add(message);
+        DAOBase[] ms = Message.query().where("");
+        for (DAOBase dao: ms) {
+            for (DAOBase um: ums) {
+                if (dao.get("messageID").toString().equals(um.get("messageID").toString())) {
+                    WikiMessage message = new WikiMessage((Message) dao);
+                    message.setIsread(((User2Message) um).isread);
+                    result.add(message);
+                }
             }
         }
         return result;

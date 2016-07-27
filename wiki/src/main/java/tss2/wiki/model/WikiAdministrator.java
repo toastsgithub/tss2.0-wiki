@@ -3,6 +3,7 @@ package tss2.wiki.model;
 import tss2.wiki.dao.Verifying;
 import tss2.wiki.dao.VerifyingReference;
 import tss2.wiki.dao.core.DAOBase;
+import tss2.wiki.util.FileUtil;
 
 import java.util.ArrayList;
 
@@ -21,7 +22,8 @@ public class WikiAdministrator {
         }
 
         WikiRecord entry = new WikiRecord(verifying.title);
-        entry.setContent(verifying.wikiId, verifying.username, verifying.categories.split("/"), verifying.tags.split("/"), verifying.summery, verifying.contentPath, true);
+        String content = FileUtil.loadStringFromAbsolutePath(verifying.contentPath);
+        entry.setContent(verifying.wikiId, verifying.username, verifying.categories.split("/"), verifying.tags.split("/"), verifying.summery,content, true);
         if (verifying.wikiId == 0) {
             verifying.wikiId = entry.getID();
         }

@@ -39,8 +39,10 @@ public class ModifyController {
     }
 
     /**
-     * 获取当前用户所有修改记录列表
+     * 获取某条修改详细信息
      * @param request
+     * @param state
+     * @param id
      * @return
      */
     @RequestMapping(value = "/singleHistory", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
@@ -57,6 +59,13 @@ public class ModifyController {
     }
 
 
+    /**
+     * 管理员审批
+     * @param request
+     * @param id
+     * @param agree
+     * @return
+     */
     @RequestMapping(value = "/Adminis", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
     public @ResponseBody AdminisResult Adminis(HttpServletRequest request, @RequestParam(value = "id") long id, @RequestParam(value = "agree") int agree) {
         WikiSession session = sessionService.checkUser(request);

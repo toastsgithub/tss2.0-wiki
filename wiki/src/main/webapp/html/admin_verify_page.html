@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>HistoryContent</title>
+    <title>Prototype</title>
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
     <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
     <!--<script src="../js/editormd.js"></script>-->
@@ -12,8 +12,6 @@
     <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="../css/wiki_navigator.css">
     <link rel="stylesheet" href="../css/entry_content.css">
-    <script src="../js/history_content.js"></script>
-    <script src="../js/change_record.js"></script>
     <script src="../js/showdown.min.js"></script>
     <script src="../js/verificationLogin.js"></script>
     <!--tooltips的依赖-->
@@ -47,10 +45,8 @@
             <li class="dropdown">
                 <ul class="dropdown-menu">
                     <li><a href="../html/Outline.html" onclick="">管理大纲(管理员)</a></li>
-                    <li><a href="../html/New_entry_editor.html">增加条目(管理员)</a></li>
+                    <li><a href="../html/Entry_editor.html">增加条目(管理员)</a></li>
                     <li role="separator" class="divider"></li>
-                    <li><a href="#">请求增加条目(敬请期待)</a></li>
-                    <li><a href="../html/admin_message_page.html">管理控制台</a></li>
                 </ul>
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">选项<span class="caret"></span></a>
             </li>
@@ -67,7 +63,6 @@
             </li>
         </ul>
 
-        <!--正文华丽丽的分割线!-->
     </div>
 </nav>
 <div class="container-fluid">
@@ -79,7 +74,14 @@
         <div id="right_part" class="col-xs-10">
 
             <div id="search_module" class="row" style="margin-top: 10px;">
-
+                <div id="search_and_btn" class="input-group col-lg-5 col-md-6 col-sm-7">
+                    <input id="search_input" type="text" class="form-control" placeholder="Search for...">
+                        <span class="input-group-btn">
+                            <button id='search_btn' class="btn btn-primary" type="button" style="outline: none">Search</button>
+                        </span>
+                    <!--<input type="text" id="search_input">-->
+                    <!--<button id="search_btn" onclick=search_entry();>search</button>-->
+                </div>
             </div>
             <div id="article_info">
                 <div id="article_title">title</div>
@@ -106,18 +108,92 @@
         document.getElementById('article_title').innerHTML = entry_name;
 //        alert(entry_name);
         load_content(entry_name);
-        init_content();
         document.getElementById('edit_old').href = "/html/edit_oldentry.html?action=modify&title="+entry_name;
 
+
     });
-    $("#search_input").keydown(function (e){
-        if (e.keyCode==13){
+//    $("#search_input").keydown(function (e){
+//        if (e.keyCode==13){
 //            var keyword = document.getElementById('search_input').value;
-            search_entry();
-        }
-    });
+//            search_entry();
+//        }
+//    });
 </script>
 
 <script>get_welcome();</script>
 
+<script>
+    function load_content(title){
+        show_tips(0,'内容加载中,请稍候');
+        var url = '/modify/singleHistory';
+        // alert('url'+url);
+        $.ajax({
+            url:url,
+            type:'get',
+             data:{state:title},
+            success:function (data) {
+                show_tips(1,'内容加载完毕');
+                // alert(JSON.stringify(data));
+                var markdown_data;
+                if (data.data) {
+                    markdown_data = data.data.content;
+                    var converter = new showdown.Converter(),
+                    // text      = '#hello, markdown!\n\n|name|age|\n|--|--|\n|Toast|20|',
+                            text      = markdown_data,
+                            html      = converter.makeHtml(text);
+                    // alert(data.visits);
+                    document.getElementById('access_times').innerHTML+=data.data.visits;
+                    document.getElementById('last_update_time').innerHTML+=data.data.date;
+                } else {
+                    markdown_data = '当前不存在条目*' + title + '* 的详细内容。你可以[创建这个条目](http://localhost:8080/html/Entry_editor.html?title=' + title + ')。' +
+                            '或者你也[请求新增这个条目](/message/wiki?title=' + title + ')。 你也可以将这个条目创建为已存在条目的别名)。';
+                }
+
+                // alert(html);
+                //----------以下是内容的渲染-----------------
+                var testEditormdView;
+
+                var markdown = html;
+                testEditormdView = editormd.markdownToHTML("test-editormd-view", {
+                    markdown        : markdown_data ,//+ "\r\n" + $("#append-test").text(),
+                    //htmlDecode      : true,       // 开启 HTML 标签解析，为了安全性，默认不开启
+                    htmlDecode      : "style,script,iframe",  // you can filter tags decode
+                    //toc             : false,
+                    tocm            : true,    // Using [TOCM]
+                    tocContainer    : "#left_part", // 自定义 ToC 容器层
+                    //gfm             : false,
+                    //tocDropdown     : true,
+                    // markdownSourceCode : true, // 是否保留 Markdown 源码，即是否删除保存源码的 Textarea 标签
+                    emoji           : true,
+                    taskList        : true,
+                    tex             : true,  // 默认不解析
+                    flowChart       : true,  // 默认不解析
+                    sequenceDiagram : true  // 默认不解析
+                });
+
+                var display_panel = document.getElementById('reference');
+                var tmp = data.reference.dao;
+                if(tmp.length == 0){
+                    display_panel.innerHTML = "<p>无</p>";
+                }
+                else{
+                    for(var i in tmp){
+                        var name = tmp[i].name;
+                        var url = tmp[i].url;
+                        var link = document.createElement('a');
+                        link.href = url;
+                        link.innerHTML = name;
+
+                        var br = document.createElement('br');
+                        display_panel.appendChild(link);
+                        display_panel.appendChild(br);
+                    }
+                }
+            },
+            error:function (data) {
+                alert("error"+JSON.stringify(data));
+            }
+        });
+    }
+</script>
 </html>
