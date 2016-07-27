@@ -12,8 +12,8 @@
     <link rel="stylesheet" href="../css/wiki_navigator.css">
     <link rel="stylesheet" href="../css/administrator_page.css">
     <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="../js/admin_common.js"></script>
-    <script src="../js/admin_message.js"></script>
+    <!--<script src="../js/admin_common.js"></script>-->
+    <script src="../js/user_message_page.js"></script>
     <script src="../js/verificationLogin.js"></script>
 
     <!--datatable 表格控件-->
@@ -60,9 +60,8 @@
     <div class="row" style="margin: 0">
         <div id="left_part" class="col-lg-2 col-md-3 col-xs-3">
             <div class="btn-group-vertical" role="group" aria-label="..." style="width: 100%;margin-top:20px;">
-                <button type="button" class="btn btn-default" onclick=location='../html/New_entry_editor.html'>增加条目</button>
-                <button type="button" class="btn btn-default">修改大纲</button>
-                <button type="button" class="btn btn-default">消息中心<span class="badge" id="message_num"></span></button>
+                <button type="button" class="btn btn-default" onclick=location.href='../html/user_message_page.html'>消息中心<span class="badge" id="message_num"></span></button>
+                <button type="button" class="btn btn-default" onclick=location.href='../html/changeRecord.html'>编辑记录</button>
             </div>
         </div>
 
@@ -104,6 +103,7 @@
                     </div>
                 </div>
             </div>
+            <div id="test_part"></div>
         </div>
     </div>
 </div>
@@ -111,8 +111,9 @@
 <script>
     get_welcome();
     $(document).ready(function () {
-        init_admin_common();
+//        init_admin_common();
         init_message_table();
+
     })
 
 </script>

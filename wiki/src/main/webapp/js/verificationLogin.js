@@ -28,7 +28,7 @@ function verif(){
                 show_illegal_tip();
            } else {
                 if(location.search.split("=")[1]=="editor"){
-                    location.href = "../html/Entry_editor.html";
+                    location.href = "../html/New_entry_editor.html";
                 }else {
                     location.href = "../html/Outline.html";
                 }
@@ -98,7 +98,12 @@ function get_welcome() {
                 alert("error!");
             }
         })
-    alert("login = " + login);
+// <<<<<<< HEAD
+//     }
+//     // alert("login = " + login);
+// =======
+//     alert("login = " + login);
+// >>>>>>> 3f9759c4453981c290be6201066930c94f659481
     if(login == false){
         document.getElementById("login_button").innerHTML="<a href='../html/login.html'>登录</a>";
         document.getElementById("welcome_tip").innerHTML="";
