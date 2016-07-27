@@ -17,7 +17,7 @@ var types = [];
 
 var names = [];
 
-var name = false, type = false, tag = false;
+var name = false, type = false, tag = true;
 
 var origin_width_of_input;
 
@@ -44,7 +44,7 @@ function addClause() {
             reference_result.push(obj);
         }
     }
-    alert(JSON.stringify(reference_result));
+    // alert('status:'+name+" "+type+" "+tag);
     if (!(name && type && tag)) {
         return;
     } else {
@@ -111,8 +111,8 @@ function addClause() {
             reference: reference_result
         }
     };
-    alert("data = " + JSON
-            .stringify(data));
+    // alert("data = " + JSON
+    //         .stringify(data));
     $.ajax({
         type: "post",
         url: "/content",
@@ -128,7 +128,7 @@ function addClause() {
             }else{
                 show_tips(1,"添加错误,原因:"+data.message);
                 if(data.message == "Authentication Failed"){
-                    alert("登录信息超时,请重新登录");
+                    show_tips(0, "登录信息超时,请重新登录");
                     window.location = '../html/login.html';
                 }
             }
@@ -259,7 +259,7 @@ function initialData(){
 //                alert("append done");
             },
             error:function () {
-                alert("网络连接不畅通");
+                show_tips(0, "网络连接不畅通");
             }
         });
 
@@ -277,8 +277,9 @@ function testTag() {
             if(document.getElementById("tag_bar").childElementCount>0){
                 if(getTags()!=null && $.inArray(new_tag_to_add, getTags())>=0){
                     tag = false;
-                    document.getElementById("tagTip").innerHTML = "请勿选择重复标签!";
+                    // document.getElementById("tagTip").innerHTML = "请勿选择重复标签!";
                     // show_tips(0,'请勿重复输入标签');
+                    $("#tags_input").val("");
                     return;
                 }
             }

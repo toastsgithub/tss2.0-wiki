@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>新一代编辑界面</title>
+    <title>edit</title>
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
     <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
     <!--<script src="../js/editormd.js"></script>-->
@@ -33,9 +33,8 @@
     <script src="../js/verificationLogin.js"></script>
     <script src="../js/bootstrap-switch.min.js"></script>
     <script src="../js/verificationLogin.js"></script>
-    <script>
-        var judge_type = false;
-    </script>
+    <script src="../js/edit_oldentry.js"></script>
+
 </head>
 <body>
 <!--<link rel="stylesheet" href="editormd.min.css" />-->
@@ -78,14 +77,14 @@
         <div class="col-sm-6" style="margin-bottom: 10px;">
             <div class="input-group">
                 <span class="input-group-addon">条目名称</span>
-                <input type="text" class="form-control" placeholder="" aria-describedby="basic-addon1" id="name_input">
+                <input type="text" class="form-control" placeholder="" aria-describedby="basic-addon1" id="name_input" readonly="readonly">
             </div>
-            <div id="nameTip" class="input_tip"></div>
+            <!--<div id="nameTip" class="input_tip"></div>-->
         </div>
         <div class="col-sm-6">
             <!--<div class="input-group">-->
-                <!--<span class="input-group-addon" >别名</span>-->
-                <!--<input type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">-->
+            <!--<span class="input-group-addon" >别名</span>-->
+            <!--<input type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">-->
             <!--</div>-->
 
             <div class="input-group" style="">
@@ -110,8 +109,8 @@
         </div>
         <div class="col-sm-6">
             <!--<div class="input-group">-->
-                <!--<span class="input-group-addon" id="">标签</span>-->
-                <!--<input id="tags_input" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">-->
+            <!--<span class="input-group-addon" id="">标签</span>-->
+            <!--<input id="tags_input" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">-->
             <!--</div>-->
             <div class="input-group" style="">
                 <span class="input-group-addon">标签</span>
@@ -226,16 +225,28 @@
 
 </script>
 <script>
-    initialData();
-    testAll();
-    get_welcome();
+
+    name = true;
+    type = true;
+    tag = true;
+    initial_data_for_old_edit();
+    testType();
+    testTag();
+    testAlias();
+    var login = get_welcome();
+    alert("!!!!!!!!!login  = " + login);
+    if(!login){
+        window.location = "../html/login.html?next=editor";
+    }
+    get_entry_data();
+
 </script>
 <script>
     $(document).ready(function () {
-        var  title = location.href.split('?')[1];
-        if(title!= undefined){
-             document.getElementById('name_input').value = title.split('=')[1];
-        }
+//        var  title = location.href.split('?')[1];
+//        if(title!= undefined){
+//            document.getElementById('name_input').value = title.split('=')[1];
+//        }
 //        origin_width_of_input = document.getElementById('tags_input').offsetWidth;
 //        origin_width_of_alias_input = document.getElementById('alias_input').offsetWidth;
     });
