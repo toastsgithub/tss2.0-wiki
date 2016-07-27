@@ -580,6 +580,7 @@ function showSearchResult(content, num){
         //-----------------------革命的分界线--------------------------
         var new_entry_div = document.createElement('div');
         new_entry_div.className = 'panel panel-primary';
+        new_entry_div.style.horizAlign = "center";
         // new_entry_div.style.marginBottom = "10px";
         var new_entry_head_div = document.createElement('div');
         new_entry_head_div.className = 'panel-heading';
