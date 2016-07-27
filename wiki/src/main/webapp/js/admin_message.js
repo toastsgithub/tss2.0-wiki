@@ -49,10 +49,7 @@ function init_message_table(){
         table.cell(selected_row,0).data(1).draw();
         read_msg(id);
         pop_test(id);
-        // var url = "/html/duck_stockDetail.html"+"?code="+value;
-        // window.location.href = url;
-//            showStockChart(value);
-//                }
+        
     } );
 }
 
@@ -66,6 +63,7 @@ function read_msg(id) {
             // alert('bingo');
             var table = $('#message_table').DataTable();
             table.draw();
+            load_message_num();
         },
         error:function (data) {
             alert("errorrrrrrr");

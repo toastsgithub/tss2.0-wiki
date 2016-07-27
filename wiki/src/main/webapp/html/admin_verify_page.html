@@ -95,12 +95,38 @@
             <div id="verify_bar">
                 <div class="btn-group" style="width: 100%">
                     <button id="add_btn" class="btn btn-primary" onclick=verify(1)>审核通过</button>
-                    <button class="btn btn-danger" onclick=verify(0)>拒绝添加</button>
+                    <button class="btn btn-danger" onclick=edit_message();>拒绝添加</button>
                 </div>
             </div>
 
+        </div>
+    </div>
 
+    <div id="pop_test" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" style="cursor: default">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div id="msg_title" class="modal-header">
+                    <span class="glyphicon glyphicon-exclamation-sign"></span>
+                    <span id="message_title">提示</span>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-header">
+                    <!--<span class="glyphicon glyphicon-user"></span>-->
+                    <!--<span>from</span>-->
+                    <span>请告知编辑者您拒绝的理由</span>
+                </div>
+                <div id="msg_content" class="modal-body">
+                    <!--<input type="text" placeholder="请输入'确认'来继续提交" class="form-control">-->
+                    <!--<button class="btn btn-danger">继续提交</button>-->
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="拒绝理由" id="refuse_reason_input">
+                    <span class="input-group-btn">
+                        <button class="btn btn-danger" type="button" onclick=confirm_test();>发送</button>
+                    </span>
+                    </div>
 
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -217,5 +243,23 @@
 
     }
 
+    function edit_message() {
+        $('#pop_test').modal();
+    }
+    
+    function submit_message(to_user) {
+        var value = document.getElementById('refuse_reason_input').value;
+        $.ajax({
+            url:'/message/send',
+            type:'get',
+            data:{to:to_user,message:value},
+            success:function (data) {
+              location.href = '../html/admin_message_page.html'
+            },
+            error:function (data) {
+                alert('error');
+            }
+        });
+    }
 </script>
 </html>
