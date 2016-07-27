@@ -363,7 +363,6 @@ function load_all_outline_content(){
  * 在大纲树的点击事件中触发
  * @param outline_key 大纲节点名称
  */
-//var zhaiyao=["\n  摘要：123321，上山打老虎怎么样SDHCUSIC会发生丢还没看到妇女金额共和国viwegrjhvoigerhvoiejrpvjrepojvifdjvjleq 呢抗日女哦ieqrjfqpoewojgnfkdvfre分部日哈佛"];
 function display_outline_content(outline_key) {
     remove_all_child('search_result_content');
     remove_all_child('nav_part');
@@ -581,6 +580,7 @@ function showSearchResult(content, num){
         //-----------------------革命的分界线--------------------------
         var new_entry_div = document.createElement('div');
         new_entry_div.className = 'panel panel-primary';
+        new_entry_div.style.horizAlign = "center";
         // new_entry_div.style.marginBottom = "10px";
         var new_entry_head_div = document.createElement('div');
         new_entry_head_div.className = 'panel-heading';

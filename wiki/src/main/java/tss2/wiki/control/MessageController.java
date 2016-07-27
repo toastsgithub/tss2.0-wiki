@@ -91,8 +91,8 @@ public class MessageController {
         WikiUser user = session.getUser();
         username = " 用户" + user.getUsername() + " ";
         WikiMessage message = new WikiMessage(user.getUsername(), "#1", "请求增加条目" + title,
-                String.format("%s请求增加条目“%s”，[点击这里](http://localhost:8080/html/Entry_editor.html?title=%s)增加这个条目。" +
-                        "或者(点击这里)[]通知这个用户词条已经被创建。", username, title, title));
+                String.format("%s请求增加条目“%s”，<a href='/html/Entry_editor.html?title=%s'>[点击这里]</a>增加这个条目。" +
+                        "或者<a>点击这里</a>通知这个用户词条已经被创建。", username, title, title));
         message.send();
     }
 
