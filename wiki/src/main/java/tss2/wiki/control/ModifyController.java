@@ -74,7 +74,7 @@ public class ModifyController {
         WikiUser user = session.getUser();
         WikiAdministrator wikiAdministrator = new WikiAdministrator();
         if(agree == 1){
-            wikiAdministrator.agree(id);
+            wikiAdministrator.agree(user.getUsername(),id);
         }else {
             wikiAdministrator.reject(user.getUsername(),id);
         }

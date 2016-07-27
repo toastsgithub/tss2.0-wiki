@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 public class WikiAdministrator {
 
-    public void agree(long id){
+    public void agree(String admin,long id){
         DAOBase[] contents = Verifying.query().where("id = '" + id + "'");
         Verifying verifying = (Verifying)contents[0];
         DAOBase[] content1 = VerifyingReference.query().where("verifyId = '" + id + "'");
@@ -46,6 +46,8 @@ public class WikiAdministrator {
             }
         }
 
+        WikiMessage wikiMessage = new WikiMessage(admin,verifying.username,"您有新的反馈信息","管理员"+admin+"批准了你的修改申请");
+        wikiMessage.send();
 
 
     }
