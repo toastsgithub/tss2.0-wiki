@@ -490,8 +490,8 @@ function load_page_btns(num){
     var nav = document.createElement('nav');
     nav_part.appendChild(nav);
 
-    // var ul = document.createElement('ul');
-    // ul.className = 'pagination nav ';
+    var ul = document.createElement('ul');
+    ul.className = 'pagination nav ';
     // var previous = document.createElement('li');
     // previous.innerHTML = "<a href='#' aria-label='Previous'><span aria-hidden='true'>&laquo;</span></a>";
     // ul.appendChild(previous);
@@ -507,7 +507,7 @@ function load_page_btns(num){
     // var after = document.createElement('li');
     // after.innerHTML = "<a href='#' aria-label='Next'><span aria-hidden='true'>&raquo;</span></a>";
     // ul.appendChild(after);
-    // nav.appendChild(ul);
+    nav.appendChild(ul);
     return pages;
   
 }
