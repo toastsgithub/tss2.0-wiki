@@ -103,7 +103,7 @@ function showSearchResult(state, id){
         success: function (data) {
             if (data.error == 0) {
                 view_message = data.entry;
-
+                fill(view_message);
             } else {
                 alert('服务器响应内容中有错误:' + data.message);
             }
@@ -112,4 +112,11 @@ function showSearchResult(state, id){
             alert('error');
         }
     });
+}
+
+function fill(data) {
+    var title = document.getElementById("article_title");
+    title.innerHTML = data.title;
+    var update_time = document.getElementById("last_update_time");
+    update_time.innerHTML = data.timestamp;
 }
