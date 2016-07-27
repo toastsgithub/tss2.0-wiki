@@ -13,7 +13,7 @@ function get_entry_data(){
         async: false,
         success: function (data) {
             if(data.exist == 0){
-                alert("the entry does not exist!");
+                show_tips(0, "the entry does not exist!")
                 return;
             }
             var alias = data.data.aliasByTitle;// may be null
@@ -47,7 +47,7 @@ function get_entry_data(){
                 // do nothing
             }else{
                 for(var i in reference){
-                    add_reference_input_area();
+                    add_reference_input_area2();
                     $("#reference_name_"+i).val(reference[i].name);
                     $("#reference_url_"+i).val(reference[i].url);
                 }
