@@ -8,8 +8,6 @@ import tss2.wiki.domain.RecordsResult;
 import tss2.wiki.model.WikiRecord;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.util.List;
 import java.util.stream.Collectors;
 
