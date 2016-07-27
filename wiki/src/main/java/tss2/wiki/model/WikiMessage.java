@@ -29,6 +29,10 @@ public class WikiMessage {
         }
     }
 
+    public WikiMessage(Message message) {
+        dao = message;
+    }
+
     public WikiMessage(String fromUser, String toUser, String title, String detail) {
         dao = new Message();
         dao.messageID = StringUtil.generateTokener(16);
