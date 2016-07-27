@@ -79,7 +79,9 @@ public class WikiUser {
         for (DAOBase dao: ms) {
             for (DAOBase um: ums) {
                 if (dao.get("messageID").toString().equals(um.get("messageID").toString())) {
-                    result.add(new WikiMessage((Message) dao));
+                    WikiMessage message = new WikiMessage((Message) dao);
+                    message.setIsread(((User2Message) um).isread);
+                    result.add(message);
                 }
             }
         }

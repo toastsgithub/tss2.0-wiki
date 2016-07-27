@@ -17,6 +17,12 @@
 <link rel="stylesheet" href="../css/wiki_navigator.css">
 <link rel="stylesheet" href="../css/admin_change_outline.css">
 <!--<script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>-->
+<!--tooltips的依赖-->
+<script src="../js/messenger.min.js"></script>
+<script src="../js/messenger-theme-future.js"></script>
+<script src="../js/wiki_utils.js"></script>
+<link rel="stylesheet" href="../css/messenger-theme-future.css">
+<link rel="stylesheet" href="../css/messenger.css">
 
 <script src="../js/wiki_utils.js"></script>
 <script src="../js/verificationLogin.js"></script>
@@ -69,11 +75,7 @@
                 <button type="button" class="btn btn-default" onclick=location='../html/admin_change_outline.html'>修改大纲</button>
                 <button type="button" class="btn btn-default" onclick=location.href='../html/admin_message_page.html'>消息中心<span class="badge" id="message_num"></span></button>
             </div>
-            <!--<div id="tool_box">-->
-            <!--<div class="tool_btn">-->
-            <!--??-->
-            <!--</div>-->
-            <!--</div>-->
+
         </div>
 
 
@@ -161,13 +163,36 @@
     }
     function confirm_test() {
         var confirm = document.getElementById('change_confirm_input').value;
-        alert(confirm);
         if(confirm == '确认'){
+            $('#pop_test').modal('hide');
             save_outline();
         }else{
 //            confirm_change()
-            show_tips(1,'确认输入错误');
+            show_tips(0,'确认输入错误');
         }
+    }
+    /**
+     * 无条件读取当前的树的结构并发送到后端保存
+     * @params:none
+     */
+    function save_outline() {
+        var data_obj = $('#outline').jstree(true).get_json();
+        alert(JSON.stringify(data_obj[0]));
+        $.ajax({
+            url:'/outline',
+            type:'put',
+            contentType:'application/json',
+            data:JSON.stringify(data_obj[0]),
+            success:function () {
+
+                show_tips(1,'更改成功')
+            },
+            error:function (data) {
+                show_tips(0,'更改失败');
+                alert('error'+JSON.stringify(data));
+            }
+        });
+
     }
 </script>
 </body>

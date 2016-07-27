@@ -53,28 +53,28 @@ $.get(
 
 
 // var rowData={"软件":[{"一班":[{"二班":["说好的孙浩大哥呢"]},"考拉","浣熊"]},{"三班":["喵"]},{"四班":["歪歪"]},{"怎么这么多":["好烦啊","我编不下去了"]},"还有？？"]};
-/**
- * 无条件读取当前的树的结构并发送到后端保存
- * @params:none
- */
-function save_outline() {
-    var data_obj = $('#moutline').jstree(true).get_json();
-    alert(JSON.stringify(data_obj[0]));
-    $.ajax({
-        url:'/outline',
-        type:'put',
-        contentType:'application/json',
-        data:JSON.stringify(data_obj[0]),
-        success:function () {
-
-            alert("success");
-        },
-        error:function (data) {
-            alert('error'+JSON.stringify(data));
-        }
-    });
-    
-}
+// /**
+//  * 无条件读取当前的树的结构并发送到后端保存
+//  * @params:none
+//  */
+// function save_outline() {
+//     var data_obj = $('#moutline').jstree(true).get_json();
+//     alert(JSON.stringify(data_obj[0]));
+//     $.ajax({
+//         url:'/outline',
+//         type:'put',
+//         contentType:'application/json',
+//         data:JSON.stringify(data_obj[0]),
+//         success:function () {
+//
+//             alert("success");
+//         },
+//         error:function (data) {
+//             alert('error'+JSON.stringify(data));
+//         }
+//     });
+//    
+// }
 /**
  * 无条件存储当前的树的结构以及树节点下的条目内容
  */
