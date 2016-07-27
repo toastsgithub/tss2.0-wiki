@@ -33,7 +33,7 @@
             <li class="dropdown">
                 <ul class="dropdown-menu">
                     <li><a href="../html/Outline.html" onclick="">管理大纲(管理员)</a></li>
-                    <li><a href="../html/Entry_editor.html">增加条目(管理员)</a></li>
+                    <li><a href="../html/New_entry_editor.html">增加条目(管理员)</a></li>
                     <li role="separator" class="divider"></li>
                     <li><a href="#">请求增加条目(敬请期待)</a></li>
                     <li><a href="../html/administrator_page.html">管理控制台</a></li>
@@ -60,7 +60,7 @@
     <div class="row" style="margin: 0">
         <div id="left_part" class="col-lg-2 col-md-3 col-xs-3">
             <div class="btn-group-vertical" role="group" aria-label="..." style="width: 100%;margin-top:20px;">
-                <button type="button" class="btn btn-default" onclick=location='../html/Entry_editor.html'>增加条目</button>
+                <button type="button" class="btn btn-default" onclick=location='../html/New_entry_editor.html'>增加条目</button>
                 <button type="button" class="btn btn-default">修改大纲</button>
                 <button type="button" class="btn btn-default">消息中心<span class="badge" id="message_num"></span></button>
             </div>
@@ -68,7 +68,7 @@
 
 
         <div id="right_part" class="col-lg-10 col-md-9 col-xs-9">
-            <table id="message_table" class="display table table-bordered">
+            <table id="message_table" class="display table table-bordered" style="cursor: pointer">
                 <thead>
                 <tr>
 
@@ -85,7 +85,7 @@
             </table>
             <!--<button onclick=pop_test()>pop out</button>-->
 
-            <div id="pop_test" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+            <div id="pop_test" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" style="cursor: default">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div id="msg_title" class="modal-header">
@@ -104,7 +104,6 @@
                     </div>
                 </div>
             </div>
-            <div id="test_part"></div>
         </div>
     </div>
 </div>

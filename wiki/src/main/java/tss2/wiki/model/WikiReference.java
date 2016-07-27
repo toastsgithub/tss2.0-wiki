@@ -3,6 +3,7 @@ package tss2.wiki.model;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import tss2.wiki.dao.Reference;
+import tss2.wiki.dao.VerifyingReference;
 import tss2.wiki.dao.core.DAOBase;
 import tss2.wiki.util.TimeUtil;
 
@@ -34,6 +35,21 @@ public class WikiReference {
     public void modify(ArrayList reference){
         changeToReference(reference);
     }
+
+    public void move(ArrayList<VerifyingReference> arrayList){
+        ArrayList<Reference> referenceArrayList = new ArrayList<>();
+        for(int i= 0 ; i < arrayList.size(); i++ ){
+            Reference temp = new Reference();
+            temp.entryid = entryid;
+            temp.title = title;
+            temp.name = arrayList.get(i).name;
+            temp.url = arrayList.get(i).url;
+            temp.timestamp = TimeUtil.getTimeStampByDate();
+            referenceArrayList.add(temp);
+        }
+        modifyReference(referenceArrayList);
+    }
+
 
     private void loadReferences() {
         dao = new ArrayList<>();

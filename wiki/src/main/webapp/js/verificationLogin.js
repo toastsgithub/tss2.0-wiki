@@ -28,7 +28,7 @@ function verif(){
                 show_illegal_tip();
            } else {
                 if(location.search.split("=")[1]=="editor"){
-                    location.href = "../html/Entry_editor.html";
+                    location.href = "../html/New_entry_editor.html";
                 }else {
                     location.href = "../html/Outline.html";
                 }
@@ -80,6 +80,7 @@ function get_welcome() {
 
     var login = false;
     var user_name;
+    var user_type;
 
         $.ajax({
             url: '/user/info',
@@ -90,13 +91,19 @@ function get_welcome() {
                 if(data.login == true){
                     login = true;
                     user_name = data.data.username;
+                    user_type = data.data.type;
                 }
             },
             error: function (data) {
                 alert("error!");
             }
         })
-    alert("login = " + login);
+// <<<<<<< HEAD
+//     }
+//     // alert("login = " + login);
+// =======
+//     alert("login = " + login);
+// >>>>>>> 3f9759c4453981c290be6201066930c94f659481
     if(login == false){
         document.getElementById("login_button").innerHTML="<a href='../html/login.html'>登录</a>";
         document.getElementById("welcome_tip").innerHTML="";
@@ -119,8 +126,10 @@ function get_welcome() {
         }else{
             welcome =  "已经是深夜了,早点休息, " + user_name;
         }
+        user_message(user_type);
         document.getElementById("login_button").innerHTML="";
         document.getElementById("welcome_tip").innerHTML=welcome+document.getElementById("welcome_tip").innerHTML;
+        
         return true;
     }
 }
@@ -155,7 +164,58 @@ function clearLogin(){
     });
 }
 
-function n_user_message(id){
-
+function user_message(user_type){
+    var parent = document.getElementById('welcome_user').parentNode;
+    var li = document.createElement('li');
+    li.style.marginTop = "13px";
+    var image;
+    $.ajax({
+        url: '/message',
+        type: 'get',
+        success: function(data){
+            if("error" == 1){
+                alert("message pass error!");
+                return;
+            }else{
+                if(data==[]){
+                    //显示没有消息
+                    image = document.createElement('img');
+                    image.src = "../resource/icon/message.png";
+                    image.style.height = '20px';
+                    image.style.width = '20px';
+                }else{
+                    var hasNotRead = false;
+                    for(var i in data.data){
+                        if(data.data[i].isread == 0){
+                            hasNotRead = true;
+                        }
+                    }
+                    if(hasNotRead){
+                        //显示有未读消息
+                        image = document.createElement('img');
+                        image.src = "../resource/icon/new_message.png";
+                        image.style.height = '20px';
+                        image.style.width = '20px';
+                    }else{
+                        //显示没有未读消息
+                        image = document.createElement('img');
+                        image.src = "../resource/icon/message.png";
+                        image.style.height = '20px';
+                        image.style.width = '20px';
+                    }
+                }
+            }
+            image.onclick = function(){
+                if(user_type==1) {
+                    window.location = "../html/admin_message_page.html";
+                }else if(user_type == 0){
+                    window.location = "../html/user_message_page.html";
+                }
+            }
+            image.style.cursor = "pointer";
+            li.appendChild(image);
+            parent.appendChild(li);
+        }
+    })
 }
 
