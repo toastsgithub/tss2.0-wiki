@@ -89,6 +89,7 @@ public class WikiMessage {
             um.save();
         }
         DAOBase[] ms = Message.query().where("messageID = '" + dao.messageID + "'");
+
         Message m = (Message) ms[0];
         m.sent = 1;
         m.save();

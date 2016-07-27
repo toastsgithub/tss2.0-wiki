@@ -48,7 +48,7 @@ function init_message_table(){
         var id = table.cell(selected_row,4).data();
         table.cell(selected_row,0).data(1).draw();
         read_msg(id);
-        pop_test(value);
+        pop_test(id);
         // var url = "/html/duck_stockDetail.html"+"?code="+value;
         // window.location.href = url;
 //            showStockChart(value);
@@ -107,13 +107,15 @@ function load_message() {
     //     .draw();
 }
 
-function pop_test(title) {
+function pop_test(id) {
     var content = '';
     var user = '';
+    var title = '';
     for (x in all_message){
-        if(all_message[x].title == title){
+        if(all_message[x].messageID == id){
             content = all_message[x].detail;
             user = all_message[x].fromUser;
+            title = all_message[x].title;
             break;
         }
     }

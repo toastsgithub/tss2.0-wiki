@@ -85,7 +85,7 @@ public class ContentServiceImpl implements ContentService {
             WikiVerifyingReference wikiVerifyingReference = new WikiVerifyingReference(wikiVerifying.getID());
             wikiVerifyingReference.modify(r);
             WikiMessage wikiMessage = new WikiMessage(user.getUsername(),"#1","有新的提交信息",
-                    "用户"+user.getUsername()+"提交了<em>"+title+"</em>的修改申请. 请前往<a href='/html/admin_verify_page.html?title="+title+"&id="+wikiVerifying.getID()+"'审核这个申请</a>.");
+                    "用户"+user.getUsername()+"提交了<em>"+title+"</em>的修改申请. 请前往<a href=\"/html/admin_verify_page.html?title="+title+"&id="+wikiVerifying.getID()+"\"审核这个申请</a>.");
             wikiMessage.send();
             return new CommonResult(0,"submit successfully!");
         }
