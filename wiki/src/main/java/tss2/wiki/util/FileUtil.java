@@ -16,7 +16,9 @@ public class FileUtil {
         String content = "";
         try {
             File file = new File(path);
-            file.getParentFile().mkdirs();
+            File parent = file.getParentFile();
+            if (parent != null)
+                file.getParentFile().mkdirs();
             fin = new FileInputStream(path);
             scanner = new Scanner(fin);
             while (scanner.hasNext()) {

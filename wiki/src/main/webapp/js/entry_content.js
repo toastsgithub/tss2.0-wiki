@@ -23,7 +23,7 @@ function load_content(title){
             // alert(JSON.stringify(data));
             var markdown_data;
             if (data.data) {
-                markdown = data.data.content;
+                markdown_data = data.data.content;
                 var converter = new showdown.Converter(),
                     // text      = '#hello, markdown!\n\n|name|age|\n|--|--|\n|Toast|20|',
                     text      = markdown_data,

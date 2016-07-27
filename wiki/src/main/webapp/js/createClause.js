@@ -70,16 +70,16 @@ function addClause() {
     var content = show_markdown();
     //这里摘要的提取还需要精细化
 
-    if(summary==''){
-        //如果没有输入摘要
-        if(content.length>100) {
-            summary = content.substring(0, 100);
-        }else{
-            summary = content;
-        }
-    }else{
-        //nothing
-    }
+    // if(summary==''){
+    //     //如果没有输入摘要
+    //     if(content.length>100) {
+    //         summary = content.substring(0, 100);
+    //     }else{
+    //         summary = content;
+    //     }
+    // }else{
+    //     //nothing
+    // }
     // alert("----->content--->"+content);
     // content = "###this is content";
     // alert("info");

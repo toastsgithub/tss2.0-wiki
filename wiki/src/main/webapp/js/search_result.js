@@ -29,8 +29,9 @@ function search_and_load(keyword) {
                 show_tips(1,"load finished at "+get_current_time());
             }
         },
-        error:function () {
+        error:function (data) {
             show_tips(0,'some thing goes wrong');
+
         }
     });
 }
