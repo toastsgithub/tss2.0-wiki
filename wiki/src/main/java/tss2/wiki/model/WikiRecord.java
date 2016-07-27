@@ -1,5 +1,6 @@
 package tss2.wiki.model;
 
+import tss2.wiki.control.ApiController;
 import tss2.wiki.dao.Alias;
 import tss2.wiki.dao.UpdateHistory;
 import tss2.wiki.dao.WikiEntry;
@@ -439,7 +440,7 @@ public class WikiRecord {
         return content;
     }
 
-    public static String polishForDisplay(String content) {
+    public static String polishForDisplay(String type, String content) {
         DAOBase[] wikis = WikiEntry.query().where("");
         for (DAOBase wiki : wikis) {
             char[] bytes = new char[wiki.get("title").toString().length()];
@@ -447,7 +448,11 @@ public class WikiRecord {
                 bytes[i] = wiki.get("title").toString().charAt(i);
             }
             String regex = '[' + StringUtil.concatArray("][", bytes) + ']';
-            content = content.replaceFirst(wiki.get("title").toString(), "<span class='wiki_match' href='http://121.42.184.4:8080/html/entry_content.html?entry=" + wiki.get("title").toString() + "'>" + wiki.get("title").toString() + "</span>");
+            if (type.equals("xml")) {
+                content = content.replaceFirst(wiki.get("title").toString(), "<span class='wiki_match' href='" + ApiController.HOST_URL + "html/entry_content.html?entry=" + wiki.get("title").toString() + "'>" + wiki.get("title").toString() + "</span>");
+            } else if (type.equals("markdown")) {
+                content = content.replaceFirst(wiki.get("title").toString(), "[" + wiki.get("title").toString() + "](" + ApiController.HOST_URL + "html/entry_content.html?entry=" + wiki.get("title").toString() + ")");
+            }
         }
         return content;
     }
@@ -458,6 +463,6 @@ public class WikiRecord {
     private static WikiAlias wikiAlias;
 
     public static void main(String args[]) {
-        System.out.println(polishForDisplay("我正在进行测试,看看如果段段丢了搜狗能不能搜到了"));
+        System.out.println(polishForDisplay("markdown", "我正在进行测试,看看如果段段丢了搜狗能不能搜到了"));
     }
 }
