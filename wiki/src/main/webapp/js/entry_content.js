@@ -31,6 +31,31 @@ function load_content(title){
                 // alert(data.visits);
                 document.getElementById('access_times').innerHTML+=data.data.visits;
                 document.getElementById('last_update_time').innerHTML+=data.data.date;
+                var question = document.createElement('div');
+            // <div style="margin-left: 20px">
+            //         <div id="question_title">
+            //     <h3>对此条目仍有问题?</h3>
+            //     </div>
+            //     <div id="question"></div>
+            //         </div>
+
+
+                $.ajax({
+                    url: 'http://110.173.17.140:8080/api/ask?wikiId='+data.data.id,
+                    type: 'get',
+                    success: function (data0) {
+                        alert("data = " + data0);
+                        question.style.marginLeft = "20px";
+                        question.innerHTML = "<div id='question_title' style='margin-top: 30px;'><h4>对此条目仍有疑问?</h4></div><div id='question'><a href = 'http://" + data0+ "'>去这里提问</a></div>"
+                        document.getElementById('right_part').appendChild(question);
+                    },
+                    error: function (data) {
+                        alert('error');
+                    }
+                })
+               
+
+
             } else {
                 markdown_data = '当前不存在条目*' + title + '* 的详细内容。你可以[创建这个条目](http://localhost:8080/html/Entry_editor.html?title=' + title + ')。' +
                                 '或者你也[请求新增这个条目](/message/wiki?title=' + title + ')。 你也可以将这个条目创建为已存在条目的别名)。';
@@ -60,9 +85,6 @@ function load_content(title){
                     flowChart       : true,  // 默认不解析
                     sequenceDiagram : true  // 默认不解析
                 });
-<<<<<<< HEAD
-            
-=======
 
             var display_panel = document.getElementById('reference');
             var tmp;
@@ -89,7 +111,6 @@ function load_content(title){
                     display_panel.appendChild(br);
                 }
             }
->>>>>>> 97c7d3f05ea18de72d1e63a0ea39ce99756fbefe
         },
         error:function (data) {
             alert("error"+JSON.stringify(data));
