@@ -63,6 +63,10 @@ public class WikiModifyInfor {
                 return null;
             }
             Verifying verifying = (Verifying)contents[0];
+
+            if(verifying.refused == 1){
+                return null;
+            }
             entry.setUsername(verifying.username);
             entry.setCategories(verifying.categories);
             entry.setSummery(verifying.summery);
