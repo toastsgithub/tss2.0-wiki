@@ -74,7 +74,7 @@
 <div class="container-fluid">
     <div class="row" style="">
         <div id="left_part_wrapper" class="col-lg-2 col-md-3 col-sm-3">
-            <div id="left_part" class="">
+            <div id="left_part" class="" style="overflow: scroll;">
 
             </div>
         </div>
@@ -168,6 +168,7 @@
             oDiv.className= baseclass + " div1";
         }
         oDiv.style.width = (left_part_width - 15 * 2) + "px";
+        oDiv.style.height = (document.documentElement.clientHeight - 15) + "px";
     };
 
 
