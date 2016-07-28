@@ -145,6 +145,13 @@ function showSearchResult(state, id) {
                     display_panel.appendChild(br);
                 }
             }
+            var tags = document.getElementById("tags");
+            for (var tagid in view_message.tags) {
+                var tag = document.createElement("span");
+                tag.className = "label label-primary";
+                tag.innerHTML = tags[tagid];
+                tags.appendChild(tag);
+            }
         },
         error: function (data) {
             alert('error');
