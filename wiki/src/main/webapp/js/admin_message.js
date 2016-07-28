@@ -4,6 +4,8 @@
  */
 var all_message;
 
+
+
 function init_message_table(){
     var table = $('#message_table').DataTable({
         data:null,

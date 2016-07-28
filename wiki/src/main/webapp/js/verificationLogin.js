@@ -3,7 +3,6 @@
  */
 
 
-
 function verif(){
     // var xhr = new XMLHttpRequest();
     // xhr.s
@@ -92,18 +91,19 @@ function get_welcome() {
                     login = true;
                     user_name = data.data.username;
                     user_type = data.data.type;
+                    if(user_type==0){
+                        try {
+                            document.getElementById('console_button').parentNode.removeChild(document.getElementById('console_button'));
+                        }catch (e){
+                            // do nothing
+                        }
+                    }
                 }
             },
             error: function (data) {
                 alert("error!");
             }
         })
-// <<<<<<< HEAD
-//     }
-//     // alert("login = " + login);
-// =======
-//     alert("login = " + login);
-// >>>>>>> 3f9759c4453981c290be6201066930c94f659481
     if(login == false){
         document.getElementById("login_button").innerHTML="<a href='../html/login.html'>登录</a>";
         document.getElementById("welcome_tip").innerHTML="";
