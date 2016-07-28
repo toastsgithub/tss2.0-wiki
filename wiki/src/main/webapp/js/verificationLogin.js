@@ -76,7 +76,6 @@ function show_tooltips() {
 
 
 function get_welcome() {
-alert('get welcome');
     var login = false;
     var user_name;
     var user_type;
@@ -150,15 +149,12 @@ function deleteCookie(name){
 }
 
 function clearLogin(){
-    alert('damn');
     $.ajax({
         url: '/user/logout',
         type: 'get',
         async: false,
         success: function (data) {
-            alert('here');
-            window.location.href = "../html/Outline.html";
-            // location.href = 'http://www.baidu.com';
+    
         },
         error: function (data) {
             alert('error!');
