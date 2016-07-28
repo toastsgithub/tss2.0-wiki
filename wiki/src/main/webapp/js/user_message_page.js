@@ -49,7 +49,7 @@ function init_message_table(){
         table.cell(selected_row,0).data(1).draw();
         var id = table.cell(selected_row,4).data();
         read_msg(id);
-        pop_test(value);
+        pop_test(id);
         // var url = "/html/duck_stockDetail.html"+"?code="+value;
         // window.location.href = url;
 //            showStockChart(value);
@@ -64,7 +64,7 @@ function read_msg(id) {
         url:url,
         type:'get',
         success:function (data) {
-            alert('bingo');
+            // alert('bingo');
         },
         error:function (data) {
             alert("errorrrrrrr");
@@ -88,31 +88,18 @@ function load_message() {
             alert('error');
         }
     });
-    // table.rows.add( [ {
-    //         "title":       "Tiger Nixon",
-    //         "source":   "System Architect",
-    //         "salary":     "$3,120",
-    //         "start_date": "2011/04/25",
-    //         "office":     "Edinburgh",
-    //         "extn":       "5421"
-    //     }, {
-    //         "sdsad": "Garrett Winters",
-    //         "title": "Director",
-    //         "source": "$5,300",
-    //         "start_date": "2011/07/25",
-    //         "office": "Edinburgh",
-    //         "extn": "8422"
-    //     } ] )
-    //     .draw();
+ 
 }
 
-function pop_test(title) {
+function pop_test(id) {
     var content = '';
     var user = '';
+    var title = '';
     for (x in all_message){
-        if(all_message[x].title == title){
+        if(all_message[x].messageID == id){
             content = all_message[x].detail;
             user = all_message[x].fromUser;
+            title = all_message[x].title;
             break;
         }
     }

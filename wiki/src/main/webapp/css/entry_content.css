@@ -9,30 +9,29 @@ div{
 
 #left_part{
     background-color: #f6f6f6;
-    height: 1000px;
+    /*height: 1000px;*/
 }
 
 #right_part {
     /*background-color: #2aabd2;*/
     /*border: solid 1px #c5a6a8;*/
     /*background-image: url("../resource/image/lightpaperfibers_@2X.png");*/
-    height: 1000px;
+    /*height: 1000px;*/
 }
-#article_info{
-    min-height: 100px;
-    background-color: #f6f6f6;
-}
+/*#article_info{*/
+    /*min-height: 100px;*/
+    /*background-color: #f6f6f6;*/
+/*}*/
 #article_title{
     font-size: 30px;
-    margin-left: 20px;
     /*background-color: #01a252;*/
 }
-#last_update_time{
-    margin-left: 20px;
-}
-#access_times{
-    margin-left: 20px;
-}
+/*#last_update_time{*/
+    /*margin-left: 20px;*/
+/*}*/
+/*#access_times{*/
+    /*margin-left: 20px;*/
+/*}*/
 #search_and_btn{
     float: right;
     margin-bottom:10px;

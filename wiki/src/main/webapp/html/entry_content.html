@@ -71,13 +71,13 @@
 </nav>
 <div class="container-fluid">
     <div class="row" style="">
-        <div id="left_part" class="col-sm-2">
+        <div id="left_part" class="col-lg-2 col-md-3 col-sm-3">
 
         </div>
 
-        <div id="right_part" class="col-xs-10">
+        <div id="right_part" class="col-lg-10 col-md-9 col-sm-9" style="padding: 20px">
 
-            <div id="search_module" class="row" style="margin-top: 10px;">
+            <div id="search_module" class="row" style="">
                 <div id="search_and_btn" class="input-group col-lg-5 col-md-6 col-sm-7">
                     <input id="search_input" type="text" class="form-control" placeholder="Search for...">
                         <span class="input-group-btn">
@@ -87,22 +87,59 @@
                     <!--<button id="search_btn" onclick=search_entry();>search</button>-->
                 </div>
             </div>
-            <div id="article_info">
-                <div id="article_title">title</div>
-                <div id="tags">标签:</div>
-                <div id="category">目录:</div>
-                <div id="last_update_time">最后更新日期:</div>
-                <div id="last_editor">最后更新人:</div>
 
-                <div id="access_times">访问次数:</div>
-            </div>
-            <div id="test-editormd-view"></div>
-            <div style="margin-left: 20px">
-                <div id="reference_title">
-                    <h3>参考资料</h3>
+            <div class="row">
+                <div id="article_info" class="panel panel-default">
+                    <div class="panel-body" style="padding: 10px">
+                        <div id="article_title">title</div>
+                        <div id="tags">标签:</div>
+                        <div id="category">目录:</div>
+                        <div id="last_update_time">最后更新日期:</div>
+                        <div id="last_editor">最后更新人:</div>
+                        <div id="access_times">访问次数:</div>
+                    </div>
                 </div>
-                <div id="reference"></div>
+                <div id="test-editormd-view"></div>
+                <div style="margin-left: 20px">
+                    <div id="reference_title">
+                        <h3>参考资料</h3>
+                    </div>
+                    <div id="reference"></div>
+                </div>
             </div>
+
+
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading" style="">相关问题</div>
+                <div class="panel-body">
+                    <p>在软乎上可能有一些与这个条目相关的问题,我们已经为您在下方列出</p>
+                </div>
+
+                <!-- List group -->
+                <ul class="list-group" id="question_panel">
+                    <!--<button class="list-group-item">-->
+                        <!--<div class="media">-->
+                            <!--&lt;!&ndash;<div class="media-left">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<a href="#">&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<img class="media-object" src="http://www.gravatar.com/avatar/2d1dc9299711e0d5fa5342d737af963a.jpg?s=100&d=identicon" alt="...">&ndash;&gt;-->
+                                <!--&lt;!&ndash;</a>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                            <!--<div class="media-body">-->
+                                <!--<h4 class="media-heading">问题标题</h4>-->
+                                <!--<div>提问人:123</div>-->
+                                <!--<div>2016-06-01</div>-->
+                                <!--<div>这是一个软乎的问题demo</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</button>-->
+                    <!--<li class="list-group-item">Dapibus ac facilisis in</li>-->
+                    <!--<button class="list-group-item" href="http://www.baidu.com">Morbi leo risus</button>-->
+                    <!--<li class="list-group-item">Porta ac consectetur ac</li>-->
+                    <!--<button class="list-group-item">Vestibulum at eros</button>-->
+                </ul>
+            </div>
+
 
         </div>
     </div>

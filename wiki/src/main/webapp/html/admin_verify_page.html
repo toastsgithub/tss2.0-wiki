@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Prototype</title>
+    <title>审核</title>
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
     <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
     <!--<script src="../js/editormd.js"></script>-->
@@ -77,9 +77,12 @@
                 <div class="panel-body">
                     <div id="article_info">
                         <div id="article_title">title</div>
-                        <div id="category">目录:</div>
                         <div id="alias">别名:</div>
                         <div id="tags">标签:</div>
+                        <div id="category">目录:</div>
+                        <div id="submit_time">提交时间:</div>
+                        <div>提交人:<span id="submit_user"></span></div>
+
                     </div>
                     <div id="test-editormd-view"></div>
                     <div style="margin-left: 20px">
@@ -121,7 +124,7 @@
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="拒绝理由" id="refuse_reason_input">
                     <span class="input-group-btn">
-                        <button class="btn btn-danger" type="button" onclick=confirm_test();>发送</button>
+                        <button class="btn btn-danger" type="button" onclick=submit_message(document.getElementById('submit_user').innerHTML);>发送</button>
                     </span>
                     </div>
 
@@ -173,7 +176,17 @@
                     // alert(data.visits);
                     document.getElementById('category').innerHTML+=data.entry.categories;
                     document.getElementById('alias').innerHTML+=data.entry.alias;
-                    document.getElementById('tags').innerHTML+=data.entry.tags;
+//                  document.getElementById('tags').innerHTML+=data.entry.tags;
+                    for(x in data.entry.tags){
+                        // <span class="label label-primary">Primary</span>
+                        var new_tag = document.createElement('span');
+                        new_tag.className = 'label label-primary';
+                        new_tag.innerHTML = data.entry.tags[x];
+                        new_tag.style.marginRight = '5px';
+                        document.getElementById('tags').appendChild(new_tag);
+                    }
+                    document.getElementById('submit_time').innerHTML+=data.entry.timestamp;
+                    document.getElementById('submit_user').innerHTML+=data.entry.username;
 //                } else {
 //                    markdown_data = '当前不存在条目*' + id + '* 的详细内容。你可以[创建这个条目](http://localhost:8080/html/Entry_editor.html?title=' + title + ')。' +
 //                            '或者你也[请求新增这个条目](/message/wiki?title=' + title + ')。 你也可以将这个条目创建为已存在条目的别名)。';
@@ -248,7 +261,11 @@
     }
     
     function submit_message(to_user) {
+
         var value = document.getElementById('refuse_reason_input').value;
+        if(value == ''){
+            value = '您的请求被拒绝,详情联系管理员';
+        }
         $.ajax({
             url:'/message/send',
             type:'get',

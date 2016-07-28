@@ -32,8 +32,20 @@ function load_content(title){
                 document.getElementById('access_times').innerHTML+=data.data.visits;
                 document.getElementById('last_update_time').innerHTML+=data.data.date;
                 document.getElementById('category').innerHTML+=data.data.categories;
-                document.getElementById('tags').innerHTML+=data.data.tags;
+                // document.getElementById('tags').innerHTML+=data.data.tags;
+                //加载tag
+                for(x in data.data.tags){
+                // <span class="label label-primary">Primary</span>
+                    var new_tag = document.createElement('span');
+                    new_tag.className = 'label label-primary';
+                    new_tag.innerHTML = data.data.tags[x];
+                    new_tag.style.marginRight = '5px';
+                    document.getElementById('tags').appendChild(new_tag);
+                }
                 document.getElementById('last_editor').innerHTML+=data.data.editor;
+                // load the question
+                
+                load_relative_question_and_ppt(data.data.id);
             } else {
                 markdown_data = '当前不存在条目*' + title + '* 的详细内容。你可以[创建这个条目](http://localhost:8080/html/Entry_editor.html?title=' + title + ')。' +
                                 '或者你也[请求新增这个条目](/message/wiki?title=' + title + ')。 你也可以将这个条目创建为已存在条目的别名)。';
@@ -63,9 +75,7 @@ function load_content(title){
                     flowChart       : true,  // 默认不解析
                     sequenceDiagram : true  // 默认不解析
                 });
-<<<<<<< HEAD
-            
-=======
+
 
             var display_panel = document.getElementById('reference');
             var tmp;
@@ -92,7 +102,6 @@ function load_content(title){
                     display_panel.appendChild(br);
                 }
             }
->>>>>>> 97c7d3f05ea18de72d1e63a0ea39ce99756fbefe
         },
         error:function (data) {
             alert("error"+JSON.stringify(data));
@@ -142,3 +151,105 @@ function delete_entry() {
     });
 }
 
+function load_relative_question_and_ppt(wiki_id) {
+    wiki_id = 177;
+    var url = 'http://110.173.17.140:8080/api/relation/wiki/'+wiki_id;
+    // alert(url);
+    $.ajax({
+        url:url,
+        type:'get',
+        // dataType:'JPSON',
+        success:function (data) {
+            // alert('mix data:'+JSON.stringify(data));
+            // alert('question:'+data.questionIds);
+            // alert('[0]:'+data.questionIds[0]);
+            // alert('length'+data.questionIds);
+            for (var x=0;x<data.questionIds.length;x++){
+                // alert('he'+data.questionIds[x]);
+                load_question(data.questionIds[x]);
+            }
+            // for(n in data.qustionIds){
+            //     alert('load item:');
+            //     // load_question(data.questionIds[n]);    
+            // }
+            
+            // alert(JSON.stringify(data));
+        },
+        error:function (data) {
+            alert(JSON.stringify(data));
+            alert('error');
+        }
+    });
+}
+
+function load_question(question_id) {
+    var url = 'http://110.173.17.140:8080/api/question?id='+question_id;
+    // alert('question '+url);
+    $.ajax({
+        url:url,
+        type:'get',
+        // dataType:'JPSON',
+        success:function (data) {
+            
+            // alert(JSON.stringify(data));
+            create_question_item(data);
+        },
+        error:function (data) {
+            alert('error '+JSON.stringify(data));
+        }
+    });
+}
+
+function create_question_item(data) {
+    // alert('data :'+JSON.stringify(data));
+    var question_item = document.createElement('button');
+    // question_item.style.border = 'solid 1px black';
+    // question_item.href = data.questionUrl;
+    // question_item.onclick = 'location.href="'+data+'"';
+    // question_item.onclick = function () {
+    //     alert('click');
+    // }
+    question_item.addEventListener('click',function () {
+       window.location.href = 'http://'+data.questionUrl; 
+    });
+    question_item.className = 'list-group-item';
+    var media = document.createElement('div');
+    media.className = 'media';
+    var media_body = document.createElement('div');
+    media_body.className = 'media-body';
+    var title = document.createElement('h4');
+    title.className = 'media-heading';
+    title.innerHTML = data.title;
+    var questioner = document.createElement('div');
+    var questioner_icon = document.createElement('span');
+    questioner_icon.className = 'glyphicon glyphicon-user';
+    var questioner_value = document.createElement('span');
+    questioner_value.innerHTML = data.userName;
+    var question_time = document.createElement('div');
+    var question_time_icon = document.createElement('span');
+    question_time_icon.className = 'glyphicon glyphicon-time';
+    var question_time_value = document.createElement('span');
+    question_time_value.innerHTML = data.createAt;
+    var content_icon = document.createElement('span');
+    content_icon.className = 'glyphicon glyphicon-file';
+    var content_value = document.createElement('span');
+    content_value.innerHTML = data.content;
+    var content = document.createElement('div');
+    
+
+    document.getElementById('question_panel').appendChild(question_item);
+    question_item.appendChild(media);
+    media.appendChild(media_body);
+    questioner.appendChild(questioner_icon);
+    questioner.appendChild(questioner_value);
+    question_time.appendChild(question_time_icon);
+    question_time.appendChild(question_time_value);
+    content.appendChild(content_icon);
+    content.appendChild(content_value);
+    media_body.appendChild(title);
+    media_body.appendChild(questioner);
+    media_body.appendChild(question_time);
+
+    media_body.appendChild(content);
+    
+}
