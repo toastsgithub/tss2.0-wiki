@@ -33,8 +33,8 @@
         <ul class="nav navbar-nav">
             <li class="dropdown">
                 <ul class="dropdown-menu">
-                    <li><a href="../html/Outline.html" onclick="">管理大纲(管理员)</a></li>
-                    <li><a href="../html/New_entry_editor.html">增加条目(管理员)</a></li>
+                    <li><a href="../html/Outline.html" onclick="">大纲</a></li>
+                    <li><a href="../html/New_entry_editor.html">增加条目</a></li>
                     <li role="separator" class="divider"></li>
                     <li><a href="#">请求增加条目(敬请期待)</a></li>
                     <li id="console_button"><a href="../html/admin_message_page.html">管理控制台</a></li>
@@ -68,6 +68,12 @@
 
 
         <div id="right_part" class="col-lg-10 col-md-9 col-xs-9">
+            <div id="search_row" class="row">
+                <div id="search_bar" style="padding: 10px;float: right;" class="col-lg-3 col-md-4 col-sm-5 col-xs-5" >
+                    <input type="text" id="search_table_input" class="form-control" placeholder="search" style="">
+                </div>
+            </div>
+
             <table id="message_table" class="display table table-bordered" style="cursor: pointer">
                 <thead>
                 <tr>
