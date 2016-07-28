@@ -76,7 +76,7 @@ function show_tooltips() {
 
 
 function get_welcome() {
-
+alert('get welcome');
     var login = false;
     var user_name;
     var user_type;
@@ -108,7 +108,7 @@ function get_welcome() {
         document.getElementById("login_button").innerHTML="<a href='../html/login.html'>登录</a>";
         document.getElementById("welcome_tip").innerHTML="";
         document.getElementById("welcome_user").style.visibility="hidden";
-        alert("hidden");
+        // alert("hidden");
         return false;
     }
     else{
@@ -150,18 +150,21 @@ function deleteCookie(name){
 }
 
 function clearLogin(){
-    
+    alert('damn');
     $.ajax({
         url: '/user/logout',
         type: 'get',
         async: false,
         success: function (data) {
-            
+            alert('here');
+            window.location.href = "../html/Outline.html";
+            // location.href = 'http://www.baidu.com';
         },
         error: function (data) {
             alert('error!');
         }
     });
+    
 }
 
 function user_message(user_type){
