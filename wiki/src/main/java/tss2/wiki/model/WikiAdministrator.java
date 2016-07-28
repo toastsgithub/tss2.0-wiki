@@ -23,6 +23,11 @@ public class WikiAdministrator {
 
         WikiRecord entry = new WikiRecord(verifying.title);
         String content = FileUtil.loadStringFromAbsolutePath(verifying.contentPath);
+        if(content == null){
+            content = "not found";
+            System.out.println("not found!");
+        }
+
         entry.setContent(verifying.wikiId, verifying.username, verifying.categories.split("/"), verifying.tags.split("/"), verifying.summery,content, true);
         if (verifying.wikiId == 0) {
             verifying.wikiId = entry.getID();

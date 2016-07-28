@@ -40,7 +40,7 @@ function addClause() {
             // do not push
         }else {
             var obj = {"name": reference_name, "url": reference_link};
-            alert('pushed: '+JSON.stringify(obj));
+            // alert('pushed: '+JSON.stringify(obj));
             reference_result.push(obj);
         }
     }

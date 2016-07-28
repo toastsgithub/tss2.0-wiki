@@ -242,7 +242,7 @@
     }
     
     function verify(state) {
-        // 1 pass  , 0 refuse
+        // 1 pass
 
         var id = location.href.split('?')[1].split('&')[1].split('=')[1];
         alert('state'+state+' id '+id);
@@ -252,9 +252,9 @@
             data:{agree:state,id:id},
             success:function (data) {
                 alert('success');
+                location.href = '../html/admin_message_page.html'
             },
             error:function (data) {
-
                 alert('error'+JSON.stringify(data));
             }
         });
@@ -268,6 +268,8 @@
     function submit_message(to_user) {
 
         var value = document.getElementById('refuse_reason_input').value;
+        var id = location.href.split('?')[1].split('&')[1].split('=')[1];
+
         if(value == ''){
             value = '您的请求被拒绝,详情联系管理员';
         }
@@ -275,7 +277,7 @@
         $.ajax({
             url:'/message/send',
             type:'get',
-            data:{to:to_user,message:value},
+            data:{to:to_user,message:value,id:id},
             success:function (data) {
               location.href = '../html/admin_message_page.html'
             },

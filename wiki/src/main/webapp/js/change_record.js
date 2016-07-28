@@ -96,7 +96,7 @@ function click_entry() {
  * @param id: 每条信息的wikiId
  * */
 function showSearchResult(state, id) {
-    alert(state + "" + id);
+    // alert(state + "" + id);
     $.ajax({
         url: '/modify/singleHistory?state=' + state + '&id=' + id,
         type: 'get',
@@ -110,7 +110,7 @@ function showSearchResult(state, id) {
             }
             var testEditormdView;
             var markdown_data = view_message.content;
-            alert(markdown_data);
+            // alert(markdown_data);
             testEditormdView = editormd.markdownToHTML("test-editormd-view", {
                 markdown: markdown_data,//+ "\r\n" + $("#append-test").text(),
                 //htmlDecode      : true,       // 开启 HTML 标签解析，为了安全性，默认不开启

@@ -137,7 +137,7 @@
 <script type="text/javascript">
     var editor_instance;
     $(function() {
-        alert('editor');
+//        alert('editor');
         var editor = editormd("editormd", {
             width  : "90%", // 编辑器宽
             height  : 540, // 编辑器高
@@ -192,7 +192,7 @@
     }
     function getMyName(){
         var myName='<%=session.getAttribute("MYNAME")%>';
-        alert(myName);
+//        alert(myName);
     }
 
 </script>
@@ -200,7 +200,7 @@
     initialData();
     testAll();
     var login = get_welcome();
-    alert("!!!!!!!!!login  = " + login);
+//    alert("!!!!!!!!!login  = " + login);
     if(!login){
         window.location = "../html/login.html?next=editor";
     }
@@ -213,7 +213,7 @@
     });
 
     function get_user_test() {
-        alert('user:'+get_user());
+//        alert('user:'+get_user());
     }
 </script>
 
