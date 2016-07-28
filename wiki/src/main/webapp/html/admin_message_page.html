@@ -112,7 +112,12 @@
     $.get('/user/info',
             null,
             function(data) {
-                if (data.data.type == 0) {
+                if(data.login==0){
+                    alert("请先登录");
+                    window.locaiton = "../html/login.html";
+                    return;
+                }
+                else if (data.data.type == 0) {
                     alert("抱歉,非管理员无权进入控制台");
                     window.location = "../html/Outline.html";
                 }

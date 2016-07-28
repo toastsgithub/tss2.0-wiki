@@ -81,7 +81,7 @@ function load_message() {
                 all_message = data.data;
                 table.rows.add(data.data).draw();
             }else{
-                alert('服务器响应内容中有错误:'+data.message);
+                // alert('服务器响应内容中有错误:'+data.message);
             }
         },
         error:function (data) {
@@ -124,7 +124,7 @@ function load_message_num() {
                 }
                 document.getElementById('message_num').innerHTML = unread_num;
             }else{
-                alert('http返回的内容存在错误');
+                // alert('http返回的内容存在错误');
             }
         },
         error:function(){
