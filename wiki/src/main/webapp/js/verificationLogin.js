@@ -76,7 +76,6 @@ function show_tooltips() {
 
 
 function get_welcome() {
-alert('get welcome');
     var login = false;
     var user_name;
     var user_type;
