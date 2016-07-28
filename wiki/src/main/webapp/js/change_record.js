@@ -9,6 +9,7 @@ var view_message;
 function getRecord() {
     var table = $('#message_table').DataTable({
         data: null,
+        dom: 'rtip',
         columns: [
             {data: 'title'},
             {data: 'state'},
@@ -35,14 +36,13 @@ function getRecord() {
                 }
             }
         },
-            /* {
-             'targets':[0],
-             'render':function (data,type,full) {
-             return '<a href="../html/historyContent.html">'+data+'</a>'
-
-             }
-             }*/]
+            ]
     });
+    //以下关于自定义搜索框
+    $('#search_table_input').on('keyup',function () {
+        table.search(this.value).draw();
+    });
+    
     $('#message_table tbody').on('click', 'tr', function () {
         table.$('tr.selected').removeClass('selected');
         $(this).addClass('selected');
