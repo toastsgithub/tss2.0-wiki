@@ -8,6 +8,7 @@ import tss2.wiki.control.service.SessionService;
 import tss2.wiki.domain.CommonResult;
 import tss2.wiki.domain.MessageListResult;
 import tss2.wiki.domain.MessageResult;
+import tss2.wiki.model.WikiAdministrator;
 import tss2.wiki.model.WikiMessage;
 import tss2.wiki.model.WikiSession;
 import tss2.wiki.model.WikiUser;
@@ -97,12 +98,15 @@ public class MessageController {
     }
 
     @RequestMapping(value = "send", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
-    public @ResponseBody CommonResult send(HttpServletRequest request, @RequestParam(value = "to") String to,@RequestParam(value = "message") String message) {
+    public @ResponseBody CommonResult send(HttpServletRequest request, @RequestParam(value = "to") String to,@RequestParam(value = "message") String message,@RequestParam(value = "id") long id) {
         WikiSession session = sessionService.checkUser(request);
         if (!session.isValid()) {
             return new CommonResult(1, "Authentication Failed");
         }
         WikiUser user = session.getUser();
+        WikiAdministrator wikiAdministrator = new WikiAdministrator();
+        wikiAdministrator.reject(user.getUsername(),id);
+
         WikiMessage wikiMessage = new WikiMessage(user.getUsername(),to,"管理员"+user.getUsername()+"对您修改的回复",message);
         wikiMessage.send();
         return new  CommonResult(0);
