@@ -127,23 +127,13 @@ function showSearchResult(state, id) {
                 flowChart: true,  // 默认不解析
                 sequenceDiagram: true  // 默认不解析
             });
-            var display_panel = document.getElementById('reference');
-            var tmp = data.reference.dao;
-            if (tmp.length == 0) {
-                display_panel.innerHTML = "<p>无</p>";
-            }
-            else {
-                for (var i in tmp) {
-                    var name = tmp[i].name;
-                    var url = tmp[i].url;
-                    var link = document.createElement('a');
-                    link.href = url;
-                    link.innerHTML = name;
-
-                    var br = document.createElement('br');
-                    display_panel.appendChild(link);
-                    display_panel.appendChild(br);
-                }
+            var tags = document.getElementById("tags");
+            for (var tagid in view_message.tags) {
+                var tag = document.createElement("span");
+                tag.className = "label label-primary";
+                tag.innerHTML = view_message.tags[tagid];
+                tag.setAttribute("style", "margin-right: 5px;");
+                tags.appendChild(tag);
             }
         },
         error: function (data) {
