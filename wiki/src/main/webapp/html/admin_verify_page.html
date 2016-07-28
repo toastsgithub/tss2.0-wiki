@@ -243,16 +243,19 @@
     
     function verify(state) {
         // 1 pass  , 0 refuse
+
         var id = location.href.split('?')[1].split('&')[1].split('=')[1];
-        alert(id);
+        alert('state'+state+' id '+id);
         $.ajax({
             url:'/modify/Adminis',
+            type:'get',
             data:{agree:state,id:id},
             success:function (data) {
                 alert('success');
             },
             error:function (data) {
-                alert('error');
+
+                alert('error'+JSON.stringify(data));
             }
         });
 
@@ -268,7 +271,7 @@
         if(value == ''){
             value = '您的请求被拒绝,详情联系管理员';
         }
-        verif(0);
+//        verify(0);
         $.ajax({
             url:'/message/send',
             type:'get',
@@ -277,7 +280,7 @@
               location.href = '../html/admin_message_page.html'
             },
             error:function (data) {
-                alert('error');
+                alert('error :'+JSON.stringify(data));
             }
         });
     }
