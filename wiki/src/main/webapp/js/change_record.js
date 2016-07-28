@@ -9,6 +9,7 @@ var view_message;
 function getRecord() {
     var table = $('#message_table').DataTable({
         data: null,
+        dom: 'rtip',
         columns: [
             {data: 'title'},
             {data: 'state'},
@@ -35,14 +36,13 @@ function getRecord() {
                 }
             }
         },
-            /* {
-             'targets':[0],
-             'render':function (data,type,full) {
-             return '<a href="../html/historyContent.html">'+data+'</a>'
-
-             }
-             }*/]
+            ]
     });
+    //以下关于自定义搜索框
+    $('#search_table_input').on('keyup',function () {
+        table.search(this.value).draw();
+    });
+    
     $('#message_table tbody').on('click', 'tr', function () {
         table.$('tr.selected').removeClass('selected');
         $(this).addClass('selected');
@@ -96,7 +96,7 @@ function click_entry() {
  * @param id: 每条信息的wikiId
  * */
 function showSearchResult(state, id) {
-    alert(state + "" + id);
+    // alert(state + "" + id);
     $.ajax({
         url: '/modify/singleHistory?state=' + state + '&id=' + id,
         type: 'get',
@@ -110,7 +110,7 @@ function showSearchResult(state, id) {
             }
             var testEditormdView;
             var markdown_data = view_message.content;
-            alert(markdown_data);
+            // alert(markdown_data);
             testEditormdView = editormd.markdownToHTML("test-editormd-view", {
                 markdown: markdown_data,//+ "\r\n" + $("#append-test").text(),
                 //htmlDecode      : true,       // 开启 HTML 标签解析，为了安全性，默认不开启
@@ -127,23 +127,13 @@ function showSearchResult(state, id) {
                 flowChart: true,  // 默认不解析
                 sequenceDiagram: true  // 默认不解析
             });
-            var display_panel = document.getElementById('reference');
-            var tmp = data.reference.dao;
-            if (tmp.length == 0) {
-                display_panel.innerHTML = "<p>无</p>";
-            }
-            else {
-                for (var i in tmp) {
-                    var name = tmp[i].name;
-                    var url = tmp[i].url;
-                    var link = document.createElement('a');
-                    link.href = url;
-                    link.innerHTML = name;
-
-                    var br = document.createElement('br');
-                    display_panel.appendChild(link);
-                    display_panel.appendChild(br);
-                }
+            var tags = document.getElementById("tags");
+            for (var tagid in view_message.tags) {
+                var tag = document.createElement("span");
+                tag.className = "label label-primary";
+                tag.innerHTML = view_message.tags[tagid];
+                tag.setAttribute("style", "margin-right: 5px;");
+                tags.appendChild(tag);
             }
         },
         error: function (data) {

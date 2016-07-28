@@ -34,7 +34,7 @@ function get_user() {
         async:false,
         type:'get',
         success:function (data) {
-            alert('got:'+JSON.stringify(data));
+            // alert('got:'+JSON.stringify(data));
             var status = data.login;
             if(status==1){
                 username = data.data.username;

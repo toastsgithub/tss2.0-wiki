@@ -20,7 +20,7 @@ function load_message_num() {
                 }
                 document.getElementById('message_num').innerHTML = unread_num;
             }else{
-                alert('http返回的内容存在错误');
+                // alert('http返回的内容存在错误');
             }
         },
         error:function(){

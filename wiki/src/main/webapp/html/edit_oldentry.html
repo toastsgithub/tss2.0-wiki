@@ -46,8 +46,8 @@
         <ul class="nav navbar-nav">
             <li class="dropdown">
                 <ul class="dropdown-menu">
-                    <li><a href="../html/Outline.html" onclick="">管理大纲(管理员)</a></li>
-                    <li><a href="../html/create_Entry.html">增加条目(管理员)</a></li>
+                    <li><a href="../html/Outline.html" onclick="">大纲</a></li>
+                    <li><a href="../html/create_Entry.html">增加条目</a></li>
                     <li role="separator" class="divider"></li>
                     <li><a href="#">请求增加条目(敬请期待)</a></li>
                     <li id="console_button"><a href="../html/admin_message_page.html">管理控制台</a></li>
@@ -235,9 +235,9 @@
     testTag();
     testAlias();
     var login = get_welcome();
-    alert("!!!!!!!!!login  = " + login);
+//    alert("!!!!!!!!!login  = " + login);
     if(!login){
-        window.location = "../html/login.html?next=editor";
+//        window.location = "../html/login.html?next=editor";
     }
     get_entry_data();
 
@@ -253,7 +253,7 @@
     });
 
     function get_user_test() {
-        alert('user:'+get_user());
+//        alert('user:'+get_user());
     }
 </script>
 

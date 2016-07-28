@@ -3,7 +3,7 @@
  */
 
 var subimit_id = 0;
-
+var type_test_time = 0;
 var countries = [
     {value: 'Andorra', data: 'AD' },
     {value: 'Boston'},
@@ -40,7 +40,7 @@ function addClause() {
             // do not push
         }else {
             var obj = {"name": reference_name, "url": reference_link};
-            alert('pushed: '+JSON.stringify(obj));
+            // alert('pushed: '+JSON.stringify(obj));
             reference_result.push(obj);
         }
     }
@@ -359,8 +359,14 @@ function testType(){
     document.getElementById('category_input').onblur=function () {
         if(this.value!=""){
             if($.inArray(this.value, types)==-1){
-                document.getElementById('typeTip').innerHTML = "该类别不存在!";
-                type = false;
+                if (type_test_time<2){
+                    type_test_time++;
+                    setTimeout(testType(),200);
+                }else{
+                    type_test_time=0;
+                    document.getElementById('typeTip').innerHTML = "该类别不存在!";
+                    type = false;
+                }
             }else{
                 type = true;
                 document.getElementById('typeTip').innerHTML = "";

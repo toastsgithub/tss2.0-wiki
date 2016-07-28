@@ -29,6 +29,7 @@ function verif(){
                 if(location.search.split("=")[1]=="editor"){
                     location.href = "../html/New_entry_editor.html";
                 }else {
+                    // alert("true " + data.login);
                     location.href = "../html/Outline.html";
                 }
             }
@@ -76,18 +77,17 @@ function show_tooltips() {
 
 
 function get_welcome() {
-
     var login = false;
     var user_name;
     var user_type;
 
         $.ajax({
-            url: '/user/info',
+            url: '../user/info',
             type: 'get',
             async: false,
             data: null,
             success: function (data) {
-                if(data.login == true){
+                if(data.login == 1){
                     login = true;
                     user_name = data.data.username;
                     user_type = data.data.type;
@@ -101,14 +101,14 @@ function get_welcome() {
                 }
             },
             error: function (data) {
-                alert("error!");
+                alert("error!!!!!");
             }
         })
     if(login == false){
         document.getElementById("login_button").innerHTML="<a href='../html/login.html'>登录</a>";
         document.getElementById("welcome_tip").innerHTML="";
         document.getElementById("welcome_user").style.visibility="hidden";
-        alert("hidden");
+        // alert("hidden");
         return false;
     }
     else{
@@ -150,18 +150,18 @@ function deleteCookie(name){
 }
 
 function clearLogin(){
-    
     $.ajax({
         url: '/user/logout',
         type: 'get',
         async: false,
         success: function (data) {
-            
+    
         },
         error: function (data) {
             alert('error!');
         }
     });
+    
 }
 
 function user_message(user_type){

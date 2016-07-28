@@ -46,8 +46,8 @@
         <ul class="nav navbar-nav">
             <li class="dropdown">
                 <ul class="dropdown-menu">
-                    <li><a href="../html/Outline.html" onclick="">管理大纲(管理员)</a></li>
-                    <li><a href="../html/New_entry_editor.html">增加条目(管理员)</a></li>
+                    <li><a href="../html/Outline.html" onclick="">大纲</a></li>
+                    <li><a href="../html/New_entry_editor.html">增加条目</a></li>
                     <li role="separator" class="divider"></li>
                     <li><a href="#">请求增加条目(敬请期待)</a></li>
                     <li><a href="../html/admin_message_page.html">管理控制台</a></li>
@@ -61,7 +61,7 @@
         <ul class="nav navbar-nav" style="float: right">
             <li class="dropdown" id="welcome_user">
                 <ul class="dropdown-menu">
-                    <li><a href="" onclick="clearLogin();">退出登录</a></li>
+                    <li><a href="../html/Outline.html" onclick="clearLogin();">退出登录</a></li>
                     <li><a href="../html/changeRecord.html">我的修改记录</a> </li>
                 </ul>
                 <a href="#" id="welcome_tip" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
@@ -82,8 +82,10 @@
             <div id="search_module" class="row" style="margin-top: 10px;">
 
             </div>
+
             <div id="article_info">
                 <div id="article_title">title</div>
+                <div id="tags"></div>
                 <div id="last_update_time">最后更新日期:</div>
             </div>
             <div id="test-editormd-view"></div>

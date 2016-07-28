@@ -21,7 +21,7 @@
     <script src="../js/verificationLogin.js"></script>
     <script src="../js/change_record.js"></script>
     <script>
-        var judge_type = false;
+
     </script>
 
     <!--datatable 表格控件-->
@@ -40,8 +40,8 @@
         <ul class="nav navbar-nav">
             <li class="dropdown">
                 <ul class="dropdown-menu">
-                    <li><a href="../html/Outline.html" onclick="">管理大纲(管理员)</a></li>
-                    <li><a href="../html/New_entry_editor.html">增加条目(管理员)</a></li>
+                    <li><a href="../html/Outline.html" onclick="">大纲</a></li>
+                    <li><a href="../html/New_entry_editor.html">增加条目</a></li>
                     <li role="separator" class="divider"></li>
                     <li><a href="#">请求增加条目(敬请期待)</a></li>
                     <li id="console_button"><a href="../html/admin_message_page.html">管理控制台</a></li>
@@ -65,9 +65,16 @@
 </nav>
 
 <!--正经内容的分割线-->
-<div id="main_content" class="container-fluid" style="padding: 0;margin: 0;">
+<div id="main_content" class="container-fluid" style="padding: 20px;margin: 0;">
     <div class="row" style="margin: 0">
-        <h1>我的修改记录</h1>
+        <h1 style="margin-left: 40px">我的修改记录</h1>
+
+        <div id="search_row" class="row">
+            <div id="search_bar" style="padding: 10px;float: right;" class="col-lg-3 col-md-4 col-sm-5 col-xs-5" >
+                <input type="text" id="search_table_input" class="form-control" placeholder="search" style="">
+            </div>
+        </div>
+
             <table id="message_table" class="display table table-bordered" >
                 <!--style="width: 600px"-->
                 <thead>
@@ -82,8 +89,7 @@
 
                 </tbody>
             </table>
-            <!--<button onclick=pop_test()>pop out</button>-->
-            <!--<div id="test_part"></div>-->
+
         </div>
     </div>
 </div>
@@ -94,6 +100,12 @@
     })
 
 </script>
-<script>get_welcome();</script>
+<script>
+    var whether_login = get_welcome();
+    if(!whether_login){
+        alert("請先登錄");
+        window.location = '../html/Outline.html';
+    }
+</script>
 </body>
 </html>
