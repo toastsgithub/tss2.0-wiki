@@ -53,7 +53,7 @@ public class ModifyController {
         WikiUser user = session.getUser();
         Entry entry = wikiModifyInfor.getEntry(state,id);
         if(entry==null){
-            return new EntryResult(1,"No Such Entry");
+            return new EntryResult(2,"No Such Entry");
         }
         return new EntryResult(0,entry);
     }

@@ -8,8 +8,8 @@ function init_message_table(){
     var table = $('#message_table').DataTable({
         data:null,
         order:[[2,'desc']],
+        dom: 'rtip',
         columns:[
-
             {data:'isread'},
             {data:'title'},
             {data:'timestamp'},
@@ -32,7 +32,10 @@ function init_message_table(){
             }
         }]
     });
-
+    //以下关于自定义搜索框
+    $('#search_table_input').on('keyup',function () {
+        table.search(this.value).draw();
+    });
     load_message();
     // hide id column
     table.column(4).visible(false);
