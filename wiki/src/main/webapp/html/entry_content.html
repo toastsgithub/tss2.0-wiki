@@ -21,6 +21,7 @@
     <script src="../js/wiki_utils.js"></script>
     <link rel="stylesheet" href="../css/messenger-theme-future.css">
     <link rel="stylesheet" href="../css/messenger.css">
+    <link rel="stylesheet" href="../css/float.css">
 
     <script src="../editormd_lib/marked.min.js"></script>
     <script src="../editormd_lib/prettify.min.js"></script>
@@ -72,8 +73,10 @@
 </nav>
 <div class="container-fluid">
     <div class="row" style="">
-        <div id="left_part" class="col-lg-2 col-md-3 col-sm-3">
+        <div id="left_part_wrapper" class="col-lg-2 col-md-3 col-sm-3">
+            <div id="left_part" class="">
 
+            </div>
         </div>
 
         <div id="right_part" class="col-lg-10 col-md-9 col-sm-9" style="padding: 20px">
@@ -148,6 +151,22 @@
 
 </body>
 <script>
+    var oDiv=document.getElementById("left_part");
+    var H=0;
+    var Y=oDiv;
+    while(Y){H+=Y.offsetTop;Y=Y.offsetParent};
+    var baseclass = oDiv.className;
+    window.onscroll=function()
+    {
+        var s=document.body.scrollTop||document.documentElement.scrollTop;
+        if (s > H){
+            oDiv.className=baseclass + " div1 div2";
+        }
+        else {
+            oDiv.className= baseclass + " div1";
+        }
+    };
+
     $(document).ready(function () {
         var param = location.href.split("?")[1].split("=")[1];
         var entry_name = decodeURI(param);
