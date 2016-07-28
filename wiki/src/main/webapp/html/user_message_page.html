@@ -19,6 +19,7 @@
     <!--datatable 表格控件-->
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.css">
     <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.js"></script>
+    <script src="../js/admin_common.js"></script>
     <!--datatable 表格控件-->
     <title>Admin</title>
 </head>
@@ -36,7 +37,7 @@
                     <li><a href="../html/New_entry_editor.html">增加条目(管理员)</a></li>
                     <li role="separator" class="divider"></li>
                     <li><a href="#">请求增加条目(敬请期待)</a></li>
-                    <li><a href="../html/admin_message_page.html">管理控制台</a></li>
+                    <li id="console_button"><a href="../html/admin_message_page.html">管理控制台</a></li>
                 </ul>
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">选项<span class="caret"></span></a>
             </li>
@@ -110,6 +111,7 @@
 
 <script>
     get_welcome();
+    load_message_num();
     $(document).ready(function () {
 //        init_admin_common();
         init_message_table();
