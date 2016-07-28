@@ -21,7 +21,7 @@
     <script src="../js/verificationLogin.js"></script>
     <script src="../js/change_record.js"></script>
     <script>
-        var judge_type = false;
+
     </script>
 
     <!--datatable 表格控件-->
@@ -65,9 +65,9 @@
 </nav>
 
 <!--正经内容的分割线-->
-<div id="main_content" class="container-fluid" style="padding: 0;margin: 0;">
+<div id="main_content" class="container-fluid" style="padding: 20px;margin: 0;">
     <div class="row" style="margin: 0">
-        <h1>我的修改记录</h1>
+        <h1 style="margin-left: 40px">我的修改记录</h1>
 
         <div id="search_row" class="row">
             <div id="search_bar" style="padding: 10px;float: right;" class="col-lg-3 col-md-4 col-sm-5 col-xs-5" >
@@ -100,6 +100,12 @@
     })
 
 </script>
-<script>get_welcome();</script>
+<script>
+    var whether_login = get_welcome();
+    if(!whether_login){
+        alert("請先登錄");
+        window.location = '../html/Outline.html';
+    }
+</script>
 </body>
 </html>
