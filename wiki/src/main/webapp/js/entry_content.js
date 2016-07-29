@@ -61,7 +61,7 @@ function load_content(title){
                     url: 'http://110.173.17.140:8080/api/ask?wikiId='+data.data.id,
                     type: 'get',
                     success: function (data0) {
-                        alert("data = " + data0);
+                        // alert("data = " + data0);
                         question.style.marginLeft = "20px";
                         question.innerHTML = "<div id='question_title' style='margin-top: 30px;'><h4>对此条目仍有疑问?</h4></div><div id='question'><a href = 'http://" + data0+ "'>去这里提问</a></div>"
                         document.getElementById('right_part').appendChild(question);
@@ -72,11 +72,11 @@ function load_content(title){
                 })
                 
             } else {
-                markdown_data = '当前不存在条目*' + title + '* 的详细内容。你可以[创建这个条目](http://localhost:8080/html/Entry_editor.html?title=' + title + ')。' +
-                                '或者你也[请求新增这个条目](/message/wiki?title=' + title + ')。 你也可以将这个条目创建为已存在条目的别名)。';
+                markdown_data = '当前不存在条目*' + title + '* 的详细内容。你可以[创建这个条目](../html/New_entry_editor.html?title=' + title + ')。' +
+                                '或者你也[请求新增这个条目](/message/wiki?title=' + title + ')。 你也可以将这个条目创建为已存在条目的别名。';
                 document.getElementById('drop_menu').removeChild(document.getElementById('edit_old').parentNode);
                 document.getElementById('drop_menu').removeChild(document.getElementById('delete_entry').parentNode);
-            
+                
             }
 
             // alert(html);

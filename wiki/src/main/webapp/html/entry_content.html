@@ -21,6 +21,7 @@
     <script src="../js/wiki_utils.js"></script>
     <link rel="stylesheet" href="../css/messenger-theme-future.css">
     <link rel="stylesheet" href="../css/messenger.css">
+    <link rel="stylesheet" href="../css/float.css">
 
     <script src="../editormd_lib/marked.min.js"></script>
     <script src="../editormd_lib/prettify.min.js"></script>
@@ -72,11 +73,14 @@
 </nav>
 <div class="container-fluid">
     <div class="row" style="">
-        <div id="left_part" class="col-lg-2 col-md-3 col-sm-3">
+        <div id="left_part_wrapper" class="col-lg-3 col-md-4 col-sm-4">
+            <div id="left_part" class="">
 
+
+            </div>
         </div>
 
-        <div id="right_part" class="col-lg-10 col-md-9 col-sm-9" style="padding: 20px">
+        <div id="right_part" class="col-lg-9 col-md-8 col-sm-8" style="padding: 20px">
 
             <div id="search_module" class="row" style="">
                 <div id="search_and_btn" class="input-group col-lg-5 col-md-6 col-sm-7">
@@ -148,6 +152,27 @@
 
 </body>
 <script>
+    var oDiv=document.getElementById("left_part");
+    var H=0;
+    var Y=oDiv;
+    while(Y){H+=Y.offsetTop;Y=Y.offsetParent};
+    var baseclass = oDiv.className;
+    window.onscroll=function()
+    {
+        var left_part_wrapper = document.getElementById("left_part_wrapper");
+        var left_part_width = left_part_wrapper.clientWidth;
+        var s=document.body.scrollTop||document.documentElement.scrollTop;
+        if (s > H){
+            oDiv.className=baseclass + " div1 div2";
+        }
+        else {
+            oDiv.className= baseclass + " div1";
+        }
+        oDiv.style.width = (left_part_width - 15 * 2) + "px";
+        oDiv.style.height = (document.documentElement.clientHeight - 15) + "px";
+    };
+
+
     $(document).ready(function () {
         var param = location.href.split("?")[1].split("=")[1];
         var entry_name = decodeURI(param);

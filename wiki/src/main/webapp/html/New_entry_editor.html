@@ -235,8 +235,10 @@
 <script>
     $(document).ready(function () {
         var  title = location.href.split('?')[1];
+//        alert('title'+title);
         if(title!= undefined){
-             document.getElementById('name_input').value = title.split('=')[1];
+             document.getElementById('name_input').value = decodeURI(title.split('=')[1]);
+             var class_name = document.getElementById('name_input').className
         }
 //        origin_width_of_input = document.getElementById('tags_input').offsetWidth;
 //        origin_width_of_alias_input = document.getElementById('alias_input').offsetWidth;

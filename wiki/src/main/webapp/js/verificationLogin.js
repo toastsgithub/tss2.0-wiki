@@ -29,6 +29,7 @@ function verif(){
                 if(location.search.split("=")[1]=="editor"){
                     location.href = "../html/New_entry_editor.html";
                 }else {
+                    // alert("true " + data.login);
                     location.href = "../html/Outline.html";
                 }
             }
@@ -81,12 +82,12 @@ function get_welcome() {
     var user_type;
 
         $.ajax({
-            url: '/user/info',
+            url: '../user/info',
             type: 'get',
             async: false,
             data: null,
             success: function (data) {
-                if(data.login == true){
+                if(data.login == 1){
                     login = true;
                     user_name = data.data.username;
                     user_type = data.data.type;
@@ -100,7 +101,7 @@ function get_welcome() {
                 }
             },
             error: function (data) {
-                alert("error!");
+                alert("error!!!!!");
             }
         })
     if(login == false){

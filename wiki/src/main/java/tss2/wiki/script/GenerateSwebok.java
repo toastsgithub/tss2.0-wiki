@@ -19,11 +19,11 @@ public class GenerateSwebok {
                 String line = scanner.nextLine();
                 if (line.matches("CHAPTER.*")) {            // 章节标题
                     md += "#" + line + "\n" + "[TOC]\n";
-                } else if (line.matches("INTRODUCTION")) {  // introduction
+                } else if (line.matches("[A-Z ]")) {  // introduction
                     md += "**" + line + "**" + "\n";
-                } else if (line.matches("[0-9]+[.][0-9]+[.][\t].*")) {  // 小节标题
+                } else if (line.matches("[0-9]+[.][0-9]+[.].*")) {  // 小节标题
                     md += "###" + line + "\n";
-                } else if (line.matches("[0-9]+[.][\t].*")) {  // 大标题
+                } else if (line.matches("[0-9]+[.].*")) {  // 大标题
                     md += "##" + line + "\n";
                 } else if (line.matches("Figure [0-9]+[.][0-9]+[.].*")) {   // 图标
                     md += "*" + line + "*" + "\n";
