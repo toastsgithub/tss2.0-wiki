@@ -76,6 +76,7 @@
         <div id="left_part_wrapper" class="col-lg-3 col-md-4 col-sm-4">
             <div id="left_part" class="">
 
+
             </div>
         </div>
 
@@ -158,6 +159,8 @@
     var baseclass = oDiv.className;
     window.onscroll=function()
     {
+        var left_part_wrapper = document.getElementById("left_part_wrapper");
+        var left_part_width = left_part_wrapper.clientWidth;
         var s=document.body.scrollTop||document.documentElement.scrollTop;
         if (s > H){
             oDiv.className=baseclass + " div1 div2";
@@ -165,7 +168,10 @@
         else {
             oDiv.className= baseclass + " div1";
         }
+        oDiv.style.width = (left_part_width - 15 * 2) + "px";
+        oDiv.style.height = (document.documentElement.clientHeight - 15) + "px";
     };
+
 
     $(document).ready(function () {
         var param = location.href.split("?")[1].split("=")[1];

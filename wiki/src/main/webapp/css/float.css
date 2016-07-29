@@ -1,3 +1,13 @@
-#box{float:left;position:relative;width:295px;}
-.div1{}
-.div2{position:fixed;top:3px;}
+#box {
+    float: left;
+    position: relative;
+    width: 295px;
+}
+
+.div1 {
+}
+
+.div2 {
+    position: fixed;
+    top: 3px;
+}
