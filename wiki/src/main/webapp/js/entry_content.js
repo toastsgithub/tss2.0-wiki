@@ -56,7 +56,7 @@ function load_content(title){
             //     <div id="question"></div>
             //         </div>
 
-
+                
                 $.ajax({
                     url: 'http://110.173.17.140:8080/api/ask?wikiId='+data.data.id,
                     type: 'get',
@@ -177,7 +177,7 @@ function delete_entry() {
 }
 
 function load_relative_question_and_ppt(wiki_id) {
-    wiki_id = 177;
+    // wiki_id = 177;
     var url = 'http://110.173.17.140:8080/api/relation/wiki/'+wiki_id;
     // alert(url);
     $.ajax({
