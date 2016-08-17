@@ -148,10 +148,21 @@ public class ContentController {
         WikiRecord wikiRecord = new WikiRecord(title);
         WikiReference wikiReference = new WikiReference(title);
         if (wikiRecord.getContent() == null) {
-            return new WikiResult(0);
+            WikiSession session = sessionService.checkUser(request);
+            WikiUser user = null;
+            if (session.isValid()) {
+                user = session.getUser();
+            }
+            if (user == null || user.getType() < WikiUser.USER_ADMIN) {
+                return new WikiResult(0, new SimpleWikiRecord("当前不存在条目*" + title + "* 的详细内容。你可以[创建这个条目](../html/New_entry_editor.html?title=" + title + ")。\n" +
+                        "或者你也[请求新增这个条目](/message/wiki?title=" + title + ")。 你也可以将这个条目创建为已存在条目的别名。"), null);
+            } else {
+                return new WikiResult(0, new SimpleWikiRecord("当前不存在条目*" + title + "* 的详细内容。你可以[创建这个条目](../html/New_entry_editor.html?title=" + title + ")。\n" +
+                        "你也可以将这个条目创建为已存在条目的别名。"), null);
+            }
         }
         wikiRecord.addVisit();
-        return new WikiResult(1, wikiRecord,wikiReference);
+        return new WikiResult(1, wikiRecord, wikiReference);
     }
 
     private String getTitle(HttpServletRequest request) {

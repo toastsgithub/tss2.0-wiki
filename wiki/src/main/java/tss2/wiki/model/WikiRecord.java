@@ -22,12 +22,12 @@ import java.util.ArrayList;
  * <p>
  * Created by 羊驼 on 2016/7/10.
  */
-public class WikiRecord {
+public class WikiRecord extends AbstractWikiRecord {
 
     public static final String FILE_PATH_PREFIX = "wikimd/";
     public static final String FILE_PATH_SUFFIX = ".md";
 
-    private WikiRecord() {
+    protected WikiRecord() {
         File fp = new File(FILE_PATH_PREFIX);
         if (!fp.exists())
             fp.mkdirs();
