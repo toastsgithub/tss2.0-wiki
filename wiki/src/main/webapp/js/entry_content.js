@@ -97,8 +97,8 @@ function load_content(title){
                     markdown        : markdown_data ,//+ "\r\n" + $("#append-test").text(),
                     //htmlDecode      : true,       // 开启 HTML 标签解析，为了安全性，默认不开启
                     htmlDecode      : "style,script,iframe",  // you can filter tags decode
-                    //toc             : false,
-                    tocm            : true,    // Using [TOCM]
+                    toc             : false,
+                    tocm            : false,    // Using [TOCM]
                     tocContainer    : "#left_part", // 自定义 ToC 容器层
                     //gfm             : false,
                     //tocDropdown     : true,
@@ -136,6 +136,7 @@ function load_content(title){
                     display_panel.appendChild(br);
                 }
             }
+            load_navigator();
         },
         error:function (data) {
             alert("error"+JSON.stringify(data));
@@ -283,7 +284,58 @@ function create_question_item(data) {
     media_body.appendChild(title);
     media_body.appendChild(questioner);
     media_body.appendChild(question_time);
-
     media_body.appendChild(content);
     
+}
+
+function load_navigator(){
+    var nav_conter = 0;
+    // var h1 = document.getElementsByTagName('h1');
+    var h1 = document.querySelectorAll('h1,h2');
+    var navigator = document.createElement('nav');
+    navigator.id = 'content_nav';
+    var body = document.getElementById('123123');
+    body.setAttribute('data-spy','scroll');
+    body.setAttribute('data-target','#content_nav');
+    var ul = document.createElement('ul');
+    // ul.className = 'nav nav-pills affix-top nav-stacked';
+    ul.className = 'nav';
+    ul.setAttribute('data-spy','affix');
+    for (var x=0;x<h1.length;x++) {
+        
+        var current_id = 'nav_item_'+nav_conter;
+        nav_conter++;
+        h1[x].id = current_id;
+        var item_name = h1[x].childNodes[2].textContent;
+        var item = document.createElement('li');
+        item.className = 'scroll-navigator-item';
+        item.setAttribute('role','presentation');
+        var link = document.createElement('a');
+        link.href = '#' + current_id;
+        link.innerHTML = item_name;
+        link.className = 'nav-item-link';
+        item.appendChild(link);
+        ul.appendChild(item);
+        // load_2rd_nav(ul,h1[x]);
+    }
+    navigator.appendChild(ul);
+    document.getElementById('left_part').appendChild(navigator);
+
+    $('[data-spy="scroll"]').each(function () {
+        var $spy = $(this).scrollspy('refresh')
+    });
+    $('#left_part').affix({
+        offset: {
+            top: -30,
+            bottom: function () {
+                return (this.bottom = $('.footer').outerHeight(true))
+            }
+        }
+    });
+}
+function load_2rd_nav(ul_node,first_nav_node){
+    alert(first_nav_node.childNodes[2].textContent)
+    // for (var x=0;x<first_nav_node.childNodes.length;x++){
+    //     alert()
+    // }
 }

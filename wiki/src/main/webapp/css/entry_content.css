@@ -9,50 +9,33 @@ div {
 }
 
 #left_part {
-    background-color: #f6f6f6;
+    /*background-color: #f6f6f6;*/
     /*height: 1000px;*/
 }
 
 #right_part {
-    /*background-color: #2aabd2;*/
-    /*border: solid 1px #c5a6a8;*/
-    /*background-image: url("../resource/image/lightpaperfibers_@2X.png");*/
-    /*height: 1000px;*/
-}
 
-/*#article_info{*/
-/*min-height: 100px;*/
-/*background-color: #f6f6f6;*/
-/*}*/
+}
 #article_title {
     font-size: 30px;
-    /*background-color: #01a252;*/
 }
 
-/*#last_update_time{*/
-/*margin-left: 20px;*/
-/*}*/
-/*#access_times{*/
-/*margin-left: 20px;*/
-/*}*/
 #search_and_btn {
     float: right;
     margin-bottom: 10px;
 }
 
-/*#search_module{*/
-/*height: 50px;*/
-/*!*background-color: chocolate;*!*/
-/*}*/
-/*#search_input{*/
-/*height: 25px;*/
-/*width: 300px;*/
-/*border: solid 1px #c0c0c0;*/
-/*outline:none;*/
-/*}*/
-/*#search_btn{*/
-/*color: #ffffff;*/
-/*background-color: #3d95dd;*/
-/*border:solid 0;*/
-
+.scroll-navigator-item{
+    list-style: none;
+    /*height: 60px;*/
+}
+.scroll-navigator-item.active{
+    border: solid 1px #e3e1e4;
+    border-left: solid 3px #244e83;
+    background-color: transparent;
+}
+/*.nav-item-link{*/
+    /*padding:0;*/
+    /*margin:0;*/
+    /*background-color: #01a252;*/
 /*}*/

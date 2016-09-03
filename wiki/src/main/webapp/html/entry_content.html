@@ -37,8 +37,8 @@
     <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />-->
 
 </head>
-<body id="123123">
-<nav class="navbar navbar-default" style="background-color: #ffffff;padding: 0;margin: 0;">
+<body id="123123" >
+<nav class="navbar navbar-default navbar-fixed-top" style="background-color: #ffffff;padding: 0;margin: 0;">
     <div class="container-fluid">
         <a class="navbar-header" href="../html/Outline.html" style="margin-top: 10px;">
             <img  src="../resource/icon/tss_logo@2x.png" alt="" style="height: 32px">
@@ -71,9 +71,9 @@
 
     </div>
 </nav>
-<div class="container-fluid">
+<div class="container-fluid" style="margin-top:50px;">
     <div class="row" style="">
-        <div id="left_part_wrapper" class="col-lg-3 col-md-4 col-sm-4">
+        <div id="left_part_wrapper" class="col-lg-3 col-md-4 col-sm-4 hidden-xs">
             <div id="left_part" class="">
 
 
@@ -123,25 +123,6 @@
 
                 <!-- List group -->
                 <ul class="list-group" id="question_panel">
-                    <!--<button class="list-group-item">-->
-                        <!--<div class="media">-->
-                            <!--&lt;!&ndash;<div class="media-left">&ndash;&gt;-->
-                                <!--&lt;!&ndash;<a href="#">&ndash;&gt;-->
-                                    <!--&lt;!&ndash;<img class="media-object" src="http://www.gravatar.com/avatar/2d1dc9299711e0d5fa5342d737af963a.jpg?s=100&d=identicon" alt="...">&ndash;&gt;-->
-                                <!--&lt;!&ndash;</a>&ndash;&gt;-->
-                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                            <!--<div class="media-body">-->
-                                <!--<h4 class="media-heading">问题标题</h4>-->
-                                <!--<div>提问人:123</div>-->
-                                <!--<div>2016-06-01</div>-->
-                                <!--<div>这是一个软乎的问题demo</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</button>-->
-                    <!--<li class="list-group-item">Dapibus ac facilisis in</li>-->
-                    <!--<button class="list-group-item" href="http://www.baidu.com">Morbi leo risus</button>-->
-                    <!--<li class="list-group-item">Porta ac consectetur ac</li>-->
-                    <!--<button class="list-group-item">Vestibulum at eros</button>-->
                 </ul>
             </div>
 
@@ -152,61 +133,14 @@
 
 </body>
 <script>
-    var oDiv=document.getElementById("left_part");
-    var H=0;
-    var Y=oDiv;
-    while(Y){H+=Y.offsetTop;Y=Y.offsetParent};
-    var baseclass = oDiv.className;
-    window.onscroll=function()
-    {
-        var left_part_wrapper = document.getElementById("left_part_wrapper");
-        var left_part_width = left_part_wrapper.clientWidth;
-        var s=document.body.scrollTop||document.documentElement.scrollTop;
-        if (s > H){
-            oDiv.className=baseclass + " div1 div2";
-        }
-        else {
-            oDiv.className= baseclass + " div1";
-        }
-        oDiv.style.width = (left_part_width - 15 * 2) + "px";
-        oDiv.style.height = (document.documentElement.clientHeight - 15) + "px";
-    };
-
-
     $(document).ready(function () {
-        var param = location.href.split("?")[1].split("=")[1];
+        var param = location.href.split("?")[1].split("&")[0].split('=')[1];
         var entry_name = decodeURI(param);
         document.getElementById('article_title').innerHTML = entry_name;
 //        alert(entry_name);
         load_content(entry_name);
         init_content();
         document.getElementById('edit_old').href = "/html/edit_oldentry.html?action=modify&title="+entry_name;
-//        alert("ready");
-//        $('#jstree_demo_div').jstree();
-
-//        $(function() {
-//            alert("test");
-//            var testEditormdView;
-//
-//                var markdown = "##title\n\n content\n\n|name|age|\n|--|--|\n|dzm|20|";
-//                testEditormdView = editormd.markdownToHTML("test-editormd-view", {
-//                    markdown        : markdown ,//+ "\r\n" + $("#append-test").text(),
-//                    //htmlDecode      : true,       // 开启 HTML 标签解析，为了安全性，默认不开启
-//                    htmlDecode      : "style,script,iframe",  // you can filter tags decode
-//                    //toc             : false,
-//                    tocm            : true,    // Using [TOCM]
-//                    //tocContainer    : "#custom-toc-container", // 自定义 ToC 容器层
-//                    //gfm             : false,
-//                    //tocDropdown     : true,
-//                    // markdownSourceCode : true, // 是否保留 Markdown 源码，即是否删除保存源码的 Textarea 标签
-//                    emoji           : true,
-//                    taskList        : true,
-//                    tex             : true,  // 默认不解析
-//                    flowChart       : true,  // 默认不解析
-//                    sequenceDiagram : true,  // 默认不解析
-//                });
-//        });
-//        alert("complete");
 
     });
     $("#search_input").keydown(function (e){

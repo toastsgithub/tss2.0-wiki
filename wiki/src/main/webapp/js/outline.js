@@ -591,7 +591,8 @@ function showSearchResult(content, num){
         // new_entry_content_div.className = 'panel-body';
         
         var new_entry_link = document.createElement('a');
-        new_entry_link.href = '../html/entry_content.html?entry='+content_title;
+        var href = '../html/entry_content.html?entry='+content_title+'&other=';
+        new_entry_link.href = href;
         new_entry_link.style.fontSize = "20px";
         new_entry_link.style.fontWeight = '200';
         new_entry_link.style.color = 'white';

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>scroll spy test</title>
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <!--<script src="../js/editormd.js"></script>-->
+    <link rel="stylesheet" href="../css/editormd.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+    <!--<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">-->
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+<body data-spy="scroll" data-target="#navigator">
+<div class="container-fluid">
+    <div class="row">
+        <div id="nav_part" class="col-lg-2 col-md-2 col-sm-3 hidden-xs" style="background-color: #a4a6a7">
+            <nav id="navigator">
+                <ul class="nav nav-pills affix-top nav-stacked" data-spy="affix">
+                    <li role="presentation" class="active"><a href="#part_1">Part 1</a></li>
+                    <li role="presentation"><a href="#part_2">Part 2</a></li>
+                    <li role="presentation"><a href="#part_3">Part 3</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div id="content_part" class="col-lg-10 col-md-10 col-sm-9">
+            <div id="part_1">
+                <p>This is Part one</p>
+                <img src="../resource/image/pic_back.png" alt="" class="img-responsive">
+            </div>
+            <div id="part_2">
+                <p>This is Part two</p>
+                <img src="../resource/image/pic_back.png" alt="" class="img-responsive">
+            </div>
+            <div id="part_3">
+                <p>This is Part three</p>
+                <img src="../resource/image/pic_back.png" alt="" class="img-responsive">
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
